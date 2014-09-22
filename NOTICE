@@ -1,0 +1,13 @@
+This product includes the following libraries:
+
+* Ion - Android Asynchronous Networking and Image Loading
+
+  <https://github.com/koush/ion>
+
+* Butterknife - View "injection" library for Android
+
+  <https://github.com/jakewharton/butterknife>
+
+* Android Support Library
+
+  <http://developer.android.com/tools/support-library/index.html>
