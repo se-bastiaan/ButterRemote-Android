@@ -70,6 +70,7 @@ public class ControllerActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        getSupportFragmentManager().popBackStack();
         mViewstackFuture.cancel(true);
         mHandler.removeCallbacksAndMessages(null);
     }

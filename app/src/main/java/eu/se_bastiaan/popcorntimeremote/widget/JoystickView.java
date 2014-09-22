@@ -78,7 +78,7 @@ public class JoystickView extends View {
         setMeasuredDimension(d, d);
 
         mButtonRadius = (int) ((d / 4) * 0.6);
-        mJoystickRadius = (int) d / 4;
+        mJoystickRadius = d / 4;
     }
 
     private int measure(int measureSpec) {

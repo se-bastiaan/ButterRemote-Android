@@ -192,7 +192,7 @@ public class PopcornTimeRpcClient {
 
     private ResponseFuture<RpcResponse> request(RpcRequest rpc, FutureCallback<RpcResponse> callback) {
         ResponseFuture<RpcResponse> response =
-                Ion.with(mContext).load(mUrl).setTimeout(1500)
+                Ion.with(mContext).load(mUrl)
                 .basicAuthentication(mUsername, mPassword)
                 .setJsonPojoBody(rpc)
                 .as(RpcResponse.class);

@@ -4,6 +4,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.PopcornTimeRemote" parent="@style/Theme.AppCompat">
+        <item name="android:windowBackground">@color/bg</item>
         <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>
     </style>
 

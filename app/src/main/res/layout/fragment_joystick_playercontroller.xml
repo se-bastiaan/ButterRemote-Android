@@ -16,60 +16,53 @@
             <eu.se_bastiaan.popcorntimeremote.widget.JoystickView
                 android:id="@+id/joystick"
                 android:layout_centerInParent="true"
-                android:layout_height="250dp"
-                android:layout_width="250dp" />
+                android:layout_height="200dp"
+                android:layout_width="200dp" />
 
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/upButton"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="1dp"
                 android:layout_centerHorizontal="true"
-                android:layout_above="@id/joystick"
+                android:layout_alignTop="@id/joystick"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_action_fastforward"
-                android:contentDescription="@string/fastforward" />
+                android:contentDescription="@string/up" />
 
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/downButton"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="25dp"
-                android:layout_below="@id/joystick"
+                android:layout_alignBottom="@+id/circle"
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_action_fastbackward"
-                android:contentDescription="@string/fastbackward" />
+                android:contentDescription="@string/down" />
 
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/rightButton"
                 android:layout_width="50dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="25dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/joystick"
+                android:layout_alignRight="@+id/circle"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_action_forward"
-                android:contentDescription="@string/forward" />
+                android:contentDescription="@string/right" />
 
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/leftButton"
                 android:layout_width="50dp"
                 android:layout_height="100dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginLeft="25dp"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/joystick"
+                android:layout_alignLeft="@+id/circle"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_action_backward"
-                android:contentDescription="@string/backward" />
+                android:contentDescription="@string/left" />
 
             <View
-                android:layout_width="275dp"
-                android:layout_height="275dp"
+                android:id="@+id/circle"
+                android:layout_width="225dp"
+                android:layout_height="225dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/circle" />
 
@@ -78,7 +71,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton

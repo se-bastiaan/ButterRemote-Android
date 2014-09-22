@@ -2,4 +2,5 @@
 <resources>
     <color name="popcorntimeremote_color">#75b8ff</color>
     <color name="list_selected">#55FFFFFF</color>
+    <color name="bg">#203041</color>
 </resources>
