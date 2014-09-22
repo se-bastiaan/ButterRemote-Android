@@ -15,7 +15,6 @@ import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceDbHelper;
 import eu.se_bastiaan.popcorntimeremote.fragments.InstanceListFragment;
-import eu.se_bastiaan.popcorntimeremote.utils.AutoUpdateApk;
 
 public class OverviewActivity extends ActionBarActivity {
 
@@ -28,7 +27,6 @@ public class OverviewActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Crashlytics.start(this);
-        AutoUpdateApk autoUpdateApk = new AutoUpdateApk(getApplicationContext(), Constants.UNANAP_KEY);
 
         setContentView(R.layout.activity_framelayout);
         ButterKnife.inject(this);
