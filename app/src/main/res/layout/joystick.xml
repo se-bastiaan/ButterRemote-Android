@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <eu.se_bastiaan.popcorntimeremote.widget.JoystickView
+        android:id="@+id/joystick"
+        android:layout_centerInParent="true"
+        android:layout_height="250dp"
+        android:layout_width="250dp" />
+
+    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
+        android:id="@+id/upButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/joystick"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_up"
+        android:contentDescription="@string/up" />
+
+    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
+        android:id="@+id/downButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@id/joystick"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_down"
+        android:contentDescription="@string/down" />
+
+    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
+        android:id="@+id/rightButton"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="25dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/joystick"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_right"
+        android:contentDescription="@string/right" />
+
+    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
+        android:id="@+id/leftButton"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="25dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/joystick"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_left"
+        android:contentDescription="@string/left" />
+
+    <View
+        android:layout_width="275dp"
+        android:layout_height="275dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circle" />
+
+</RelativeLayout>

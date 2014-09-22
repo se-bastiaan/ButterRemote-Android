@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="Theme.PopcornTimeRemote" parent="@style/Theme.AppCompat">
+        <item name="actionBarItemBackground">@drawable/selectable_background_popcorntimeremote</item>
+        <item name="popupMenuStyle">@style/PopupMenu.PopcornTimeRemote</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.PopcornTimeRemote</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.PopcornTimeRemote</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.PopcornTimeRemote</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.PopcornTimeRemote</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_pt_remote</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_pt_remote</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.PopcornTimeRemote</item>
+
+        <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>
+    </style>
+
+    <style name="ActionBar.Solid.PopcornTimeRemote" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_pt_remote</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_pt_remote</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_pt_remote</item>
+        <item name="progressBarStyle">@style/ProgressBar.PopcornTimeRemote</item>
+    </style>
+
+    <style name="ActionBar.Transparent.PopcornTimeRemote" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_pt_remote</item>
+        <item name="progressBarStyle">@style/ProgressBar.PopcornTimeRemote</item>
+    </style>
+	
+    <style name="PopupMenu.PopcornTimeRemote" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_pt_remote</item>
+    </style>
+	
+    <style name="DropDownListView.PopcornTimeRemote" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_popcorntimeremote</item>
+    </style>
+
+    <style name="ActionBarTabStyle.PopcornTimeRemote" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_popcorntimeremote</item>
+    </style>
+	
+    <style name="DropDownNav.PopcornTimeRemote" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_popcorntimeremote</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_pt_remote</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_popcorntimeremote</item>
+    </style>
+    
+    <style name="ProgressBar.PopcornTimeRemote" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_popcorntimeremote</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.PopcornTimeRemote" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_popcorntimeremote</item>
+    </style>
+
+    <style name="SeekBar.PopcornTimeRemote" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/popcorntimeremote_scrubber_progress_horizontal_holo_dark</item>
+        <item name="android:indeterminateDrawable">@drawable/popcorntimeremote_scrubber_progress_horizontal_holo_dark</item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/popcorntimeremote_scrubber_control_selector_holo_dark</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.PopcornTimeRemote.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.PopcornTimeRemote</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.PopcornTimeRemote</item>
+    </style>
+
+</resources>
