@@ -182,7 +182,10 @@ public class JoystickMainControllerFragment extends Fragment {
     }
 
     private PopcornTimeRpcClient getClient() {
-        return ((ControllerActivity) getActivity()).getClient();
+        try {
+            return ((ControllerActivity) getActivity()).getClient();
+        } catch (Exception e) {}
+        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

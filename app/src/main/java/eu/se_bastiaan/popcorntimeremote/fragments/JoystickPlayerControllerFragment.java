@@ -38,8 +38,6 @@ public class JoystickPlayerControllerFragment extends Fragment {
     @InjectView(R.id.volumeControl)
     SeekBar volumeControl;
 
-
-
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -154,7 +152,10 @@ public class JoystickPlayerControllerFragment extends Fragment {
     }
 
     private PopcornTimeRpcClient getClient() {
-        return ((ControllerActivity) getActivity()).getClient();
+        try {
+            return ((ControllerActivity) getActivity()).getClient();
+        } catch (Exception e) {}
+        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

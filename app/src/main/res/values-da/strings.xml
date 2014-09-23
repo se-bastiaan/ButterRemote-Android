@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Popcorn Time Remote</string>
+    <string name="subtitles">Undertekster</string>
+    <string name="disable_subs">Deaktiver undertekster</string>
+
+    <string name="no_connection">Ingen forbindelse</string>
+    <string name="no_connection_desc">Der kunne ikke oprettes forbindelse til Popcorn Time. Undersøg om Popcorn Time (v0.3.3+) kører og check dine indstillinger samt din internetforbindelse.</string>
+    <string name="retry">Prøv igen</string>
+
+    <string name="back">Tilbage</string>
+    <string name="left">Venstre</string>
+    <string name="right">Højre</string>
+    <string name="up">Op</string>
+    <string name="down">Ned</string>
+    <string name="toggle_tabs">Skift mellem faner</string>
+    <string name="favourite">Skift mellem bogmærker</string>
+    <string name="watched">Skift mellem sete</string>
+    <string name="fullscreen">Fuldskærm</string>
+    <string name="search">Søg</string>
+    <string name="subs">Vælg undertekster</string>
+    <string name="quality">Skift kvalitet</string>
+    <string name="next_season">Næste sæson</string>
+    <string name="prev_season">Forrig sæson</string>
+    <string name="forward">Forlæns</string>
+    <string name="backward">Baglæns</string>
+    <string name="fastforward">Hurtigt forlæns</string>
+    <string name="fastbackward">Hurtigt baglæns</string>
+
+    <string name="no_instances">Tilføj en ny Popcorn Time proces for at benytte Popcorn Time Remote.</string>
+    <string name="add_instance">Tilføj proces</string>
+    <string name="edit_instance">Rediger proces</string>
+    <string name="delete_instance">Slet proces</string>
+    <string name="save">Gem</string>
+    <string name="cancel">Annullér</string>
+    <string name="ip">IP-adresse</string>
+    <string name="name">Navn</string>
+    <string name="port">Port</string>
+    <string name="username">Brugernavn</string>
+    <string name="password">Kodeord</string>
+    <string name="enter_manually">Indstil manuelt</string>
+    <string name="scan_qr">Scan QR-kode</string>
+    <string name="easy_pairing">Easy pairing is available in Popcorn Time v0.3.4 and higher. Open the advanced settings and generate your QR code in the \'remote control\' section.</string>
+
+</resources>
