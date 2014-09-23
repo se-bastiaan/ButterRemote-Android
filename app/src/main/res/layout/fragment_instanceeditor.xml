@@ -20,14 +20,45 @@
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:inputType="textPersonName" />
+
+        <LinearLayout
+            android:id="@+id/pairingLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/manualButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/enter_manually" />
+
+            <Button
+                android:id="@+id/scanButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/scan_qr" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center_horizontal"
+                android:text="@string/easy_pairing" />
+        </LinearLayout>
+
         <EditText
+            android:visibility="gone"
             android:id="@+id/ipInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:hint="@string/ip"
             android:inputType="text" />
+
         <EditText
+            android:visibility="gone"
             android:id="@+id/portInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +66,9 @@
             android:hint="@string/port"
             android:text="8008"
             android:inputType="number" />
+
         <EditText
+            android:visibility="gone"
             android:id="@+id/usernameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +76,9 @@
             android:hint="@string/username"
             android:text="popcorn"
             android:inputType="textVisiblePassword" />
+
         <EditText
+            android:visibility="gone"
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

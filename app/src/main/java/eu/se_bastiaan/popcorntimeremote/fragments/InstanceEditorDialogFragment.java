@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
@@ -26,8 +28,10 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
+import eu.se_bastiaan.popcorntimeremote.activities.PairingScannerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceProvider;
+import eu.se_bastiaan.popcorntimeremote.models.ScanModel;
 
 public class InstanceEditorDialogFragment extends DialogFragment {
 
@@ -52,6 +56,12 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     @InjectView(R.id.passwordInput)
     @Required(order = 6)
     EditText passwordInput;
+    @InjectView(R.id.manualButton)
+    Button manualButton;
+    @InjectView(R.id.scanButton)
+    Button scanButton;
+    @InjectView(R.id.pairingLayout)
+    LinearLayout pairingLayout;
 
     private Validator.ValidationListener mValidationListener = new Validator.ValidationListener() {
         @Override
@@ -151,7 +161,39 @@ public class InstanceEditorDialogFragment extends DialogFragment {
             }
         });
 
+        manualButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ipInput.setVisibility(View.VISIBLE);
+                portInput.setVisibility(View.VISIBLE);
+                usernameInput.setVisibility(View.VISIBLE);
+                passwordInput.setVisibility(View.VISIBLE);
+                pairingLayout.setVisibility(View.GONE);
+            }
+        });
+
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PairingScannerActivity.class);
+                startActivityForResult(intent, PairingScannerActivity.SCAN);
+            }
+        });
+
         return dialog;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PairingScannerActivity.SCAN && resultCode == PairingScannerActivity.SUCCESS) {
+            ScanModel model = data.getParcelableExtra("result");
+            ipInput.setText(model.ip);
+            portInput.setText(model.port);
+            usernameInput.setText(model.user);
+            passwordInput.setText(model.user);
+
+            manualButton.performClick();
+        }
+    }
 }

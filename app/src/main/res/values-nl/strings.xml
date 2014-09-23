@@ -39,5 +39,9 @@
     <string name="port">Poort</string>
     <string name="username">Gebruikersnaam</string>
     <string name="password">Wachtwoord</string>
+    <string name="enter_manually">Handmatig invoeren</string>
+    <string name="scan_qr">Snel koppelen met QR-code</string>
+    <string name="easy_pairing">Snel koppelen is beschikbaar in Popcorn Time v0.3.4 en hoger. Open de geavanceerde instellingen en genereer je QR code bij de sectie \'remote control\'.</string>
+
 
 </resources>

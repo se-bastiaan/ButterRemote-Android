@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="popcorntimeremote_color">#75b8ff</color>
+    <color name="popcorntimeremote_color">#FF75B8FF</color>
     <color name="list_selected">#55FFFFFF</color>
-    <color name="bg">#203041</color>
+    <color name="bg">#FF203041</color>
+
+    <color name="viewfinder_laser">#FF75B8FF</color>
+    <color name="viewfinder_border">#FFFFFFFF</color>
 </resources>

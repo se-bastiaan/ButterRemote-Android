@@ -46,8 +46,6 @@ public class ControllerActivity extends ActionBarActivity {
         setContentView(R.layout.activity_framelayout);
         ButterKnife.inject(this);
 
-        getSupportActionBar().setLogo(R.drawable.ic_logo);
-
         Intent intent = getIntent();
         mExtras = intent.getExtras();
 
@@ -59,6 +57,7 @@ public class ControllerActivity extends ActionBarActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_logo);
     }
 
     @Override
@@ -76,15 +75,20 @@ public class ControllerActivity extends ActionBarActivity {
     }
 
     public void setFragment(Fragment fragment, boolean fade) {
-        progressBar.setVisibility(View.GONE);
+        try {
+            progressBar.setVisibility(View.GONE);
 
-        SubtitleSelectorDialogFragment subsFragment = (SubtitleSelectorDialogFragment) getSupportFragmentManager().findFragmentByTag("subtitle_fragment");
-        if(subsFragment != null) subsFragment.dismiss();
+            SubtitleSelectorDialogFragment subsFragment = (SubtitleSelectorDialogFragment) getSupportFragmentManager().findFragmentByTag("subtitle_fragment");
+            if (subsFragment != null) subsFragment.dismiss();
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if(fade) fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            if (fade)
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.frameLayout, fragment);
+            fragmentTransaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public PopcornTimeRpcClient getClient() {

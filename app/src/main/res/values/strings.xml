@@ -39,5 +39,8 @@
     <string name="port">Port</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="enter_manually">Enter settings manually</string>
+    <string name="scan_qr">Scan easy pairing QR</string>
+    <string name="easy_pairing">Easy pairing is available in Popcorn Time v0.3.4 and higher. Open the advanced settings and generate your QR code in the \'remote control\' section.</string>
 
 </resources>
