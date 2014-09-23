@@ -125,7 +125,12 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
 
             String lang = getItem(position);
             if(!lang.equals("no-subs")) {
-                Locale locale = new Locale(lang);
+                Locale locale;
+                if(lang.contains("-")) {
+                    locale = new Locale(lang.substring(0, 2), lang.substring(3, 5));
+                } else {
+                    locale = new Locale(lang);
+                }
                 holder.text1.setText(locale.getDisplayName());
             } else {
                 holder.text1.setText(R.string.disable_subs);
