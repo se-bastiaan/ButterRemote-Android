@@ -40,7 +40,7 @@
     <string name="username">Brugernavn</string>
     <string name="password">Kodeord</string>
     <string name="enter_manually">Indstil manuelt</string>
-    <string name="scan_qr">Scan QR-kode</string>
-    <string name="easy_pairing">Easy pairing is available in Popcorn Time v0.3.4 and higher. Open the advanced settings and generate your QR code in the \'remote control\' section.</string>
+    <string name="scan_qr">Skan QR-kode</string>
+    <string name="easy_pairing">\'Nem parring\' er tilgængeligt i Popcorn Time v0.3.4 eller højere. Åben avancerede indstillinger og generér din QR-kode i \'Fjernbetjening\' området.</string>
 
 </resources>
