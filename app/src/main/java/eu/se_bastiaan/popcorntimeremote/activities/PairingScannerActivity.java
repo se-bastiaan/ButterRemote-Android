@@ -3,6 +3,7 @@ package eu.se_bastiaan.popcorntimeremote.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
@@ -54,4 +55,14 @@ public class PairingScannerActivity extends ActionBarActivity implements ZXingSc
         setResult(SUCCESS, intent);
         finish();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    
 }
