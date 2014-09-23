@@ -3,7 +3,7 @@
 
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Legendas</string>
-    <string name="disable_subs">Desativar  legendas</string>
+    <string name="disable_subs">Desativar legendas</string>
 
     <string name="no_connection">Sem conexão</string>
     <string name="no_connection_desc">We could not connect to the selected Popcorn Time instance, make sure Popcorn Time (v0.3.3+) is running and check your settings and internet connection.</string>
