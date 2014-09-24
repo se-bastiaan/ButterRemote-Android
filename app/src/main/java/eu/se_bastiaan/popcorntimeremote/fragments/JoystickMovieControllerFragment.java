@@ -57,7 +57,7 @@ public class JoystickMovieControllerFragment extends Fragment {
                     fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
                 case R.id.qualityButton:
-                    getClient().quality(mResponseListener);
+                    getClient().toggleQuality(mResponseListener);
                     break;
             }
         }

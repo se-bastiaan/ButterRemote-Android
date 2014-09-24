@@ -69,7 +69,7 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {
-                subsData = (ArrayList<String>) ((ArrayList)result.result).get(0);
+                subsData = (ArrayList<String>) result.getMapResult().get("subtitles");
                 subsData.add(0, "no-subs");
                 SubtitleAdapter adapter = new SubtitleAdapter(subsData);
                 progressBar.setVisibility(View.GONE);

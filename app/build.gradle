@@ -30,8 +30,8 @@ android {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 10
         targetSdkVersion 20
-        versionCode 7
-        versionName "0.1.7"
+        versionCode 8
+        versionName "0.1.8"
     }
     buildTypes {
         release {

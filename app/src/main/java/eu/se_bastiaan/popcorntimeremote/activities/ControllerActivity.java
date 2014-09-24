@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.future.ResponseFuture;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,6 +27,7 @@ import eu.se_bastiaan.popcorntimeremote.fragments.JoystickPlayerControllerFragme
 import eu.se_bastiaan.popcorntimeremote.fragments.JoystickSeriesControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.SubtitleSelectorDialogFragment;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
+import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 
 public class ControllerActivity extends ActionBarActivity {
 
@@ -111,21 +114,24 @@ public class ControllerActivity extends ActionBarActivity {
             @Override
             public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
                 if (e == null && result != null && result.result != null) {
-                    ArrayList<String> resultList = (ArrayList<String>) ((ArrayList) result.result).get(0);
-                    String topView = resultList.get(resultList.size() - 1);
+                    LinkedTreeMap<String, Object> map = result.getMapResult();
+                    if(map.containsKey("viewstack")) {
+                        ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
+                        String topView = resultList.get(resultList.size() - 1);
 
-                    if (topView.equals("player") && (mCurrentFragment == null || !mCurrentFragment.equals("player"))) {
-                        setFragment(new JoystickPlayerControllerFragment(), true);
-                        mCurrentFragment = topView;
-                    } else if (topView.equals("shows-container-contain") && (mCurrentFragment == null || !mCurrentFragment.equals("shows-container-contain"))) {
-                        setFragment(new JoystickSeriesControllerFragment(), true);
-                        mCurrentFragment = topView;
-                    } else if (topView.equals("movie-detail") && (mCurrentFragment == null || !mCurrentFragment.equals("movie-detail"))) {
-                        setFragment(new JoystickMovieControllerFragment(), true);
-                        mCurrentFragment = topView;
-                    } else if (!(topView.equals("player") || topView.equals("shows-container-contain") || topView.equals("movie-detail")) && (mCurrentFragment == null || !mCurrentFragment.equals("main"))) {
-                        setFragment(new JoystickMainControllerFragment(), true);
-                        mCurrentFragment = "main";
+                        if (topView.equals("player") && (mCurrentFragment == null || !mCurrentFragment.equals("player"))) {
+                            setFragment(new JoystickPlayerControllerFragment(), true);
+                            mCurrentFragment = topView;
+                        } else if (topView.equals("shows-container-contain") && (mCurrentFragment == null || !mCurrentFragment.equals("shows-container-contain"))) {
+                            setFragment(new JoystickSeriesControllerFragment(), true);
+                            mCurrentFragment = topView;
+                        } else if (topView.equals("movie-detail") && (mCurrentFragment == null || !mCurrentFragment.equals("movie-detail"))) {
+                            setFragment(new JoystickMovieControllerFragment(), true);
+                            mCurrentFragment = topView;
+                        } else if (!(topView.equals("player") || topView.equals("shows-container-contain") || topView.equals("movie-detail")) && (mCurrentFragment == null || !mCurrentFragment.equals("main"))) {
+                            setFragment(new JoystickMainControllerFragment(), true);
+                            mCurrentFragment = "main";
+                        }
                     }
 
                     mHandler.postDelayed(mGetViewstackRunnable, 500);
@@ -141,6 +147,17 @@ public class ControllerActivity extends ActionBarActivity {
 
     public void runViewstackRunnable() {
         getSupportFragmentManager().popBackStack();
-        mGetViewstackRunnable.run();
+        mRpc.ping(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+            @Override
+            public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                if (e == null) {
+                    mGetViewstackRunnable.run();
+                } else {
+                    e.printStackTrace();
+                    setFragment(new ConnectionLostFragment(), true);
+                    mCurrentFragment = "no-connection";
+                }
+            }
+        });
     }
 }
