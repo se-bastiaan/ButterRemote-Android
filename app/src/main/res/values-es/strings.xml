@@ -15,18 +15,18 @@
     <string name="up">Arriba</string>
     <string name="down">Abajo</string>
     <string name="toggle_tabs">Cambiar pestañas</string>
-    <string name="favourite">Toggle bookmark</string>
-    <string name="watched">Toggle watched</string>
-    <string name="fullscreen">Toggle fullscreen</string>
+    <string name="favourite">Favorito</string>
+    <string name="watched">Visto</string>
+    <string name="fullscreen">Pantalla completa</string>
     <string name="search">Buscar</string>
     <string name="subs">Seleccionar subtítulos</string>
     <string name="quality">Cambiar calidad</string>
     <string name="next_season">Siguiente temporada</string>
     <string name="prev_season">Temporada anterior</string>
-    <string name="forward">Adelantar</string>
-    <string name="backward">Retrodecer</string>
-    <string name="fastforward">Fast seek forward</string>
-    <string name="fastbackward">Fast seek backward</string>
+    <string name="forward">Avance</string>
+    <string name="backward">Retroceso</string>
+    <string name="fastforward">Avance rápido</string>
+    <string name="fastbackward">Retroceso rápido</string>
 
     <string name="no_instances">Añade una nueva instancia para comenzar a usar Popcorn Time Remote</string>
     <string name="add_instance">Añadir instancia</string>

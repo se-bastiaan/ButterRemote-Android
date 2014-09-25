@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Popcorn Time Remote</string>
+    <string name="subtitles">Sous-titres</string>
+    <string name="disable_subs">Désactiver sous-titres</string>
+
+    <string name="no_connection">Pas de connection</string>
+    <string name="no_connection_desc">Nous ne pouvions pas vous connecter à l\'instance du Popcorn Time sélectionné, assurez-vous que Popcorn Time (v0.3.3 +) est en cours d\'exécution et vérifiez vos paramètres et connexion Internet.</string>
+    <string name="retry">Réessayer</string>
+
+    <string name="back">Retour</string>
+    <string name="left">Gauche</string>
+    <string name="right">Droite</string>
+    <string name="up">Haut</string>
+    <string name="down">Bas</string>
+    <string name="toggle_tabs">Change onglet</string>
+    <string name="favourite">Favori</string>
+    <string name="watched">Regardé</string>
+    <string name="fullscreen">Plein écran</string>
+    <string name="search">Rechercher</string>
+    <string name="subs">Sélectionner sous-titres</string>
+    <string name="quality">Change qualité</string>
+    <string name="next_season">Saison suivante</string>
+    <string name="prev_season">Saison précédente</string>
+    <string name="forward">Avance</string>
+    <string name="backward">Rembobine</string>
+    <string name="fastforward">Avance rapide</string>
+    <string name="fastbackward">Rembobine rapide</string>
+
+    <string name="no_instances">Ajouter une nouvelle instance pour commencer d\'utiliser Popcorn Time Remote.</string>
+    <string name="add_instance">Ajoute instance</string>
+    <string name="edit_instance">Modifie instance</string>
+    <string name="delete_instance">Supprime instance</string>
+    <string name="save">Sauvegardé</string>
+    <string name="cancel">Annulé</string>
+    <string name="ip">Adresse IP</string>
+    <string name="name">Nom</string>
+    <string name="port">Port</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="enter_manually">Entrez réglage manuellement</string>
+    <string name="scan_qr">Easy Pairing: lire QR-code</string>
+    <string name="easy_pairing">Easy Pairing est disponible en v0.3.4 de Popcorn Time et plus. Ouvrir les paramètres avancés et générer votre code QR dans la section \ "commande à distance \ \'.</string>
+
+</resources>
