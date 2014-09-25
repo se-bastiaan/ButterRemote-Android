@@ -146,18 +146,20 @@ public class ControllerActivity extends ActionBarActivity {
     };
 
     public void runViewstackRunnable() {
-        getSupportFragmentManager().popBackStack();
-        mRpc.ping(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-            @Override
-            public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-                if (e == null) {
-                    mGetViewstackRunnable.run();
-                } else {
-                    e.printStackTrace();
-                    setFragment(new ConnectionLostFragment(), true);
-                    mCurrentFragment = "no-connection";
+        try {
+            getSupportFragmentManager().popBackStack();
+            mRpc.ping(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+                @Override
+                public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                    if (e == null) {
+                        mGetViewstackRunnable.run();
+                    } else {
+                        e.printStackTrace();
+                        setFragment(new ConnectionLostFragment(), true);
+                        mCurrentFragment = "no-connection";
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) { }
     }
 }
