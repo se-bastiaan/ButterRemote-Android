@@ -12,8 +12,8 @@ build:
           echo $ANDROID_BUILD_TOOLS
           echo $ANDROID_UPDATE_FILTER
           echo $ANDROID_NDK_HOME
-    # A step that executes `gradle build` command
+    # A step that executes `gradle assembleDebug` command
     - script:
         name: run gradle
         code: |
-          gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR buildDebug
+          gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR assembleDebug
