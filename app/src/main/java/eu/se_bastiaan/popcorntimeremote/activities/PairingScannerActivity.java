@@ -46,14 +46,18 @@ public class PairingScannerActivity extends ActionBarActivity implements ZXingSc
 
     @Override
     public void handleResult(Result rawResult) {
-        String json = rawResult.getText();
-        Gson gson = new Gson();
-        ScanModel model = gson.fromJson(json, ScanModel.class);
+        try {
+            String json = rawResult.getText();
+            Gson gson = new Gson();
+            ScanModel model = gson.fromJson(json, ScanModel.class);
 
-        Intent intent = new Intent();
-        intent.putExtra("result", model);
-        setResult(SUCCESS, intent);
-        finish();
+            Intent intent = new Intent();
+            intent.putExtra("result", model);
+            setResult(SUCCESS, intent);
+            finish();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
