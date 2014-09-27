@@ -5,10 +5,6 @@ import android.content.Context;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.widget.ObscuredSharedPreferences;
 
-
-/**
- * Created by Sebastiaan on 11-06-14.
- */
 public class PrefUtils {
 
     // Main functions below

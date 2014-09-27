@@ -1,0 +1,9 @@
+Control Popcorn Time (popcorntime.io) v0.3.3 and higher directly from your phone.
+
+Choose any movie or series, add it to your bookmarks or start playing it. Play, pause or seek through the video, all from the comfort of your couch.
+
+Currently, this application is in beta and every suggestion is welcome! Issues can be reported on GitHub and translations are always great.
+
+GitHub: https://github.com/se-bastiaan/PopcornTimeRemote-Android/
+Issues: https://github.com/se-bastiaan/PopcornTimeRemote-Android/issues
+Translations: http://www.transifex.com/projects/p/popcorntimeremote-android
