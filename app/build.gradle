@@ -28,10 +28,10 @@ android {
     buildToolsVersion "19.1.0"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
-        minSdkVersion 10
+        minSdkVersion 8
         targetSdkVersion 19
-        versionCode 10
-        versionName "0.1.10"
+        versionCode 11
+        versionName "0.1.11"
     }
     buildTypes {
         release {

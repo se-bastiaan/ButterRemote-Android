@@ -157,6 +157,12 @@ public class InstanceEditorDialogFragment extends DialogFragment {
                     usernameInput.setText(cursor.getString(4));
                     passwordInput.setText(cursor.getString(5));
                     cursor.close();
+
+                    ipInput.setVisibility(View.VISIBLE);
+                    portInput.setVisibility(View.VISIBLE);
+                    usernameInput.setVisibility(View.VISIBLE);
+                    passwordInput.setVisibility(View.VISIBLE);
+                    pairingLayout.setVisibility(View.GONE);
                 }
             }
         });

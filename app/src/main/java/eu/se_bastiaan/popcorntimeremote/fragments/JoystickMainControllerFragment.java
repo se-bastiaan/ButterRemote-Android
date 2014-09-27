@@ -136,7 +136,7 @@ public class JoystickMainControllerFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(s.toString().isEmpty()) {
+            if(s.toString().equals("")) {
                 getClient().clearSearch(mResponseListener);
                 return;
             }
