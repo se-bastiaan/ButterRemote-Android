@@ -117,7 +117,7 @@ public class ClearableEditText extends EditText implements OnTouchListener, OnFo
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
 
-        if (isFocused()) {
+        if (isFocused() && !iconAlwaysVisible) {
             setClearIconVisible(!getText().toString().equals(""));
         }
     }
