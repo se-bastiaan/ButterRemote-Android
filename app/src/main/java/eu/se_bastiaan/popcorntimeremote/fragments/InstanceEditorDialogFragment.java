@@ -66,20 +66,24 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     private Validator.ValidationListener mValidationListener = new Validator.ValidationListener() {
         @Override
         public void onValidationSucceeded() {
-            ContentValues values = new ContentValues();
-            values.put(InstanceEntry.COLUMN_NAME_NAME, nameInput.getText().toString());
-            values.put(InstanceEntry.COLUMN_NAME_IP, ipInput.getText().toString());
-            values.put(InstanceEntry.COLUMN_NAME_PORT, portInput.getText().toString());
-            values.put(InstanceEntry.COLUMN_NAME_USERNAME, usernameInput.getText().toString());
-            values.put(InstanceEntry.COLUMN_NAME_PASSWORD, passwordInput.getText().toString());
+            try {
+                ContentValues values = new ContentValues();
+                values.put(InstanceEntry.COLUMN_NAME_NAME, nameInput.getText().toString());
+                values.put(InstanceEntry.COLUMN_NAME_IP, ipInput.getText().toString());
+                values.put(InstanceEntry.COLUMN_NAME_PORT, portInput.getText().toString());
+                values.put(InstanceEntry.COLUMN_NAME_USERNAME, usernameInput.getText().toString());
+                values.put(InstanceEntry.COLUMN_NAME_PASSWORD, passwordInput.getText().toString());
 
-            if(mIsNewInstance) {
-                getActivity().getContentResolver().insert(InstanceProvider.INSTANCES_URI, values);
-            } else {
-                getActivity().getContentResolver().update(Uri.withAppendedPath(InstanceProvider.INSTANCES_URI, "/" + mId), values, null, null);
+                if (mIsNewInstance) {
+                    getActivity().getContentResolver().insert(InstanceProvider.INSTANCES_URI, values);
+                } else {
+                    getActivity().getContentResolver().update(Uri.withAppendedPath(InstanceProvider.INSTANCES_URI, "/" + mId), values, null, null);
+                }
+
+                dismiss();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
-
-            dismiss();
         }
 
         @Override

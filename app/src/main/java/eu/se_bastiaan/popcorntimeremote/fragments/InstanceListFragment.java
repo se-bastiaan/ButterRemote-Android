@@ -164,12 +164,16 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
     }
 
     private void openEditorFragment(String id) {
-        InstanceEditorDialogFragment fragment = new InstanceEditorDialogFragment();
-        if(id != null) {
-            Bundle args = new Bundle();
-            args.putString("_id", id);
-            fragment.setArguments(args);
+        try {
+            InstanceEditorDialogFragment fragment = new InstanceEditorDialogFragment();
+            if (id != null) {
+                Bundle args = new Bundle();
+                args.putString("_id", id);
+                fragment.setArguments(args);
+            }
+            fragment.show(getActivity().getSupportFragmentManager(), "editor_fragment");
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
-        fragment.show(getActivity().getSupportFragmentManager(), "editor_fragment");
     }
 }
