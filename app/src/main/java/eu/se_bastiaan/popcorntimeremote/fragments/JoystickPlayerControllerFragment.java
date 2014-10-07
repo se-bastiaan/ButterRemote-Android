@@ -17,6 +17,7 @@ import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.Version;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
 public class JoystickPlayerControllerFragment extends Fragment {
@@ -33,6 +34,8 @@ public class JoystickPlayerControllerFragment extends Fragment {
     ImageButton rightButton;
     @InjectView(R.id.fullscreenButton)
     ImageButton fullscreenButton;
+    @InjectView(R.id.subsButton)
+    ImageButton subsButton;
     @InjectView(R.id.backButton)
     ImageButton backButton;
     @InjectView(R.id.volumeControl)
@@ -42,14 +45,15 @@ public class JoystickPlayerControllerFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.watchedButton:
-                    getClient().toggleWatched(mResponseListener);
-                    break;
                 case R.id.backButton:
                     getClient().back(mResponseListener);
                     break;
                 case R.id.fullscreenButton:
                     getClient().toggleFullscreen(mResponseListener);
+                    break;
+                case R.id.subsButton:
+                    SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
+                    fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
             }
         }
@@ -141,6 +145,11 @@ public class JoystickPlayerControllerFragment extends Fragment {
         rightButton.setOnClickListener(mOnDirectionClickListener);
         fullscreenButton.setOnClickListener(mButtonClickListener);
         backButton.setOnClickListener(mButtonClickListener);
+        subsButton.setOnClickListener(mButtonClickListener);
+
+        if(Version.compare(getClient().getVersion(), "0.3.4")) {
+            subsButton.setVisibility(View.VISIBLE);
+        }
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
         joystickView.setJoystickImage(R.drawable.ic_action_playpause);

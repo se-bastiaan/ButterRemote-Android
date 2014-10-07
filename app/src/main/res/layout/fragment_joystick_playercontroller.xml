@@ -84,6 +84,17 @@
                 android:contentDescription="@string/back"
                 />
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
+                android:id="@+id/subsButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_action_subs"
+                android:background="@drawable/selectable_background_popcorntimeremote"
+                android:contentDescription="@string/subs"
+                android:visibility="gone"
+                />
+            <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/fullscreenButton"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
