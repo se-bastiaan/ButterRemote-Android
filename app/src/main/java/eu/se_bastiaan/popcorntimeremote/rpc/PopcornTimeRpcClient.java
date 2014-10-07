@@ -23,7 +23,6 @@ public class PopcornTimeRpcClient {
 
     public PopcornTimeRpcClient(Context context, String ipAdress, String port, String username, String password) {
         mContext = context;
-        if(Constants.LOG_ENABLED) Ion.getDefault(mContext).configure().setLogging("IonLogs", Log.DEBUG);
         mIpAddress = ipAdress;
         mPort = port;
         mUsername = username;
@@ -33,6 +32,13 @@ public class PopcornTimeRpcClient {
         checkUrl();
 
         mUrl = mIpAddress + ":" + mPort + "/";
+
+        try {
+            if (Constants.LOG_ENABLED)
+                Ion.getDefault(mContext).configure().setLogging("IonLogs", Log.DEBUG);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setVersion(String version) {
