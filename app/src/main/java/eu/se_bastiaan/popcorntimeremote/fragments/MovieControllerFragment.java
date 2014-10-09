@@ -104,7 +104,7 @@ public class MovieControllerFragment extends Fragment {
         backButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_playpause);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
 
         return v;
     }

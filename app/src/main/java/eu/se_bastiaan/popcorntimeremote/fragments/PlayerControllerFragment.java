@@ -230,9 +230,10 @@ public class PlayerControllerFragment extends Fragment {
             }
         });
 
-        if(!Version.compare(getClient().getVersion(), "0.0.0")) {
+        if(Version.compare(getClient().getVersion(), "0.0.0")) {
             mPlayingRunnable.run();
             mFullscreenRunnable.run();
+        } else {
             currentTime.setVisibility(View.GONE);
             playPauseButton.setImageResource(R.drawable.ic_action_playpause);
         }
@@ -245,16 +246,19 @@ public class PlayerControllerFragment extends Fragment {
     }
 
     private void updateViews() {
-        if(mPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_action_pause);
-        } else {
-            playPauseButton.setImageResource(R.drawable.ic_action_play);
-        }
+        if(Version.compare(getClient().getVersion(), "0.0.0")) {
+            LogUtils.d("PlayerControllerFragment", "UpdateViews");
+            if (mPlaying) {
+                playPauseButton.setImageResource(R.drawable.ic_action_pause);
+            } else {
+                playPauseButton.setImageResource(R.drawable.ic_action_play);
+            }
 
-        if(mFullscreen) {
-            fullscreenButton.setImageResource(R.drawable.ic_action_smallscreen);
-        } else {
-            fullscreenButton.setImageResource(R.drawable.ic_action_fullscreen);
+            if (mFullscreen) {
+                fullscreenButton.setImageResource(R.drawable.ic_action_smallscreen);
+            } else {
+                fullscreenButton.setImageResource(R.drawable.ic_action_fullscreen);
+            }
         }
     }
 
