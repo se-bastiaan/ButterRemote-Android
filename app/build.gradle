@@ -49,5 +49,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.2'
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.5'
+    compile 'com.sothree.slidinguppanel:library:+'
     compile 'com.crashlytics.android:crashlytics:1.+'
 }

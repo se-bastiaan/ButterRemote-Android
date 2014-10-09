@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import eu.se_bastiaan.popcorntimeremote.Constants;
+import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class PopcornTimeRpcClient {
@@ -273,8 +274,19 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    public ResponseFuture<RpcResponse> getPlaying(final FutureCallback<RpcResponse> callback) {
+        RpcRequest request  = new RpcRequest("getplaying");
+        request.id = RequestId.GET_SELECTION.ordinal();
+        if(Version.compare(mVersion, "0.0.0")) {
+            return request(request, callback);
+        } else {
+            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            return null;
+        }
+    }
+
     public ResponseFuture<RpcResponse> getFullscreen(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getselection");
+        RpcRequest request  = new RpcRequest("getfullscreen");
         request.id = RequestId.GET_FULLSCREEN.ordinal();
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);

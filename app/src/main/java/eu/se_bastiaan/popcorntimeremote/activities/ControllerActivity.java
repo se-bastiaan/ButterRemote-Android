@@ -15,16 +15,16 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.future.ResponseFuture;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fragments.ConnectionLostFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.JoystickMainControllerFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.JoystickMovieControllerFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.JoystickPlayerControllerFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.JoystickSeriesControllerFragment;
+import eu.se_bastiaan.popcorntimeremote.fragments.LoadingControllerFragment;
+import eu.se_bastiaan.popcorntimeremote.fragments.MainControllerFragment;
+import eu.se_bastiaan.popcorntimeremote.fragments.MovieControllerFragment;
+import eu.se_bastiaan.popcorntimeremote.fragments.PlayerControllerFragment;
+import eu.se_bastiaan.popcorntimeremote.fragments.SeriesControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.SubtitleSelectorDialogFragment;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
@@ -54,7 +54,7 @@ public class ControllerActivity extends ActionBarActivity {
 
         if(mExtras != null && mExtras.containsKey(KEY_IP) && mExtras.containsKey(KEY_PORT) && mExtras.containsKey(KEY_USERNAME) && mExtras.containsKey(KEY_PASSWORD) && mExtras.containsKey(KEY_NAME)) {
             mRpc = new PopcornTimeRpcClient(this, mExtras.getString(KEY_IP), mExtras.getString(KEY_PORT), mExtras.getString(KEY_USERNAME), mExtras.getString(KEY_PASSWORD));
-            getSupportActionBar().setTitle(getString(R.string.app_name) + ": " + mExtras.getString(KEY_NAME));
+            getSupportActionBar().setTitle(getString(R.string.connected_to) + ": " + mExtras.getString(KEY_NAME));
         } else {
             finish();
         }
@@ -114,32 +114,41 @@ public class ControllerActivity extends ActionBarActivity {
         mViewstackFuture = mRpc.getViewstack(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
             @Override
             public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-                if (e == null && result != null && result.result != null) {
-                    LinkedTreeMap<String, Object> map = result.getMapResult();
-                    if(map.containsKey("viewstack")) {
-                        ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
-                        String topView = resultList.get(resultList.size() - 1);
+                try {
+                    if (e == null && result != null && result.result != null) {
+                        LinkedTreeMap<String, Object> map = result.getMapResult();
+                        if (map.containsKey("viewstack")) {
+                            ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
+                            String topView = resultList.get(resultList.size() - 1);
 
-                        if (topView.equals("player") && (mCurrentFragment == null || !mCurrentFragment.equals("player"))) {
-                            setFragment(new JoystickPlayerControllerFragment(), true);
-                            mCurrentFragment = topView;
-                        } else if (topView.equals("shows-container-contain") && (mCurrentFragment == null || !mCurrentFragment.equals("shows-container-contain"))) {
-                            setFragment(new JoystickSeriesControllerFragment(), true);
-                            mCurrentFragment = topView;
-                        } else if (topView.equals("movie-detail") && (mCurrentFragment == null || !mCurrentFragment.equals("movie-detail"))) {
-                            setFragment(new JoystickMovieControllerFragment(), true);
-                            mCurrentFragment = topView;
-                        } else if (!(topView.equals("player") || topView.equals("shows-container-contain") || topView.equals("movie-detail")) && (mCurrentFragment == null || !mCurrentFragment.equals("main"))) {
-                            setFragment(new JoystickMainControllerFragment(), true);
-                            mCurrentFragment = "main";
+                            LogUtils.d("TopView", topView);
+
+                            if (topView.equals("player") && (mCurrentFragment == null || !mCurrentFragment.equals("player"))) {
+                                setFragment(new PlayerControllerFragment(), true);
+                                mCurrentFragment = topView;
+                            } else if (topView.equals("shows-container-contain") && (mCurrentFragment == null || !mCurrentFragment.equals("shows-container-contain"))) {
+                                setFragment(new SeriesControllerFragment(), true);
+                                mCurrentFragment = topView;
+                            } else if (topView.equals("movie-detail") && (mCurrentFragment == null || !mCurrentFragment.equals("movie-detail"))) {
+                                setFragment(new MovieControllerFragment(), true);
+                                mCurrentFragment = topView;
+                            } else if (topView.equals("app-overlay") && (mCurrentFragment == null || !mCurrentFragment.equals("app-overlay"))) {
+                                setFragment(new LoadingControllerFragment(), true);
+                                mCurrentFragment = topView;
+                            } else if (!(topView.equals("player") || topView.equals("shows-container-contain") || topView.equals("movie-detail") || topView.equals("app-overlay")) && (mCurrentFragment == null || !mCurrentFragment.equals("main"))) {
+                                setFragment(new MainControllerFragment(), true);
+                                mCurrentFragment = "main";
+                            }
                         }
-                    }
 
-                    mHandler.postDelayed(mGetViewstackRunnable, 500);
-                } else if (e != null) {
-                    e.printStackTrace();
-                    setFragment(new ConnectionLostFragment(), true);
-                    mCurrentFragment = "no-connection";
+                        mHandler.postDelayed(mGetViewstackRunnable, 500);
+                    } else if (e != null) {
+                        e.printStackTrace();
+                        setFragment(new ConnectionLostFragment(), true);
+                        mCurrentFragment = "no-connection";
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });

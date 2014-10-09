@@ -18,18 +18,16 @@ import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class JoystickMovieControllerFragment extends Fragment {
+public class SeriesControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.favouriteButton)
-    ImageButton favouriteButton;
     @InjectView(R.id.backButton)
     ImageButton backButton;
-    @InjectView(R.id.qualityButton)
-    ImageButton qualityButton;
-    @InjectView(R.id.subsButton)
-    ImageButton subsButton;
+    @InjectView(R.id.favouriteButton)
+    ImageButton favouriteButton;
+    @InjectView(R.id.watchedButton)
+    ImageButton watchedButton;
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
@@ -43,13 +41,6 @@ public class JoystickMovieControllerFragment extends Fragment {
                     break;
                 case R.id.watchedButton:
                     getClient().toggleWatched(mResponseListener);
-                    break;
-                case R.id.subsButton:
-                    SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
-                    fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
-                    break;
-                case R.id.qualityButton:
-                    getClient().toggleQuality(mResponseListener);
                     break;
             }
         }
@@ -71,10 +62,10 @@ public class JoystickMovieControllerFragment extends Fragment {
                     getClient().down(mResponseListener);
                     break;
                 case RIGHT:
-                    getClient().right(mResponseListener);
+                    getClient().nextSeason(mResponseListener);
                     break;
                 case LEFT:
-                    getClient().left(mResponseListener);
+                    getClient().prevSeason(mResponseListener);
                     break;
             }
         }
@@ -95,16 +86,18 @@ public class JoystickMovieControllerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
-        View v = inflater.inflate(R.layout.fragment_joystick_moviecontroller, container, false);
+        View v = inflater.inflate(R.layout.fragment_seriescontroller, container, false);
         ButterKnife.inject(this, v);
 
-        subsButton.setOnClickListener(mButtonClickListener);
-        favouriteButton.setOnClickListener(mButtonClickListener);
-        qualityButton.setOnClickListener(mButtonClickListener);
         backButton.setOnClickListener(mButtonClickListener);
+        favouriteButton.setOnClickListener(mButtonClickListener);
+        watchedButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_playpause);
+        joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
+        joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
+
 
         return v;
     }
