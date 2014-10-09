@@ -24,14 +24,6 @@ public class JoystickPlayerControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.upButton)
-    ImageButton upButton;
-    @InjectView(R.id.downButton)
-    ImageButton downButton;
-    @InjectView(R.id.leftButton)
-    ImageButton leftButton;
-    @InjectView(R.id.rightButton)
-    ImageButton rightButton;
     @InjectView(R.id.fullscreenButton)
     ImageButton fullscreenButton;
     @InjectView(R.id.subsButton)
@@ -56,28 +48,6 @@ public class JoystickPlayerControllerFragment extends Fragment {
                     fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
             }
-        }
-    };
-
-    private View.OnClickListener mOnDirectionClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            JoystickView.Direction d = JoystickView.Direction.CENTER;
-            switch (v.getId()) {
-                case R.id.upButton:
-                    d = JoystickView.Direction.UP;
-                    break;
-                case R.id.downButton:
-                    d = JoystickView.Direction.DOWN;
-                    break;
-                case R.id.leftButton:
-                    d = JoystickView.Direction.LEFT;
-                    break;
-                case R.id.rightButton:
-                    d = JoystickView.Direction.RIGHT;
-                    break;
-            }
-            joystickView.setDirection(d);
         }
     };
 
@@ -139,10 +109,6 @@ public class JoystickPlayerControllerFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_joystick_playercontroller, container, false);
         ButterKnife.inject(this, v);
 
-        upButton.setOnClickListener(mOnDirectionClickListener);
-        downButton.setOnClickListener(mOnDirectionClickListener);
-        leftButton.setOnClickListener(mOnDirectionClickListener);
-        rightButton.setOnClickListener(mOnDirectionClickListener);
         fullscreenButton.setOnClickListener(mButtonClickListener);
         backButton.setOnClickListener(mButtonClickListener);
         subsButton.setOnClickListener(mButtonClickListener);
@@ -152,7 +118,11 @@ public class JoystickPlayerControllerFragment extends Fragment {
         }
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(R.drawable.ic_action_playpause);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_playpause);
+        joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_forward);
+        joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_backward);
+        joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_fastforward);
+        joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_fastbackward);
 
         getClient().setVolume(1.0, mResponseListener);
         volumeControl.setOnSeekBarChangeListener(mOnVolumeControlChangeListener);

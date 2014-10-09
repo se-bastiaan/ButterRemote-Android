@@ -9,7 +9,11 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <include layout="@layout/joystick" />
+        <eu.se_bastiaan.popcorntimeremote.widget.JoystickView
+            android:id="@+id/joystick"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
         <LinearLayout
             android:layout_width="wrap_content"

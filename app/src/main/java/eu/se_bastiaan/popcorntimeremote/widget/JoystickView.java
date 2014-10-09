@@ -1,5 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -9,15 +10,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-
-import eu.se_bastiaan.popcorntimeremote.R;
 
 public class JoystickView extends View {
     // Constants
     private final double RAD = 57.2957795;
-    public enum Direction { CENTER, RIGHT, UP, LEFT, DOWN};
+    public enum Direction { CENTER, RIGHT, UP, LEFT, DOWN };
     // Variables
     private OnJoystickMoveListener mOnJoystickMoveListener;
     private int mPositionX = 0;
@@ -25,37 +25,49 @@ public class JoystickView extends View {
     private int mCenterX = 0;
     private int mCenterY = 0;
     private Paint mMainCircle;
+    private Paint mOuterCircle;
     private Paint mButton;
     private Paint mButtonImagePaint;
-    private Bitmap mButtonImage;
+    private Bitmap mCenterImage, mLeftImage, mRightImage, mUpImage, mDownImage;
     private int mJoystickRadius;
     private int mButtonRadius;
+    private int mOuterCircleRadius;
     private int mLastAngle = 0;
     private int mLastPower = 0;
     private boolean mUserIsTouching = false;
     private boolean mCalledOnce = false;
     private boolean mDrawn = false;
     private Handler mHandler = new Handler();
+    private Context mContext;
+    private DisplayMetrics mMetrics = new DisplayMetrics();
 
     public JoystickView(Context context) {
         super(context);
+        initJoystickView(context);
     }
 
     public JoystickView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initJoystickView();
+        initJoystickView(context);
     }
 
     public JoystickView(Context context, AttributeSet attrs, int defaultStyle) {
         super(context, attrs, defaultStyle);
-        initJoystickView();
+        initJoystickView(context);
     }
 
-    protected void initJoystickView() {
+    protected void initJoystickView(Context context) {
+        mContext = context;
+
         mMainCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
         mMainCircle.setColor(Color.parseColor("#77FFFFFF"));
         mMainCircle.setStyle(Paint.Style.STROKE);
         mMainCircle.setAntiAlias(true);
+
+        mOuterCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mOuterCircle.setColor(Color.parseColor("#77FFFFFF"));
+        mOuterCircle.setStyle(Paint.Style.STROKE);
+        mOuterCircle.setAntiAlias(true);
 
         mButton = new Paint(Paint.ANTI_ALIAS_FLAG);
         mButton.setColor(Color.parseColor("#75B8FF"));
@@ -63,6 +75,8 @@ public class JoystickView extends View {
         mButton.setAntiAlias(true);
 
         mButtonImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        ((Activity) mContext).getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
 
     @Override
@@ -73,30 +87,13 @@ public class JoystickView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // setting the measured values to resize the view to a certain width and
         // height
-        int d = Math.min(measure(widthMeasureSpec), measure(heightMeasureSpec));
+        int d = mMetrics.widthPixels;
 
         setMeasuredDimension(d, d);
 
-        mButtonRadius = (int) ((d / 4) * 0.6);
-        mJoystickRadius = d / 4;
-    }
-
-    private int measure(int measureSpec) {
-        int result;
-
-        // Decode the measurement specifications.
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
-
-        if (specMode == MeasureSpec.UNSPECIFIED) {
-            // Return a default size of 200 if no bounds are specified.
-            result = 200;
-        } else {
-            // As you want to fill the available space
-            // always return the full available bounds.
-            result = specSize;
-        }
-        return result;
+        mButtonRadius = (int) (((d * 0.75) / 4) * 0.6);
+        mJoystickRadius = (int) (d * 0.75) / 4;
+        mOuterCircleRadius = d / 3;
     }
 
     @Override
@@ -129,8 +126,11 @@ public class JoystickView extends View {
             }
         }
 
+        Integer centerBetweenRadius = mJoystickRadius + (mOuterCircleRadius - mJoystickRadius) / 2;
+
         // painting the main circle
         canvas.drawCircle(mCenterX, mCenterY, mJoystickRadius, mMainCircle);
+        canvas.drawCircle(mCenterX, mCenterX, mOuterCircleRadius, mMainCircle);
 
         // painting the move button
         if(mUserIsTouching) {
@@ -139,10 +139,26 @@ public class JoystickView extends View {
             mButton.setShadowLayer(8.0f, 0.0f, 0.0f, 0x99000000);
         }
 
+        if(mUpImage != null) {
+            canvas.drawBitmap(mUpImage, mCenterX - (mUpImage.getWidth() / 2), mCenterY - centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
+        }
+
+        if(mDownImage != null) {
+            canvas.drawBitmap(mDownImage, mCenterX - (mDownImage.getWidth() / 2), mCenterY + centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
+        }
+
+        if(mLeftImage != null) {
+            canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+        }
+
+        if(mRightImage != null) {
+            canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+        }
+
         canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButton);
 
-        if(mButtonImage != null) {
-            canvas.drawBitmap(mButtonImage, mPositionX - (mButtonImage.getWidth() / 2), mPositionY - (mButtonImage.getHeight() / 2), mButtonImagePaint);
+        if(mCenterImage != null) {
+            canvas.drawBitmap(mCenterImage, mPositionX - (mCenterImage.getWidth() / 2), mPositionY - (mCenterImage.getHeight() / 2), mButtonImagePaint);
         }
 
         if(!mUserIsTouching && (mCenterX != mPositionX || mCenterY != mPositionY)) invalidate();
@@ -253,25 +269,57 @@ public class JoystickView extends View {
         mOnJoystickMoveListener = listener;
     }
 
-    public void setJoystickImage(Integer drawableRes) {
+    public void setJoystickImage(Direction direction, Integer drawableRes) {
         Resources res = getResources();
         Bitmap resource = BitmapFactory.decodeResource(res, drawableRes);
         if(mDrawn) {
-            mButtonImage = Bitmap.createScaledBitmap(resource, getWidth() * (2 / 3), getHeight() * (2 / 3), false);
-        } else {
-            mButtonImage = resource;
+            resource = Bitmap.createScaledBitmap(resource, getWidth() * (2 / 3), getHeight() * (2 / 3), false);
+        }
+
+        switch (direction) {
+            case CENTER:
+                mCenterImage = resource;
+                break;
+            case UP:
+                mUpImage = resource;
+                break;
+            case DOWN:
+                mDownImage = resource;
+                break;
+            case LEFT:
+                mLeftImage = resource;
+                break;
+            case RIGHT:
+                mRightImage = resource;
+                break;
         }
     }
 
-    public void setJoystickImage(Bitmap bitmap) {
+    public void setJoystickImage(Direction direction, Bitmap bitmap) {
         if(bitmap != null) {
             if(mDrawn) {
-                mButtonImage = Bitmap.createScaledBitmap(bitmap, getWidth() * (2 / 3), getHeight() * (2 / 3), false);
-            } else {
-                mButtonImage = bitmap;
+                bitmap = Bitmap.createScaledBitmap(bitmap, getWidth() * (2 / 3), getHeight() * (2 / 3), false);
+            }
+
+            switch (direction) {
+                case CENTER:
+                    mCenterImage = bitmap;
+                    break;
+                case UP:
+                    mUpImage = bitmap;
+                    break;
+                case DOWN:
+                    mDownImage = bitmap;
+                    break;
+                case LEFT:
+                    mLeftImage = bitmap;
+                    break;
+                case RIGHT:
+                    mRightImage = bitmap;
+                    break;
             }
         } else {
-            mButtonImage = null;
+            mCenterImage = null;
         }
     }
 

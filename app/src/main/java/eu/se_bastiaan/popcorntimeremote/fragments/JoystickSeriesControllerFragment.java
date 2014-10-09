@@ -22,14 +22,6 @@ public class JoystickSeriesControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.upButton)
-    ImageButton upButton;
-    @InjectView(R.id.downButton)
-    ImageButton downButton;
-    @InjectView(R.id.leftButton)
-    ImageButton leftButton;
-    @InjectView(R.id.rightButton)
-    ImageButton rightButton;
     @InjectView(R.id.backButton)
     ImageButton backButton;
     @InjectView(R.id.favouriteButton)
@@ -51,28 +43,6 @@ public class JoystickSeriesControllerFragment extends Fragment {
                     getClient().toggleWatched(mResponseListener);
                     break;
             }
-        }
-    };
-
-    private View.OnClickListener mOnDirectionClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            JoystickView.Direction d = JoystickView.Direction.CENTER;
-            switch (v.getId()) {
-                case R.id.upButton:
-                    d = JoystickView.Direction.UP;
-                    break;
-                case R.id.downButton:
-                    d = JoystickView.Direction.DOWN;
-                    break;
-                case R.id.leftButton:
-                    d = JoystickView.Direction.LEFT;
-                    break;
-                case R.id.rightButton:
-                    d = JoystickView.Direction.RIGHT;
-                    break;
-            }
-            joystickView.setDirection(d);
         }
     };
 
@@ -119,22 +89,15 @@ public class JoystickSeriesControllerFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_joystick_seriescontroller, container, false);
         ButterKnife.inject(this, v);
 
-        upButton.setOnClickListener(mOnDirectionClickListener);
-        downButton.setOnClickListener(mOnDirectionClickListener);
-        leftButton.setOnClickListener(mOnDirectionClickListener);
-        rightButton.setOnClickListener(mOnDirectionClickListener);
-
-        leftButton.setImageResource(R.drawable.ic_action_prevseason);
-        rightButton.setImageResource(R.drawable.ic_action_nextseason);
-        leftButton.setContentDescription(getString(R.string.prev_season));
-        rightButton.setContentDescription(getString(R.string.next_season));
-
         backButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
         watchedButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
+        joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
+
 
         return v;
     }

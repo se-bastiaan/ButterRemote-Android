@@ -27,14 +27,6 @@ public class JoystickMainControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.upButton)
-    ImageButton upButton;
-    @InjectView(R.id.downButton)
-    ImageButton downButton;
-    @InjectView(R.id.leftButton)
-    ImageButton leftButton;
-    @InjectView(R.id.rightButton)
-    ImageButton rightButton;
     @InjectView(R.id.searchButton)
     ImageButton searchButton;
     @InjectView(R.id.favouriteButton)
@@ -67,28 +59,6 @@ public class JoystickMainControllerFragment extends Fragment {
                     getClient().toggleTabs(mResponseListener);
                     break;
             }
-        }
-    };
-
-    private View.OnClickListener mOnDirectionClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            JoystickView.Direction d = JoystickView.Direction.CENTER;
-            switch (v.getId()) {
-                case R.id.upButton:
-                    d = JoystickView.Direction.UP;
-                    break;
-                case R.id.downButton:
-                    d = JoystickView.Direction.DOWN;
-                    break;
-                case R.id.leftButton:
-                    d = JoystickView.Direction.LEFT;
-                    break;
-                case R.id.rightButton:
-                    d = JoystickView.Direction.RIGHT;
-                    break;
-            }
-            joystickView.setDirection(d);
         }
     };
 
@@ -162,17 +132,17 @@ public class JoystickMainControllerFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_joystick_maincontroller, container, false);
         ButterKnife.inject(this, v);
 
-        upButton.setOnClickListener(mOnDirectionClickListener);
-        downButton.setOnClickListener(mOnDirectionClickListener);
-        leftButton.setOnClickListener(mOnDirectionClickListener);
-        rightButton.setOnClickListener(mOnDirectionClickListener);
         searchButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
         backButton.setOnClickListener(mButtonClickListener);
         tabsButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_right);
+        joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_left);
+        joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
+        joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
 
         searchInput.setIconAlwaysVisible(true);
         searchInput.setListener(mClearableEditTextListener);
