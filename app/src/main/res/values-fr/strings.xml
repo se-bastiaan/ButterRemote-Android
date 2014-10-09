@@ -8,6 +8,8 @@
     <string name="no_connection">Pas de connection</string>
     <string name="no_connection_desc">Nous ne pouvions pas vous connecter à l\'instance du Popcorn Time sélectionné, assurez-vous que Popcorn Time (v0.3.3 +) est en cours d\'exécution et vérifiez vos paramètres et connexion Internet.</string>
     <string name="retry">Réessayer</string>
+    <string name="connected_to">Connecter to</string>
+    <string name="loading">Popcorn Time is loading data…</string>
 
     <string name="back">Retour</string>
     <string name="left">Gauche</string>
