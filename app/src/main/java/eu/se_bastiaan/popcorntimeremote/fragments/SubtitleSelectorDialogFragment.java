@@ -25,6 +25,7 @@ import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
+import eu.se_bastiaan.popcorntimeremote.widget.SubtitleAdapter;
 
 public class SubtitleSelectorDialogFragment extends DialogFragment {
 
@@ -71,73 +72,13 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {
                 subsData = (ArrayList<String>) result.getMapResult().get("subtitles");
                 subsData.add(0, "no-subs");
-                SubtitleAdapter adapter = new SubtitleAdapter(subsData);
+                SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
                 progressBar.setVisibility(View.GONE);
                 listView.setAdapter(adapter);
             }
         }
     };
 
-    class SubtitleAdapter extends BaseAdapter {
 
-        private ArrayList<String> mData;
-        private LayoutInflater mInflater;
-
-        class ViewHolder {
-            public ViewHolder(View v) {
-                ButterKnife.inject(this, v);
-            }
-            @InjectView(android.R.id.text1)
-            TextView text1;
-        }
-
-        public SubtitleAdapter(ArrayList<String> data) {
-            mData = data;
-            mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return mData.size();
-        }
-
-        @Override
-        public String getItem(int position) {
-            return mData.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if(convertView == null) {
-                convertView = mInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-                holder = new ViewHolder(convertView);
-                holder.text1.setPadding(32, 0, 0, 0);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            String lang = getItem(position);
-            if(!lang.equals("no-subs")) {
-                Locale locale;
-                if(lang.contains("-")) {
-                    locale = new Locale(lang.substring(0, 2), lang.substring(3, 5));
-                } else {
-                    locale = new Locale(lang);
-                }
-                holder.text1.setText(locale.getDisplayName());
-            } else {
-                holder.text1.setText(R.string.disable_subs);
-            }
-
-            return convertView;
-        }
-    }
 
 }

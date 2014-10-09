@@ -3,7 +3,10 @@
     <color name="popcorntimeremote_color">#FF75B8FF</color>
     <color name="list_selected">#55FFFFFF</color>
     <color name="bg">#FF203041</color>
+    <color name="bottom_bg">#1B222A</color>
 
     <color name="viewfinder_laser">#FF75B8FF</color>
     <color name="viewfinder_border">#FFFFFFFF</color>
+
+    <color name="overlay">#33000000</color>
 </resources>
