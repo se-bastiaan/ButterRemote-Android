@@ -23,7 +23,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.ClearableEditText;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class MainControllerFragment extends Fragment {
+public class MainControllerFragment extends BaseControlFragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
@@ -50,13 +50,13 @@ public class MainControllerFragment extends Fragment {
                     }
                     break;
                 case R.id.backButton:
-                    getClient().back(mResponseListener);
+                    getClient().back(mBlankResponseCallback);
                     break;
                 case R.id.favouriteButton:
-                    getClient().toggleFavourite(mResponseListener);
+                    getClient().toggleFavourite(mBlankResponseCallback);
                     break;
                 case R.id.tabsButton:
-                    getClient().toggleTabs(mResponseListener);
+                    getClient().toggleTabs(mBlankResponseCallback);
                     break;
             }
         }
@@ -69,19 +69,19 @@ public class MainControllerFragment extends Fragment {
 
             switch (direction) {
                 case CENTER:
-                    getClient().enter(mResponseListener);
+                    getClient().enter(mBlankResponseCallback);
                     break;
                 case UP:
-                    getClient().up(mResponseListener);
+                    getClient().up(mBlankResponseCallback);
                     break;
                 case DOWN:
-                    getClient().down(mResponseListener);
+                    getClient().down(mBlankResponseCallback);
                     break;
                 case RIGHT:
-                    getClient().right(mResponseListener);
+                    getClient().right(mBlankResponseCallback);
                     break;
                 case LEFT:
-                    getClient().left(mResponseListener);
+                    getClient().left(mBlankResponseCallback);
                     break;
             }
         }
@@ -91,7 +91,7 @@ public class MainControllerFragment extends Fragment {
         @Override
         public void didClearText() {
             searchInput.setVisibility(View.INVISIBLE);
-            getClient().clearSearch(mResponseListener);
+            getClient().clearSearch(mBlankResponseCallback);
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
@@ -107,21 +107,10 @@ public class MainControllerFragment extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.toString().equals("")) {
-                getClient().clearSearch(mResponseListener);
+                getClient().clearSearch(mBlankResponseCallback);
                 return;
             }
-            getClient().filterSearch(s.toString(), mResponseListener);
-        }
-    };
-
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            if(result != null && e != null) {
-                LogUtils.d("MainControllerFragment", result.result);
-            } else if(e != null) {
-                e.printStackTrace();
-            }
+            getClient().filterSearch(s.toString(), mBlankResponseCallback);
         }
     };
 
@@ -149,13 +138,6 @@ public class MainControllerFragment extends Fragment {
         searchInput.addTextChangedListener(mClearableEditTextWatcher);
 
         return v;
-    }
-
-    private PopcornTimeRpcClient getClient() {
-        try {
-            return ((ControllerActivity) getActivity()).getClient();
-        } catch (Exception e) {}
-        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

@@ -18,7 +18,7 @@ import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class SeriesControllerFragment extends Fragment {
+public class SeriesControllerFragment extends BaseControlFragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
@@ -34,13 +34,13 @@ public class SeriesControllerFragment extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.backButton:
-                    getClient().back(mResponseListener);
+                    getClient().back(mBlankResponseCallback);
                     break;
                 case R.id.favouriteButton:
-                    getClient().toggleFavourite(mResponseListener);
+                    getClient().toggleFavourite(mBlankResponseCallback);
                     break;
                 case R.id.watchedButton:
-                    getClient().toggleWatched(mResponseListener);
+                    getClient().toggleWatched(mBlankResponseCallback);
                     break;
             }
         }
@@ -53,31 +53,20 @@ public class SeriesControllerFragment extends Fragment {
 
             switch (direction) {
                 case CENTER:
-                    getClient().enter(mResponseListener);
+                    getClient().enter(mBlankResponseCallback);
                     break;
                 case UP:
-                    getClient().up(mResponseListener);
+                    getClient().up(mBlankResponseCallback);
                     break;
                 case DOWN:
-                    getClient().down(mResponseListener);
+                    getClient().down(mBlankResponseCallback);
                     break;
                 case RIGHT:
-                    getClient().nextSeason(mResponseListener);
+                    getClient().nextSeason(mBlankResponseCallback);
                     break;
                 case LEFT:
-                    getClient().prevSeason(mResponseListener);
+                    getClient().prevSeason(mBlankResponseCallback);
                     break;
-            }
-        }
-    };
-
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            if(result != null && e != null) {
-                LogUtils.d("MainControllerFragment", result.result);
-            } else if(e != null) {
-                e.printStackTrace();
             }
         }
     };
@@ -94,19 +83,12 @@ public class SeriesControllerFragment extends Fragment {
         watchedButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_playpause);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
         joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
 
 
         return v;
-    }
-
-    private PopcornTimeRpcClient getClient() {
-        try {
-            return ((ControllerActivity) getActivity()).getClient();
-        } catch (Exception e) {}
-        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }
