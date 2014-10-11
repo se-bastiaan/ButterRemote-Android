@@ -30,8 +30,8 @@ android {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 8
         targetSdkVersion 19
-        versionCode 16
-        versionName "0.1.16"
+        versionCode 17
+        versionName "0.1.17"
     }
     buildTypes {
         release {
@@ -50,5 +50,6 @@ dependencies {
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.5'
     compile 'com.sothree.slidinguppanel:library:+'
+    compile 'org.michaelevans.colorart:library:0.0.2'
     compile 'com.crashlytics.android:crashlytics:1.+'
 }
