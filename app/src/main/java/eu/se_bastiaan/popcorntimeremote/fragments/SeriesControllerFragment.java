@@ -32,17 +32,17 @@ public class SeriesControllerFragment extends Fragment {
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.backButton:
-                    getClient().back(mResponseListener);
-                    break;
-                case R.id.favouriteButton:
-                    getClient().toggleFavourite(mResponseListener);
-                    break;
-                case R.id.watchedButton:
-                    getClient().toggleWatched(mResponseListener);
-                    break;
-            }
+        switch(v.getId()) {
+            case R.id.backButton:
+                getClient().back(mResponseListener);
+                break;
+            case R.id.favouriteButton:
+                getClient().toggleFavourite(mResponseListener);
+                break;
+            case R.id.watchedButton:
+                getClient().toggleWatched(mResponseListener);
+                break;
+        }
         }
     };
 
