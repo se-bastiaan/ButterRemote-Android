@@ -1,6 +1,8 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -139,7 +141,13 @@ public class ControllerActivity extends ActionBarActivity {
                             }
                         }
 
-                        mHandler.postDelayed(mGetViewstackRunnable, 500);
+                        if(mCurrentFragment.equals("player")) {
+                            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
+                        } else {
+                            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_pt_remote));
+                        }
+
+                        mHandler.postDelayed(mGetViewstackRunnable, 1000);
                     } else if (e != null) {
                         e.printStackTrace();
                         setFragment(new ConnectionLostFragment(), true);
