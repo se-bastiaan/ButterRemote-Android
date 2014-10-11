@@ -97,6 +97,8 @@ public class SeriesControllerFragment extends Fragment {
         joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
         joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
+        joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
+        joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
 
 
         return v;
