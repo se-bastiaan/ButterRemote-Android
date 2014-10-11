@@ -79,7 +79,7 @@ public class PlayerControllerFragment extends Fragment {
                     getClient().seek(60, mResponseListener);
                     break;
                 case R.id.backwardButton:
-                    getClient().seek(60, mResponseListener);
+                    getClient().seek(-60, mResponseListener);
                     break;
             }
         }
@@ -210,22 +210,34 @@ public class PlayerControllerFragment extends Fragment {
         currentTime.setProgress(0);
         currentTime.setOnSeekBarChangeListener(mOnTimeControlChangeListener);
 
-        getClient().setVolume(1.0, mResponseListener);
         volumeControl.setOnSeekBarChangeListener(mOnVolumeControlChangeListener);
 
         getClient().getSelection(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
             @Override
             public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-                if(result != null && e == null) {
-                    LinkedTreeMap<String, Object> mapResult = result.getMapResult();
-                    Ion.with(coverImage).load(((String) mapResult.get("image")).replace("-300.jpg", ".jpg"));
+                try {
+                    if (result != null && e == null) {
+                        LinkedTreeMap<String, Object> mapResult = result.getMapResult();
+                        String type = null;
+                        if(mapResult.containsKey("type")) type = (String) mapResult.get("type");
+                        String posterUrl = "";
+                        if(type != null && type.equals("movie")) {
+                            posterUrl = ((String) mapResult.get("image")).replace("-300.jpg", ".jpg");
+                        } else {
+                            LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mapResult.get("images");
+                            posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
+                        }
+                        Ion.with(coverImage).load(posterUrl);
 
-                    Set<String> subsSet = (Set<String>) ((LinkedTreeMap<String, String>) result.getMapResult().get("subtitle")).keySet();
-                    ArrayList<String> subsData = new ArrayList<String>();
-                    subsData.addAll(subsSet);
-                    subsData.add(0, "no-subs");
-                    SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
-                    subsSpinner.setAdapter(adapter);
+                        Set<String> subsSet = ((LinkedTreeMap<String, String>) result.getMapResult().get("subtitle")).keySet();
+                        ArrayList<String> subsData = new ArrayList<String>();
+                        subsData.addAll(subsSet);
+                        subsData.add(0, "no-subs");
+                        SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
+                        subsSpinner.setAdapter(adapter);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });
