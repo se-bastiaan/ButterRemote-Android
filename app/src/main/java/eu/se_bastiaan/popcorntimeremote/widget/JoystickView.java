@@ -139,30 +139,26 @@ public class JoystickView extends View {
             mButton.setShadowLayer(8.0f, 0.0f, 0.0f, 0x99000000);
         }
 
-        try {
-            if (mUpImage != null) {
-                canvas.drawBitmap(mUpImage, mCenterX - (mUpImage.getWidth() / 2), mCenterY - centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
-            }
+        if(mUpImage != null) {
+            canvas.drawBitmap(mUpImage, mCenterX - (mUpImage.getWidth() / 2), mCenterY - centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
+        }
 
-            if (mDownImage != null) {
-                canvas.drawBitmap(mDownImage, mCenterX - (mDownImage.getWidth() / 2), mCenterY + centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
-            }
+        if(mDownImage != null) {
+            canvas.drawBitmap(mDownImage, mCenterX - (mDownImage.getWidth() / 2), mCenterY + centerBetweenRadius - (mCenterImage.getHeight() / 2), mButtonImagePaint);
+        }
 
-            if (mLeftImage != null) {
-                canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
-            }
+        if(mLeftImage != null) {
+            canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+        }
 
-            if (mRightImage != null) {
-                canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
-            }
+        if(mRightImage != null) {
+            canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+        }
 
-            canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButton);
+        canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButton);
 
-            if (mCenterImage != null) {
-                canvas.drawBitmap(mCenterImage, mPositionX - (mCenterImage.getWidth() / 2), mPositionY - (mCenterImage.getHeight() / 2), mButtonImagePaint);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(mCenterImage != null) {
+            canvas.drawBitmap(mCenterImage, mPositionX - (mCenterImage.getWidth() / 2), mPositionY - (mCenterImage.getHeight() / 2), mButtonImagePaint);
         }
 
         if(!mUserIsTouching && (mCenterX != mPositionX || mCenterY != mPositionY)) invalidate();

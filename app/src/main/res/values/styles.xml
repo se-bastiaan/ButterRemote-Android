@@ -29,7 +29,6 @@
         <item name="actionModeBackground">@drawable/cab_background_top_pt_remote</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_pt_remote</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.PopcornTimeRemote</item>
-        <item name="windowActionBarOverlay">true</item>
 
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>

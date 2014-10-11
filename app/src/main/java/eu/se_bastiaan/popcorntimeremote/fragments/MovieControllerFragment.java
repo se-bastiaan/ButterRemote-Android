@@ -18,7 +18,7 @@ import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class MovieControllerFragment extends BaseControlFragment {
+public class MovieControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
@@ -36,20 +36,20 @@ public class MovieControllerFragment extends BaseControlFragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
+                    getClient().back(mResponseListener);
                     break;
                 case R.id.favouriteButton:
-                    getClient().toggleFavourite(mBlankResponseCallback);
+                    getClient().toggleFavourite(mResponseListener);
                     break;
                 case R.id.watchedButton:
-                    getClient().toggleWatched(mBlankResponseCallback);
+                    getClient().toggleWatched(mResponseListener);
                     break;
                 case R.id.subsButton:
                     SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
                     fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
                 case R.id.qualityButton:
-                    getClient().toggleQuality(mBlankResponseCallback);
+                    getClient().toggleQuality(mResponseListener);
                     break;
             }
         }
@@ -62,20 +62,31 @@ public class MovieControllerFragment extends BaseControlFragment {
 
             switch (direction) {
                 case CENTER:
-                    getClient().enter(mBlankResponseCallback);
+                    getClient().enter(mResponseListener);
                     break;
                 case UP:
-                    getClient().up(mBlankResponseCallback);
+                    getClient().up(mResponseListener);
                     break;
                 case DOWN:
-                    getClient().down(mBlankResponseCallback);
+                    getClient().down(mResponseListener);
                     break;
                 case RIGHT:
-                    getClient().right(mBlankResponseCallback);
+                    getClient().right(mResponseListener);
                     break;
                 case LEFT:
-                    getClient().left(mBlankResponseCallback);
+                    getClient().left(mResponseListener);
                     break;
+            }
+        }
+    };
+
+    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+        @Override
+        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+            if(result != null && e != null) {
+                LogUtils.d("MainControllerFragment", result.result);
+            } else if(e != null) {
+                e.printStackTrace();
             }
         }
     };
@@ -96,6 +107,13 @@ public class MovieControllerFragment extends BaseControlFragment {
         joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
 
         return v;
+    }
+
+    private PopcornTimeRpcClient getClient() {
+        try {
+            return ((ControllerActivity) getActivity()).getClient();
+        } catch (Exception e) {}
+        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

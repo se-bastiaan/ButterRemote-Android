@@ -21,6 +21,8 @@ public class ConnectionLostFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
+
         View v = inflater.inflate(R.layout.fragment_noconnection, container, false);
         ButterKnife.inject(this, v);
 

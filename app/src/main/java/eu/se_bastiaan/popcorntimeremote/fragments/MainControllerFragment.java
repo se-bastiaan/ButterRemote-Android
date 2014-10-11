@@ -23,7 +23,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.ClearableEditText;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class MainControllerFragment extends BaseControlFragment {
+public class MainControllerFragment extends Fragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
@@ -50,13 +50,13 @@ public class MainControllerFragment extends BaseControlFragment {
                     }
                     break;
                 case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
+                    getClient().back(mResponseListener);
                     break;
                 case R.id.favouriteButton:
-                    getClient().toggleFavourite(mBlankResponseCallback);
+                    getClient().toggleFavourite(mResponseListener);
                     break;
                 case R.id.tabsButton:
-                    getClient().toggleTabs(mBlankResponseCallback);
+                    getClient().toggleTabs(mResponseListener);
                     break;
             }
         }
@@ -69,19 +69,19 @@ public class MainControllerFragment extends BaseControlFragment {
 
             switch (direction) {
                 case CENTER:
-                    getClient().enter(mBlankResponseCallback);
+                    getClient().enter(mResponseListener);
                     break;
                 case UP:
-                    getClient().up(mBlankResponseCallback);
+                    getClient().up(mResponseListener);
                     break;
                 case DOWN:
-                    getClient().down(mBlankResponseCallback);
+                    getClient().down(mResponseListener);
                     break;
                 case RIGHT:
-                    getClient().right(mBlankResponseCallback);
+                    getClient().right(mResponseListener);
                     break;
                 case LEFT:
-                    getClient().left(mBlankResponseCallback);
+                    getClient().left(mResponseListener);
                     break;
             }
         }
@@ -91,7 +91,7 @@ public class MainControllerFragment extends BaseControlFragment {
         @Override
         public void didClearText() {
             searchInput.setVisibility(View.INVISIBLE);
-            getClient().clearSearch(mBlankResponseCallback);
+            getClient().clearSearch(mResponseListener);
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
@@ -107,10 +107,21 @@ public class MainControllerFragment extends BaseControlFragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.toString().equals("")) {
-                getClient().clearSearch(mBlankResponseCallback);
+                getClient().clearSearch(mResponseListener);
                 return;
             }
-            getClient().filterSearch(s.toString(), mBlankResponseCallback);
+            getClient().filterSearch(s.toString(), mResponseListener);
+        }
+    };
+
+    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+        @Override
+        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+            if(result != null && e != null) {
+                LogUtils.d("MainControllerFragment", result.result);
+            } else if(e != null) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -138,6 +149,13 @@ public class MainControllerFragment extends BaseControlFragment {
         searchInput.addTextChangedListener(mClearableEditTextWatcher);
 
         return v;
+    }
+
+    private PopcornTimeRpcClient getClient() {
+        try {
+            return ((ControllerActivity) getActivity()).getClient();
+        } catch (Exception e) {}
+        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }
