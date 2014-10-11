@@ -1,14 +1,12 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,21 +17,19 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import org.michaelevans.colorart.library.ColorArt;
-
 import java.util.ArrayList;
 import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
-import eu.se_bastiaan.popcorntimeremote.graphics.Palette;
+import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
 import eu.se_bastiaan.popcorntimeremote.widget.SubtitleAdapter;
 
-public class PlayerControllerFragment extends BaseControlFragment {
+public class PlayerControllerFragment extends Fragment {
 
     private Boolean mPlaying = false, mSeeked = false, mVolumeChanged = false, mFullscreen = false;
     private Integer mCurrentTime, mMax, mVolume;
@@ -51,10 +47,6 @@ public class PlayerControllerFragment extends BaseControlFragment {
     ImageButton fullscreenButton;
     @InjectView(R.id.backButton)
     ImageButton backButton;
-    @InjectView(R.id.slidingPanelTopLayout)
-    LinearLayout slidingPanelTopLayout;
-    @InjectView(R.id.slidingPanelBottomLayout)
-    LinearLayout slidingPanelBottomLayout;
     @InjectView(R.id.currentProgress)
     SeekBar currentTime;
     @InjectView(R.id.volumeControl)
@@ -69,25 +61,25 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
+                    getClient().back(mResponseListener);
                     break;
                 case R.id.fullscreenButton:
-                    getClient().toggleFullscreen(mBlankResponseCallback);
+                    getClient().toggleFullscreen(mResponseListener);
                     break;
                 case R.id.subsButton:
                     SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
                     fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
                 case R.id.playPauseButton:
-                    getClient().togglePlay(mBlankResponseCallback);
+                    getClient().togglePlay(mResponseListener);
                     mPlaying = !mPlaying;
                     updateViews();
                     break;
                 case R.id.forwardButton:
-                    getClient().seek(60, mBlankResponseCallback);
+                    getClient().seek(60, mResponseListener);
                     break;
                 case R.id.backwardButton:
-                    getClient().seek(-60, mBlankResponseCallback);
+                    getClient().seek(-60, mResponseListener);
                     break;
             }
         }
@@ -98,7 +90,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if(fromUser) {
                 LogUtils.d("JoystickPlayerControllerFragment", progress);
-                getClient().seek(progress - mCurrentTime, mBlankResponseCallback);
+                getClient().seek(progress - mCurrentTime, mResponseListener);
                 mCurrentTime = progress;
                 mSeeked = true;
             }
@@ -118,7 +110,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
                 if (volume == 0) volume = 0.001;
                 mVolumeChanged = true;
                 mVolume = progress;
-                getClient().setVolume(volume, mBlankResponseCallback);
+                getClient().setVolume(volume, mResponseListener);
             }
         }
 
@@ -128,119 +120,76 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onStopTrackingTouch(SeekBar seekBar) { }
     };
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mSelectionCallback = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            try {
-                if (result != null && e == null) {
-                    LinkedTreeMap<String, Object> mapResult = result.getMapResult();
-                    String type = null;
-                    if(mapResult.containsKey("type")) type = (String) mapResult.get("type");
-                    String posterUrl = "";
-                    if(type != null && type.equals("movie")) {
-                        posterUrl = ((String) mapResult.get("image")).replace("-300.jpg", ".jpg");
-                    } else {
-                        LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mapResult.get("images");
-                        posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
-                    }
-                    Ion.with(getActivity()).load(posterUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
-                        @Override
-                        public void onCompleted(Exception e, final Bitmap bitmap) {
-                            if(bitmap != null) {
-                                Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-                                    @Override
-                                    public void onGenerated(Palette paramPalette) {
-                                        try {
-                                            coverImage.setImageBitmap(bitmap);
-                                            coverImage.setVisibility(View.VISIBLE);
-                                            Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
-                                            coverImage.startAnimation(fadeInAnim);
-                                            Integer color = paramPalette.getVibrantColor().getRgb();
-                                            slidingPanelTopLayout.setBackgroundColor(color);
-                                            slidingPanelBottomLayout.setBackgroundColor(color);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
-
-                    Set<String> subsSet = ((LinkedTreeMap<String, String>) result.getMapResult().get("subtitle")).keySet();
-                    ArrayList<String> subsData = new ArrayList<String>();
-                    subsData.addAll(subsSet);
-                    subsData.add(0, "no-subs");
-                    SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
-                    subsSpinner.setAdapter(adapter);
-                }
-            } catch(Exception exception) { exception.printStackTrace(); }
-        }
-    };
-
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mPlayingCallback = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            try {
-                if (result != null && e == null) {
-                    mPlaying = (Boolean) result.getMapResult().get("playing");
-                    updateViews();
-
-                    if (mPlaying) {
-                        if (mMax == null) {
-                            mMax = ((Double) result.getMapResult().get("duration")).intValue();
-                            currentTime.setMax(mMax);
-                        }
-                        if (!mSeeked) {
-                            mCurrentTime = ((Double) result.getMapResult().get("currentTime")).intValue();
-                            currentTime.setProgress(mCurrentTime);
-                        } else {
-                            mSeeked = false;
-                        }
-                        if(!mVolumeChanged) {
-                            Double volume = (Double) result.getMapResult().get("volume");
-                            mVolume = (int) (volume * 100.0);
-                            volumeControl.setProgress(mVolume);
-                        } else {
-                            mVolumeChanged = false;
-                        }
-                    }
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
+            if(result != null && e != null) {
+                LogUtils.d("MainControllerFragment", result.result);
+            } else if(e != null) {
+                e.printStackTrace();
             }
-
-            mHandler.postDelayed(mPlayingRunnable, 1000);
-        }
-    };
-
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mFullscreenCallback  = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            try {
-                if (result != null && e == null) {
-                    mFullscreen = (Boolean) result.getMapResult().get("fullscreen");
-                    updateViews();
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-
-            mHandler.postDelayed(mFullscreenRunnable, 1000);
         }
     };
 
     private Runnable mPlayingRunnable = new Runnable() {
         @Override
         public void run() {
-            getClient().getPlaying(mPlayingCallback);
+            getClient().getPlaying(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+                @Override
+                public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                    try {
+                        if (result != null && e == null) {
+                            mPlaying = (Boolean) result.getMapResult().get("playing");
+                            updateViews();
+
+                            if (mPlaying) {
+                                if (mMax == null) {
+                                    mMax = ((Double) result.getMapResult().get("duration")).intValue();
+                                    currentTime.setMax(mMax);
+                                }
+                                if (!mSeeked) {
+                                    mCurrentTime = ((Double) result.getMapResult().get("currentTime")).intValue();
+                                    currentTime.setProgress(mCurrentTime);
+                                } else {
+                                    mSeeked = false;
+                                }
+                                if(!mVolumeChanged) {
+                                    Double volume = (Double) result.getMapResult().get("volume");
+                                    mVolume = (int) (volume * 100.0);
+                                    volumeControl.setProgress(mVolume);
+                                } else {
+                                    mVolumeChanged = false;
+                                }
+                            }
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                    mHandler.postDelayed(mPlayingRunnable, 1000);
+                }
+            });
         }
     };
 
     private Runnable mFullscreenRunnable = new Runnable() {
         @Override
         public void run() {
-            getClient().getFullscreen(mFullscreenCallback);
+            getClient().getFullscreen(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+                @Override
+                public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                    try {
+                        if (result != null && e == null) {
+                            mFullscreen = (Boolean) result.getMapResult().get("fullscreen");
+                            updateViews();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                    mHandler.postDelayed(mFullscreenRunnable, 1000);
+                }
+            });
         }
     };
 
@@ -263,7 +212,35 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
         volumeControl.setOnSeekBarChangeListener(mOnVolumeControlChangeListener);
 
-        getClient().getSelection(mSelectionCallback);
+        getClient().getSelection(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+            @Override
+            public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                try {
+                    if (result != null && e == null) {
+                        LinkedTreeMap<String, Object> mapResult = result.getMapResult();
+                        String type = null;
+                        if(mapResult.containsKey("type")) type = (String) mapResult.get("type");
+                        String posterUrl = "";
+                        if(type != null && type.equals("movie")) {
+                            posterUrl = ((String) mapResult.get("image")).replace("-300.jpg", ".jpg");
+                        } else {
+                            LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mapResult.get("images");
+                            posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
+                        }
+                        Ion.with(coverImage).load(posterUrl);
+
+                        Set<String> subsSet = ((LinkedTreeMap<String, String>) result.getMapResult().get("subtitle")).keySet();
+                        ArrayList<String> subsData = new ArrayList<String>();
+                        subsData.addAll(subsSet);
+                        subsData.add(0, "no-subs");
+                        SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
+                        subsSpinner.setAdapter(adapter);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
 
         if(Version.compare(getClient().getVersion(), "0.0.0")) {
             mPlayingRunnable.run();
@@ -295,6 +272,13 @@ public class PlayerControllerFragment extends BaseControlFragment {
                 fullscreenButton.setImageResource(R.drawable.ic_action_fullscreen);
             }
         }
+    }
+
+    private PopcornTimeRpcClient getClient() {
+        try {
+            return ((ControllerActivity) getActivity()).getClient();
+        } catch (Exception e) {}
+        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

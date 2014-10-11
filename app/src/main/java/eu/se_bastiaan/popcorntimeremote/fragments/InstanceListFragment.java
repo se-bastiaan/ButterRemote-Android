@@ -42,8 +42,7 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
         getListView().setSelector(R.drawable.selectable_background_popcorntimeremote);
         int horizontalMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         int verticalMargin = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
-        int actionBarHeight = getResources().getDimensionPixelSize(R.dimen.abc_action_bar_default_height);
-        getListView().setPadding(horizontalMargin, verticalMargin + actionBarHeight, horizontalMargin, verticalMargin);
+        getListView().setPadding(horizontalMargin, verticalMargin, horizontalMargin, verticalMargin);
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
                 R.layout.fragment_listinstance_item, null, new String[]{
