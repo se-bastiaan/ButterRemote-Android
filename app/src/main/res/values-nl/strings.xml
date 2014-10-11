@@ -8,8 +8,6 @@
     <string name="no_connection">Geen verbinding</string>
     <string name="no_connection_desc">Er kon geen verbinding gemaakt worden met de Popcorn Time instantie, zorg dat Popcorn Time (v0.3.3+) op je computer is opgestart, controleer je instellingen en dat je internetverbinding werkt.</string>
     <string name="retry">Probeer opnieuw</string>
-    <string name="connected_to">Verbonden met</string>
-    <string name="loading">Gegevens laden in Popcorn Time…</string>
 
     <string name="back">Terug</string>
     <string name="left">Links</string>

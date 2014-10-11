@@ -148,11 +148,11 @@ public class JoystickView extends View {
         }
 
         if(mLeftImage != null) {
-            canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mLeftImage.getWidth() / 2), mCenterY - (mLeftImage.getHeight() / 2), mButtonImagePaint);
+            canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
         }
 
         if(mRightImage != null) {
-            canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mRightImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+            canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
         }
 
         canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButton);

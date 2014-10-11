@@ -121,6 +121,8 @@ public class ControllerActivity extends ActionBarActivity {
                             ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
                             String topView = resultList.get(resultList.size() - 1);
 
+                            LogUtils.d("TopView", topView);
+
                             if (topView.equals("player") && (mCurrentFragment == null || !mCurrentFragment.equals("player"))) {
                                 setFragment(new PlayerControllerFragment(), true);
                                 mCurrentFragment = topView;

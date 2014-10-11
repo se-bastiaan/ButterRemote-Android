@@ -94,7 +94,7 @@ public class SeriesControllerFragment extends Fragment {
         watchedButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
-        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
+        joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_playpause);
         joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
 
