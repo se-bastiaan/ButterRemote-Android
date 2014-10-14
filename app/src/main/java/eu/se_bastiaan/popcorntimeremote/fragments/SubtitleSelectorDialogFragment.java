@@ -1,5 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -30,23 +31,35 @@ import eu.se_bastiaan.popcorntimeremote.widget.SubtitleAdapter;
 public class SubtitleSelectorDialogFragment extends DialogFragment {
 
     private ArrayList<String> subsData;
+    private PopcornTimeRpcClient mRpc;
+    private Bundle mExtras;
 
     @InjectView(R.id.listView)
     ListView listView;
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
 
+    protected PopcornTimeRpcClient getClient() {
+        if(mExtras == null) {
+            mExtras = getArguments();
+        }
+        if (mRpc == null) {
+            mRpc = new PopcornTimeRpcClient(getActivity(), mExtras.getString(ControllerActivity.KEY_IP), mExtras.getString(ControllerActivity.KEY_PORT), mExtras.getString(ControllerActivity.KEY_USERNAME), mExtras.getString(ControllerActivity.KEY_PASSWORD), mExtras.getString(ControllerActivity.KEY_VERSION));
+        }
+        return mRpc;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_subtitleselector, null, false);
         ButterKnife.inject(this, view);
 
-        ((ControllerActivity)getActivity()).getClient().getSubtitles(mResponseListener);
+        getClient().getSubtitles(mResponseListener);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((ControllerActivity)getActivity()).getClient().setSubtitle(subsData.get(position), mResponseListener);
+                getClient().setSubtitle(subsData.get(position), mResponseListener);
                 dismiss();
             }
         });
@@ -64,6 +77,11 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
             );
 
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
     }
 
     private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {

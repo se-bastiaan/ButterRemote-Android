@@ -31,8 +31,6 @@ public class MainControllerFragment extends BaseControlFragment {
     ImageButton searchButton;
     @InjectView(R.id.favouriteButton)
     ImageButton favouriteButton;
-    @InjectView(R.id.backButton)
-    ImageButton backButton;
     @InjectView(R.id.tabsButton)
     ImageButton tabsButton;
     @InjectView(R.id.searchInput)
@@ -48,9 +46,6 @@ public class MainControllerFragment extends BaseControlFragment {
                     } else {
                         searchInput.setVisibility(View.VISIBLE);
                     }
-                    break;
-                case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
                     break;
                 case R.id.favouriteButton:
                     getClient().toggleFavourite(mBlankResponseCallback);
@@ -123,7 +118,6 @@ public class MainControllerFragment extends BaseControlFragment {
 
         searchButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
-        backButton.setOnClickListener(mButtonClickListener);
         tabsButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);

@@ -14,12 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-
-import org.michaelevans.colorart.library.ColorArt;
+import com.nineoldandroids.animation.ArgbEvaluator;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.graphics.Palette;
+import eu.se_bastiaan.popcorntimeremote.graphics.PaletteItem;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
@@ -47,34 +49,27 @@ public class PlayerControllerFragment extends BaseControlFragment {
     ImageButton playPauseButton;
     @InjectView(R.id.forwardButton)
     ImageButton forwardButton;
-    @InjectView(R.id.fullscreenButton)
-    ImageButton fullscreenButton;
-    @InjectView(R.id.backButton)
-    ImageButton backButton;
     @InjectView(R.id.slidingPanelTopLayout)
     LinearLayout slidingPanelTopLayout;
-    @InjectView(R.id.slidingPanelBottomLayout)
-    LinearLayout slidingPanelBottomLayout;
     @InjectView(R.id.currentProgress)
     SeekBar currentTime;
     @InjectView(R.id.volumeControl)
     SeekBar volumeControl;
-    @InjectView(R.id.subsSpinner)
-    Spinner subsSpinner;
-    @InjectView(R.id.subsSpinnerBlock)
-    LinearLayout subsSpinnerBlock;
+    @InjectView(R.id.fullscreenBlock)
+    LinearLayout fullscreenBlock;
+    @InjectView(R.id.fullscreenBlockImage)
+    ImageView fullscreenBlockImage;
+    @InjectView(R.id.subtitlesBlock)
+    LinearLayout subtitlesBlock;
 
-    private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
-                    break;
-                case R.id.fullscreenButton:
+                case R.id.fullscreenBlock:
                     getClient().toggleFullscreen(mBlankResponseCallback);
                     break;
-                case R.id.subsButton:
+                case R.id.subtitlesBlock:
                     SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
                     fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
                     break;
@@ -143,21 +138,34 @@ public class PlayerControllerFragment extends BaseControlFragment {
                         LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mapResult.get("images");
                         posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
                     }
+
                     Ion.with(getActivity()).load(posterUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
                         @Override
                         public void onCompleted(Exception e, final Bitmap bitmap) {
                             if(bitmap != null) {
                                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                                     @Override
-                                    public void onGenerated(Palette paramPalette) {
+                                    public void onGenerated(Palette palette) {
                                         try {
                                             coverImage.setImageBitmap(bitmap);
-                                            coverImage.setVisibility(View.VISIBLE);
+
                                             Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+
+                                            PaletteItem paletteItem = palette.getVibrantColor();
+                                            final Integer color;
+                                            if(paletteItem != null) {
+                                                color = paletteItem.getRgb();
+                                            } else {
+                                                paletteItem = palette.getMutedColor();
+                                                color = paletteItem.getRgb();
+                                            }
+
+                                            ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.accent_color), color);
+                                            slidingPanelTopLayoutColorFade.setDuration(500);
+
+                                            slidingPanelTopLayoutColorFade.start();
+                                            coverImage.setVisibility(View.VISIBLE);
                                             coverImage.startAnimation(fadeInAnim);
-                                            Integer color = paramPalette.getVibrantColor().getRgb();
-                                            slidingPanelTopLayout.setBackgroundColor(color);
-                                            slidingPanelBottomLayout.setBackgroundColor(color);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -166,15 +174,10 @@ public class PlayerControllerFragment extends BaseControlFragment {
                             }
                         }
                     });
-
-                    Set<String> subsSet = ((LinkedTreeMap<String, String>) result.getMapResult().get("subtitle")).keySet();
-                    ArrayList<String> subsData = new ArrayList<String>();
-                    subsData.addAll(subsSet);
-                    subsData.add(0, "no-subs");
-                    SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
-                    subsSpinner.setAdapter(adapter);
                 }
-            } catch(Exception exception) { exception.printStackTrace(); }
+            } catch(Exception exception) {
+                exception.printStackTrace();
+            }
         }
     };
 
@@ -187,18 +190,19 @@ public class PlayerControllerFragment extends BaseControlFragment {
                     updateViews();
 
                     if (mPlaying) {
+                        LinkedTreeMap<String, Object> mapResult = result.getMapResult();
                         if (mMax == null) {
-                            mMax = ((Double) result.getMapResult().get("duration")).intValue();
+                            mMax = ((Double) mapResult.get("duration")).intValue();
                             currentTime.setMax(mMax);
                         }
                         if (!mSeeked) {
-                            mCurrentTime = ((Double) result.getMapResult().get("currentTime")).intValue();
+                            mCurrentTime = ((Double) mapResult.get("currentTime")).intValue();
                             currentTime.setProgress(mCurrentTime);
                         } else {
                             mSeeked = false;
                         }
                         if(!mVolumeChanged) {
-                            Double volume = (Double) result.getMapResult().get("volume");
+                            Double volume = (Double) mapResult.get("volume");
                             mVolume = (int) (volume * 100.0);
                             volumeControl.setProgress(mVolume);
                         } else {
@@ -251,11 +255,10 @@ public class PlayerControllerFragment extends BaseControlFragment {
         View v = inflater.inflate(R.layout.fragment_playercontroller, container, false);
         ButterKnife.inject(this, v);
 
-        fullscreenButton.setOnClickListener(mButtonClickListener);
-        backButton.setOnClickListener(mButtonClickListener);
-        forwardButton.setOnClickListener(mButtonClickListener);
-        backwardButton.setOnClickListener(mButtonClickListener);
-        playPauseButton.setOnClickListener(mButtonClickListener);
+        fullscreenBlock.setOnClickListener(mOnClickListener);
+        forwardButton.setOnClickListener(mOnClickListener);
+        backwardButton.setOnClickListener(mOnClickListener);
+        playPauseButton.setOnClickListener(mOnClickListener);
 
         currentTime.setMax(0);
         currentTime.setProgress(0);
@@ -265,16 +268,18 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
         getClient().getSelection(mSelectionCallback);
 
+        LogUtils.d("Version", getClient().getVersion());
+
         if(Version.compare(getClient().getVersion(), "0.0.0")) {
             mPlayingRunnable.run();
             mFullscreenRunnable.run();
         } else {
             currentTime.setVisibility(View.GONE);
-            playPauseButton.setImageResource(R.drawable.ic_action_playpause);
+            playPauseButton.setImageResource(R.drawable.ic_av_playpause);
         }
 
         if(Version.compare(getClient().getVersion(), "0.3.4")) {
-            subsSpinnerBlock.setVisibility(View.VISIBLE);
+            subtitlesBlock.setVisibility(View.VISIBLE);
         }
 
         return v;
@@ -282,17 +287,16 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
     private void updateViews() {
         if(Version.compare(getClient().getVersion(), "0.0.0")) {
-            LogUtils.d("PlayerControllerFragment", "UpdateViews");
             if (mPlaying) {
-                playPauseButton.setImageResource(R.drawable.ic_action_pause);
+                playPauseButton.setImageResource(R.drawable.ic_av_pause);
             } else {
-                playPauseButton.setImageResource(R.drawable.ic_action_play);
+                playPauseButton.setImageResource(R.drawable.ic_av_play);
             }
 
             if (mFullscreen) {
-                fullscreenButton.setImageResource(R.drawable.ic_action_smallscreen);
+                fullscreenBlockImage.setImageResource(R.drawable.ic_av_small_screen);
             } else {
-                fullscreenButton.setImageResource(R.drawable.ic_action_fullscreen);
+                fullscreenBlockImage.setImageResource(R.drawable.ic_av_full_screen);
             }
         }
     }

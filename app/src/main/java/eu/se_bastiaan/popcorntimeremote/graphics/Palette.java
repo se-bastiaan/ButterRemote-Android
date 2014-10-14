@@ -49,7 +49,7 @@ public final class Palette
       throw new IllegalArgumentException("listener can not be null");
     }
 
-    AsyncTask task = new AsyncTask<Void, Void, Palette>()
+    AsyncTask<Void, Void, Palette> task = new AsyncTask<Void, Void, Palette>()
     {
       protected Palette doInBackground(Void[] voids) {
         return Palette.generate(bitmap, numColors);
@@ -61,7 +61,7 @@ public final class Palette
         listener.onGenerated(colorExtractor);
       }
     };
-    task.execute(new Void[0]);
+    task.execute();
     return task;
   }
 
@@ -229,8 +229,3 @@ public final class Palette
     public abstract void onGenerated(Palette paramPalette);
   }
 }
-
-/* Location:           /Users/Sebastiaan/Development/Android/Apps/PopcornTimeRemote/app/build/intermediates/exploded-aar/com.android.support/palette-v7/21.0.0-rc1/classes.jar
- * Qualified Name:     eu.se_bastiaan.popcorntimeremote.graphics.Palette
- * JD-Core Version:    0.6.2
- */

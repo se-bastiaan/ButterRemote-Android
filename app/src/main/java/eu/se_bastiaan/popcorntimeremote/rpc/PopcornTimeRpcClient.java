@@ -20,26 +20,28 @@ public class PopcornTimeRpcClient {
     private Context mContext;
     private String mIpAddress, mPort, mUrl, mUsername, mPassword, mVersion;
 
-    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, SET_SUBTITLE, LISTENNOTIFICATIONS }
+    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }
 
-    public PopcornTimeRpcClient(Context context, String ipAdress, String port, String username, String password) {
+    public PopcornTimeRpcClient(Context context, String ipAddress, String port, String username, String password, String version) {
+        mVersion = version;
+        init(context, ipAddress, port, username, password);
+    }
+
+    public PopcornTimeRpcClient(Context context, String ipAddress, String port, String username, String password) {
+        mVersion = "0.0.0";
+        init(context, ipAddress, port, username, password);
+    }
+
+    private void init(Context context, String ipAddress, String port, String username, String password) {
         mContext = context;
-        mIpAddress = ipAdress;
+        mIpAddress = ipAddress;
         mPort = port;
         mUsername = username;
         mPassword = password;
-        mVersion = "0.0.0";
 
         checkUrl();
 
         mUrl = mIpAddress + ":" + mPort + "/";
-
-        try {
-            if (Constants.LOG_ENABLED)
-                Ion.getDefault(mContext).configure().setLogging("IonLogs", Log.DEBUG);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void setVersion(String version) {
@@ -230,13 +232,17 @@ public class PopcornTimeRpcClient {
             return request(request, new FutureCallback<RpcResponse>() {
                 @Override
                 public void onCompleted(Exception e, RpcResponse result) {
-                    if (e == null && result != null && result.result != null) {
-                        ArrayList list = (ArrayList) result.result;
-                        LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
-                        map.put("viewstack", list.get(0));
-                        result.result = map;
+                    try {
+                        if (e == null && result != null && result.result != null) {
+                            ArrayList list = (ArrayList) result.result;
+                            LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
+                            map.put("viewstack", list.get(0));
+                            result.result = map;
+                        }
+                        callback.onCompleted(e, result);
+                    } catch(Exception exception) {
+                        exception.printStackTrace();
                     }
-                    callback.onCompleted(e, result);
                 }
             });
         }
@@ -296,6 +302,23 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    public ResponseFuture<RpcResponse> getPlayers(final FutureCallback<RpcResponse> callback) {
+        RpcRequest request  = new RpcRequest("getplayers");
+        request.id = RequestId.GET_PLAYERS.ordinal();
+        if(Version.compare(mVersion, "0.0.0")) {
+            return request(request, callback);
+        } else {
+            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            return null;
+        }
+    }
+
+    public ResponseFuture<RpcResponse> setPlayer(String playerId, FutureCallback<RpcResponse> callback) {
+        RpcRequest request  = new RpcRequest("setplayer", Arrays.asList(playerId));
+        request.id = RequestId.SET_PLAYER.ordinal();
+        return request(request, callback);
+    }
+
     public ResponseFuture<RpcResponse> setSubtitle(String subLang, FutureCallback<RpcResponse> callback) {
         RpcRequest request  = new RpcRequest("setsubtitle", Arrays.asList(subLang));
         request.id = RequestId.SET_SUBTITLE.ordinal();
@@ -308,7 +331,9 @@ public class PopcornTimeRpcClient {
         return request(request, callback);
     }
 
-    private ResponseFuture<RpcResponse> request(RpcRequest rpc, final FutureCallback<RpcResponse> callback) {
+    private ResponseFuture<RpcResponse> request(final RpcRequest rpc, final FutureCallback<RpcResponse> callback) {
+        if(mContext == null) return null;
+
         ResponseFuture<RpcResponse> response =
                 Ion.with(mContext).load(mUrl)
                 .basicAuthentication(mUsername, mPassword)
@@ -328,6 +353,10 @@ public class PopcornTimeRpcClient {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     mVersion = "0.0.0";
+                    LogUtils.d("Version", "Exception: " + mVersion);
+                    if(rpc.id == RequestId.GET_SELECTION.ordinal()) {
+                        mVersion = "0.3.4";
+                    }
                 }
                 callback.onCompleted(e, result);
             }

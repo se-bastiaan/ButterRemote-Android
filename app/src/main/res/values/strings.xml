@@ -11,17 +11,20 @@
     <string name="connected_to">Connected to</string>
     <string name="loading">Popcorn Time is loading data…</string>
 
-    <string name="back">Back</string>
+    <string name="minutes">min</string>
+    <string name="watch_trailer">Watch trailer</string>
+
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="up">Up</string>
     <string name="down">Down</string>
     <string name="toggle_tabs">Toggle tabs</string>
-    <string name="favourite">Toggle bookmark</string>
+    <string name="favourite">Toggle favourite</string>
     <string name="watched">Toggle watched</string>
     <string name="fullscreen">Toggle fullscreen</string>
     <string name="search">Search</string>
     <string name="subs">Select subtitles</string>
+    <string name="player">Select video player</string>
     <string name="quality">Toggle quality</string>
     <string name="next_season">Next season</string>
     <string name="prev_season">Previous season</string>

@@ -19,22 +19,11 @@ import eu.se_bastiaan.popcorntimeremote.widget.ImageButton;
 
 public class LoadingControllerFragment extends BaseControlFragment {
 
-    @InjectView(R.id.backButton)
-    ImageButton backButton;
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
         View v = inflater.inflate(R.layout.fragment_loadingcontroller, container, false);
-        ButterKnife.inject(this, v);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getClient().back(mBlankResponseCallback);
-            }
-        });
 
         return v;
     }

@@ -6,6 +6,7 @@
     <style name="Theme.PopcornTimeRemote" parent="@style/Theme.AppCompat">
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>
+        <item name="android:editTextBackground">@drawable/popcorntimeremote_edit_text_holo_dark</item>
     </style>
 
 

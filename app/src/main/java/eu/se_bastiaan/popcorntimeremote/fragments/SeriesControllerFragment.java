@@ -22,8 +22,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.backButton)
-    ImageButton backButton;
     @InjectView(R.id.favouriteButton)
     ImageButton favouriteButton;
     @InjectView(R.id.watchedButton)
@@ -33,9 +31,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.backButton:
-                    getClient().back(mBlankResponseCallback);
-                    break;
                 case R.id.favouriteButton:
                     getClient().toggleFavourite(mBlankResponseCallback);
                     break;
@@ -78,7 +73,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
         View v = inflater.inflate(R.layout.fragment_seriescontroller, container, false);
         ButterKnife.inject(this, v);
 
-        backButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
         watchedButton.setOnClickListener(mButtonClickListener);
 
@@ -86,6 +80,8 @@ public class SeriesControllerFragment extends BaseControlFragment {
         joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
         joystickView.setJoystickImage(JoystickView.Direction.LEFT, R.drawable.ic_action_prevseason);
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
+        joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
+        joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
 
 
         return v;

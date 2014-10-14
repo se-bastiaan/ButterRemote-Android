@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="228dp"
+    android:background="@color/overlay">
+    <ImageView
+        android:id="@+id/popcornLogo"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/popcorn_logo" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0.6"
+        android:paddingTop="100dp"
+        style="?android:attr/progressBarStyle" />
+
+    <ImageView
+        android:id="@+id/coverImage"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        android:scaleType="centerCrop" />
+</RelativeLayout>

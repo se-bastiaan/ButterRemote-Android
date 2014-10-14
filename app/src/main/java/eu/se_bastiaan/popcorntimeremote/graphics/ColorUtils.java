@@ -104,8 +104,3 @@ final class ColorUtils
     return Color.rgb(r, g, b);
   }
 }
-
-/* Location:           /Users/Sebastiaan/Development/Android/Apps/PopcornTimeRemote/app/build/intermediates/exploded-aar/com.android.support/palette-v7/21.0.0-rc1/classes.jar
- * Qualified Name:     eu.se_bastiaan.popcorntimeremote.graphics.ColorUtils
- * JD-Core Version:    0.6.2
- */

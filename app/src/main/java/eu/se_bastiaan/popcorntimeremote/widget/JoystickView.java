@@ -14,6 +14,8 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
+
 public class JoystickView extends View {
     // Constants
     private final double RAD = 57.2957795;
@@ -24,14 +26,13 @@ public class JoystickView extends View {
     private int mPositionY = 0;
     private int mCenterX = 0;
     private int mCenterY = 0;
-    private Paint mMainCircle;
-    private Paint mOuterCircle;
-    private Paint mButton;
+    private Paint mCirclePaint;
+    private Paint mButtonPaint;
     private Paint mButtonImagePaint;
     private Bitmap mCenterImage, mLeftImage, mRightImage, mUpImage, mDownImage;
-    private int mJoystickRadius;
-    private int mButtonRadius;
-    private int mOuterCircleRadius;
+    private float mJoystickRadius;
+    private float mButtonRadius;
+    private float mOuterCircleRadius;
     private int mLastAngle = 0;
     private int mLastPower = 0;
     private boolean mUserIsTouching = false;
@@ -59,20 +60,16 @@ public class JoystickView extends View {
     protected void initJoystickView(Context context) {
         mContext = context;
 
-        mMainCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mMainCircle.setColor(Color.parseColor("#77FFFFFF"));
-        mMainCircle.setStyle(Paint.Style.STROKE);
-        mMainCircle.setAntiAlias(true);
+        mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mCirclePaint.setColor(Color.parseColor("#444C53"));
+        mCirclePaint.setStyle(Paint.Style.STROKE);
+        mCirclePaint.setStrokeWidth(PixelUtils.getPixelsFromDp(mContext, 2));
+        mCirclePaint.setAntiAlias(true);
 
-        mOuterCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mOuterCircle.setColor(Color.parseColor("#77FFFFFF"));
-        mOuterCircle.setStyle(Paint.Style.STROKE);
-        mOuterCircle.setAntiAlias(true);
-
-        mButton = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mButton.setColor(Color.parseColor("#75B8FF"));
-        mButton.setStyle(Paint.Style.FILL);
-        mButton.setAntiAlias(true);
+        mButtonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mButtonPaint.setColor(Color.parseColor("#1976D2"));
+        mButtonPaint.setStyle(Paint.Style.FILL);
+        mButtonPaint.setAntiAlias(true);
 
         mButtonImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -87,13 +84,14 @@ public class JoystickView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // setting the measured values to resize the view to a certain width and
         // height
-        int d = mMetrics.widthPixels;
+        int widthPixels = mMetrics.widthPixels;
 
-        setMeasuredDimension(d, d);
+        setMeasuredDimension(widthPixels, widthPixels);
 
-        mButtonRadius = (int) (((d * 0.75) / 4) * 0.6);
-        mJoystickRadius = (int) (d * 0.75) / 4;
-        mOuterCircleRadius = d / 3;
+        int baseRadius = widthPixels / 2;
+        mButtonRadius = baseRadius * 0.1824074074f;
+        mJoystickRadius = baseRadius * 0.3009259259f;
+        mOuterCircleRadius = baseRadius * 0.7314814815f;
     }
 
     @Override
@@ -126,17 +124,17 @@ public class JoystickView extends View {
             }
         }
 
-        Integer centerBetweenRadius = mJoystickRadius + (mOuterCircleRadius - mJoystickRadius) / 2;
+        Float centerBetweenRadius = mJoystickRadius + (mOuterCircleRadius - mJoystickRadius) / 1.5f;
 
         // painting the main circle
-        canvas.drawCircle(mCenterX, mCenterY, mJoystickRadius, mMainCircle);
-        canvas.drawCircle(mCenterX, mCenterX, mOuterCircleRadius, mMainCircle);
+        canvas.drawCircle(mCenterX, mCenterY, mJoystickRadius, mCirclePaint);
+        canvas.drawCircle(mCenterX, mCenterX, mOuterCircleRadius, mCirclePaint);
 
         // painting the move button
         if(mUserIsTouching) {
-            mButton.setShadowLayer(2.0f, 0.0f, 0.0f, 0x99000000);
+            mButtonPaint.setShadowLayer(2.0f, 0.0f, 0.0f, 0x99000000);
         } else {
-            mButton.setShadowLayer(8.0f, 0.0f, 0.0f, 0x99000000);
+            mButtonPaint.setShadowLayer(8.0f, 0.0f, 0.0f, 0x99000000);
         }
 
         try {
@@ -149,14 +147,14 @@ public class JoystickView extends View {
             }
 
             if (mLeftImage != null) {
-                canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+                canvas.drawBitmap(mLeftImage, mCenterX - centerBetweenRadius - (mLeftImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
             }
 
             if (mRightImage != null) {
-                canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mDownImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
+                canvas.drawBitmap(mRightImage, mCenterX + centerBetweenRadius - (mRightImage.getWidth() / 2), mCenterY - (mRightImage.getHeight() / 2), mButtonImagePaint);
             }
 
-            canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButton);
+            canvas.drawCircle(mPositionX, mPositionY, mButtonRadius, mButtonPaint);
 
             if (mCenterImage != null) {
                 canvas.drawBitmap(mCenterImage, mPositionX - (mCenterImage.getWidth() / 2), mPositionY - (mCenterImage.getHeight() / 2), mButtonImagePaint);
@@ -185,7 +183,7 @@ public class JoystickView extends View {
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             mUserIsTouching = false;
-            mButton.setAlpha(255);
+            mButtonPaint.setAlpha(255);
             mHandler.removeCallbacksAndMessages(null);
             invalidate();
             if(mOnJoystickMoveListener != null && !mCalledOnce) {
@@ -195,7 +193,7 @@ public class JoystickView extends View {
         }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             mUserIsTouching = true;
-            if(!move) mButton.setAlpha(190);
+            if(!move) mButtonPaint.setAlpha(190);
             if(mOnJoystickMoveListener != null) {
                 mHandler.postDelayed(mCallbackRunnable, 200);
             }

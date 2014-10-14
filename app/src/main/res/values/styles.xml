@@ -83,6 +83,11 @@
         <item name="android:paddingLeft">16dip</item>
         <item name="android:paddingRight">16dip</item>
     </style>
+
+    <style name="EditText.PopcornTimeRemote" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/popcorntimeremote_edit_text_holo_dark</item>
+        <item name="android:textColor">#fff</item>
+    </style>
     
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.PopcornTimeRemote.Widget" parent="@style/Theme.AppCompat">

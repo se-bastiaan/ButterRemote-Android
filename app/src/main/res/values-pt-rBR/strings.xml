@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Legendas</string>
     <string name="disable_subs">Desativar legendas</string>
-
     <string name="no_connection">Sem conexão</string>
     <string name="no_connection_desc">Não conseguimos conectar a instância do Popcorn Time selecionada, tenha certeza que o Popcorn Time (v0.3.3+) esta rodando e verifique suas configurações e conexão com a internet.</string>
     <string name="retry">Tentar novamente</string>
-
+    <string name="connected_to">Conectado a</string>
+    <string name="loading">Popcorn Time esta carregando os dados…</string>
     <string name="back">Voltar</string>
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
@@ -27,7 +26,6 @@
     <string name="backward">Retroceder</string>
     <string name="fastforward">Avançar rapidamente</string>
     <string name="fastbackward">Retroceder rapidamente</string>
-
     <string name="no_instances">Adicione uma nova instância para começar a usar o Popcorn Time Remote</string>
     <string name="add_instance">Adicionar instância</string>
     <string name="edit_instance">Editar instância</string>
@@ -42,5 +40,4 @@
     <string name="enter_manually">Introduzir configurações manualmente</string>
     <string name="scan_qr">Scanear código QR</string>
     <string name="easy_pairing">Scaneamento de código QR esta disponível somente no Popcorn Time v0.3.4 ou maior. Abra as Configurações avançadas e gere seu código QR na seção \'Controle remoto\'.</string>
-
 </resources>
