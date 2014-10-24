@@ -1,46 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">Popcorn Time Remote</string>
-    <string name="subtitles">Titlovi</string>
-    <string name="disable_subs">Onemogući titlove</string>
-
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Popcorn Time dalj.</string>
+    <string name="subtitles">Podnaslovi</string>
+    <string name="disable_subs">Onemogući podnaslove</string>
     <string name="no_connection">Nije povezano</string>
-    <string name="no_connection_desc">Nemoguće spojiti se na odabranu Popcorn Time instancu, provjerite dali vam Popcorn Time (v0.3.3+) radi, provjerite i postavke i vašu mrežnu vezu. </string>
-    <string name="retry">Pokušajte ponovno</string>
-
+    <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
+    <string name="retry">Pokušaj ponovno</string>
+    <string name="connected_to">Povezano s</string>
+    <string name="loading">Popcorn Time učitava podatke...</string>
     <string name="back">Natrag</string>
     <string name="left">Lijevo</string>
     <string name="right">Desno</string>
     <string name="up">Gore</string>
     <string name="down">Dolje</string>
-    <string name="toggle_tabs">Namjestiti kartice</string>
-    <string name="favourite">Namjestiti omiljeno</string>
-    <string name="watched">Namjestiti pogledano</string>
-    <string name="fullscreen">Namjestiti cijeli ekran</string>
-    <string name="search">Pretražiti</string>
-    <string name="subs">Odabrati titlove</string>
-    <string name="quality">Namjestiti kvalitetu</string>
-    <string name="next_season">Slijedeća sezona</string>
-    <string name="prev_season">Prošla sezona</string>
-    <string name="forward">Ići naprijed</string>
-    <string name="backward">Ići nazad</string>
-    <string name="fastforward">Idi brzo naprijed</string>
-    <string name="fastbackward">Idi brzo nazad</string>
-
-    <string name="no_instances">Dodajte novu instancu kako biste koristili Popcorn Time daljinski</string>
-    <string name="add_instance">Dodaj instancu</string>
-    <string name="edit_instance">Uredi instancu</string>
-    <string name="delete_instance">Obriši instancu</string>
+    <string name="toggle_tabs">Uključi/Isključi kartice</string>
+    <string name="favourite">Uključi/Isključi zabilješke</string>
+    <string name="watched">Uključi/Isključi pogledano</string>
+    <string name="fullscreen">Uključi/Isključi cjelozaslonski prikaz</string>
+    <string name="search">Pretraži</string>
+    <string name="subs">Odaberi podnaslove</string>
+    <string name="quality">Uključi/Isključi kvalitetu</string>
+    <string name="next_season">Sljedeća sezona</string>
+    <string name="prev_season">Prijašnja sezona</string>
+    <string name="forward">Premotaj unaprijed</string>
+    <string name="backward">Premotaj unazad</string>
+    <string name="fastforward">Brzo premotaj unaprijed</string>
+    <string name="fastbackward">Brzo premotaj unazad</string>
+    <string name="no_instances">Dodaj novi primjerak za početak korištenja Popcorn Time daljinskog upravljača</string>
+    <string name="add_instance">Dodaj primjerak</string>
+    <string name="edit_instance">Uredi primjerak</string>
+    <string name="delete_instance">Obriši primjerak</string>
     <string name="save">Spremi</string>
     <string name="cancel">Odustani</string>
     <string name="ip">IP adresa</string>
     <string name="name">Naziv</string>
-    <string name="port">Port</string>
+    <string name="port">Ulaz</string>
     <string name="username">Korisničko ime</string>
     <string name="password">Lozinka</string>
     <string name="enter_manually">Unesite postavke ručno</string>
-    <string name="scan_qr">Skeniraj QR za lakše uparivanje</string>
-    <string name="easy_pairing">Lakše uparivanje je dostupno u Popcorn Time v0.3.4 i višoj. Otvorite naredne postavke i generirajte QR kod u sekciji Daljinsko upravljenje.</string>
-
+    <string name="scan_qr">Skeniraj QR kôd za lakše uparivanje</string>
+    <string name="easy_pairing">Lakše uparivanje je dostupno u Popcorn Time v0.3.4 i novijim izdanjima. Otvorite napredne postavke i generirajte QR kôd u \'Daljinsko upravljenje\' odjeljku.</string>
 </resources>

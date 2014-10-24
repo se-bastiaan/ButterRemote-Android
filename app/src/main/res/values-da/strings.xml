@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Undertekster</string>
     <string name="disable_subs">Deaktiver undertekster</string>
-
     <string name="no_connection">Ingen forbindelse</string>
     <string name="no_connection_desc">Der kunne ikke oprettes forbindelse til Popcorn Time. Undersøg om Popcorn Time (v0.3.3+) kører og check dine indstillinger samt din internetforbindelse.</string>
     <string name="retry">Prøv igen</string>
-
     <string name="back">Tilbage</string>
     <string name="left">Venstre</string>
     <string name="right">Højre</string>
     <string name="up">Op</string>
     <string name="down">Ned</string>
     <string name="toggle_tabs">Skift mellem faner</string>
-    <string name="favourite">Skift mellem bogmærker</string>
+    <string name="favourite">Tilføj/fjern favorit</string>
     <string name="watched">Skift mellem sete</string>
     <string name="fullscreen">Fuldskærm</string>
     <string name="search">Søg</string>
@@ -27,7 +24,6 @@
     <string name="backward">Baglæns</string>
     <string name="fastforward">Hurtigt forlæns</string>
     <string name="fastbackward">Hurtigt baglæns</string>
-
     <string name="no_instances">Tilføj en ny Popcorn Time proces for at benytte Popcorn Time Remote.</string>
     <string name="add_instance">Tilføj proces</string>
     <string name="edit_instance">Rediger proces</string>
@@ -42,5 +38,4 @@
     <string name="enter_manually">Indstil manuelt</string>
     <string name="scan_qr">Skan QR-kode</string>
     <string name="easy_pairing">\'Nem parring\' er tilgængeligt i Popcorn Time v0.3.4 eller højere. Åben avancerede indstillinger og generér din QR-kode i \'Fjernbetjening\' området.</string>
-
 </resources>
