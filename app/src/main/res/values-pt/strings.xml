@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Legendas</string>
     <string name="disable_subs">Desativar legendas</string>
-
     <string name="no_connection">Sem ligação</string>
     <string name="no_connection_desc">Não foi possível ligar à instância escolhida do Popcorn Time, certifica-te que o Popcorn Time (v0.3.3+) está aberto e confirma as tuas definições e acesso à Internet.</string>
     <string name="retry">Tentar novamente</string>
-
+    <string name="connected_to">Ligado a</string>
+    <string name="loading">Popcorn Time está a carregar dados...</string>
     <string name="back">Voltar</string>
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
@@ -17,7 +16,7 @@
     <string name="toggle_tabs">Alternar separadores</string>
     <string name="favourite">Marcar favorito</string>
     <string name="watched">Marcar visto</string>
-    <string name="fullscreen">Alternar Ecrã Inteiro</string>
+    <string name="fullscreen">Alternar ecrã inteiro</string>
     <string name="search">Procurar</string>
     <string name="subs">Selecionar legendas</string>
     <string name="quality">Alterar qualidade</string>
@@ -27,7 +26,6 @@
     <string name="backward">Recuar</string>
     <string name="fastforward">Avançar rapidamente</string>
     <string name="fastbackward">Recuar rapidamente</string>
-    
     <string name="no_instances">Adiciona uma nova instância para começar a usar o Popcorn Time Remote</string>
     <string name="add_instance">Adicionar instância</string>
     <string name="edit_instance">Editar instância</string>
@@ -42,5 +40,4 @@
     <string name="enter_manually">Introduzir definições manualmente</string>
     <string name="scan_qr">Capturar código QR de emparelhamento simples</string>
     <string name="easy_pairing">O emparelhamento simples está disponível no Popcorn Time v0.3.4 e superior. Abre as Definições Avançadas e gera o teu código QR na secção \'Controlo Remoto\'.</string>
-
 </resources>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Popcorn Time Remote</string>
+    <string name="app_name">Popcorn Time 远程控制</string>
     <string name="subtitles">字幕</string>
     <string name="disable_subs">关闭字幕</string>
     <string name="no_connection">无网络连接</string>
@@ -26,7 +26,7 @@
     <string name="backward">后退</string>
     <string name="fastforward">快进</string>
     <string name="fastbackward">快退</string>
-    <string name="no_instances">添加一台新设备来使用 Popcorn Time Remote</string>
+    <string name="no_instances">添加一台新设备来使用 Popcorn Time 远程控制</string>
     <string name="add_instance">添加设备</string>
     <string name="edit_instance">编辑设备</string>
     <string name="delete_instance">删除设备</string>
@@ -39,5 +39,5 @@
     <string name="password">密码</string>
     <string name="enter_manually">手动输入设置</string>
     <string name="scan_qr">扫描匹配的二维码</string>
-    <string name="easy_pairing"> Popcorn Time v0.3.4及往后版本均支持创建二维码。打开高级设置，在“远程控制”栏目中创建属于您的二维码。</string>
+    <string name="easy_pairing">Popcorn Time v0.3.4及往后版本均支持创建二维码。打开高级设置，在“远程控制”栏目中创建属于您的二维码。</string>
 </resources>

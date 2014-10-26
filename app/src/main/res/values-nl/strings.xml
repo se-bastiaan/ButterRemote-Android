@@ -11,6 +11,7 @@
     <string name="connected_to">Verbonden met</string>
     <string name="loading">Gegevens laden in Popcorn Time…</string>
 
+    <string name="back">Terug</string>
     <string name="left">Links</string>
     <string name="right">Rechts</string>
     <string name="up">Omhoog</string>
@@ -28,7 +29,6 @@
     <string name="backward">Achteruitspoelen</string>
     <string name="fastforward">Snel vooruitspoelen</string>
     <string name="fastbackward">Snel achteruitspoelen</string>
-    <string name="now_playing">Je bekijkt nu:</string>
 
     <string name="no_instances">Voeg een instantie van Popcorn Time toe om Popcorn Time Remote te gebruiken</string>
     <string name="add_instance">Instantie toevoegen</string>
