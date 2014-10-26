@@ -126,7 +126,7 @@ public class ClearableEditText extends EditText implements OnTouchListener, OnFo
         xD = getCompoundDrawables()[2];
         if (xD == null) {
             xD = getResources()
-                    .getDrawable(R.drawable.abc_ic_clear);
+                    .getDrawable(R.drawable.abc_ic_clear_mtrl_alpha);
         }
         xD.setBounds(0, 0, xD.getIntrinsicWidth(), xD.getIntrinsicHeight());
         setClearIconVisible(false);

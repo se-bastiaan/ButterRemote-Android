@@ -3,14 +3,18 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -19,11 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubeIntents;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.gson.internal.LinkedTreeMap;
 import com.koushikdutta.async.future.FutureCallback;
@@ -36,8 +35,6 @@ import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fadingactionbar.FadingActionBarHelper;
-import eu.se_bastiaan.popcorntimeremote.graphics.Palette;
-import eu.se_bastiaan.popcorntimeremote.graphics.PaletteItem;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
@@ -115,7 +112,7 @@ public class MovieControllerFragment extends BaseControlFragment {
         View v = mFadingHelper.createView(inflater);
         ButterKnife.inject(this, v);
 
-        Drawable playButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.accent_color));
+        Drawable playButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
         if(mPlayButtonDrawable == null) playButton.setImageDrawable(playButtonDrawable);
 
         playButton.setOnClickListener(mOnClickListener);
@@ -181,21 +178,20 @@ public class MovieControllerFragment extends BaseControlFragment {
                                     @Override
                                     public void onGenerated(Palette palette) {
                                         try {
-                                            PaletteItem paletteItem = palette.getVibrantColor();
-                                            final Integer color;
-                                            if(paletteItem != null) {
-                                                color = paletteItem.getRgb();
+                                            int vibrantColor = palette.getVibrantColor(R.color.primary);
+                                            final int color;
+                                            if(vibrantColor == R.color.primary) {
+                                                color = palette.getMutedColor(R.color.primary);
                                             } else {
-                                                paletteItem = palette.getMutedColor();
-                                                color = paletteItem.getRgb();
+                                                color = vibrantColor;
                                             }
 
-                                            final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.accent_color), color);
+                                            final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
                                             mainInfoBlockColorFade.setDuration(500);
 
-                                            Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.accent_color));
+                                            Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
                                             mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, color);
-                                            final TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldDrawable, mPlayButtonDrawable });
+                                            final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
                                             playButton.setImageDrawable(td);
 
                                             Ion.with(getActivity()).load(backdropUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
@@ -234,7 +230,7 @@ public class MovieControllerFragment extends BaseControlFragment {
 
         try {
             mFadingHelper = new FadingActionBarHelper()
-                    .actionBarBackground(R.drawable.ab_solid_pt_remote)
+                    .actionBarBackground(ActionBarBackground.getColoredBackground(getActivity(), getResources().getColor(R.color.primary)))
                     .headerLayout(R.layout.fragment_detailheader)
                     .contentLayout(R.layout.fragment_moviecontroller);
             mFadingHelper.initActionBar(activity);

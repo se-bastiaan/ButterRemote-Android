@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.koushikdutta.async.future.FutureCallback;
@@ -22,18 +21,12 @@ import com.koushikdutta.ion.Ion;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
-import eu.se_bastiaan.popcorntimeremote.graphics.Palette;
-import eu.se_bastiaan.popcorntimeremote.graphics.PaletteItem;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
-import eu.se_bastiaan.popcorntimeremote.widget.SubtitleAdapter;
 
 public class PlayerControllerFragment extends BaseControlFragment {
 
@@ -151,16 +144,15 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
                                             Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
 
-                                            PaletteItem paletteItem = palette.getVibrantColor();
-                                            final Integer color;
-                                            if(paletteItem != null) {
-                                                color = paletteItem.getRgb();
+                                            int vibrantColor = palette.getVibrantColor(R.color.primary);
+                                            final int color;
+                                            if(vibrantColor == R.color.primary) {
+                                                color = palette.getMutedColor(R.color.primary);
                                             } else {
-                                                paletteItem = palette.getMutedColor();
-                                                color = paletteItem.getRgb();
+                                                color = vibrantColor;
                                             }
 
-                                            ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.accent_color), color);
+                                            ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
                                             slidingPanelTopLayoutColorFade.setDuration(500);
 
                                             slidingPanelTopLayoutColorFade.start();

@@ -39,7 +39,11 @@ public class ActionBarBackground {
 
         final int actionBarId = getResources().getIdentifier("action_bar", "id", "android");
         final View actionBar = actionBarActivity.findViewById(actionBarId);
-        mOldBackground = actionBar.getBackground();
+        if(actionBar == null || actionBar.getBackground() == null) {
+            mOldBackground = getColoredBackground(actionBarActivity, R.color.primary);
+        } else {
+            mOldBackground = actionBar.getBackground();
+        }
     }
 
     private Resources getResources() {
@@ -48,6 +52,12 @@ public class ActionBarBackground {
 
     private void changeColor() {
         fadeBackground(mOldBackground, getColoredBackground(mActivity, mNewColor));
+    }
+
+    private void fadeOut() {
+        Drawable background = getColoredBackground(mActivity, android.R.color.transparent);
+        background.setAlpha(0);
+        fadeBackground(mOldBackground, background);
     }
 
     private void fadeBackground(Drawable newDrawable) {
@@ -68,6 +78,7 @@ public class ActionBarBackground {
             } else {
 
                 TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldDrawable, newDrawable });
+                td.setCrossFadeEnabled(true);
 
                 // workaround for broken ActionBarContainer drawable handling on
                 // pre-API 17 builds
@@ -109,10 +120,13 @@ public class ActionBarBackground {
     };
 
     public static Drawable getColoredBackground(Context context, int color) {
-        Drawable colorDrawable = new ColorDrawable(color);
-        Drawable bottomDrawable = context.getResources().getDrawable(R.drawable.actionbar_bottom);
-        LayerDrawable ld = new LayerDrawable(new Drawable[]{colorDrawable, bottomDrawable});
-        return ld;
+        return new ColorDrawable(color);
+    }
+
+    public static ActionBarBackground fadeOut(ActionBarActivity activity) {
+        ActionBarBackground abColor = new ActionBarBackground(activity);
+        abColor.fadeOut();
+        return abColor;
     }
 
     public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor) {

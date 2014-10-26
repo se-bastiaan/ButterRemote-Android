@@ -3,6 +3,7 @@ package eu.se_bastiaan.popcorntimeremote.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.google.gson.internal.LinkedTreeMap;
@@ -112,7 +115,7 @@ public class ControllerActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        if(mTopView.equals("main-browser")) {
+        if(mTopView != null && mTopView.equals("main-browser")) {
             super.onBackPressed();
         } else {
             mRpc.back(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
@@ -126,7 +129,7 @@ public class ControllerActivity extends ActionBarActivity {
     private void showNoConnection() {
         setFragment(new ConnectionLostFragment(), true);
         mCurrentFragment = "no-connection";
-        ActionBarBackground.fadeDrawable(ControllerActivity.this, getResources().getDrawable(R.drawable.ab_solid_pt_remote));
+        ActionBarBackground.fadeDrawable(ControllerActivity.this, new ColorDrawable(getResources().getColor(R.color.primary)));
     }
 
     private Runnable mGetViewstackRunnable = new Runnable() {
@@ -164,10 +167,19 @@ public class ControllerActivity extends ActionBarActivity {
                                 mCurrentFragment = "main";
                             }
 
+                            Window window = getWindow();
                             if(translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
-                                ActionBarBackground.fadeDrawable(ControllerActivity.this, new ColorDrawable(Color.parseColor("#00000000")));
+                                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                    window.setStatusBarColor(getResources().getColor(R.color.bg));
+                                }
+
+                                ActionBarBackground.fadeOut(ControllerActivity.this);
                             } else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
-                                ActionBarBackground.fadeDrawable(ControllerActivity.this, getResources().getDrawable(R.drawable.ab_solid_pt_remote));
+                                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                    window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
+                                }
+
+                                ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
                             }
                         }
 

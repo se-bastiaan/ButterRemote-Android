@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/accent_color"
+                    android:background="@color/primary"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <eu.se_bastiaan.popcorntimeremote.widget.ImageButton

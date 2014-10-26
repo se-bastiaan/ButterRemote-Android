@@ -3,11 +3,15 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.PopcornTimeRemote" parent="@style/Theme.AppCompat">
+    <!--<style name="Theme.PopcornTimeRemote" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowBackground">@color/bg</item>
         <item name="android:windowBackground">@color/bg</item>
-        <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>
-        <item name="android:editTextBackground">@drawable/popcorntimeremote_edit_text_holo_dark</item>
-    </style>
+        <!-<item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>->
+    </style>-->
 
 
     <style name="SeekBar.PopcornTimeRemote" parent="android:Widget.Holo.SeekBar">
