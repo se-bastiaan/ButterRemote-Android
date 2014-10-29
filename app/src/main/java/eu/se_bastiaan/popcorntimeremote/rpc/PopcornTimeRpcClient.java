@@ -309,6 +309,8 @@ public class PopcornTimeRpcClient {
     }
 
     private ResponseFuture<RpcResponse> request(RpcRequest rpc, final FutureCallback<RpcResponse> callback) {
+        if(mContext == null)  return null;
+
         ResponseFuture<RpcResponse> response =
                 Ion.with(mContext).load(mUrl)
                 .basicAuthentication(mUsername, mPassword)
