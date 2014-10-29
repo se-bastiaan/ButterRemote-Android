@@ -205,7 +205,7 @@ public class MovieControllerFragment extends BaseControlFragment {
                                                     coverImage.setVisibility(View.VISIBLE);
                                                     coverImage.startAnimation(fadeInAnim);
 
-                                                    mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(getActivity(), color)).initActionBar(getActivity());
+                                                    mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(color)).initActionBar(getActivity());
                                                 }
                                             });
                                         } catch (Exception e) {
@@ -230,7 +230,7 @@ public class MovieControllerFragment extends BaseControlFragment {
 
         try {
             mFadingHelper = new FadingActionBarHelper()
-                    .actionBarBackground(ActionBarBackground.getColoredBackground(getActivity(), getResources().getColor(R.color.primary)))
+                    .actionBarBackground(ActionBarBackground.getColoredBackground(getResources().getColor(R.color.primary)))
                     .headerLayout(R.layout.fragment_detailheader)
                     .contentLayout(R.layout.fragment_moviecontroller);
             mFadingHelper.initActionBar(activity);
