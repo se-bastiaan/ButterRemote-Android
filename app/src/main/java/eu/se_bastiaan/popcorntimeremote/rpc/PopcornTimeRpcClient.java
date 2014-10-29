@@ -20,7 +20,7 @@ public class PopcornTimeRpcClient {
     private Context mContext;
     private String mIpAddress, mPort, mUrl, mUsername, mPassword, mVersion;
 
-    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }
+    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, GET_PLAYING, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, SET_SELECTION, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }
 
     public PopcornTimeRpcClient(Context context, String ipAddress, String port, String username, String password, String version) {
         mVersion = version;
@@ -53,126 +53,125 @@ public class PopcornTimeRpcClient {
     }
 
     public ResponseFuture<RpcResponse> ping(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("ping");
-        request.id = RequestId.PING.ordinal();
+        RpcRequest request  = new RpcRequest("ping", RequestId.PING);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> up(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("up");
-        request.id = RequestId.UP.ordinal();
+        RpcRequest request  = new RpcRequest("up", RequestId.UP);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> down(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("down");
-        request.id = RequestId.DOWN.ordinal();
+        RpcRequest request  = new RpcRequest("down", RequestId.DOWN);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> left(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("left");
-        request.id = RequestId.LEFT.ordinal();
+        RpcRequest request  = new RpcRequest("left", RequestId.LEFT);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> right(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("right");
-        request.id = RequestId.RIGHT.ordinal();
+        RpcRequest request  = new RpcRequest("right", RequestId.RIGHT);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> enter(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("enter");
-        request.id = RequestId.ENTER.ordinal();
+        RpcRequest request  = new RpcRequest("enter", RequestId.ENTER);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> back(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("back");
-        request.id = RequestId.BACK.ordinal();
+        RpcRequest request  = new RpcRequest("back", RequestId.BACK);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> toggleQuality(FutureCallback<RpcResponse> callback) {
         RpcRequest request;
         if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("togglequality");
+            request = new RpcRequest("togglequality", RequestId.QUALITY);
         } else {
-            request = new RpcRequest("quality");
+            request = new RpcRequest("quality", RequestId.QUALITY);
         }
-        request.id = RequestId.QUALITY.ordinal();
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> nextSeason(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("nextseason");
-        request.id = RequestId.NEXT_SEASON.ordinal();
+        RpcRequest request  = new RpcRequest("nextseason", RequestId.NEXT_SEASON);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> prevSeason(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("previousseason");
-        request.id = RequestId.PREV_SEASON.ordinal();
+        RpcRequest request  = new RpcRequest("previousseason", RequestId.PREV_SEASON);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> togglePlay(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("toggleplaying");
-        request.id = RequestId.TOGGLE_PLAY.ordinal();
+        RpcRequest request  = new RpcRequest("toggleplaying", RequestId.TOGGLE_PLAY);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> toggleTabs(FutureCallback<RpcResponse> callback) {
         RpcRequest request;
         if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("toggletab");
+            request = new RpcRequest("toggletab", RequestId.TOGGLE_TABS);
         } else {
-            request = new RpcRequest("togglemoviesshows");
+            request = new RpcRequest("togglemoviesshows", RequestId.TOGGLE_TABS);
         }
-        request.id = RequestId.TOGGLE_TABS.ordinal();
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> toggleFullscreen(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("togglefullscreen");
-        request.id = RequestId.TOGGLE_FULLSCREEN.ordinal();
+        RpcRequest request  = new RpcRequest("togglefullscreen", RequestId.TOGGLE_FULLSCREEN);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> toggleFavourite(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("togglefavourite");
-        request.id = RequestId.TOGGLE_FAVOURITE.ordinal();
+        RpcRequest request  = new RpcRequest("togglefavourite", RequestId.TOGGLE_FAVOURITE);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> toggleWatched(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("togglewatched");
-        request.id = RequestId.TOGGLE_WATCHED.ordinal();
+        RpcRequest request  = new RpcRequest("togglewatched", RequestId.TOGGLE_WATCHED);
         return request(request, callback);
     }
 
+    /**
+     * Toggle volume mute
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> toggleMute(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("togglemute");
-        request.id = RequestId.TOGGLE_MUTE.ordinal();
+        RpcRequest request  = new RpcRequest("togglemute", RequestId.TOGGLE_MUTE);
         return request(request, callback);
     }
 
+    /**
+     * Set volume of video player
+     * @param volume Volume to set
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> setVolume(Double volume, FutureCallback<RpcResponse> callback) {
         RpcRequest request;
         if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("volume", Arrays.asList(volume));
+            request = new RpcRequest("volume", Arrays.asList(volume), RequestId.SET_VOLUME);
         } else {
-            request = new RpcRequest("setvolume", Arrays.asList(volume));
+            request = new RpcRequest("setvolume", Arrays.asList(volume), RequestId.SET_VOLUME);
         }
-        request.id = RequestId.SET_VOLUME.ordinal();
         return request(request, callback);
     }
 
+    /**
+     * Get volume of player
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getVolume(FutureCallback<RpcResponse> callback) {
         RpcRequest request;
         if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("volume");
+            request = new RpcRequest("volume", RequestId.GET_VOLUME);
         } else {
             RpcResponse response = new RpcResponse();
             LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
@@ -181,41 +180,70 @@ public class PopcornTimeRpcClient {
             callback.onCompleted(null, response);
             return null;
         }
-        request.id = RequestId.GET_VOLUME.ordinal();
         return request(request, callback);
     }
 
+    /**
+     * Filter by genre
+     * @param genre Genre to filter by
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> filterGenre(String genre, FutureCallback<RpcResponse> callback) {
-        RpcRequest request = new RpcRequest("filtergenre", Arrays.asList(genre));
-        request.id = RequestId.FILTER_GENRE.ordinal();
+        RpcRequest request = new RpcRequest("filtergenre", Arrays.asList(genre), RequestId.FILTER_GENRE);
         return request(request, callback);
     }
 
+    /**
+     * Sort items by sorter
+     * @param sorter Type to sort by
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> filterSorter(String sorter, FutureCallback<RpcResponse> callback) {
-        RpcRequest request = new RpcRequest("filtersorter", Arrays.asList(sorter));
-        request.id = RequestId.FILTER_SORTER.ordinal();
+        RpcRequest request = new RpcRequest("filtersorter", Arrays.asList(sorter), RequestId.FILTER_SORTER);
         return request(request, callback);
     }
 
+    /**
+     * Filter by type
+     * @param type Type to select
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> filterType(String type, FutureCallback<RpcResponse> callback) {
-        RpcRequest request = new RpcRequest("filtertype", Arrays.asList(type));
-        request.id = RequestId.FILTER_TYPE.ordinal();
+        RpcRequest request = new RpcRequest("filtertype", Arrays.asList(type), RequestId.FILTER_TYPE);
         return request(request, callback);
     }
 
-    public ResponseFuture<RpcResponse> filterSearch(String searchTerm, FutureCallback<RpcResponse> callback) {
+    /**
+     * Filter items by keywords
+     * @param keywords Keywords to search by
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
+    public ResponseFuture<RpcResponse> filterSearch(String keywords, FutureCallback<RpcResponse> callback) {
         RpcRequest request;
-        request = new RpcRequest("filtersearch", Arrays.asList(searchTerm));
-        request.id = RequestId.FILTER_SEARCH.ordinal();
+        request = new RpcRequest("filtersearch", Arrays.asList(keywords), RequestId.FILTER_SEARCH);
         return request(request, callback);
     }
 
+    /**
+     * Clear the search input
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> clearSearch(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("clearsearch");
-        request.id = RequestId.CLEAR_SEARCH.ordinal();
+        RpcRequest request  = new RpcRequest("clearsearch", RequestId.CLEAR_SEARCH);
         return request(request, callback);
     }
 
+    /**
+     * Seek {seconds} in the video
+     * @param seconds Seconds to seek forward or backward
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> seek(Integer seconds, FutureCallback<RpcResponse> callback) {
         RpcRequest request;
         request = new RpcRequest("seek", Arrays.asList(seconds));
@@ -223,9 +251,13 @@ public class PopcornTimeRpcClient {
         return request(request, callback);
     }
 
+    /**
+     * Get current viewstack of the application
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getViewstack(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getviewstack");
-        request.id = RequestId.GET_VIEWSTACK.ordinal();
+        RpcRequest request  = new RpcRequest("getviewstack", RequestId.GET_VIEWSTACK);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -248,9 +280,13 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Get available subtitles for the current playing or selected video
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getSubtitles(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getsubtitles");
-        request.id = RequestId.GET_SUBTITLES.ordinal();
+        RpcRequest request  = new RpcRequest("getsubtitles", RequestId.GET_SUBTITLES);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -269,9 +305,13 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Get selection in the list browser or the opened detail
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getSelection(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getselection");
-        request.id = RequestId.GET_SELECTION.ordinal();
+        RpcRequest request  = new RpcRequest("getselection", RequestId.GET_SELECTION);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -280,9 +320,29 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Set selection in the list browser
+     * @param index Index of the item that has to become selected
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
+    public ResponseFuture<RpcResponse> setSelection(Integer index, final FutureCallback<RpcResponse> callback) {
+        RpcRequest request  = new RpcRequest("setselection", Arrays.asList(index), RequestId.SET_SELECTION);
+        if(Version.compare(mVersion, "0.3.4")) {
+            return request(request, callback);
+        } else {
+            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            return null;
+        }
+    }
+
+    /**
+     * Get the current playing video information
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getPlaying(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getplaying");
-        request.id = RequestId.GET_SELECTION.ordinal();
+        RpcRequest request  = new RpcRequest("getplaying", RequestId.GET_PLAYING);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -291,9 +351,13 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Get the current fullscreen status of the application
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getFullscreen(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getfullscreen");
-        request.id = RequestId.GET_FULLSCREEN.ordinal();
+        RpcRequest request  = new RpcRequest("getfullscreen", RequestId.GET_FULLSCREEN);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -302,9 +366,13 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Get available media players for the instance
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> getPlayers(final FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("getplayers");
-        request.id = RequestId.GET_PLAYERS.ordinal();
+        RpcRequest request  = new RpcRequest("getplayers", RequestId.GET_PLAYERS);
         if(Version.compare(mVersion, "0.0.0")) {
             return request(request, callback);
         } else {
@@ -313,29 +381,44 @@ public class PopcornTimeRpcClient {
         }
     }
 
+    /**
+     * Set the media player of instance
+     * @param playerId New id of the player
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> setPlayer(String playerId, FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("setplayer", Arrays.asList(playerId));
-        request.id = RequestId.SET_PLAYER.ordinal();
+        RpcRequest request  = new RpcRequest("setplayer", Arrays.asList(playerId), RequestId.SET_PLAYER);
         return request(request, callback);
     }
 
+    /**
+     * Set subtitle language of instance
+     * @param subLang New language for subtitles
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     public ResponseFuture<RpcResponse> setSubtitle(String subLang, FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("setsubtitle", Arrays.asList(subLang));
-        request.id = RequestId.SET_SUBTITLE.ordinal();
+        RpcRequest request  = new RpcRequest("setsubtitle", Arrays.asList(subLang), RequestId.SET_SUBTITLE);
         return request(request, callback);
     }
 
     public ResponseFuture<RpcResponse> listenNotifications(FutureCallback<RpcResponse> callback) {
-        RpcRequest request  = new RpcRequest("listennotifications");
-        request.id = RequestId.LISTENNOTIFICATIONS.ordinal();
+        RpcRequest request  = new RpcRequest("listennotifications", RequestId.LISTENNOTIFICATIONS);
         return request(request, callback);
     }
 
+    /**
+     * Send JSON RPC request to the instance
+     * @param rpc Request data
+     * @param callback Callback for the request
+     * @return ResponseFuture
+     */
     private ResponseFuture<RpcResponse> request(final RpcRequest rpc, final FutureCallback<RpcResponse> callback) {
         if(mContext == null) return null;
 
         ResponseFuture<RpcResponse> response =
-                Ion.with(mContext).load(mUrl)
+                Ion.with(mContext.getApplicationContext()).load(mUrl)
                 .basicAuthentication(mUsername, mPassword)
                 .setJsonPojoBody(rpc)
                 .as(RpcResponse.class);
@@ -364,6 +447,9 @@ public class PopcornTimeRpcClient {
         return response;
     }
 
+    /**
+     * Check the ip address to start with http//
+     */
     private void checkUrl() {
         if(!mIpAddress.startsWith("http://") && !mIpAddress.startsWith("https://")) {
             mIpAddress = "http://" + mIpAddress;
@@ -375,8 +461,8 @@ public class PopcornTimeRpcClient {
     }
 
     private class RpcRequest {
-        public String jsonrpc = "2.0";
-        public String method;
+        final public String jsonrpc = "2.0";
+        final public String method;
         public Object params = new ArrayList();
         public Integer id = 10;
 
@@ -389,14 +475,18 @@ public class PopcornTimeRpcClient {
             this.params = params;
         }
 
-        public RpcRequest(String method, Object params, Integer id) {
+        public RpcRequest(String method, Object params, RequestId id) {
             this(method, params);
-            this.id = id;
+            this.id = id.ordinal();
+        }
+
+        public RpcRequest(String method, RequestId id) {
+            this(method);
+            this.id = id.ordinal();
         }
     }
 
     public class RpcResponse {
-        public String jsonrpc;
         public Object result;
         public Integer id;
 

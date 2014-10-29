@@ -40,7 +40,7 @@ public class ActionBarBackground {
         final int actionBarId = getResources().getIdentifier("action_bar", "id", "android");
         final View actionBar = actionBarActivity.findViewById(actionBarId);
         if(actionBar == null || actionBar.getBackground() == null) {
-            mOldBackground = getColoredBackground(actionBarActivity, R.color.primary);
+            mOldBackground = getColoredBackground(R.color.primary);
         } else {
             mOldBackground = actionBar.getBackground();
         }
@@ -50,56 +50,72 @@ public class ActionBarBackground {
         return mActivity.getResources();
     }
 
-    private void changeColor() {
-        fadeBackground(mOldBackground, getColoredBackground(mActivity, mNewColor));
+    /**
+     * Change color of ActionBar to mNewColor
+     * @return Instance of this class
+     */
+    private ActionBarBackground changeColor() {
+        fadeBackground(mOldBackground, getColoredBackground(mNewColor));
+        return this;
     }
 
-    private void fadeOut() {
-        Drawable background = getColoredBackground(mActivity, android.R.color.transparent);
+    /**
+     * Fade the ActionBar background to zero opacity
+     * @return Instance of this class
+     */
+    private ActionBarBackground fadeOut() {
+        Drawable background = getColoredBackground(android.R.color.transparent);
         background.setAlpha(0);
         fadeBackground(mOldBackground, background);
+        return this;
     }
 
-    private void fadeBackground(Drawable newDrawable) {
+    /**
+     * Fade the ActionBar background to the provided newDrawable
+     * @param newDrawable New background of ActionBar
+     * @return Instance of this class
+     */
+    private ActionBarBackground fadeBackground(Drawable newDrawable) {
         fadeBackground(mOldBackground, newDrawable);
+        return this;
     }
 
-    private void fadeBackground(Drawable oldDrawable, Drawable newDrawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-
-            if (oldDrawable == null) {
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    newDrawable.setCallback(drawableCallback);
-                } else {
-                    mActionBar.setBackgroundDrawable(newDrawable);
-                }
-
+    /**
+     * Fade the ActionBar background from oldDrawable to newDrawable
+     * @param oldDrawable Drawable to be faded from
+     * @param newDrawable Drawable to be faded to
+     * @return Instance of this class
+     */
+    private ActionBarBackground fadeBackground(Drawable oldDrawable, Drawable newDrawable) {
+        if (oldDrawable == null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                newDrawable.setCallback(drawableCallback);
             } else {
+                mActionBar.setBackgroundDrawable(newDrawable);
+            }
+        } else {
+            TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldDrawable, newDrawable });
+            td.setCrossFadeEnabled(true);
 
-                TransitionDrawable td = new TransitionDrawable(new Drawable[] { oldDrawable, newDrawable });
-                td.setCrossFadeEnabled(true);
-
-                // workaround for broken ActionBarContainer drawable handling on
-                // pre-API 17 builds
-                // https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    td.setCallback(drawableCallback);
-                } else {
-                    mActionBar.setBackgroundDrawable(td);
-                }
-
-                td.startTransition(500);
-
+            // workaround for broken ActionBarContainer drawable handling on
+            // pre-API 17 builds
+            // https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                td.setCallback(drawableCallback);
+            } else {
+                mActionBar.setBackgroundDrawable(td);
             }
 
-            mOldBackground = newDrawable;
-
-            // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
-            mActionBar.setDisplayShowTitleEnabled(false);
-            mActionBar.setDisplayShowTitleEnabled(true);
-
+            td.startTransition(500);
         }
+
+        mOldBackground = newDrawable;
+
+        // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(true);
+
+        return this;
     }
 
     private Drawable.Callback drawableCallback = new Drawable.Callback() {
@@ -119,28 +135,44 @@ public class ActionBarBackground {
         }
     };
 
-    public static Drawable getColoredBackground(Context context, int color) {
+    /**
+     * Get new drawable with provided color.
+     * @param color Color of the new drawable
+     * @return Drawable with provided color
+     */
+    public static Drawable getColoredBackground(int color) {
         return new ColorDrawable(color);
     }
 
+    /**
+     * Fade the ActionBar background to zero opacity
+     * @param activity Activity where the ActionBar has to change
+     * @return Instance of this class
+     */
     public static ActionBarBackground fadeOut(ActionBarActivity activity) {
         ActionBarBackground abColor = new ActionBarBackground(activity);
         abColor.fadeOut();
         return abColor;
     }
 
+    /**
+     * Change the background color of the ActionBar to newColor
+     * @param activity Activity where the ActionBar has to change
+     * @param newColor New background color of the ActionBar
+     * @return Instance of this class
+     */
     public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor) {
         ActionBarBackground abColor = new ActionBarBackground(activity, newColor);
         abColor.changeColor();
         return abColor;
     }
 
-    public static ActionBarBackground fade(ActionBarActivity activity, Drawable oldDrawable, Drawable newDrawable) {
-        ActionBarBackground abColor = new ActionBarBackground(activity);
-        abColor.fadeBackground(oldDrawable, newDrawable);
-        return abColor;
-    }
-
+    /**
+     * Fade background of the ActionBar to newDrawable
+     * @param activity Activity where the ActionBar has to change
+     * @param newDrawable New background color of the ActionBar
+     * @return Instance of this class
+     */
     public static ActionBarBackground fadeDrawable(ActionBarActivity activity, Drawable newDrawable) {
         ActionBarBackground abColor = new ActionBarBackground(activity);
         abColor.fadeBackground(newDrawable);
