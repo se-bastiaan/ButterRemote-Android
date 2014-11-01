@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
     private Boolean mPlaying = false, mSeeked = false, mVolumeChanged = false, mFullscreen = false;
     private Integer mCurrentTime, mMax, mVolume;
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @InjectView(R.id.coverImage)
     ImageView coverImage;
@@ -137,7 +138,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
                     Picasso.with(getActivity()).load(posterUrl).into(new Target() {
                         @Override
                         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                            if(bitmap != null) {
+                            if (bitmap != null) {
                                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                                     @Override
                                     public void onGenerated(Palette palette) {
@@ -148,7 +149,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
                                             int vibrantColor = palette.getVibrantColor(R.color.primary);
                                             final int color;
-                                            if(vibrantColor == R.color.primary) {
+                                            if (vibrantColor == R.color.primary) {
                                                 color = palette.getMutedColor(R.color.primary);
                                             } else {
                                                 color = vibrantColor;
