@@ -446,7 +446,7 @@ public class PopcornTimeRpcClient {
                 try {
                     if (response != null && response.isSuccessful()) {
                         String responseStr = response.body().string();
-                        LogUtils.d("PopcornTimeRpcClient", "Response: " + responseStr);
+                        //LogUtils.d("PopcornTimeRpcClient", "Response: " + responseStr);
                         result = mGson.fromJson(responseStr, RpcResponse.class);
                         LinkedTreeMap<String, Object> map = result.getMapResult();
                         if (map.containsKey("popcornVersion")) {

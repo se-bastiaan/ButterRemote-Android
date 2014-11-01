@@ -135,50 +135,27 @@ public class PlayerControllerFragment extends BaseControlFragment {
                         posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
                     }
 
-                    Picasso.with(getActivity()).load(posterUrl).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                            if (bitmap != null) {
-                                Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-                                    @Override
-                                    public void onGenerated(Palette palette) {
-                                        try {
-                                            coverImage.setImageBitmap(bitmap);
+                    Bitmap bitmap = Picasso.with(getActivity()).load(posterUrl).get();
+                    Palette palette = Palette.generate(bitmap);
 
-                                            Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+                    coverImage.setImageBitmap(bitmap);
 
-                                            int vibrantColor = palette.getVibrantColor(R.color.primary);
-                                            final int color;
-                                            if (vibrantColor == R.color.primary) {
-                                                color = palette.getMutedColor(R.color.primary);
-                                            } else {
-                                                color = vibrantColor;
-                                            }
+                    Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
 
-                                            ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
-                                            slidingPanelTopLayoutColorFade.setDuration(500);
+                    int vibrantColor = palette.getVibrantColor(R.color.primary);
+                    final int color;
+                    if (vibrantColor == R.color.primary) {
+                        color = palette.getMutedColor(R.color.primary);
+                    } else {
+                        color = vibrantColor;
+                    }
 
-                                            slidingPanelTopLayoutColorFade.start();
-                                            coverImage.setVisibility(View.VISIBLE);
-                                            coverImage.startAnimation(fadeInAnim);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                            }
-                        }
+                    ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
+                    slidingPanelTopLayoutColorFade.setDuration(500);
 
-                        @Override
-                        public void onBitmapFailed(Drawable errorDrawable) {
-
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                        }
-                    });
+                    slidingPanelTopLayoutColorFade.start();
+                    coverImage.setVisibility(View.VISIBLE);
+                    coverImage.startAnimation(fadeInAnim);
                 }
             } catch(Exception exception) {
                 exception.printStackTrace();
@@ -192,7 +169,12 @@ public class PlayerControllerFragment extends BaseControlFragment {
             try {
                 if (result != null && e == null) {
                     mPlaying = (Boolean) result.getMapResult().get("playing");
-                    updateViews();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateViews();
+                        }
+                    });
 
                     if (mPlaying) {
                         LinkedTreeMap<String, Object> mapResult = result.getMapResult();
@@ -229,7 +211,12 @@ public class PlayerControllerFragment extends BaseControlFragment {
             try {
                 if (result != null && e == null) {
                     mFullscreen = (Boolean) result.getMapResult().get("fullscreen");
-                    updateViews();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateViews();
+                        }
+                    });
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();

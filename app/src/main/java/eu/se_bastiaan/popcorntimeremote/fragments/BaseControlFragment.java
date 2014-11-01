@@ -2,6 +2,8 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
@@ -11,6 +13,7 @@ public abstract class BaseControlFragment extends Fragment {
 
     private PopcornTimeRpcClient mRpc;
     private Bundle mExtras;
+    protected Handler mHandler = new Handler(Looper.getMainLooper());
 
     protected PopcornTimeRpcClient.Callback mBlankResponseCallback = new PopcornTimeRpcClient.Callback() {
         @Override

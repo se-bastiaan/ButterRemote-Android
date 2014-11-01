@@ -38,7 +38,7 @@ public class ControllerActivity extends ActionBarActivity {
 
     private Bundle mExtras;
     private PopcornTimeRpcClient mRpc;
-    private Handler mHandler = new Handler();
+    private Handler mHandler;
     private String mCurrentFragment, mTopView;
     private Call mViewstackFuture;
 
@@ -62,6 +62,8 @@ public class ControllerActivity extends ActionBarActivity {
             finish();
         }
 
+        mHandler = new Handler(getMainLooper());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_logo);
     }
@@ -83,7 +85,7 @@ public class ControllerActivity extends ActionBarActivity {
 
     public void setFragment(Fragment fragment, boolean fade) {
         try {
-            runOnUiThread(new Runnable() {
+            mHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     progressBar.setVisibility(View.GONE);
@@ -131,7 +133,7 @@ public class ControllerActivity extends ActionBarActivity {
     private void showNoConnection() {
         setFragment(new ConnectionLostFragment(), true);
         mCurrentFragment = "no-connection";
-        runOnUiThread(new Runnable() {
+        mHandler.post(new Runnable() {
             @Override
             public void run() {
                 ActionBarBackground.fadeDrawable(ControllerActivity.this, new ColorDrawable(getResources().getColor(R.color.primary)));
@@ -179,7 +181,7 @@ public class ControllerActivity extends ActionBarActivity {
                                 if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                                     window.setStatusBarColor(getResources().getColor(R.color.bg));
                                 }
-                                runOnUiThread(new Runnable() {
+                                mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         ActionBarBackground.fadeOut(ControllerActivity.this);
@@ -190,7 +192,7 @@ public class ControllerActivity extends ActionBarActivity {
                                     window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
                                 }
 
-                                runOnUiThread(new Runnable() {
+                                mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));

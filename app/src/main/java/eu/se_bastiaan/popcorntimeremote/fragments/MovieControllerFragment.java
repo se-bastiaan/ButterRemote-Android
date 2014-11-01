@@ -130,6 +130,8 @@ public class MovieControllerFragment extends BaseControlFragment {
             synopsisBlock.setVisibility(View.GONE);
         }
 
+        getClient().getSelection(mSelectionCallback);
+
         return v;
     }
 
@@ -141,17 +143,22 @@ public class MovieControllerFragment extends BaseControlFragment {
                     mCurrentMap = result.getMapResult();
 
                     // movie info
-                    String title = (String) mCurrentMap.get("title");
-                    String synopsis = (String) mCurrentMap.get("synopsis");
-                    String year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
-                    String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
-                    String rating = (String) mCurrentMap.get("rating");
+                    final String title = (String) mCurrentMap.get("title");
+                    final String synopsis = (String) mCurrentMap.get("synopsis");
+                    final String year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
+                    final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
+                    final String rating = (String) mCurrentMap.get("rating");
 
-                    titleText.setText(title);
-                    synopsisText.setText(synopsis);
-                    yearText.setText(year);
-                    runtimeText.setText(runtime + " " + getString(R.string.minutes));
-                    ratingText.setText(rating + "/10");
+                    mHandler.post(new Runnable() {
+                          @Override
+                          public void run() {
+                              titleText.setText(title);
+                              synopsisText.setText(synopsis);
+                              yearText.setText(year);
+                              runtimeText.setText(runtime + " " + getString(R.string.minutes));
+                              ratingText.setText(rating + "/10");
+                          }
+                    });
 
                     // poster/color
                     String type = null;
@@ -172,60 +179,58 @@ public class MovieControllerFragment extends BaseControlFragment {
                         backdropUrl = images.get("fanart");
                     }
 
-                    Picasso.with(getActivity()).load(posterUrl).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            if (bitmap != null) {
-                                Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+                    Bitmap poster = Picasso.with(getActivity()).load(posterUrl).get();
+                    Palette palette = Palette.generate(poster);
+
+                    try {
+                        int vibrantColor = palette.getVibrantColor(R.color.primary);
+                        final int color;
+                        if (vibrantColor == R.color.primary) {
+                            color = palette.getMutedColor(R.color.primary);
+                        } else {
+                            color = vibrantColor;
+                        }
+
+                        final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
+                        mainInfoBlockColorFade.setDuration(500);
+                        Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
+                        mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, color);
+                        final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
+
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                playButton.setImageDrawable(td);
+                            }
+                        });
+
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
                                     @Override
-                                    public void onGenerated(Palette palette) {
-                                        try {
-                                            int vibrantColor = palette.getVibrantColor(R.color.primary);
-                                            final int color;
-                                            if (vibrantColor == R.color.primary) {
-                                                color = palette.getMutedColor(R.color.primary);
-                                            } else {
-                                                color = vibrantColor;
-                                            }
+                                    public void onSuccess() {
+                                        Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
 
-                                            final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
-                                            mainInfoBlockColorFade.setDuration(500);
+                                        mainInfoBlockColorFade.start();
+                                        td.startTransition(500);
+                                        coverImage.setVisibility(View.VISIBLE);
+                                        coverImage.startAnimation(fadeInAnim);
 
-                                            Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
-                                            mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, color);
-                                            final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
-                                            playButton.setImageDrawable(td);
+                                        mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(color)).initActionBar(getActivity());
+                                    }
 
-                                            Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
-                                                @Override
-                                                public void onSuccess() {
-                                                    mainInfoBlockColorFade.start();
-                                                    td.startTransition(500);
+                                    @Override
+                                    public void onError() {
 
-                                                    mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(color)).initActionBar(getActivity());
-                                                }
-
-                                                @Override
-                                                public void onError() {
-
-                                                }
-                                            });
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
                                     }
                                 });
                             }
-                        }
+                        });
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
 
-                        @Override
-                        public void onBitmapFailed(Drawable errorDrawable) {
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        }
-                    });
                 }
             } catch(Exception exception) {
                 exception.printStackTrace();
@@ -246,8 +251,6 @@ public class MovieControllerFragment extends BaseControlFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        getClient().getSelection(mSelectionCallback);
     }
 
 }
