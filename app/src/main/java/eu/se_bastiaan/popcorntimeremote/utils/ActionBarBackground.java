@@ -9,6 +9,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -21,7 +22,7 @@ public class ActionBarBackground {
     private ActionBarActivity mActivity;
     private ActionBar mActionBar;
     private int mNewColor;
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     public ActionBarBackground(ActionBarActivity actionBarActivity) {
         mNewColor = Color.parseColor("#FFFFFF");

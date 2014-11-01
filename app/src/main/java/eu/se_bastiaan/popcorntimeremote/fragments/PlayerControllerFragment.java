@@ -1,6 +1,7 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,10 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.google.gson.internal.LinkedTreeMap;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -116,7 +118,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onStopTrackingTouch(SeekBar seekBar) { }
     };
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mSelectionCallback = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -132,9 +134,9 @@ public class PlayerControllerFragment extends BaseControlFragment {
                         posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
                     }
 
-                    Ion.with(getActivity()).load(posterUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
+                    Picasso.with(getActivity()).load(posterUrl).into(new Target() {
                         @Override
-                        public void onCompleted(Exception e, final Bitmap bitmap) {
+                        public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
                             if(bitmap != null) {
                                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                                     @Override
@@ -165,6 +167,16 @@ public class PlayerControllerFragment extends BaseControlFragment {
                                 });
                             }
                         }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
                     });
                 }
             } catch(Exception exception) {
@@ -173,7 +185,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mPlayingCallback = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private PopcornTimeRpcClient.Callback mPlayingCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -210,7 +222,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mFullscreenCallback  = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private PopcornTimeRpcClient.Callback mFullscreenCallback  = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {

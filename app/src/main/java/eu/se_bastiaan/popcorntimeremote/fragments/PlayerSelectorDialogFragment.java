@@ -3,24 +3,17 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.gson.internal.LinkedTreeMap;
-import com.koushikdutta.async.future.FutureCallback;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,7 +21,6 @@ import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.widget.PlayerAdapter;
-import eu.se_bastiaan.popcorntimeremote.widget.SubtitleAdapter;
 
 public class PlayerSelectorDialogFragment extends DialogFragment {
 
@@ -46,7 +38,7 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
             mExtras = getArguments();
         }
         if (mRpc == null) {
-            mRpc = new PopcornTimeRpcClient(getActivity(), mExtras.getString(ControllerActivity.KEY_IP), mExtras.getString(ControllerActivity.KEY_PORT), mExtras.getString(ControllerActivity.KEY_USERNAME), mExtras.getString(ControllerActivity.KEY_PASSWORD), mExtras.getString(ControllerActivity.KEY_VERSION));
+            mRpc = new PopcornTimeRpcClient(mExtras.getString(ControllerActivity.KEY_IP), mExtras.getString(ControllerActivity.KEY_PORT), mExtras.getString(ControllerActivity.KEY_USERNAME), mExtras.getString(ControllerActivity.KEY_PASSWORD), mExtras.getString(ControllerActivity.KEY_VERSION));
         }
         return mRpc;
     }
@@ -86,7 +78,7 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
         super.onAttach(activity);
     }
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_PLAYERS.ordinal()) {

@@ -2,20 +2,12 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.koushikdutta.async.future.FutureCallback;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
-import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
-import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
-import eu.se_bastiaan.popcorntimeremote.widget.ImageButton;
 
 public class LoadingControllerFragment extends BaseControlFragment {
 

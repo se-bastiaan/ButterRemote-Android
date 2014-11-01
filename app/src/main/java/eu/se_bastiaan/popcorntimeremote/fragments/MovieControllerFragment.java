@@ -3,18 +3,14 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -25,10 +21,16 @@ import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.gson.internal.LinkedTreeMap;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -131,7 +133,7 @@ public class MovieControllerFragment extends BaseControlFragment {
         return v;
     }
 
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mSelectionCallback = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+    private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -170,17 +172,17 @@ public class MovieControllerFragment extends BaseControlFragment {
                         backdropUrl = images.get("fanart");
                     }
 
-                    Ion.with(getActivity()).load(posterUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
+                    Picasso.with(getActivity()).load(posterUrl).into(new Target() {
                         @Override
-                        public void onCompleted(Exception e, final Bitmap bitmap) {
-                            if(bitmap != null) {
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            if (bitmap != null) {
                                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                                     @Override
                                     public void onGenerated(Palette palette) {
                                         try {
                                             int vibrantColor = palette.getVibrantColor(R.color.primary);
                                             final int color;
-                                            if(vibrantColor == R.color.primary) {
+                                            if (vibrantColor == R.color.primary) {
                                                 color = palette.getMutedColor(R.color.primary);
                                             } else {
                                                 color = vibrantColor;
@@ -194,18 +196,18 @@ public class MovieControllerFragment extends BaseControlFragment {
                                             final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
                                             playButton.setImageDrawable(td);
 
-                                            Ion.with(getActivity()).load(backdropUrl).asBitmap().setCallback(new FutureCallback<Bitmap>() {
+                                            Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
                                                 @Override
-                                                public void onCompleted(Exception e, Bitmap result) {
-                                                    coverImage.setImageBitmap(result);
-
-                                                    Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+                                                public void onSuccess() {
                                                     mainInfoBlockColorFade.start();
                                                     td.startTransition(500);
-                                                    coverImage.setVisibility(View.VISIBLE);
-                                                    coverImage.startAnimation(fadeInAnim);
 
                                                     mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(color)).initActionBar(getActivity());
+                                                }
+
+                                                @Override
+                                                public void onError() {
+
                                                 }
                                             });
                                         } catch (Exception e) {
@@ -214,7 +216,14 @@ public class MovieControllerFragment extends BaseControlFragment {
                                     }
                                 });
                             }
+                        }
 
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
                         }
                     });
                 }

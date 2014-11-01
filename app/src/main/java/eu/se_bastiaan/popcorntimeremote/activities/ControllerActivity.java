@@ -1,7 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,12 +11,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.google.gson.internal.LinkedTreeMap;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.future.ResponseFuture;
+import com.squareup.okhttp.Call;
 
 import java.util.ArrayList;
 
@@ -43,7 +40,7 @@ public class ControllerActivity extends ActionBarActivity {
     private PopcornTimeRpcClient mRpc;
     private Handler mHandler = new Handler();
     private String mCurrentFragment, mTopView;
-    private ResponseFuture<PopcornTimeRpcClient.RpcResponse> mViewstackFuture;
+    private Call mViewstackFuture;
 
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
@@ -59,7 +56,7 @@ public class ControllerActivity extends ActionBarActivity {
         mExtras = intent.getExtras();
 
         if(mExtras != null && mExtras.containsKey(KEY_IP) && mExtras.containsKey(KEY_PORT) && mExtras.containsKey(KEY_USERNAME) && mExtras.containsKey(KEY_PASSWORD) && mExtras.containsKey(KEY_NAME)) {
-            mRpc = new PopcornTimeRpcClient(this, mExtras.getString(KEY_IP), mExtras.getString(KEY_PORT), mExtras.getString(KEY_USERNAME), mExtras.getString(KEY_PASSWORD));
+            mRpc = new PopcornTimeRpcClient(mExtras.getString(KEY_IP), mExtras.getString(KEY_PORT), mExtras.getString(KEY_USERNAME), mExtras.getString(KEY_PASSWORD));
             getSupportActionBar().setTitle(getString(R.string.connected_to) + ": " + mExtras.getString(KEY_NAME));
         } else {
             finish();
@@ -80,13 +77,18 @@ public class ControllerActivity extends ActionBarActivity {
         super.onPause();
         getSupportFragmentManager().popBackStack();
         if(mViewstackFuture != null)
-            mViewstackFuture.cancel(true);
+            mViewstackFuture.cancel();
         mHandler.removeCallbacksAndMessages(null);
     }
 
     public void setFragment(Fragment fragment, boolean fade) {
         try {
-            progressBar.setVisibility(View.GONE);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
 
             SubtitleSelectorDialogFragment subsFragment = (SubtitleSelectorDialogFragment) getSupportFragmentManager().findFragmentByTag("subtitle_fragment");
             if (subsFragment != null) subsFragment.dismiss();
@@ -118,7 +120,7 @@ public class ControllerActivity extends ActionBarActivity {
         if(mTopView != null && mTopView.equals("main-browser")) {
             super.onBackPressed();
         } else {
-            mRpc.back(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+            mRpc.back(new PopcornTimeRpcClient.Callback() {
                 @Override
                 public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
                 }
@@ -129,13 +131,18 @@ public class ControllerActivity extends ActionBarActivity {
     private void showNoConnection() {
         setFragment(new ConnectionLostFragment(), true);
         mCurrentFragment = "no-connection";
-        ActionBarBackground.fadeDrawable(ControllerActivity.this, new ColorDrawable(getResources().getColor(R.color.primary)));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ActionBarBackground.fadeDrawable(ControllerActivity.this, new ColorDrawable(getResources().getColor(R.color.primary)));
+            }
+        });
     }
 
     private Runnable mGetViewstackRunnable = new Runnable() {
         @Override
         public void run() {
-        mViewstackFuture = mRpc.getViewstack(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+        mViewstackFuture = mRpc.getViewstack(new PopcornTimeRpcClient.Callback() {
             @Override
             public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
                 try {
@@ -172,14 +179,23 @@ public class ControllerActivity extends ActionBarActivity {
                                 if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                                     window.setStatusBarColor(getResources().getColor(R.color.bg));
                                 }
-
-                                ActionBarBackground.fadeOut(ControllerActivity.this);
-                            } else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ActionBarBackground.fadeOut(ControllerActivity.this);
+                                    }
+                                });
+                                }else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
                                 if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                                     window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
                                 }
 
-                                ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
+                                    }
+                                });
                             }
                         }
 
@@ -199,7 +215,7 @@ public class ControllerActivity extends ActionBarActivity {
     public void runViewstackRunnable() {
         try {
             getSupportFragmentManager().popBackStack();
-            mRpc.ping(new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
+            mRpc.ping(new PopcornTimeRpcClient.Callback() {
                 @Override
                 public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
                     if (e == null) {
