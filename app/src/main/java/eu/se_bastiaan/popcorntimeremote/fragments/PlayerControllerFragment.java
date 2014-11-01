@@ -88,7 +88,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if(fromUser) {
-                LogUtils.d("JoystickPlayerControllerFragment", progress);
+                //LogUtils.d("JoystickPlayerControllerFragment", progress);
                 getClient().seek(progress - mCurrentTime, mBlankResponseCallback);
                 mCurrentTime = progress;
                 mSeeked = true;
@@ -135,12 +135,15 @@ public class PlayerControllerFragment extends BaseControlFragment {
                         posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
                     }
 
-                    Bitmap bitmap = Picasso.with(getActivity()).load(posterUrl).get();
+                    final Bitmap bitmap = Picasso.with(getActivity()).load(posterUrl).get();
                     Palette palette = Palette.generate(bitmap);
 
-                    coverImage.setImageBitmap(bitmap);
-
-                    Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            coverImage.setImageBitmap(bitmap);
+                        }
+                    });
 
                     int vibrantColor = palette.getVibrantColor(R.color.primary);
                     final int color;
@@ -149,13 +152,18 @@ public class PlayerControllerFragment extends BaseControlFragment {
                     } else {
                         color = vibrantColor;
                     }
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+                            ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
+                            slidingPanelTopLayoutColorFade.setDuration(500);
 
-                    ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
-                    slidingPanelTopLayoutColorFade.setDuration(500);
-
-                    slidingPanelTopLayoutColorFade.start();
-                    coverImage.setVisibility(View.VISIBLE);
-                    coverImage.startAnimation(fadeInAnim);
+                            slidingPanelTopLayoutColorFade.start();
+                            coverImage.setVisibility(View.VISIBLE);
+                            coverImage.startAnimation(fadeInAnim);
+                        }
+                    });
                 }
             } catch(Exception exception) {
                 exception.printStackTrace();
