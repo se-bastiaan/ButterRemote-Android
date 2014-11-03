@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="100dp"
-                android:paddingLeft="32dp"
+                android:paddingLeft="@dimen/divider_margin"
                 android:paddingRight="104dp"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
@@ -141,7 +141,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="32dp"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/play_button_circle" />
 
             <LinearLayout
@@ -152,62 +152,60 @@
                 android:elevation="3dp"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:background="?android:attr/windowBackground">
 
                 <LinearLayout
                     android:id="@+id/synopsisBlock"
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="top">
                     <ImageView
                         android:id="@+id/synopsisBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_action_info" />
                     <TextView
                         android:id="@+id/synopsisText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
-                        android:layout_marginTop="14dp"
-                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:text="..."
                         android:textSize="14sp"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/trailerBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/trailerBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_trailer" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:text="@string/watch_trailer"
@@ -215,31 +213,31 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/favouriteBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/favouriteBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_action_favourite" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:text="@string/favourite"
@@ -247,31 +245,31 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/qualityBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/qualityBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_action_quality" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:text="@string/quality"
@@ -279,31 +277,31 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/subtitlesBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/subtitlesBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_subs" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:text="@string/subs"
@@ -311,31 +309,31 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/playerBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_vertical_margin"
-                    android:paddingLeft="@dimen/playercontrol_vertical_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/playerBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_player" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/playercontrol_vertical_margin"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:text="@string/player"

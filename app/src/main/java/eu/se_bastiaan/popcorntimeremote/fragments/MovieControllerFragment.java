@@ -44,9 +44,10 @@ public class MovieControllerFragment extends BaseControlFragment {
 
     private Drawable mPlayButtonDrawable;
     private LinkedTreeMap<String, Object> mCurrentMap;
-    private Integer mLastScrollLocation = 0, mPaletteColor = R.color.primary, mOpenBarPos;
+    private Integer mLastScrollLocation = 0, mPaletteColor = R.color.primary, mOpenBarPos, mHeaderHeight, mToolbarHeight, mParallaxHeight;
     private Boolean mTransparentBar = true, mOpenBar = true;
 
+    View toolbar;
     @InjectView(R.id.scrollView)
     ParallaxScrollView scrollView;
     @InjectView(R.id.coverImage)
@@ -110,6 +111,51 @@ public class MovieControllerFragment extends BaseControlFragment {
         }
     };
 
+    private ViewTreeObserver.OnScrollChangedListener mOnScrollListener = new ViewTreeObserver.OnScrollChangedListener() {
+        @Override
+        public void onScrollChanged() {
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) toolbar.getLayoutParams();
+
+            if(scrollView.getScrollY() > mHeaderHeight) {
+                if (mLastScrollLocation > scrollView.getScrollY()) {
+                    // scroll up
+                    if ((mOpenBarPos == null || !mOpenBar) && layoutParams.topMargin <= -mToolbarHeight)
+                        mOpenBarPos = scrollView.getScrollY() - mToolbarHeight;
+                    mOpenBar = true;
+                } else if (mLastScrollLocation < scrollView.getScrollY()) {
+                    // scroll down
+                    if (mOpenBarPos == null || mOpenBar)
+                        mOpenBarPos = scrollView.getScrollY();
+                    mOpenBar = false;
+                }
+
+                if (layoutParams.topMargin <= 0)
+                    layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
+
+                if (layoutParams.topMargin > 0) {
+                    layoutParams.topMargin = 0;
+                }
+            }
+
+                /* Fade out when over header */
+            if(mParallaxHeight - scrollView.getScrollY() < 0) {
+                if(mTransparentBar) {
+                    mTransparentBar = false;
+                    ActionBarBackground.changeColor((ActionBarActivity) getActivity(), mPaletteColor, false);
+                }
+            } else {
+                if(!mTransparentBar) {
+                    mTransparentBar = true;
+                    ActionBarBackground.fadeOut((ActionBarActivity) getActivity());
+                }
+            }
+
+            toolbar.setLayoutParams(layoutParams);
+
+            mLastScrollLocation = scrollView.getScrollY();
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_moviecontroller, container, false);
@@ -125,101 +171,13 @@ public class MovieControllerFragment extends BaseControlFragment {
         qualityBlock.setOnClickListener(mOnClickListener);
         playerBlock.setOnClickListener(mOnClickListener);
 
-        final int parallaxHeight = PixelUtils.getPixelsFromDp(getActivity(), 228);
-        final View toolbar = getActionBarView();
-        final int toolbarHeight = toolbar.getHeight();
-        LogUtils.d("onScrollChanged", "toolbarHeight: " + toolbarHeight);
-        final int headerHeight = parallaxHeight - toolbarHeight;
+        mParallaxHeight = PixelUtils.getPixelsFromDp(getActivity(), 228);
+        toolbar = getActionBarView();
+        mToolbarHeight = toolbar.getHeight();
+        LogUtils.d("onScrollChanged", "toolbarHeight: " + mToolbarHeight);
+        mHeaderHeight = mParallaxHeight - mToolbarHeight;
         scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) toolbar.getLayoutParams();
-
-                if(scrollView.getScrollY() > headerHeight) {
-                    if (mLastScrollLocation > scrollView.getScrollY()) {
-                        // scroll up
-                        if ((mOpenBarPos == null || !mOpenBar) && layoutParams.topMargin <= -toolbarHeight)
-                            mOpenBarPos = scrollView.getScrollY() - toolbarHeight;
-                        mOpenBar = true;
-                    } else if (mLastScrollLocation < scrollView.getScrollY()) {
-                        // scroll down
-                        if (mOpenBarPos == null || mOpenBar)
-                            mOpenBarPos = scrollView.getScrollY();
-                        mOpenBar = false;
-                    }
-
-
-                    if (layoutParams.topMargin <= 0)
-                        layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
-
-                    if (layoutParams.topMargin > 0) {
-                        layoutParams.topMargin = 0;
-                    }
-                }
-                /*
-                if(mLastScrollLocation > scrollView.getScrollY() && layoutParams.topMargin == 0) {
-                    mOpenBar = true;
-                    if(mOpenBarPos == null)
-                        mOpenBarPos = scrollView.getScrollY();
-                } else if(mLastScrollLocation < scrollView.getScrollY() && layoutParams.topMargin == -toolbarHeight) {
-                    mOpenBar = false;
-                    mOpenBarPos = scrollView.getScrollY();
-                }
-
-                if(layoutParams.topMargin < 0 && mOpenBar) {
-                    //hidden
-                    layoutParams.topMargin = -toolbarHeight + (mOpenBarPos - scrollView.getScrollY());
-                } else if(layoutParams.topMargin > -toolbarHeight && !mOpenBar) {
-                    //visible
-                    layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
-                }
-
-                if(layoutParams.topMargin == 0 && layoutParams.topMargin == -toolbarHeight) {
-                    mOpenBarPos = null;
-                }
-
-                LogUtils.d("onScrollChanged", "OpenBar: " + mOpenBar);
-*/
-                /*if (headerHeight - scrollView.getScrollY() < 0) {
-                    layoutParams.topMargin = -layoutParams.topMargin <= toolbarHeight ? headerHeight - scrollView.getScrollY() : -toolbarHeight;
-                }
-
-                if(parallaxHeight - scrollView.getScrollY() < 0) {
-                    if(mLastScrollLocation < scrollView.getScrollY() && -layoutParams.topMargin >= toolbarHeight && mOpenBar) {
-                        // scroll down
-                        mOpenBar = false;
-                        mOpenBarPos = scrollView.getScrollY();
-                    } else if(mLastScrollLocation > scrollView.getScrollY() && -layoutParams.topMargin <= toolbarHeight && !mOpenBar) {
-                        // scroll up
-                        mOpenBar = true;
-                        mOpenBarPos = scrollView.getScrollY();
-                    }
-
-                    layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
-                }*/
-
-                LogUtils.d("onScrollChanged", "topMargin: " + layoutParams.topMargin);
-                LogUtils.d("onScrollChanged", "----------------------------------------");
-
-                /* Fade out when on header */
-                if(parallaxHeight - scrollView.getScrollY() < 0) {
-                    if(mTransparentBar) {
-                        mTransparentBar = false;
-                        ActionBarBackground.changeColor((ActionBarActivity) getActivity(), mPaletteColor, false);
-                    }
-                } else {
-                    if(!mTransparentBar) {
-                        mTransparentBar = true;
-                        ActionBarBackground.fadeOut((ActionBarActivity) getActivity());
-                    }
-                }
-
-                toolbar.setLayoutParams(layoutParams);
-
-                mLastScrollLocation = scrollView.getScrollY();
-            }
-        });
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(mOnScrollListener);
 
         if(!Version.compare(getClient().getVersion(), "0.0.0")) {
             playerBlock.setVisibility(View.GONE);
