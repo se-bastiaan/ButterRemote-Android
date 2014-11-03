@@ -24,7 +24,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/fab__gradient" />
+        android:background="@drawable/ab_gradient" />
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:sothree="http://schemas.android.com/apk/res-auto"

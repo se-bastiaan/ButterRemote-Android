@@ -1,11 +1,9 @@
 package eu.se_bastiaan.popcorntimeremote.utils;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -38,7 +36,7 @@ public class ActionBarBackground {
         mActionBar = actionBarActivity.getSupportActionBar();
         mActivity = actionBarActivity;
 
-        final int actionBarId = getResources().getIdentifier("action_bar", "id", "android");
+        final int actionBarId = getResources().getIdentifier("toolbar", "id", actionBarActivity.getPackageName());
         final View actionBar = actionBarActivity.findViewById(actionBarId);
         if(actionBar == null || actionBar.getBackground() == null) {
             mOldBackground = getColoredBackground(R.color.primary);
@@ -55,8 +53,12 @@ public class ActionBarBackground {
      * Change color of ActionBar to mNewColor
      * @return Instance of this class
      */
-    private ActionBarBackground changeColor() {
-        fadeBackground(mOldBackground, getColoredBackground(mNewColor));
+    private ActionBarBackground changeColor(Boolean fade) {
+        if(fade) {
+            fadeBackground(mOldBackground, getColoredBackground(mNewColor));
+        } else {
+            mActionBar.setBackgroundDrawable(getColoredBackground(mNewColor));
+        }
         return this;
     }
 
@@ -68,6 +70,18 @@ public class ActionBarBackground {
         Drawable background = getColoredBackground(android.R.color.transparent);
         background.setAlpha(0);
         fadeBackground(mOldBackground, background);
+        return this;
+    }
+
+    /**
+     * Fade the ActionBar background to solid opacity
+     * @return Instance of this class
+     */
+    private ActionBarBackground fadeIn(Integer color) {
+        Drawable transBackground = getColoredBackground(android.R.color.transparent);
+        Drawable background = getColoredBackground(color);
+        background.setAlpha(1);
+        fadeBackground(transBackground, background);
         return this;
     }
 
@@ -157,14 +171,35 @@ public class ActionBarBackground {
     }
 
     /**
+     * Fade the ActionBar background to solid opacity
+     * @param activity Activity where the ActionBar has to change
+     * @return Instance of this class
+     */
+    public static ActionBarBackground fadeIn(ActionBarActivity activity, Integer color) {
+        ActionBarBackground abColor = new ActionBarBackground(activity);
+        abColor.fadeIn(color);
+        return abColor;
+    }
+
+    /**
      * Change the background color of the ActionBar to newColor
      * @param activity Activity where the ActionBar has to change
      * @param newColor New background color of the ActionBar
      * @return Instance of this class
      */
     public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor) {
+        return changeColor(activity, newColor, true);
+    }
+
+    /**
+     * Change the background color of the ActionBar to newColor, fading or not
+     * @param activity Activity where the ActionBar has to change
+     * @param newColor New background color of the ActionBar
+     * @return Instance of this class
+     */
+    public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor, Boolean fade) {
         ActionBarBackground abColor = new ActionBarBackground(activity, newColor);
-        abColor.changeColor();
+        abColor.changeColor(fade);
         return abColor;
     }
 

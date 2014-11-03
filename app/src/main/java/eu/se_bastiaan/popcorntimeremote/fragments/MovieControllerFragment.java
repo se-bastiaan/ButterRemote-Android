@@ -1,16 +1,20 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
-import android.app.Activity;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -23,31 +27,28 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.gson.internal.LinkedTreeMap;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.R;
-import eu.se_bastiaan.popcorntimeremote.fadingactionbar.FadingActionBarHelper;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
+import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class MovieControllerFragment extends BaseControlFragment {
 
-    private FadingActionBarHelper mFadingHelper;
     private Drawable mPlayButtonDrawable;
     private LinkedTreeMap<String, Object> mCurrentMap;
+    private Integer mLastScrollLocation = 0, mPaletteColor = R.color.primary, mOpenBarPos;
+    private Boolean mTransparentBar = true, mOpenBar = true;
 
+    @InjectView(R.id.scrollView)
+    ParallaxScrollView scrollView;
     @InjectView(R.id.coverImage)
     ImageView coverImage;
     @InjectView(R.id.mainInfoBlock)
@@ -111,7 +112,7 @@ public class MovieControllerFragment extends BaseControlFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = mFadingHelper.createView(inflater);
+        View v = inflater.inflate(R.layout.fragment_moviecontroller, container, false);
         ButterKnife.inject(this, v);
 
         Drawable playButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
@@ -123,6 +124,102 @@ public class MovieControllerFragment extends BaseControlFragment {
         favouriteBlock.setOnClickListener(mOnClickListener);
         qualityBlock.setOnClickListener(mOnClickListener);
         playerBlock.setOnClickListener(mOnClickListener);
+
+        final int parallaxHeight = PixelUtils.getPixelsFromDp(getActivity(), 228);
+        final View toolbar = getActionBarView();
+        final int toolbarHeight = toolbar.getHeight();
+        LogUtils.d("onScrollChanged", "toolbarHeight: " + toolbarHeight);
+        final int headerHeight = parallaxHeight - toolbarHeight;
+        scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) toolbar.getLayoutParams();
+
+                if(scrollView.getScrollY() > headerHeight) {
+                    if (mLastScrollLocation > scrollView.getScrollY()) {
+                        // scroll up
+                        if ((mOpenBarPos == null || !mOpenBar) && layoutParams.topMargin <= -toolbarHeight)
+                            mOpenBarPos = scrollView.getScrollY() - toolbarHeight;
+                        mOpenBar = true;
+                    } else if (mLastScrollLocation < scrollView.getScrollY()) {
+                        // scroll down
+                        if (mOpenBarPos == null || mOpenBar)
+                            mOpenBarPos = scrollView.getScrollY();
+                        mOpenBar = false;
+                    }
+
+
+                    if (layoutParams.topMargin <= 0)
+                        layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
+
+                    if (layoutParams.topMargin > 0) {
+                        layoutParams.topMargin = 0;
+                    }
+                }
+                /*
+                if(mLastScrollLocation > scrollView.getScrollY() && layoutParams.topMargin == 0) {
+                    mOpenBar = true;
+                    if(mOpenBarPos == null)
+                        mOpenBarPos = scrollView.getScrollY();
+                } else if(mLastScrollLocation < scrollView.getScrollY() && layoutParams.topMargin == -toolbarHeight) {
+                    mOpenBar = false;
+                    mOpenBarPos = scrollView.getScrollY();
+                }
+
+                if(layoutParams.topMargin < 0 && mOpenBar) {
+                    //hidden
+                    layoutParams.topMargin = -toolbarHeight + (mOpenBarPos - scrollView.getScrollY());
+                } else if(layoutParams.topMargin > -toolbarHeight && !mOpenBar) {
+                    //visible
+                    layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
+                }
+
+                if(layoutParams.topMargin == 0 && layoutParams.topMargin == -toolbarHeight) {
+                    mOpenBarPos = null;
+                }
+
+                LogUtils.d("onScrollChanged", "OpenBar: " + mOpenBar);
+*/
+                /*if (headerHeight - scrollView.getScrollY() < 0) {
+                    layoutParams.topMargin = -layoutParams.topMargin <= toolbarHeight ? headerHeight - scrollView.getScrollY() : -toolbarHeight;
+                }
+
+                if(parallaxHeight - scrollView.getScrollY() < 0) {
+                    if(mLastScrollLocation < scrollView.getScrollY() && -layoutParams.topMargin >= toolbarHeight && mOpenBar) {
+                        // scroll down
+                        mOpenBar = false;
+                        mOpenBarPos = scrollView.getScrollY();
+                    } else if(mLastScrollLocation > scrollView.getScrollY() && -layoutParams.topMargin <= toolbarHeight && !mOpenBar) {
+                        // scroll up
+                        mOpenBar = true;
+                        mOpenBarPos = scrollView.getScrollY();
+                    }
+
+                    layoutParams.topMargin = mOpenBarPos - scrollView.getScrollY();
+                }*/
+
+                LogUtils.d("onScrollChanged", "topMargin: " + layoutParams.topMargin);
+                LogUtils.d("onScrollChanged", "----------------------------------------");
+
+                /* Fade out when on header */
+                if(parallaxHeight - scrollView.getScrollY() < 0) {
+                    if(mTransparentBar) {
+                        mTransparentBar = false;
+                        ActionBarBackground.changeColor((ActionBarActivity) getActivity(), mPaletteColor, false);
+                    }
+                } else {
+                    if(!mTransparentBar) {
+                        mTransparentBar = true;
+                        ActionBarBackground.fadeOut((ActionBarActivity) getActivity());
+                    }
+                }
+
+                toolbar.setLayoutParams(layoutParams);
+
+                mLastScrollLocation = scrollView.getScrollY();
+            }
+        });
 
         if(!Version.compare(getClient().getVersion(), "0.0.0")) {
             playerBlock.setVisibility(View.GONE);
@@ -184,17 +281,16 @@ public class MovieControllerFragment extends BaseControlFragment {
 
                     try {
                         int vibrantColor = palette.getVibrantColor(R.color.primary);
-                        final int color;
                         if (vibrantColor == R.color.primary) {
-                            color = palette.getMutedColor(R.color.primary);
+                            mPaletteColor = palette.getMutedColor(R.color.primary);
                         } else {
-                            color = vibrantColor;
+                            mPaletteColor = vibrantColor;
                         }
 
-                        final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
+                        final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), mPaletteColor);
                         mainInfoBlockColorFade.setDuration(500);
                         Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
-                        mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, color);
+                        mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, mPaletteColor);
                         final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
 
                         mHandler.post(new Runnable() {
@@ -216,8 +312,6 @@ public class MovieControllerFragment extends BaseControlFragment {
                                         td.startTransition(500);
                                         coverImage.setVisibility(View.VISIBLE);
                                         coverImage.startAnimation(fadeInAnim);
-
-                                        mFadingHelper.actionBarBackground(ActionBarBackground.getColoredBackground(color)).initActionBar(getActivity());
                                     }
 
                                     @Override
@@ -237,20 +331,5 @@ public class MovieControllerFragment extends BaseControlFragment {
             }
         }
     };
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mFadingHelper = new FadingActionBarHelper()
-                    .actionBarBackground(ActionBarBackground.getColoredBackground(getResources().getColor(R.color.primary)))
-                    .headerLayout(R.layout.fragment_detailheader)
-                    .contentLayout(R.layout.fragment_moviecontroller);
-            mFadingHelper.initActionBar(activity);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

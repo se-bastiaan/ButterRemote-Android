@@ -88,8 +88,7 @@
     <orderEntry type="library" exported="" name="okio-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="core-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-21.0.0" level="project" />
-    <orderEntry type="library" exported="" name="fadingactionbar-abc-3.1.2" level="project" />
-    <orderEntry type="library" exported="" name="fadingactionbar-3.1.2" level="project" />
+    <orderEntry type="library" exported="" name="parallaxscroll-1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.0" level="project" />
     <orderEntry type="library" exported="" name="core-1.5" level="project" />
     <orderEntry type="library" exported="" name="YouTubeAndroidPlayerApi" level="project" />

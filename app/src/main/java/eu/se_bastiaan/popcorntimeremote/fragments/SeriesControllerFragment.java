@@ -39,7 +39,7 @@ public class SeriesControllerFragment extends BaseControlFragment {
     private JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
         @Override
         public void onValueChanged(int angle, int power, JoystickView.Direction direction) {
-            LogUtils.d("mOnJoystickMoveListener", power);
+            LogUtils.d("OnJoystickMoveListener", power);
 
             switch (direction) {
                 case CENTER:
@@ -77,7 +77,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
         joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
         joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
-
 
         return v;
     }

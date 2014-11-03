@@ -3,6 +3,7 @@ package eu.se_bastiaan.popcorntimeremote.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -16,6 +17,8 @@ public class OverviewActivity extends ActionBarActivity {
 
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +29,9 @@ public class OverviewActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_framelayout);
         ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
 
         progressBar.setVisibility(View.GONE);
-
-        getSupportActionBar().setLogo(R.drawable.ic_logo);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);

@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -44,6 +45,8 @@ public class ControllerActivity extends ActionBarActivity {
 
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +54,15 @@ public class ControllerActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_framelayout);
         ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         mExtras = intent.getExtras();
 
         if(mExtras != null && mExtras.containsKey(KEY_IP) && mExtras.containsKey(KEY_PORT) && mExtras.containsKey(KEY_USERNAME) && mExtras.containsKey(KEY_PASSWORD) && mExtras.containsKey(KEY_NAME)) {
             mRpc = new PopcornTimeRpcClient(mExtras.getString(KEY_IP), mExtras.getString(KEY_PORT), mExtras.getString(KEY_USERNAME), mExtras.getString(KEY_PASSWORD));
-            getSupportActionBar().setTitle(getString(R.string.connected_to) + ": " + mExtras.getString(KEY_NAME));
+            //getSupportActionBar().setTitle(getString(R.string.connected_to) + ": " + mExtras.getString(KEY_NAME));
+            getSupportActionBar().setTitle(getString(R.string.app_name));
         } else {
             finish();
         }
@@ -65,7 +70,6 @@ public class ControllerActivity extends ActionBarActivity {
         mHandler = new Handler(getMainLooper());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_logo);
     }
 
     @Override
@@ -184,10 +188,11 @@ public class ControllerActivity extends ActionBarActivity {
                                 mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ActionBarBackground.fadeOut(ControllerActivity.this);
+                                    getSupportActionBar().setTitle("");
+                                    ActionBarBackground.fadeOut(ControllerActivity.this);
                                     }
                                 });
-                                }else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
+                            } else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
                                 if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                                     window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
                                 }
@@ -195,7 +200,8 @@ public class ControllerActivity extends ActionBarActivity {
                                 mHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
+                                    getSupportActionBar().setTitle(getString(R.string.app_name));
+                                    ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
                                     }
                                 });
                             }
