@@ -1,5 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
 public class SeriesControllerFragment extends BaseControlFragment {
@@ -66,6 +68,9 @@ public class SeriesControllerFragment extends BaseControlFragment {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
         View v = inflater.inflate(R.layout.fragment_seriescontroller, container, false);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + PixelUtils.getStatusBarHeight(getActivity()), v.getPaddingRight(), v.getPaddingBottom());
+        }
         ButterKnife.inject(this, v);
 
         favouriteButton.setOnClickListener(mButtonClickListener);

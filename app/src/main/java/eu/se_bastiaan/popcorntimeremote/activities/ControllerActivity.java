@@ -1,10 +1,12 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -12,11 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.squareup.okhttp.Call;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -43,6 +47,8 @@ public class ControllerActivity extends ActionBarActivity {
     private String mCurrentFragment, mTopView;
     private Call mViewstackFuture;
 
+    @InjectView(R.id.frameLayout)
+    FrameLayout frameLayout;
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
     @InjectView(R.id.toolbar)
@@ -96,16 +102,13 @@ public class ControllerActivity extends ActionBarActivity {
                 }
             });
 
-            SubtitleSelectorDialogFragment subsFragment = (SubtitleSelectorDialogFragment) getSupportFragmentManager().findFragmentByTag("subtitle_fragment");
-            if (subsFragment != null) subsFragment.dismiss();
-            PlayerSelectorDialogFragment playerFragment = (PlayerSelectorDialogFragment) getSupportFragmentManager().findFragmentByTag("player_fragment");
-            if (playerFragment != null) playerFragment.dismiss();
+            DialogFragment dialogFragment = (DialogFragment) getSupportFragmentManager().findFragmentByTag("overlay_fragment");
+            if (dialogFragment != null) dialogFragment.dismiss();
 
             fragment.setArguments(mExtras);
-
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             if (fade)
-                fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
             fragmentTransaction.replace(R.id.frameLayout, fragment);
             fragmentTransaction.commit();
         } catch (Exception e) {
@@ -116,14 +119,14 @@ public class ControllerActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        if(mTopView != null && mTopView.equals("main-browser")) {
+        if(mTopView == null || mTopView.equals("main-browser") || mTopView.equals("no-connection")) {
             super.onBackPressed();
         } else {
             mRpc.back(new PopcornTimeRpcClient.Callback() {
@@ -136,7 +139,7 @@ public class ControllerActivity extends ActionBarActivity {
 
     private void showNoConnection() {
         setFragment(new ConnectionLostFragment(), true);
-        mCurrentFragment = "no-connection";
+        mCurrentFragment = mTopView = "no-connection";
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -183,7 +186,7 @@ public class ControllerActivity extends ActionBarActivity {
                             Window window = getWindow();
                             if(translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
                                 if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-                                    window.setStatusBarColor(getResources().getColor(R.color.bg));
+                                    window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
                                 }
                                 mHandler.post(new Runnable() {
                                     @Override

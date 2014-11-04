@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +47,7 @@ public class MovieControllerFragment extends BaseControlFragment {
     private Drawable mPlayButtonDrawable;
     private LinkedTreeMap<String, Object> mCurrentMap;
     private Integer mLastScrollLocation = 0, mPaletteColor = R.color.primary, mOpenBarPos, mHeaderHeight, mToolbarHeight, mParallaxHeight;
-    private Boolean mTransparentBar = true, mOpenBar = true;
+    private Boolean mTransparentBar = true, mOpenBar = true, mIsFavourited = false;
 
     View toolbar;
     @InjectView(R.id.scrollView)
@@ -66,6 +68,8 @@ public class MovieControllerFragment extends BaseControlFragment {
     TextView ratingText;
     @InjectView(R.id.synopsisText)
     TextView synopsisText;
+    @InjectView(R.id.favouriteText)
+    TextView favouriteText;
     @InjectView(R.id.synopsisBlock)
     LinearLayout synopsisBlock;
     @InjectView(R.id.qualityBlock)
@@ -89,18 +93,31 @@ public class MovieControllerFragment extends BaseControlFragment {
                 case R.id.qualityBlock:
                     getClient().toggleQuality(mBlankResponseCallback);
                     break;
+                case R.id.synopsisBlock:
+                    SynopsisDialogFragment synopsisDialogFragment = new SynopsisDialogFragment();
+                    Bundle b = new Bundle();
+                    b.putString("text", (String) mCurrentMap.get("synopsis"));
+                    synopsisDialogFragment.setArguments(b);
+                    synopsisDialogFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
+                    break;
                 case R.id.subtitlesBlock:
                     SubtitleSelectorDialogFragment subtitleFragment = new SubtitleSelectorDialogFragment();
                     subtitleFragment.setArguments(getArguments());
-                    subtitleFragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
+                    subtitleFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
                     break;
                 case R.id.playerBlock:
                     PlayerSelectorDialogFragment playerFragment = new PlayerSelectorDialogFragment();
                     playerFragment.setArguments(getArguments());
-                    playerFragment.show(getActivity().getSupportFragmentManager(), "player_fragment");
+                    playerFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
                     break;
                 case R.id.favouriteBlock:
                     getClient().toggleFavourite(mBlankResponseCallback);
+                    mIsFavourited = !mIsFavourited;
+                    if(mIsFavourited) {
+                        favouriteText.setText(R.string.remove_favourite);
+                    } else {
+                        favouriteText.setText(R.string.add_favourite);
+                    }
                     break;
                 case R.id.trailerBlock:
                     String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
@@ -165,6 +182,7 @@ public class MovieControllerFragment extends BaseControlFragment {
         if(mPlayButtonDrawable == null) playButton.setImageDrawable(playButtonDrawable);
 
         playButton.setOnClickListener(mOnClickListener);
+        synopsisBlock.setOnClickListener(mOnClickListener);
         trailerBlock.setOnClickListener(mOnClickListener);
         subtitlesBlock.setOnClickListener(mOnClickListener);
         favouriteBlock.setOnClickListener(mOnClickListener);
@@ -174,7 +192,6 @@ public class MovieControllerFragment extends BaseControlFragment {
         mParallaxHeight = PixelUtils.getPixelsFromDp(getActivity(), 228);
         toolbar = getActionBarView();
         mToolbarHeight = toolbar.getHeight();
-        LogUtils.d("onScrollChanged", "toolbarHeight: " + mToolbarHeight);
         mHeaderHeight = mParallaxHeight - mToolbarHeight;
         scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         scrollView.getViewTreeObserver().addOnScrollChangedListener(mOnScrollListener);
@@ -190,6 +207,49 @@ public class MovieControllerFragment extends BaseControlFragment {
         return v;
     }
 
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        scrollView.getViewTreeObserver().removeOnScrollChangedListener(mOnScrollListener);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) toolbar.getLayoutParams();
+                try {
+                    if (layoutParams.topMargin < 0) {
+                        int height;
+                        if (layoutParams.topMargin < -mToolbarHeight) {
+                            height = -mToolbarHeight;
+                        } else {
+                            height = layoutParams.topMargin;
+                        }
+
+                        for (int i = height; i != 1; i++) {
+                            layoutParams.topMargin = i;
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    toolbar.setLayoutParams(layoutParams);
+                                }
+                            });
+                        }
+                    }
+                } catch(Exception e) {
+                    layoutParams.topMargin = 0;
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            toolbar.setLayoutParams(layoutParams);
+                        }
+                    });
+                }
+                return null;
+            }
+        }.execute();
+    }
+
     private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
@@ -203,6 +263,7 @@ public class MovieControllerFragment extends BaseControlFragment {
                     final String year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
                     final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
                     final String rating = (String) mCurrentMap.get("rating");
+                    mIsFavourited = (Boolean) mCurrentMap.get("bookmarked");
 
                     mHandler.post(new Runnable() {
                           @Override
@@ -212,6 +273,12 @@ public class MovieControllerFragment extends BaseControlFragment {
                               yearText.setText(year);
                               runtimeText.setText(runtime + " " + getString(R.string.minutes));
                               ratingText.setText(rating + "/10");
+
+                              if(mIsFavourited) {
+                                  favouriteText.setText(R.string.remove_favourite);
+                              } else {
+                                  favouriteText.setText(R.string.add_favourite);
+                              }
                           }
                     });
 

@@ -8,7 +8,7 @@
     <string name="no_connection">No connection</string>
     <string name="no_connection_desc">We could not connect to the selected Popcorn Time instance, make sure Popcorn Time (v0.3.3+) is running and check your settings and internet connection.</string>
     <string name="retry">Retry</string>
-    <string name="connected_to">Connected to</string>
+    <string name="now_playing">Now playing</string>
     <string name="loading">Popcorn Time is loading data…</string>
 
     <string name="minutes">min</string>
@@ -19,7 +19,8 @@
     <string name="up">Up</string>
     <string name="down">Down</string>
     <string name="toggle_tabs">Toggle tabs</string>
-    <string name="favourite">Toggle favourite</string>
+    <string name="add_favourite">Add to favourites</string>
+    <string name="remove_favourite">Remove from favourites</string>
     <string name="watched">Toggle watched</string>
     <string name="fullscreen">Toggle fullscreen</string>
     <string name="search">Search</string>
@@ -39,6 +40,7 @@
     <string name="delete_instance">Delete instance</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="ip">IP Address</string>
     <string name="name">Name</string>
     <string name="port">Port</string>

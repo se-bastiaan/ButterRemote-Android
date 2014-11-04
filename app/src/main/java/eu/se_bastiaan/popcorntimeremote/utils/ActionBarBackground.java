@@ -18,6 +18,7 @@ public class ActionBarBackground {
 
     private Drawable mOldBackground;
     private ActionBarActivity mActivity;
+    private View mToolbar;
     private ActionBar mActionBar;
     private int mNewColor;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -36,17 +37,22 @@ public class ActionBarBackground {
         mActionBar = actionBarActivity.getSupportActionBar();
         mActivity = actionBarActivity;
 
-        final int actionBarId = getResources().getIdentifier("toolbar", "id", actionBarActivity.getPackageName());
-        final View actionBar = actionBarActivity.findViewById(actionBarId);
-        if(actionBar == null || actionBar.getBackground() == null) {
+        getToolbar(actionBarActivity);
+        if(mToolbar == null || mToolbar.getBackground() == null) {
             mOldBackground = getColoredBackground(R.color.primary);
         } else {
-            mOldBackground = actionBar.getBackground();
+            mOldBackground = mToolbar.getBackground();
         }
     }
 
     private Resources getResources() {
         return mActivity.getResources();
+    }
+
+    private View getToolbar(ActionBarActivity actionBarActivity) {
+        final int toolBarId = getResources().getIdentifier("toolbar", "id", actionBarActivity.getPackageName());
+        mToolbar = actionBarActivity.findViewById(toolBarId);
+        return mToolbar;
     }
 
     /**
@@ -118,7 +124,9 @@ public class ActionBarBackground {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 td.setCallback(drawableCallback);
             } else {
+                int paddingTop = mToolbar.getPaddingTop();
                 mActionBar.setBackgroundDrawable(td);
+                mToolbar.setPadding(0, paddingTop, 0, 0); // fix for fitSystemWindows
             }
 
             td.startTransition(500);
@@ -127,8 +135,8 @@ public class ActionBarBackground {
         mOldBackground = newDrawable;
 
         // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
-        mActionBar.setDisplayShowTitleEnabled(false);
-        mActionBar.setDisplayShowTitleEnabled(true);
+        //mActionBar.setDisplayShowTitleEnabled(false);
+        //mActionBar.setDisplayShowTitleEnabled(true);
 
         return this;
     }

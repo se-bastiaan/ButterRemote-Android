@@ -82,9 +82,11 @@
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text=""
                     android:textColor="@color/text_color"
-                    android:textSize="21dp" />
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="18sp" />
                 <TextView
                     android:id="@+id/yearText"
                     android:layout_below="@id/titleText"
@@ -150,7 +152,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:elevation="3dp"
-                android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:orientation="vertical"
                 android:background="?android:attr/windowBackground">
@@ -161,9 +162,12 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/playercontrol_margin"
                     android:paddingRight="@dimen/playercontrol_margin_right"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:gravity="top">
+                    android:gravity="top"
+                    android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/synopsisBlockImage"
                         android:layout_width="@dimen/context_icon"
@@ -176,13 +180,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/playercontrol_margin"
                         android:text="..."
+                        android:maxLines="6"
+                        android:ellipsize="end"
                         android:textSize="14sp"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
@@ -235,12 +240,13 @@
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_action_favourite" />
                     <TextView
+                        android:id="@+id/favouriteText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/playercontrol_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
-                        android:text="@string/favourite"
+                        android:text="@string/add_favourite"
                         android:textSize="@dimen/playercontrol_text_size"
                         android:textColor="@android:color/white" />
                 </LinearLayout>

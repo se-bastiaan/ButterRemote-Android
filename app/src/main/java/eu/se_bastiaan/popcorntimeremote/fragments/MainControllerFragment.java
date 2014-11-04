@@ -1,6 +1,7 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -10,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.ClearableEditText;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
@@ -22,24 +26,28 @@ public class MainControllerFragment extends BaseControlFragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
+
     @InjectView(R.id.searchButton)
     ImageButton searchButton;
     @InjectView(R.id.favouriteButton)
     ImageButton favouriteButton;
     @InjectView(R.id.tabsButton)
     ImageButton tabsButton;
+    @InjectView(R.id.searchInputBox)
+    LinearLayout searchInputBox;
     @InjectView(R.id.searchInput)
     ClearableEditText searchInput;
+
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.searchButton:
-                    if(searchInput.getVisibility() == View.VISIBLE) {
+                    if(searchInputBox.getVisibility() == View.VISIBLE) {
                         mClearableEditTextListener.didClearText();
                     } else {
-                        searchInput.setVisibility(View.VISIBLE);
+                        searchInputBox.setVisibility(View.VISIBLE);
                     }
                     break;
                 case R.id.favouriteButton:
@@ -80,7 +88,7 @@ public class MainControllerFragment extends BaseControlFragment {
     private ClearableEditText.Listener mClearableEditTextListener = new ClearableEditText.Listener() {
         @Override
         public void didClearText() {
-            searchInput.setVisibility(View.INVISIBLE);
+            searchInputBox.setVisibility(View.GONE);
             getClient().clearSearch(mBlankResponseCallback);
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(searchInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -109,6 +117,9 @@ public class MainControllerFragment extends BaseControlFragment {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
         View v = inflater.inflate(R.layout.fragment_maincontroller, container, false);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + PixelUtils.getStatusBarHeight(getActivity()), v.getPaddingRight(), v.getPaddingBottom());
+        }
         ButterKnife.inject(this, v);
 
         searchButton.setOnClickListener(mButtonClickListener);
