@@ -25,7 +25,7 @@ android {
         }
     }
     compileSdkVersion 21
-    buildToolsVersion "21.0.1"
+    buildToolsVersion "21.0.0"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 9
