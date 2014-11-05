@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import com.google.gson.internal.LinkedTreeMap;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -29,6 +30,7 @@ import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.PrefUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class PlayerControllerFragment extends BaseControlFragment {
@@ -37,6 +39,8 @@ public class PlayerControllerFragment extends BaseControlFragment {
     private Integer mCurrentTime, mMax, mVolume;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    @InjectView(R.id.slidingLayout)
+    SlidingUpPanelLayout slidingLayout;
     @InjectView(R.id.coverImage)
     ImageView coverImage;
     @InjectView(R.id.backwardButton)
@@ -86,19 +90,16 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
     private SeekBar.OnSeekBarChangeListener mOnTimeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            if(fromUser) {
-                //LogUtils.d("JoystickPlayerControllerFragment", progress);
-                getClient().seek(progress - mCurrentTime, mBlankResponseCallback);
-                mCurrentTime = progress;
-                mSeeked = true;
-            }
-        }
-
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) { }
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) { }
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            int progress = seekBar.getProgress();
+            getClient().seek(progress - mCurrentTime, mBlankResponseCallback);
+            mCurrentTime = progress;
+            mSeeked = true;
+        }
     };
 
     private SeekBar.OnSeekBarChangeListener mOnVolumeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -280,6 +281,11 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
         if(Version.compare(getClient().getVersion(), "0.3.4")) {
             subtitlesBlock.setVisibility(View.VISIBLE);
+        }
+
+        if(!PrefUtils.contains(getActivity(), "learned_panel")) {
+            slidingLayout.expandPanel();
+            PrefUtils.save(getActivity(), "learned_panel", true);
         }
 
         return v;

@@ -93,7 +93,7 @@ public class ControllerActivity extends ActionBarActivity {
         mHandler.removeCallbacksAndMessages(null);
     }
 
-    public void setFragment(Fragment fragment, boolean fade) {
+    public void setFragment(Fragment fragment) {
         try {
             mHandler.post(new Runnable() {
                 @Override
@@ -107,8 +107,27 @@ public class ControllerActivity extends ActionBarActivity {
 
             fragment.setArguments(mExtras);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if (fade)
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            if (mCurrentFragment.equals("player")) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+                    }
+                });
+
+                fragmentTransaction.setCustomAnimations(R.anim.still, R.anim.slide_down);
+            } else if(mTopView.equals("player")) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        toolbar.setNavigationIcon(R.drawable.abc_ic_clear_mtrl_alpha);
+                    }
+                });
+
+                fragmentTransaction.setCustomAnimations(R.anim.slide_up, R.anim.still);
+            } else {
+                fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            }
             fragmentTransaction.replace(R.id.frameLayout, fragment);
             fragmentTransaction.commit();
         } catch (Exception e) {
@@ -138,7 +157,7 @@ public class ControllerActivity extends ActionBarActivity {
     }
 
     private void showNoConnection() {
-        setFragment(new ConnectionLostFragment(), true);
+        setFragment(new ConnectionLostFragment());
         mCurrentFragment = mTopView = "no-connection";
         mHandler.post(new Runnable() {
             @Override
@@ -165,21 +184,21 @@ public class ControllerActivity extends ActionBarActivity {
                             String shownFragment = mCurrentFragment = mCurrentFragment != null ? mCurrentFragment : "";
 
                             if (mTopView.equals("player") && !mCurrentFragment.equals("player")) {
-                                setFragment(new PlayerControllerFragment(), true);
+                                setFragment(new PlayerControllerFragment());
                                 mCurrentFragment = mTopView;
                                 translucentActionBar = true;
                             } else if (mTopView.equals("shows-container-contain") && !mCurrentFragment.equals("shows-container-contain")) {
-                                setFragment(new SeriesControllerFragment(), true);
+                                setFragment(new SeriesControllerFragment());
                                 mCurrentFragment = mTopView;
                             } else if (mTopView.equals("movie-detail") && !mCurrentFragment.equals("movie-detail")) {
-                                setFragment(new MovieControllerFragment(), true);
+                                setFragment(new MovieControllerFragment());
                                 mCurrentFragment = mTopView;
                                 translucentActionBar = true;
                             } else if (mTopView.equals("app-overlay") && !mCurrentFragment.equals("app-overlay")) {
-                                setFragment(new LoadingControllerFragment(), true);
+                                setFragment(new LoadingControllerFragment());
                                 mCurrentFragment = mTopView;
                             } else if (!(mTopView.equals("player") || mTopView.equals("shows-container-contain") || mTopView.equals("movie-detail") || mTopView.equals("app-overlay")) && !mCurrentFragment.equals("main")) {
-                                setFragment(new MainControllerFragment(), true);
+                                setFragment(new MainControllerFragment());
                                 mCurrentFragment = "main";
                             }
 
@@ -208,9 +227,18 @@ public class ControllerActivity extends ActionBarActivity {
                                     }
                                 });
                             }
+
+                            if(mTopView.equals("player")) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getSupportActionBar().setTitle(R.string.now_playing);
+                                    }
+                                });
+                            }
                         }
 
-                        mHandler.postDelayed(mGetViewstackRunnable, 200);
+                        mHandler.postDelayed(mGetViewstackRunnable, 500);
                     } else if (e != null) {
                         e.printStackTrace();
                         showNoConnection();

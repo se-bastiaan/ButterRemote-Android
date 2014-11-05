@@ -28,7 +28,7 @@
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sliding_layout"
+        android:id="@+id/slidingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
@@ -141,28 +141,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:progress="100"
-                        android:max="100" />
+                        android:max="100"
+                        style="@style/SeekBar.PopcornTimeRemote" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/fullscreenBlock"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
                     android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/fullscreenBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_full_screen" />
                     <TextView
@@ -176,9 +177,9 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
                 <View
-                    android:layout_width="310dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/divider_margin"
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/subtitlesBlock"
