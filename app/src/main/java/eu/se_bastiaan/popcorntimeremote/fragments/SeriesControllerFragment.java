@@ -28,6 +28,8 @@ public class SeriesControllerFragment extends Fragment {
     ImageButton favouriteButton;
     @InjectView(R.id.watchedButton)
     ImageButton watchedButton;
+    @InjectView(R.id.qualityButton)
+    ImageButton qualityButton;
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
@@ -41,6 +43,9 @@ public class SeriesControllerFragment extends Fragment {
                 break;
             case R.id.watchedButton:
                 getClient().toggleWatched(mResponseListener);
+                break;
+            case R.id.qualityButton:
+                getClient().toggleQuality(mResponseListener);
                 break;
         }
         }
@@ -92,6 +97,7 @@ public class SeriesControllerFragment extends Fragment {
         backButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
         watchedButton.setOnClickListener(mButtonClickListener);
+        qualityButton.setOnClickListener(mButtonClickListener);
 
         joystickView.setOnJoystickMoveListener(mOnJoystickMoveListener);
         joystickView.setJoystickImage(JoystickView.Direction.CENTER, R.drawable.ic_action_ok);
