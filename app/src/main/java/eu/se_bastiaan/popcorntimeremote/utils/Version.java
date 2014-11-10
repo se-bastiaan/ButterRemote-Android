@@ -13,7 +13,7 @@ public class Version implements Comparable<Version> {
     public Version(String version) {
         if(version == null)
             throw new IllegalArgumentException("Version can not be null");
-        if(!version.matches("[0-9]+(\\.[0-9]+)*"))
+        if(!version.matches("[0-9]+(\\.[0-9]+)+(\\-[0-9]+)*"))
             throw new IllegalArgumentException("Invalid version format");
         this.version = version;
     }
@@ -22,8 +22,8 @@ public class Version implements Comparable<Version> {
     public int compareTo(Version that) {
         if(that == null)
             return 1;
-        String[] thisParts = this.get().split("\\.");
-        String[] thatParts = that.get().split("\\.");
+        String[] thisParts = this.get().split("\\.|\\-");
+        String[] thatParts = that.get().split("\\.|\\-");
         int length = Math.max(thisParts.length, thatParts.length);
         for(int i = 0; i < length; i++) {
             int thisPart = i < thisParts.length ?
