@@ -6,15 +6,13 @@
     <string name="no_connection">无网络连接</string>
     <string name="no_connection_desc">我们无法连接到选中的 Popcorn Time 设备，请确认 Popcorn Time (v0.3.3以上) 已运行并检查您的设置及网络连接。</string>
     <string name="retry">重试</string>
-    <string name="connected_to">已连接到</string>
     <string name="loading">Popcorn Time 正在载入数据...</string>
-    <string name="back">返回</string>
     <string name="left">左</string>
     <string name="right">右</string>
     <string name="up">上</string>
     <string name="down">下</string>
     <string name="toggle_tabs">切换标签页</string>
-    <string name="favourite">打开书签</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched">打开已观看</string>
     <string name="fullscreen">进入全屏</string>
     <string name="search">搜索</string>

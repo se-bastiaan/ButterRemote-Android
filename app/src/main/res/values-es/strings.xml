@@ -9,13 +9,12 @@
     <string name="no_connection_desc">No se ha podido conectar a Popcorn Time, verifica que Popcorn Time (v0.3.3 o superior) está corriendo, revisa las configuraciones y la conexión a internet. </string>
     <string name="retry">Reintentar</string>
 
-    <string name="back">Volver</string>
     <string name="left">Izquierda</string>
     <string name="right">Derecha</string>
     <string name="up">Arriba</string>
     <string name="down">Abajo</string>
     <string name="toggle_tabs">Cambiar pestañas</string>
-    <string name="favourite">Favorito</string>
+    <string name="add_favourite">Favorito</string>
     <string name="watched">Visto</string>
     <string name="fullscreen">Pantalla completa</string>
     <string name="search">Buscar</string>

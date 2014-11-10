@@ -9,13 +9,12 @@
     <string name="no_connection_desc">Nie można się połączyć z wybraną instancją Popcorn Time. Upewnij się, że Popcorn Time (v0.3.3+) jest uruchomiony, sprawdź swoje ustawienia oraz połączenie z internetem.</string>
     <string name="retry">Ponów</string>
 
-    <string name="back">Wstecz</string>
     <string name="left">Lewo</string>
     <string name="right">Prawo</string>
     <string name="up">Góra</string>
     <string name="down">Dół</string>
     <string name="toggle_tabs">Przełącz karty</string>
-    <string name="favourite">Ulubione</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched">Obejrzane</string>
     <string name="fullscreen">Pełny ekran</string>
     <string name="search">Szukaj</string>

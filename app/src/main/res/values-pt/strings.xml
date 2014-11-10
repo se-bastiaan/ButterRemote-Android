@@ -6,15 +6,13 @@
     <string name="no_connection">Sem ligação</string>
     <string name="no_connection_desc">Não foi possível ligar à instância escolhida do Popcorn Time, certifica-te que o Popcorn Time (v0.3.3+) está aberto e confirma as tuas definições e acesso à Internet.</string>
     <string name="retry">Tentar novamente</string>
-    <string name="connected_to">Ligado a</string>
     <string name="loading">Popcorn Time está a carregar dados...</string>
-    <string name="back">Voltar</string>
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
     <string name="up">Cima</string>
     <string name="down">Baixo</string>
     <string name="toggle_tabs">Alternar separadores</string>
-    <string name="favourite">Marcar favorito</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched">Marcar visto</string>
     <string name="fullscreen">Alternar ecrã inteiro</string>
     <string name="search">Procurar</string>

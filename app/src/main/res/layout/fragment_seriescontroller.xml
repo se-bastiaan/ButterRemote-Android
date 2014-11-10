@@ -30,7 +30,7 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_action_favourite"
                 android:background="@drawable/selectable_background_popcorntimeremote"
-                android:contentDescription="@string/favourite"
+                android:contentDescription="@string/add_favourite"
                 />
             <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                 android:id="@+id/watchedButton"

@@ -6,15 +6,13 @@
     <string name="no_connection">Nincs kapcsolat</string>
     <string name="no_connection_desc">Nem tudunk csatlakozni a kiválasztott Popcorn Time -hoz, győződjön meg róla, hogy fut a Popcorn Time (v0.3.3+) és ellenőrizze a beállításait és internetkapcsolatát.</string>
     <string name="retry">Újra</string>
-    <string name="connected_to">Csatlakozva</string>
     <string name="loading">Popcorn Time betöltése...</string>
-    <string name="back">Vissza</string>
     <string name="left">Balra</string>
     <string name="right">Jobbra</string>
     <string name="up">Fel</string>
     <string name="down">Le</string>
     <string name="toggle_tabs">Lap váltása</string>
-    <string name="favourite">Könyvjelző</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched"> Megjelölés megtekintettnek</string>
     <string name="fullscreen">Teljes képernyő</string>
     <string name="search">Keresés</string>

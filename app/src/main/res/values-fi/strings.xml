@@ -6,15 +6,13 @@
     <string name="no_connection">Ei yhteyttä</string>
     <string name="no_connection_desc">Emme pystyneet yhdistämään valittuun Popcorn Time istuntoon. Varmista, että Popcorn Time (v0.3.3+) on päällä ja tarkista asetuksesi, sekä internetyhteytesi.</string>
     <string name="retry">Uudelleen</string>
-    <string name="connected_to">Yhdistetty laitteeseen</string>
     <string name="loading">Popcorn Time lataa...</string>
-    <string name="back">Takaisin</string>
     <string name="left">Vasen</string>
     <string name="right">Oikea</string>
     <string name="up">Ylös</string>
     <string name="down">Alas</string>
     <string name="toggle_tabs">Vaihda välilehteä</string>
-    <string name="favourite">Lisää suosikkeihin</string>
+    <string name="add_favourite">Lisää suosikkeihin</string>
     <string name="watched">Merkitse katsotuksi</string>
     <string name="fullscreen">Vaihda koko näytölle</string>
     <string name="search">Etsi</string>

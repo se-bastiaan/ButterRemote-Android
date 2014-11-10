@@ -6,15 +6,13 @@
     <string name="no_connection">Pas de connexion</string>
     <string name="no_connection_desc">Nous n\'avons pas pu vous connecter à la session sélectionnée. Assurez-vous que Popcorn Time (0.3.3 +) est en cours d\'exécution, vérifiez les paramètres et votre connexion Internet.</string>
     <string name="retry">Réessayer</string>
-    <string name="connected_to">Connecté à</string>
     <string name="loading">Popcorn Time charge les données…</string>
-    <string name="back">Retour</string>
     <string name="left">Gauche</string>
     <string name="right">Droite</string>
     <string name="up">Haut</string>
     <string name="down">Bas</string>
     <string name="toggle_tabs">Changer d\'onglet</string>
-    <string name="favourite">Ajouter/Retirer des Favoris</string>
+    <string name="add_favourite">Ajouter/Retirer des Favoris</string>
     <string name="watched">Visionné/Non-visionné</string>
     <string name="fullscreen">Plein écran</string>
     <string name="search">Rechercher</string>

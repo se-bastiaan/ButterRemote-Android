@@ -6,15 +6,13 @@
     <string name="no_connection">اتصال برقرار نیست</string>
     <string name="no_connection_desc">ارتباط با Popcorn Time مورد نظر با خطا مواجه شد. مطمئن شوید که Popcorn Time (نسخه‌ی v0.3.3 یا بالاتر) در حال اجرا هست و تنظیمات و اتصال اینترنت خود را چک کنید.</string>
     <string name="retry">دوباره سعی کن</string>
-    <string name="connected_to">اتصال برقرار شد با</string>
     <string name="loading">Popcorn Time در حال بارگزاری اطلاعات است...</string>
-    <string name="back">بازگشت</string>
     <string name="left">چپ</string>
     <string name="right">راست</string>
     <string name="up">بالا</string>
     <string name="down">پایین</string>
     <string name="toggle_tabs">جابجایی بین برگه‌ها</string>
-    <string name="favourite">بوکمارک‌</string>
+    <string name="add_favourite">بوکمارک‌</string>
     <string name="watched">دیده شده</string>
     <string name="fullscreen">تمام‌صفحه</string>
     <string name="search">جست‌وجو</string>
