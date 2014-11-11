@@ -4,8 +4,8 @@
     <string name="subtitles">Undertexter</string>
     <string name="disable_subs">Inaktivera undertexter</string>
     <string name="no_connection">Ingen anslutning</string>
-    <string name="no_connection_desc">Vi kunde inte ansluta till den valda Popcorn Tid instans, se till Popcorn Time (v0.3.3 +) är igång och kontrollera dina inställningar och internetuppkoppling.</string>
-    <string name="retry">Försöka igen</string>
+    <string name="no_connection_desc">Kunde inte ansluta till den valda Popcorn Time-instansen, se till att Popcorn Time (v0.3.3 +) är igång och kontrollera dina inställningar och din internetuppkoppling.</string>
+    <string name="retry">Försök igen</string>
     <string name="connected_to">Ansluten till</string>
     <string name="loading">Popcorn Time laddar data...</string>
     <string name="back">Tillbaka</string>
@@ -38,6 +38,6 @@
     <string name="username">Användarnamn</string>
     <string name="password">Lösenord</string>
     <string name="enter_manually">Ange inställningarna manuellt</string>
-    <string name="scan_qr">Skanna enkel ihopkoppling QR</string>
-    <string name="easy_pairing">Enkel ihopkoppling finns i Popcorn Time v0.3.4 och senare. Öppna avancerade inställningar och skapa din QR-kod i \"fjärrkontroll\" avsnittet.</string>
+    <string name="scan_qr">Skanna QR för enkel ihopkoppling</string>
+    <string name="easy_pairing">Enkel ihopkoppling finns i Popcorn Time v0.3.4 och senare. Öppna avancerade inställningar och skapa din QR-kod i avsnittet \"fjärrkontroll\".</string>
 </resources>
