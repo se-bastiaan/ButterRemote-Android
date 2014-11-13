@@ -120,9 +120,13 @@ public class MovieControllerFragment extends BaseControlFragment {
                     }
                     break;
                 case R.id.trailerBlock:
-                    String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
-                    Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
-                    startActivity(intent);
+                    if(Version.compare(getClient().getVersion(), "0.3.4")) {
+                        getClient().playTrailer(mBlankResponseCallback);
+                    } else {
+                        String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
+                        Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
+                        startActivity(intent);
+                    }
                     break;
             }
         }

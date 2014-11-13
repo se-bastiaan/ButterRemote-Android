@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
     private ArrayList<LinkedTreeMap<String, String>> playerData;
     private PopcornTimeRpcClient mRpc;
     private Bundle mExtras;
+    private Handler mHandler;
 
     @InjectView(R.id.listView)
     ListView listView;
@@ -41,6 +44,12 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
             mRpc = new PopcornTimeRpcClient(mExtras.getString(ControllerActivity.KEY_IP), mExtras.getString(ControllerActivity.KEY_PORT), mExtras.getString(ControllerActivity.KEY_USERNAME), mExtras.getString(ControllerActivity.KEY_PASSWORD), mExtras.getString(ControllerActivity.KEY_VERSION));
         }
         return mRpc;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -83,9 +92,14 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_PLAYERS.ordinal()) {
                 playerData = (ArrayList<LinkedTreeMap<String, String>>) result.getMapResult().get("players");
-                PlayerAdapter adapter = new PlayerAdapter(getActivity(), playerData);
-                progressBar.setVisibility(View.GONE);
-                listView.setAdapter(adapter);
+                final PlayerAdapter adapter = new PlayerAdapter(getActivity(), playerData);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        listView.setAdapter(adapter);
+                    }
+                });
             }
         }
     };

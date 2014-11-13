@@ -29,7 +29,7 @@ public class PopcornTimeRpcClient {
     private Gson mGson = new Gson();
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json");
 
-    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, GET_PLAYING, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, SET_SELECTION, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }
+    public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, PLAY_TRAILER, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, GET_PLAYING, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, SET_SELECTION, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }
 
     public PopcornTimeRpcClient(String ipAddress, String port, String username, String password, String version) {
         mVersion = version;
@@ -117,6 +117,11 @@ public class PopcornTimeRpcClient {
 
     public Call togglePlay(Callback callback) {
         RpcRequest request  = new RpcRequest("toggleplaying", RequestId.TOGGLE_PLAY);
+        return request(request, callback);
+    }
+
+    public Call playTrailer(Callback callback) {
+        RpcRequest request  = new RpcRequest("watchtrailer", RequestId.PLAY_TRAILER);
         return request(request, callback);
     }
 
