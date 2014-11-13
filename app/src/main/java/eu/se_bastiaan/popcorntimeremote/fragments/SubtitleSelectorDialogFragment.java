@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
     private ArrayList<String> subsData;
     private PopcornTimeRpcClient mRpc;
     private Bundle mExtras;
+    private Handler mHandler;
 
     @InjectView(R.id.listView)
     ListView listView;
@@ -39,6 +42,12 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
             mRpc = new PopcornTimeRpcClient(mExtras.getString(ControllerActivity.KEY_IP), mExtras.getString(ControllerActivity.KEY_PORT), mExtras.getString(ControllerActivity.KEY_USERNAME), mExtras.getString(ControllerActivity.KEY_PASSWORD), mExtras.getString(ControllerActivity.KEY_VERSION));
         }
         return mRpc;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -82,9 +91,14 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {
                 subsData = (ArrayList<String>) result.getMapResult().get("subtitles");
                 subsData.add(0, "no-subs");
-                SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
-                progressBar.setVisibility(View.GONE);
-                listView.setAdapter(adapter);
+                final SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        listView.setAdapter(adapter);
+                    }
+                });
             }
         }
     };

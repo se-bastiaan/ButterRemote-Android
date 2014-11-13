@@ -183,20 +183,19 @@
                     android:background="@color/div_white" />
                 <LinearLayout
                     android:id="@+id/subtitlesBlock"
-                    android:visibility="gone"
-                    android:layout_width="310dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingRight="@dimen/playercontrol_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
                     android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
                         android:id="@+id/subtitlesBlockImage"
-                        android:layout_width="32dp"
-                        android:layout_height="56dp"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_subs" />
                     <TextView

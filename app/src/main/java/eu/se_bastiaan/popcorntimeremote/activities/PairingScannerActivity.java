@@ -1,6 +1,5 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,10 +15,9 @@ import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.models.ScanModel;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class PairingScannerActivity extends Activity implements ZXingScannerView.ResultHandler {
+public class PairingScannerActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler {
 
     public static Integer SCAN = 1440, SUCCESS = 1441;
-
 
     ZXingScannerView scannerView;
 
@@ -27,6 +25,7 @@ public class PairingScannerActivity extends Activity implements ZXingScannerView
     public void onCreate(Bundle state) {
         super.onCreate(state);
         scannerView = new ZXingScannerView(this);
+        setContentView(scannerView);
     }
 
     @Override
@@ -66,5 +65,5 @@ public class PairingScannerActivity extends Activity implements ZXingScannerView
 
         return super.onOptionsItemSelected(item);
     }
-    
+
 }

@@ -70,8 +70,9 @@ public class PlayerControllerFragment extends BaseControlFragment {
                     getClient().toggleFullscreen(mBlankResponseCallback);
                     break;
                 case R.id.subtitlesBlock:
-                    SubtitleSelectorDialogFragment fragment = new SubtitleSelectorDialogFragment();
-                    fragment.show(getActivity().getSupportFragmentManager(), "subtitle_fragment");
+                    SubtitleSelectorDialogFragment subtitleFragment = new SubtitleSelectorDialogFragment();
+                    subtitleFragment.setArguments(getArguments());
+                    subtitleFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
                     break;
                 case R.id.playPauseButton:
                     getClient().togglePlay(mBlankResponseCallback);
@@ -260,6 +261,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         forwardButton.setOnClickListener(mOnClickListener);
         backwardButton.setOnClickListener(mOnClickListener);
         playPauseButton.setOnClickListener(mOnClickListener);
+        subtitlesBlock.setOnClickListener(mOnClickListener);
 
         currentTime.setMax(0);
         currentTime.setProgress(0);
