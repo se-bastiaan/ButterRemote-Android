@@ -29,22 +29,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-<<<<<<< HEAD
-        switch(v.getId()) {
-            case R.id.backButton:
-                getClient().back(mResponseListener);
-                break;
-            case R.id.favouriteButton:
-                getClient().toggleFavourite(mResponseListener);
-                break;
-            case R.id.watchedButton:
-                getClient().toggleWatched(mResponseListener);
-                break;
-            case R.id.qualityButton:
-                getClient().toggleQuality(mResponseListener);
-                break;
-        }
-=======
             switch(v.getId()) {
                 case R.id.favouriteButton:
                     getClient().toggleFavourite(mBlankResponseCallback);
@@ -53,7 +37,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
                     getClient().toggleWatched(mBlankResponseCallback);
                     break;
             }
->>>>>>> feature/android-l
         }
     };
 
@@ -102,10 +85,6 @@ public class SeriesControllerFragment extends BaseControlFragment {
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
         joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
         joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/android-l
 
         return v;
     }

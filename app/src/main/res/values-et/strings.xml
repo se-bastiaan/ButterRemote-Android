@@ -6,23 +6,13 @@
     <string name="no_connection">Ühendus puudub</string>
     <string name="no_connection_desc">Ei ole võimalik valitud PopcornTime\'ga ühendust luua. Palun kontrollige, et PopcornTime (v0.3.3+) on käivitatud, kontrollige oma seadeid ja interneti ühendust. </string>
     <string name="retry">Proovi uuesti</string>
-<<<<<<< HEAD
-    <string name="connected_to">Ühendatud seadmega</string>
     <string name="loading">PopcornTime loeb andmeid...</string>
-    <string name="back">Tagasi</string>
-=======
-    <string name="loading">PopcornTime loeb andmeid...</string>
->>>>>>> feature/android-l
     <string name="left">Vasakule</string>
     <string name="right">Paremale</string>
     <string name="up">Üles</string>
     <string name="down">Alla</string>
     <string name="toggle_tabs">Vahelehed</string>
-<<<<<<< HEAD
-    <string name="favourite">Järjehoidjad</string>
-=======
     <string name="add_favourite">Järjehoidjad</string>
->>>>>>> feature/android-l
     <string name="watched">Vaadatud</string>
     <string name="fullscreen">Täisekraan</string>
     <string name="search">Otsing</string>

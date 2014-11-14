@@ -6,13 +6,7 @@
     <string name="no_connection">Sem ligação</string>
     <string name="no_connection_desc">Não foi possível ligar à instância escolhida do Popcorn Time, certifica-te que o Popcorn Time (v0.3.3+) está aberto e confirma as tuas definições e acesso à Internet.</string>
     <string name="retry">Tentar novamente</string>
-<<<<<<< HEAD
-    <string name="connected_to">Ligado a</string>
     <string name="loading">Popcorn Time está a carregar dados...</string>
-    <string name="back">Voltar</string>
-=======
-    <string name="loading">Popcorn Time está a carregar dados...</string>
->>>>>>> feature/android-l
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
     <string name="up">Cima</string>

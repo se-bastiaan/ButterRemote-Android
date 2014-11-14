@@ -421,16 +421,6 @@ public class PopcornTimeRpcClient {
         return request(request, callback);
     }
 
-<<<<<<< HEAD
-    private ResponseFuture<RpcResponse> request(RpcRequest rpc, final FutureCallback<RpcResponse> callback) {
-        if(mContext == null)  return null;
-
-        ResponseFuture<RpcResponse> response =
-                Ion.with(mContext).load(mUrl)
-                .basicAuthentication(mUsername, mPassword)
-                .setJsonPojoBody(rpc)
-                .as(RpcResponse.class);
-=======
     /**
      * Send JSON RPC request to the instance
      * @param rpc Request data
@@ -453,7 +443,6 @@ public class PopcornTimeRpcClient {
             public void onFailure(Request request, IOException e) {
                 callback.onCompleted(e, null);
             }
->>>>>>> feature/android-l
 
             @Override
             public void onResponse(Response response) throws IOException {

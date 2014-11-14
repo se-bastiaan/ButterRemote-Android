@@ -28,17 +28,10 @@ android {
     buildToolsVersion "21.0.0"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
-<<<<<<< HEAD
-        minSdkVersion 8
-        targetSdkVersion 19
-        versionCode 1205
-        versionName "0.1.21"
-=======
         minSdkVersion 9
         targetSdkVersion 21
         versionCode 2000
         versionName "0.2"
->>>>>>> feature/android-l
     }
     buildTypes {
         release {
@@ -46,6 +39,12 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 }
 
