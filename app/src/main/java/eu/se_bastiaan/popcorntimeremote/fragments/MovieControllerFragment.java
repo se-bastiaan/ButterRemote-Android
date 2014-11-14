@@ -1,6 +1,5 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -10,13 +9,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -38,7 +34,6 @@ import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
-import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
@@ -82,6 +77,8 @@ public class MovieControllerFragment extends BaseControlFragment {
     LinearLayout subtitlesBlock;
     @InjectView(R.id.playerBlock)
     LinearLayout playerBlock;
+    @InjectView(R.id.topDivider)
+    View topDivider;
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
@@ -120,13 +117,16 @@ public class MovieControllerFragment extends BaseControlFragment {
                     }
                     break;
                 case R.id.trailerBlock:
-                    if(Version.compare(getClient().getVersion(), "0.3.4")) {
-                        getClient().playTrailer(mBlankResponseCallback);
-                    } else {
-                        String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
-                        Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
-                        startActivity(intent);
-                    }
+                    getClient().playTrailer(new PopcornTimeRpcClient.Callback() {
+                        @Override
+                        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                            if(e != null) {
+                                String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
+                                Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
+                                startActivity(intent);
+                            }
+                        }
+                    });
                     break;
             }
         }
@@ -264,7 +264,12 @@ public class MovieControllerFragment extends BaseControlFragment {
                     // movie info
                     final String title = (String) mCurrentMap.get("title");
                     final String synopsis = (String) mCurrentMap.get("synopsis");
-                    final String year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
+                    final String year;
+                    if(mCurrentMap.get("year") instanceof Double) {
+                        year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
+                    } else {
+                        year = (String) mCurrentMap.get("year");
+                    }
                     final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
                     final String rating = (String) mCurrentMap.get("rating");
                     mIsFavourited = (Boolean) mCurrentMap.get("bookmarked");
@@ -283,14 +288,17 @@ public class MovieControllerFragment extends BaseControlFragment {
                               } else {
                                   favouriteText.setText(R.string.add_favourite);
                               }
+
+                              if(!mCurrentMap.containsKey("trailer")) {
+                                  trailerBlock.setVisibility(View.GONE);
+                                  topDivider.setVisibility(View.GONE);
+                              }
                           }
                     });
 
                     // poster/color
-                    String type = null;
-                    if(mCurrentMap.containsKey("type")) type = (String) mCurrentMap.get("type");
                     final String posterUrl;
-                    if(type != null && type.equals("movie")) {
+                    if(mCurrentMap.containsKey("image")) {
                         posterUrl = ((String) mCurrentMap.get("image")).replace("-300.jpg", ".jpg");
                     } else {
                         LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");
@@ -298,7 +306,7 @@ public class MovieControllerFragment extends BaseControlFragment {
                     }
 
                     final String backdropUrl;
-                    if(type != null && type.equals("movie")) {
+                    if(mCurrentMap.containsKey("backdrop")) {
                         backdropUrl = (String) mCurrentMap.get("backdrop");
                     } else {
                         LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");

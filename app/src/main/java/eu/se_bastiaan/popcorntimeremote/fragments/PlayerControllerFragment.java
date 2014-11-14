@@ -127,10 +127,8 @@ public class PlayerControllerFragment extends BaseControlFragment {
             try {
                 if (result != null && e == null) {
                     LinkedTreeMap<String, Object> mapResult = result.getMapResult();
-                    String type = null;
-                    if(mapResult.containsKey("type")) type = (String) mapResult.get("type");
                     String posterUrl = "";
-                    if(type != null && type.equals("movie")) {
+                    if(mapResult.containsKey("image")) {
                         posterUrl = ((String) mapResult.get("image")).replace("-300.jpg", ".jpg");
                     } else {
                         LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mapResult.get("images");

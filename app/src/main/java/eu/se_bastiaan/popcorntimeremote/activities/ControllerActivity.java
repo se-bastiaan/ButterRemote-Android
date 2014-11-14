@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.squareup.okhttp.Call;
@@ -36,6 +37,7 @@ import eu.se_bastiaan.popcorntimeremote.fragments.SeriesControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.SubtitleSelectorDialogFragment;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
 public class ControllerActivity extends ActionBarActivity {
 
@@ -47,8 +49,6 @@ public class ControllerActivity extends ActionBarActivity {
     private String mCurrentFragment, mTopView;
     private Call mViewstackFuture;
 
-    @InjectView(R.id.frameLayout)
-    FrameLayout frameLayout;
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
     @InjectView(R.id.toolbar)
@@ -61,6 +61,12 @@ public class ControllerActivity extends ActionBarActivity {
         setContentView(R.layout.activity_framelayout);
         ButterKnife.inject(this);
         setSupportActionBar(toolbar);
+
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            toolbar.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.abc_action_bar_default_height_material) + PixelUtils.getStatusBarHeight(this)));
+        } else {
+            toolbar.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.abc_action_bar_default_height_material)));
+        }
 
         Intent intent = getIntent();
         mExtras = intent.getExtras();
@@ -81,7 +87,11 @@ public class ControllerActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        runViewstackRunnable();
+        if(mViewstackFuture == null) {
+            runViewstackRunnable();
+        } else {
+            mGetViewstackRunnable.run();
+        }
     }
 
     @Override
@@ -157,8 +167,8 @@ public class ControllerActivity extends ActionBarActivity {
     }
 
     private void showNoConnection() {
-        setFragment(new ConnectionLostFragment());
         mCurrentFragment = mTopView = "no-connection";
+        setFragment(new ConnectionLostFragment());
         mHandler.post(new Runnable() {
             @Override
             public void run() {
