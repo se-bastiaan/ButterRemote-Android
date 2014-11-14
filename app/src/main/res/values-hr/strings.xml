@@ -6,15 +6,23 @@
     <string name="no_connection">Nije povezano</string>
     <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
     <string name="retry">Pokušaj ponovno</string>
+<<<<<<< HEAD
     <string name="connected_to">Povezano s</string>
     <string name="loading">Popcorn Time učitava podatke...</string>
     <string name="back">Natrag</string>
+=======
+    <string name="loading">Popcorn Time učitava podatke...</string>
+>>>>>>> feature/android-l
     <string name="left">Lijevo</string>
     <string name="right">Desno</string>
     <string name="up">Gore</string>
     <string name="down">Dolje</string>
     <string name="toggle_tabs">Uključi/Isključi kartice</string>
+<<<<<<< HEAD
     <string name="favourite">Uključi/Isključi zabilješke</string>
+=======
+    <string name="add_favourite">Add to favourites</string>
+>>>>>>> feature/android-l
     <string name="watched">Uključi/Isključi pogledano</string>
     <string name="fullscreen">Uključi/Isključi cjelozaslonski prikaz</string>
     <string name="search">Pretraži</string>

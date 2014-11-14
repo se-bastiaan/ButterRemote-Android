@@ -6,15 +6,23 @@
     <string name="no_connection">Nicio conexiune</string>
     <string name="no_connection_desc">Nu am putut să vă conectăm la exemplul selectat în Popcorn Time, fiţi sigur că Popcorn Time (v0.3.3+) rulează şi verificaţi setările şi conexiunea la internet.</string>
     <string name="retry">Reincearca</string>
+<<<<<<< HEAD
     <string name="connected_to">Conectat la</string>
     <string name="loading">Popcorn Time încarcă informaţia...</string>
     <string name="back">Inapoi</string>
+=======
+    <string name="loading">Popcorn Time încarcă informaţia...</string>
+>>>>>>> feature/android-l
     <string name="left">Stânga</string>
     <string name="right">Dreapta</string>
     <string name="up">Sus</string>
     <string name="down">Jos</string>
     <string name="toggle_tabs">Comută taburi</string>
+<<<<<<< HEAD
     <string name="favourite">Comută marcaje</string>
+=======
+    <string name="add_favourite">Add to favourites</string>
+>>>>>>> feature/android-l
     <string name="watched">Comută vizionate</string>
     <string name="fullscreen">Comută pe tot ecranul</string>
     <string name="search">Caută</string>

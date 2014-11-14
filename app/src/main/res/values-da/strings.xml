@@ -6,13 +6,20 @@
     <string name="no_connection">Ingen forbindelse</string>
     <string name="no_connection_desc">Der kunne ikke oprettes forbindelse til Popcorn Time. Undersøg om Popcorn Time (v0.3.3+) kører og check dine indstillinger samt din internetforbindelse.</string>
     <string name="retry">Prøv igen</string>
+<<<<<<< HEAD
     <string name="back">Tilbage</string>
+=======
+>>>>>>> feature/android-l
     <string name="left">Venstre</string>
     <string name="right">Højre</string>
     <string name="up">Op</string>
     <string name="down">Ned</string>
     <string name="toggle_tabs">Skift mellem faner</string>
+<<<<<<< HEAD
     <string name="favourite">Tilføj/fjern favorit</string>
+=======
+    <string name="add_favourite">Tilføj/fjern favorit</string>
+>>>>>>> feature/android-l
     <string name="watched">Skift mellem sete</string>
     <string name="fullscreen">Fuldskærm</string>
     <string name="search">Søg</string>

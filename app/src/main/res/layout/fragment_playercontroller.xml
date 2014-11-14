@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="-16dp"
-    android:layout_marginRight="-16dp">
+    android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/popcornLogo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_centerInParent="true"
         android:scaleType="centerInside"
         android:src="@drawable/popcorn_logo" />
 
     <ImageView
         android:id="@+id/coverImage"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="68dp"
         android:scaleType="centerCrop" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/ab_gradient" />
+
     <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sliding_layout"
+        android:id="@+id/slidingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
@@ -44,30 +50,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="84dp">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/fade_pt_remote" />
+
                 <LinearLayout
+                    android:id="@+id/slidingPanelTopLayout"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/bottom_bg"
+                    android:background="@color/primary"
                     android:gravity="center"
                     android:orientation="horizontal">
-
-                    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
-                        android:id="@+id/backButton"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_action_back"
-                        android:background="@drawable/selectable_background_popcorntimeremote"
-                        android:contentDescription="@string/back"
-                        />
                     <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
                         android:id="@+id/backwardButton"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_action_backward"
+                        android:src="@drawable/ic_av_rewind"
                         android:background="@drawable/selectable_background_popcorntimeremote"
                         android:contentDescription="@string/backward"
                         />
@@ -77,7 +79,7 @@
                         android:layout_height="56dp"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_action_play"
+                        android:src="@drawable/ic_av_play"
                         android:background="@drawable/selectable_background_popcorntimeremote"
                         />
                     <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
@@ -87,19 +89,9 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:gravity="center_vertical"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_action_forward"
+                        android:src="@drawable/ic_av_forward"
                         android:background="@drawable/selectable_background_popcorntimeremote"
                         android:contentDescription="@string/forward"
-                        />
-                    <eu.se_bastiaan.popcorntimeremote.widget.ImageButton
-                        android:id="@+id/fullscreenButton"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_action_fullscreen"
-                        android:background="@drawable/selectable_background_popcorntimeremote"
-                        android:contentDescription="@string/fullscreen"
                         />
                 </LinearLayout>
 
@@ -107,64 +99,114 @@
                     android:id="@+id/currentProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="-16dp"
+                    android:layout_marginRight="-16dp"
                     android:layout_alignParentTop="true"
+                    android:progressDrawable="@drawable/popcorntimeremote_scrubber_progress_horizontal_notrack_holo_dark"
                     style="@style/SeekBar.PopcornTimeRemote" />
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/slidingPanelBottomLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:minHeight="68dp"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:gravity="center_vertical"
-                android:background="@color/bottom_bg">
-                <LinearLayout
+                android:background="@color/bg">
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/fade_pt_remote_reverse" />
+
+                <LinearLayout
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/playercontrol_margin"
+                    android:paddingLeft="@dimen/playercontrol_margin"
                     android:orientation="horizontal"
-                    android:maxWidth="250dp">
+                    android:gravity="center_vertical">
                     <ImageView
                         android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_action_audio" />
+                        android:layout_height="56dp"
+                        android:layout_marginRight="@dimen/playercontrol_icon_margin"
+                        android:src="@drawable/ic_av_volume" />
                     <SeekBar
                         android:id="@+id/volumeControl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:progress="100"
-                        android:max="100" />
+                        android:max="100"
+                        style="@style/SeekBar.PopcornTimeRemote" />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/divider_margin"
+                    android:background="@color/div_white" />
                 <LinearLayout
-                    android:id="@+id/subsSpinnerBlock"
-                    android:visibility="gone"
+                    android:id="@+id/fullscreenBlock"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:maxWidth="250dp">
+                    android:clickable="true"
+                    android:background="@drawable/selectable_background_popcorntimeremote">
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_action_subs" />
-                    <Spinner
-                        android:id="@+id/subsSpinner"
+                        android:id="@+id/fullscreenBlockImage"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
+                        android:layout_marginRight="@dimen/playercontrol_icon_margin"
+                        android:src="@drawable/ic_av_full_screen" />
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                        android:layout_marginRight="@dimen/playercontrol_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:text="@string/fullscreen"
+                        android:textSize="@dimen/playercontrol_text_size"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/divider_margin"
+                    android:background="@color/div_white" />
+                <LinearLayout
+                    android:id="@+id/subtitlesBlock"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="@dimen/playercontrol_margin"
+                    android:paddingRight="@dimen/playercontrol_margin_right"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:background="@drawable/selectable_background_popcorntimeremote">
+                    <ImageView
+                        android:id="@+id/subtitlesBlockImage"
+                        android:layout_width="@dimen/context_icon"
+                        android:layout_height="@dimen/context_icon"
+                        android:layout_marginRight="@dimen/playercontrol_icon_margin"
+                        android:src="@drawable/ic_av_subs" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/playercontrol_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:text="@string/subtitles"
+                        android:textSize="@dimen/playercontrol_text_size"
+                        android:textColor="@android:color/white" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

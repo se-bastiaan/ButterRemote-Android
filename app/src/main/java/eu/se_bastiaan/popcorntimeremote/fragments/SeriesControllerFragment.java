@@ -1,29 +1,24 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.koushikdutta.async.future.FutureCallback;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.se_bastiaan.popcorntimeremote.R;
-import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
-import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
-public class SeriesControllerFragment extends Fragment {
+public class SeriesControllerFragment extends BaseControlFragment {
 
     @InjectView(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.backButton)
-    ImageButton backButton;
     @InjectView(R.id.favouriteButton)
     ImageButton favouriteButton;
     @InjectView(R.id.watchedButton)
@@ -34,6 +29,7 @@ public class SeriesControllerFragment extends Fragment {
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+<<<<<<< HEAD
         switch(v.getId()) {
             case R.id.backButton:
                 getClient().back(mResponseListener);
@@ -48,41 +44,40 @@ public class SeriesControllerFragment extends Fragment {
                 getClient().toggleQuality(mResponseListener);
                 break;
         }
+=======
+            switch(v.getId()) {
+                case R.id.favouriteButton:
+                    getClient().toggleFavourite(mBlankResponseCallback);
+                    break;
+                case R.id.watchedButton:
+                    getClient().toggleWatched(mBlankResponseCallback);
+                    break;
+            }
+>>>>>>> feature/android-l
         }
     };
 
     private JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
         @Override
         public void onValueChanged(int angle, int power, JoystickView.Direction direction) {
-            LogUtils.d("mOnJoystickMoveListener", power);
+            LogUtils.d("OnJoystickMoveListener", power);
 
             switch (direction) {
                 case CENTER:
-                    getClient().enter(mResponseListener);
+                    getClient().enter(mBlankResponseCallback);
                     break;
                 case UP:
-                    getClient().up(mResponseListener);
+                    getClient().up(mBlankResponseCallback);
                     break;
                 case DOWN:
-                    getClient().down(mResponseListener);
+                    getClient().down(mBlankResponseCallback);
                     break;
                 case RIGHT:
-                    getClient().nextSeason(mResponseListener);
+                    getClient().nextSeason(mBlankResponseCallback);
                     break;
                 case LEFT:
-                    getClient().prevSeason(mResponseListener);
+                    getClient().prevSeason(mBlankResponseCallback);
                     break;
-            }
-        }
-    };
-
-    private FutureCallback<PopcornTimeRpcClient.RpcResponse> mResponseListener = new FutureCallback<PopcornTimeRpcClient.RpcResponse>() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            if(result != null && e != null) {
-                LogUtils.d("MainControllerFragment", result.result);
-            } else if(e != null) {
-                e.printStackTrace();
             }
         }
     };
@@ -92,9 +87,11 @@ public class SeriesControllerFragment extends Fragment {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
         View v = inflater.inflate(R.layout.fragment_seriescontroller, container, false);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + PixelUtils.getStatusBarHeight(getActivity()), v.getPaddingRight(), v.getPaddingBottom());
+        }
         ButterKnife.inject(this, v);
 
-        backButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);
         watchedButton.setOnClickListener(mButtonClickListener);
         qualityButton.setOnClickListener(mButtonClickListener);
@@ -105,16 +102,12 @@ public class SeriesControllerFragment extends Fragment {
         joystickView.setJoystickImage(JoystickView.Direction.RIGHT, R.drawable.ic_action_nextseason);
         joystickView.setJoystickImage(JoystickView.Direction.UP, R.drawable.ic_action_up);
         joystickView.setJoystickImage(JoystickView.Direction.DOWN, R.drawable.ic_action_down);
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/android-l
 
         return v;
-    }
-
-    private PopcornTimeRpcClient getClient() {
-        try {
-            return ((ControllerActivity) getActivity()).getClient();
-        } catch (Exception e) {}
-        return new PopcornTimeRpcClient(getActivity(), "0.0.0.0", "8008", "", "");
     }
 
 }

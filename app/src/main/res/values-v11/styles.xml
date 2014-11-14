@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <style name="Theme.PopcornTimeRemote" parent="@style/Theme.AppCompat">
-        <item name="android:windowBackground">@color/bg</item>
-        <item name="android:seekBarStyle">@style/SeekBar.PopcornTimeRemote</item>
-    </style>
-
 
     <style name="SeekBar.PopcornTimeRemote" parent="android:Widget.Holo.SeekBar">
         <item name="android:progressDrawable">@drawable/popcorntimeremote_scrubber_progress_horizontal_holo_dark</item>

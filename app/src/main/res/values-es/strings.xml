@@ -6,6 +6,7 @@
     <string name="no_connection">Sin conexión</string>
     <string name="no_connection_desc">No hemos podido conectar a la instancia seleccionada, verifique que Popcorn Time (v0.3.3+) está funcionando, verifique su configuración y la conexión a Internet.</string>
     <string name="retry">Reintentar</string>
+<<<<<<< HEAD
     <string name="connected_to">Conectado a</string>
     <string name="loading">Popcorn Time está cargando datos...</string>
     <string name="back">Atras</string>
@@ -33,6 +34,34 @@
     <string name="save">Guardar </string>
     <string name="cancel">Cancelar </string>
     <string name="ip">Dirección ip</string>
+=======
+
+    <string name="left">Izquierda</string>
+    <string name="right">Derecha</string>
+    <string name="up">Arriba</string>
+    <string name="down">Abajo</string>
+    <string name="toggle_tabs">Cambiar pestañas</string>
+    <string name="add_favourite">Favorito</string>
+    <string name="watched">Visto</string>
+    <string name="fullscreen">Pantalla completa</string>
+    <string name="search">Buscar</string>
+    <string name="subs">Seleccionar subtítulos</string>
+    <string name="quality">Cambiar calidad</string>
+    <string name="next_season">Siguiente temporada</string>
+    <string name="prev_season">Temporada anterior</string>
+    <string name="forward">Avance</string>
+    <string name="backward">Retroceso</string>
+    <string name="fastforward">Avance rápido</string>
+    <string name="fastbackward">Retroceso rápido</string>
+
+    <string name="no_instances">Añade una nueva instancia para comenzar a usar Popcorn Time Remote</string>
+    <string name="add_instance">Añadir instancia</string>
+    <string name="edit_instance">Editar instancia</string>
+    <string name="delete_instance">Eliminar instancia</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ip">Dirección IP</string>
+>>>>>>> feature/android-l
     <string name="name">Nombre</string>
     <string name="port">Puerto </string>
     <string name="username">Usuario </string>

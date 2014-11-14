@@ -6,13 +6,16 @@
     <string name="no_connection">Nessuna connessione!</string>
     <string name="no_connection_desc">Non posso connettermi all\'istanza di Popcorn Time selezionata, assicurati che Popcorn Time (v0.3.3+) sia in esecuzione e che le impostazioni della connessione ad internet siano corrette.</string>
     <string name="retry">Riprova</string>
+<<<<<<< HEAD
     <string name="back">Indietro</string>
+=======
+>>>>>>> feature/android-l
     <string name="left">Sinistra</string>
     <string name="right">Destra</string>
     <string name="up">Su</string>
     <string name="down">Giù</string>
     <string name="toggle_tabs">Cambia tab</string>
-    <string name="favourite">Cambia preferito</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched">Mostra/Nascondi Visti</string>
     <string name="fullscreen">Schermo intero</string>
     <string name="search">Cerca</string>

@@ -3,6 +3,7 @@ package eu.se_bastiaan.popcorntimeremote.fragments;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -23,6 +24,7 @@ import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceProvider;
+import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
 public class InstanceListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,7 +44,12 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
         getListView().setSelector(R.drawable.selectable_background_popcorntimeremote);
         int horizontalMargin = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         int verticalMargin = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
-        getListView().setPadding(horizontalMargin, verticalMargin, horizontalMargin, verticalMargin);
+        int actionBarHeight = getResources().getDimensionPixelSize(R.dimen.abc_action_bar_default_height_material);
+        int statusBarHeight = 0;
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            statusBarHeight = PixelUtils.getStatusBarHeight(getActivity());
+        }
+        getListView().setPadding(horizontalMargin, verticalMargin + actionBarHeight + statusBarHeight, horizontalMargin, verticalMargin);
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
                 R.layout.fragment_listinstance_item, null, new String[]{

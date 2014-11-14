@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Sous-titres</string>
+<<<<<<< HEAD
     <string name="disable_subs">Désactiver sous-titres</string>
     <string name="no_connection">Pas de connection</string>
     <string name="no_connection_desc">Nous ne pouvions pas vous connecter à l\'instance Popcorn Time sélectionné, assurez-vous que Popcorn Time (v0.3.3 +) est en cours d\'exécution et vérifiez vos paramètres et connexion Internet.</string>
@@ -9,35 +10,56 @@
     <string name="connected_to">Connecté à</string>
     <string name="loading">Popcorn Time charge les données…</string>
     <string name="back">Retour</string>
+=======
+    <string name="disable_subs">Désactiver les sous-titres</string>
+    <string name="no_connection">Pas de connexion</string>
+    <string name="no_connection_desc">Nous n\'avons pas pu vous connecter à la session sélectionnée. Assurez-vous que Popcorn Time (0.3.3 +) est en cours d\'exécution, vérifiez les paramètres et votre connexion Internet.</string>
+    <string name="retry">Réessayer</string>
+    <string name="loading">Popcorn Time charge les données…</string>
+>>>>>>> feature/android-l
     <string name="left">Gauche</string>
     <string name="right">Droite</string>
     <string name="up">Haut</string>
     <string name="down">Bas</string>
-    <string name="toggle_tabs">Change onglet</string>
-    <string name="favourite">Favori</string>
-    <string name="watched">Regardé</string>
+    <string name="toggle_tabs">Changer d\'onglet</string>
+    <string name="add_favourite">Ajouter/Retirer des Favoris</string>
+    <string name="watched">Visionné/Non-visionné</string>
     <string name="fullscreen">Plein écran</string>
     <string name="search">Rechercher</string>
     <string name="subs">Sélectionner sous-titres</string>
-    <string name="quality">Change qualité</string>
+    <string name="quality">Changer la qualité</string>
     <string name="next_season">Saison suivante</string>
     <string name="prev_season">Saison précédente</string>
-    <string name="forward">Avance</string>
-    <string name="backward">Rembobine</string>
+    <string name="forward">Avancer</string>
+    <string name="backward">Retour en arrière</string>
     <string name="fastforward">Avance rapide</string>
+<<<<<<< HEAD
     <string name="fastbackward">Rembobine rapide</string>
     <string name="no_instances">Ajouter une nouvelle instance pour commencer d\'utiliser Popcorn Time Remote.</string>
     <string name="add_instance">Ajouter instance</string>
     <string name="edit_instance">Modifie instance</string>
     <string name="delete_instance">Supprime instance</string>
+=======
+    <string name="fastbackward">Retour en arrière rapide</string>
+    <string name="no_instances">Ajoutez une nouvelle session pour commencer à utiliser Popcorn Time Remote.</string>
+    <string name="add_instance">Ajouter une session</string>
+    <string name="edit_instance">Modifier la session</string>
+    <string name="delete_instance">Supprimer la session</string>
+>>>>>>> feature/android-l
     <string name="save">Sauvegarder</string>
     <string name="cancel">Annuler</string>
     <string name="ip">Adresse IP</string>
-    <string name="name">Nom</string>
+    <string name="name">Titre de la session</string>
     <string name="port">Port</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
+<<<<<<< HEAD
     <string name="enter_manually">Entrez réglage manuellement</string>
     <string name="scan_qr">Easy Pairing: lire QR-code</string>
     <string name="easy_pairing">Easy Pairing est disponible en v0.3.4 de Popcorn Time et plus. Ouvrir les paramètres avancés et générer votre QR-code dans la section \ \"commande à distance \ .</string>
+=======
+    <string name="enter_manually">Régler manuellement</string>
+    <string name="scan_qr">Easy Pairing: code QR</string>
+    <string name="easy_pairing">Easy Pairing est disponible pour Popcorn Time 0.3.4 +. Ouvrez les paramètres avancés de Popcorn Time et générez votre code QR dans la section \\"contrôle à distance\\".</string>
+>>>>>>> feature/android-l
 </resources>

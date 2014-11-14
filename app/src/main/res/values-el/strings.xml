@@ -6,13 +6,12 @@
     <string name="no_connection">Καμία σύνδεση</string>
     <string name="no_connection_desc">Αδύνατη η σύνδεση στον επιλεγμένο Popcorn Time διακομιστή, ελέγξτε ότι το Popcorn Time (v0.3.3+) είναι σε λειτουργία, τις ρυθμίσεις σας και την σύνδεση σας στο internet.</string>
     <string name="retry">Δοκιμάστε ξανά</string>
-    <string name="back">Πίσω</string>
     <string name="left">Αριστερά</string>
     <string name="right">Δεξιά</string>
     <string name="up">Επάνω</string>
     <string name="down">Κάτω</string>
     <string name="toggle_tabs">Εναλλαγή καρτελών</string>
-    <string name="favourite">Εναλλαγή σελιδοδεικτών</string>
+    <string name="add_favourite">Εναλλαγή σελιδοδεικτών</string>
     <string name="watched">Εναλλαγή προβεβλημένων</string>
     <string name="fullscreen">Εναλλαγή πλήρους οθόνης</string>
     <string name="search">Αναζήτηση</string>

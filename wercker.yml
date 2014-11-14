@@ -1,4 +1,4 @@
-box: futurestudio/android@1.0.5
+box: nvanbenschoten/android-tablelist@1.0.9
 # Build definition
 build:
   # The steps that will be executed on build

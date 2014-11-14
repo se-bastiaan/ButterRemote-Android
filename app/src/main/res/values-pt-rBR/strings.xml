@@ -6,15 +6,19 @@
     <string name="no_connection">Sem conexão</string>
     <string name="no_connection_desc">Não conseguimos conectar a instância do Popcorn Time selecionada, tenha certeza que o Popcorn Time (v0.3.3+) esta rodando e verifique suas configurações e conexão com a internet.</string>
     <string name="retry">Tentar novamente</string>
+<<<<<<< HEAD
     <string name="connected_to">Conectado a</string>
     <string name="loading">Popcorn Time esta carregando os dados…</string>
     <string name="back">Voltar</string>
+=======
+    <string name="loading">Popcorn Time esta carregando os dados…</string>
+>>>>>>> feature/android-l
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
     <string name="up">Cima</string>
     <string name="down">Baixo</string>
     <string name="toggle_tabs">Alternar abas</string>
-    <string name="favourite">Alternar favorito</string>
+    <string name="add_favourite">Add to favourites</string>
     <string name="watched">Alternar assistido</string>
     <string name="fullscreen">Alternar tela cheia</string>
     <string name="search">Buscar</string>

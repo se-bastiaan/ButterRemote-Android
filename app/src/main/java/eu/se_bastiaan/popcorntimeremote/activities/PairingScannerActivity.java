@@ -26,9 +26,6 @@ public class PairingScannerActivity extends ActionBarActivity implements ZXingSc
         super.onCreate(state);
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_logo);
     }
 
     @Override
@@ -68,5 +65,5 @@ public class PairingScannerActivity extends ActionBarActivity implements ZXingSc
 
         return super.onOptionsItemSelected(item);
     }
-    
+
 }
