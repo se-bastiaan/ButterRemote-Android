@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Ondertiteling</string>
     <string name="disable_subs">Ondertiteling uitschakelen</string>
-
     <string name="no_connection">Geen verbinding</string>
     <string name="no_connection_desc">Er kon geen verbinding gemaakt worden met de Popcorn Time instantie, zorg dat Popcorn Time (v0.3.3+) op je computer is opgestart, controleer je instellingen en dat je internetverbinding werkt.</string>
     <string name="retry">Probeer opnieuw</string>
+    <string name="now_playing">Speelt nu</string>
     <string name="loading">Gegevens laden in Popcorn Time…</string>
-
+    <string name="minutes">min</string>
+    <string name="watch_trailer">Bekijk trailer</string>
     <string name="left">Links</string>
     <string name="right">Rechts</string>
     <string name="up">Omhoog</string>
     <string name="down">Omlaag</string>
     <string name="toggle_tabs">Tabs wisselen</string>
-    <string name="add_favourite">Add to favourites</string>
+    <string name="add_favourite">Toevoegen aan favorieten</string>
+    <string name="remove_favourite">Verwijderen uit favorieten</string>
     <string name="watched">Status \'bekeken\' aanpassen</string>
     <string name="fullscreen">Volledig scherm openen/sluiten</string>
     <string name="search">Zoeken</string>
     <string name="subs">Selecteer ondertiteling</string>
+    <string name="player">Selecteer videospeler</string>
     <string name="quality">Wissel kwaliteit</string>
     <string name="next_season">Volgend seizoen</string>
     <string name="prev_season">Vorig seizoen</string>
@@ -27,13 +29,13 @@
     <string name="backward">Achteruitspoelen</string>
     <string name="fastforward">Snel vooruitspoelen</string>
     <string name="fastbackward">Snel achteruitspoelen</string>
-
     <string name="no_instances">Voeg een instantie van Popcorn Time toe om Popcorn Time Remote te gebruiken</string>
     <string name="add_instance">Instantie toevoegen</string>
     <string name="edit_instance">Instantie bewerken</string>
     <string name="delete_instance">Instantie verwijderen</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleer</string>
+    <string name="close">Sluiten</string>
     <string name="ip">IP-adres</string>
     <string name="name">Naam</string>
     <string name="port">Poort</string>
@@ -42,6 +44,4 @@
     <string name="enter_manually">Handmatig invoeren</string>
     <string name="scan_qr">Snel koppelen met QR-code</string>
     <string name="easy_pairing">Snel koppelen is beschikbaar in Popcorn Time v0.3.4 en hoger. Open de geavanceerde instellingen en genereer je QR code bij de sectie \'remote control\'.</string>
-
-
 </resources>
