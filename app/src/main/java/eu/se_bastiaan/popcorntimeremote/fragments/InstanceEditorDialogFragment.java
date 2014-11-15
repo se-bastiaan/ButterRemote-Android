@@ -44,7 +44,6 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     EditText nameInput;
     @InjectView(R.id.ipInput)
     @Required(order = 1)
-    @IpAddress(order = 2)
     EditText ipInput;
     @InjectView(R.id.portInput)
     @Required(order = 3)
