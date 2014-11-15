@@ -9,4 +9,4 @@ Currently, this application is in beta and every suggestion is welcome! Issues c
 GitHub: https://github.com/se-bastiaan/PopcornTimeRemote-Android/
 Issues: https://github.com/se-bastiaan/PopcornTimeRemote-Android/issues
 Translations: http://www.transifex.com/projects/p/popcorntimeremote-android
-Support: Mail sv244@live.nl or mention @sv244 on Twitter
+Support: Mail sv244@popcorntime.io or mention @sv244 on Twitter
