@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
@@ -46,9 +47,8 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View  v = inflater.inflate(R.layout.fragment_listinstance, null);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             final int diameter = getResources().getDimensionPixelSize(R.dimen.diameter);
-            Outline outline = new Outline();
             View addButton = v.findViewById(R.id.add_button);
             ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
                 @Override
@@ -159,7 +159,8 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
         }
         mAdapter.swapCursor(cursor);
         if (mAdapter.getCount() <= 0) {
-            //  getListView.setem(getActivity().getString(R.string.no_instances));
+            TextView emptyText = (TextView) getActivity().findViewById(android.R.id.empty);
+            getListView().setEmptyView(emptyText);
         }
     }
 
