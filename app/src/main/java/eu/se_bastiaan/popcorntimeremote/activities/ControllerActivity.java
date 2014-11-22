@@ -1,5 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
@@ -179,6 +180,7 @@ public class ControllerActivity extends ActionBarActivity {
 
     private Runnable mGetViewstackRunnable = new Runnable() {
         @Override
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         public void run() {
         mViewstackFuture = mRpc.getViewstack(new PopcornTimeRpcClient.Callback() {
             @Override

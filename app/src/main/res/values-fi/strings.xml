@@ -7,7 +7,7 @@
     <string name="no_connection_desc">Emme pystyneet yhdistämään valittuun Popcorn Time istuntoon. Varmista, että Popcorn Time (v0.3.3+) on päällä ja tarkista asetuksesi, sekä internetyhteytesi.</string>
     <string name="retry">Uudelleen</string>
     <string name="now_playing">Toistetaan</string>
-    <string name="loading">Popcorn Time lataa...</string>
+    <string name="loading">Popcorn Time lataa…</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Katso traileri</string>
     <string name="left">Vasen</string>

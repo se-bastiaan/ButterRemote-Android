@@ -65,7 +65,7 @@
             android:visibility="gone">
             <eu.se_bastiaan.popcorntimeremote.widget.ClearableEditText
                 android:id="@+id/searchInput"
-                android:hint="Search..."
+                android:hint="Search…"
                 android:layout_marginLeft="@dimen/action_margin"
                 android:layout_marginRight="@dimen/action_margin"
                 android:layout_width="match_parent"

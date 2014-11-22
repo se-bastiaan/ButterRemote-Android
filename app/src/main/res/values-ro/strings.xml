@@ -6,7 +6,7 @@
     <string name="no_connection">Nicio conexiune</string>
     <string name="no_connection_desc">Nu am putut să vă conectăm la exemplul selectat în Popcorn Time, fiţi sigur că Popcorn Time (v0.3.3+) rulează şi verificaţi setările şi conexiunea la internet.</string>
     <string name="retry">Reincearca</string>
-    <string name="loading">Popcorn Time încarcă informaţia...</string>
+    <string name="loading">Popcorn Time încarcă informaţia…</string>
     <string name="left">Stânga</string>
     <string name="right">Dreapta</string>
     <string name="up">Sus</string>

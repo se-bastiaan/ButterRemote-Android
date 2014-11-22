@@ -7,7 +7,7 @@
     <string name="no_connection_desc">ارتباط با Popcorn Time مورد نظر با خطا مواجه شد. مطمئن شوید که Popcorn Time (نسخه‌ی v0.3.3 یا بالاتر) در حال اجرا هست و تنظیمات و اتصال اینترنت خود را چک کنید.</string>
     <string name="retry">دوباره سعی کن</string>
     <string name="now_playing">در حال پخش</string>
-    <string name="loading">Popcorn Time در حال بارگزاری اطلاعات است...</string>
+    <string name="loading">Popcorn Time در حال بارگزاری اطلاعات است…</string>
     <string name="minutes">دقیقه</string>
     <string name="watch_trailer">تماشای نسخه‌ی نمایشی</string>
     <string name="left">چپ</string>

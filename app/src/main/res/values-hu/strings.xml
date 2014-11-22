@@ -7,7 +7,7 @@
     <string name="no_connection_desc">Nem tudunk csatlakozni a kiválasztott Popcorn Time -hoz, győződjön meg róla, hogy fut a Popcorn Time (v0.3.3+) és ellenőrizze a beállításait és internetkapcsolatát.</string>
     <string name="retry">Újra</string>
     <string name="now_playing">Most játszott</string>
-    <string name="loading">Popcorn Time betöltése...</string>
+    <string name="loading">Popcorn Time betöltése…</string>
     <string name="minutes">perc</string>
     <string name="watch_trailer">Trailer megnézése</string>
     <string name="left">Balra</string>

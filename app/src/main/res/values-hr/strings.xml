@@ -7,7 +7,7 @@
     <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
     <string name="retry">Pokušaj ponovno</string>
     <string name="now_playing">Trenutno ide</string>
-    <string name="loading">Popcorn Time učitava podatke...</string>
+    <string name="loading">Popcorn Time učitava podatke…</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Pogledaj najavu</string>
     <string name="left">Lijevo</string>

@@ -7,7 +7,7 @@
     <string name="no_connection_desc">Vi kunde inte ansluta till den valda Popcorn Time-instansen, se till att Popcorn Time (v0.3.3 +) är igång och kontrollera dina inställningar och din internetuppkoppling.</string>
     <string name="retry">Försök igen</string>
     <string name="now_playing">Nu spelas</string>
-    <string name="loading">Popcorn Time laddar data...</string>
+    <string name="loading">Popcorn Time laddar data…</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Se trailer</string>
     <string name="left">Vänster</string>

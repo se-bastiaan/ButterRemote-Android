@@ -7,7 +7,7 @@
     <string name="no_connection_desc">No hemos podido conectar a la instancia seleccionada, verifique que Popcorn Time (v0.3.3+) está funcionando, verifique su configuración y la conexión a Internet.</string>
     <string name="retry">Reintentar</string>
     <string name="now_playing">Reproduciendo </string>
-    <string name="loading">Popcorn Time está cargando datos...</string>
+    <string name="loading">Popcorn Time está cargando datos…</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Ver trailer </string>
     <string name="left">Izquierda </string>

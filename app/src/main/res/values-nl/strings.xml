@@ -7,7 +7,7 @@
     <string name="no_connection_desc">Er kon geen verbinding gemaakt worden met de Popcorn Time instantie, zorg dat Popcorn Time (v0.3.3+) op je computer is opgestart, controleer je instellingen en dat je internetverbinding werkt.</string>
     <string name="retry">Probeer opnieuw</string>
     <string name="now_playing">Speelt nu</string>
-    <string name="loading">Gegevens laden in Popcorn Time...</string>
+    <string name="loading">Gegevens laden in Popcorn Time…</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Bekijk trailer</string>
     <string name="left">Links</string>

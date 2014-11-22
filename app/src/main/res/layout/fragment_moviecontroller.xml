@@ -179,7 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/playercontrol_margin"
-                        android:text="..."
+                        android:text="…"
                         android:maxLines="6"
                         android:ellipsize="end"
                         android:textSize="14sp"

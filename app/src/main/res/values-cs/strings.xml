@@ -4,7 +4,7 @@
     <string name="subtitles">Titulky</string>
     <string name="disable_subs">Zakázat titulky</string>
     <string name="no_connection">Žádné připojení</string>
-    <string name="no_connection_desc">Nemůžeme se připojit k vybrané aplikaci Popcorn Time... Ujistěte se, že Popcorn Time (v0.3.3+) je spuštěn, zkontrolujte si nastavení a internetové připojení...</string>
+    <string name="no_connection_desc">Nemůžeme se připojit k vybrané aplikaci Popcorn Time… Ujistěte se, že Popcorn Time (v0.3.3+) je spuštěn, zkontrolujte si nastavení a internetové připojení…</string>
     <string name="retry">Znovu</string>
     <string name="now_playing">Nyní běží</string>
     <string name="loading">Popcorn Time načítá data</string>
