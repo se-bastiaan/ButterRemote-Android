@@ -1,21 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Υπότιτλοι</string>
     <string name="disable_subs">Απενεργοποίηση υποτίτλων</string>
     <string name="no_connection">Καμία σύνδεση</string>
     <string name="no_connection_desc">Αδύνατη η σύνδεση στον επιλεγμένο Popcorn Time διακομιστή, ελέγξτε ότι το Popcorn Time (v0.3.3+) είναι σε λειτουργία, τις ρυθμίσεις σας και την σύνδεση σας στο internet.</string>
     <string name="retry">Δοκιμάστε ξανά</string>
+    <string name="now_playing">Παίζει τώρα</string>
+    <string name="loading">Το Popcorn Time φορτώνει δεδομένα…</string>
+    <string name="minutes">λεπτά</string>
+    <string name="watch_trailer">Αναπαραγωγή τρέιλερ</string>
     <string name="left">Αριστερά</string>
     <string name="right">Δεξιά</string>
     <string name="up">Επάνω</string>
     <string name="down">Κάτω</string>
     <string name="toggle_tabs">Εναλλαγή καρτελών</string>
-    <string name="add_favourite">Εναλλαγή σελιδοδεικτών</string>
+    <string name="add_favourite">Πεοσθήκη στα αγαπημένα</string>
+    <string name="remove_favourite">Αφαίρεση από τα αγαπημένα</string>
     <string name="watched">Εναλλαγή προβεβλημένων</string>
     <string name="fullscreen">Εναλλαγή πλήρους οθόνης</string>
     <string name="search">Αναζήτηση</string>
     <string name="subs">Επιλογή Υποτίτλων</string>
+    <string name="player">Επιλογή προγράμματος βίντεο</string>
     <string name="quality">Εναλλαγή ποιότητας</string>
     <string name="next_season">Επόμενη σεζόν</string>
     <string name="prev_season">Προηγούμενη σεζόν</string>
@@ -29,12 +35,13 @@
     <string name="delete_instance">Διαγραφή διακομιστή</string>
     <string name="save">Αποθήκευση</string>
     <string name="cancel">Ακύρωση</string>
+    <string name="close">Κλείσιμο</string>
     <string name="ip">Διεύθυνση IP</string>
     <string name="name">Όνομα</string>
     <string name="port">Θύρα</string>
     <string name="username">Όνομα χρήστη</string>
     <string name="password">Κωδικός</string>
     <string name="enter_manually">Εισαγωγή ρυθμίσεων χειροκίνητα</string>
-    <string name="scan_qr">Σκανάρισμα εύκολου ζευγαρώματος QR</string>
-    <string name="easy_pairing">Το εύκολο \"ζευγάρωμα\" είναι διαθέσιμο από το Popcorn TIme v0.3.4 και πάνω. Πηγαίνετε στις προηγμένες ρυθμίσεις και δημιουργείστε το QR κώδικα σας από το τμήμα \'remote control\'.</string>
+    <string name="scan_qr">Σκανάρισμα εύκολης αντιστοίχισης QR</string>
+    <string name="easy_pairing">Η εύκολη αντιστοίχιση είναι διαθέσιμη από το Popcorn TIme v0.3.4 και πάνω. Πηγαίνετε στις προηγμένες ρυθμίσεις και δημιουργείστε τον QR κώδικα σας από το τμήμα \'remote control\'.</string>
 </resources>

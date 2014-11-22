@@ -1,22 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Popcorn Time dalj.</string>
+    <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Podnaslovi</string>
     <string name="disable_subs">Onemogući podnaslove</string>
     <string name="no_connection">Nije povezano</string>
     <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
     <string name="retry">Pokušaj ponovno</string>
+    <string name="now_playing">Trenutno ide</string>
     <string name="loading">Popcorn Time učitava podatke...</string>
+    <string name="minutes">min</string>
+    <string name="watch_trailer">Pogledaj najavu</string>
     <string name="left">Lijevo</string>
     <string name="right">Desno</string>
     <string name="up">Gore</string>
     <string name="down">Dolje</string>
     <string name="toggle_tabs">Uključi/Isključi kartice</string>
-    <string name="add_favourite">Add to favourites</string>
+    <string name="add_favourite">Dodaj u zabilješke</string>
+    <string name="remove_favourite">Ukloni iz zabilješki</string>
     <string name="watched">Uključi/Isključi pogledano</string>
     <string name="fullscreen">Uključi/Isključi cjelozaslonski prikaz</string>
     <string name="search">Pretraži</string>
     <string name="subs">Odaberi podnaslove</string>
+    <string name="player">Odaberi video izvođač</string>
     <string name="quality">Uključi/Isključi kvalitetu</string>
     <string name="next_season">Sljedeća sezona</string>
     <string name="prev_season">Prijašnja sezona</string>
@@ -30,6 +35,7 @@
     <string name="delete_instance">Obriši primjerak</string>
     <string name="save">Spremi</string>
     <string name="cancel">Odustani</string>
+    <string name="close">Zatvori</string>
     <string name="ip">IP adresa</string>
     <string name="name">Naziv</string>
     <string name="port">Ulaz</string>
