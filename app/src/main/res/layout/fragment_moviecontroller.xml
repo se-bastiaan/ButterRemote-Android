@@ -17,12 +17,12 @@
         <RelativeLayout
             android:id="@+id/parallax"
             android:layout_width="match_parent"
-            android:layout_height="228dp"
+            android:layout_height="@dimen/parallax_height"
             android:background="@color/overlay">
             <ImageView
                 android:id="@+id/popcornLogo"
                 android:layout_width="match_parent"
-                android:layout_height="228dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
                 android:layout_centerInParent="true"
@@ -41,7 +41,7 @@
                 android:id="@+id/coverImage"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="228dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
 
             <View
@@ -52,7 +52,7 @@
 
         <RelativeLayout
             android:layout_below="@id/parallax"
-            android:layout_marginTop="-28dp"
+            android:layout_marginTop="-30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
