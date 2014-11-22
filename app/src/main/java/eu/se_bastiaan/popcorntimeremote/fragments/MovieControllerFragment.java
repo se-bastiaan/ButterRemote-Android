@@ -343,7 +343,8 @@ public class MovieControllerFragment extends BaseControlFragment {
                                 Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
                                     @Override
                                     public void onSuccess() {
-                                        Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+                                        if(getActivity() == null) return;
+                                        Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
 
                                         mainInfoBlockColorFade.start();
                                         td.startTransition(500);

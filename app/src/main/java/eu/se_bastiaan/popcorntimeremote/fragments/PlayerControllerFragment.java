@@ -97,7 +97,9 @@ public class PlayerControllerFragment extends BaseControlFragment {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             int progress = seekBar.getProgress();
-            getClient().seek(progress - mCurrentTime, mBlankResponseCallback);
+            PopcornTimeRpcClient client = getClient();
+            if(client == null) return;
+            client.seek(progress - mCurrentTime, mBlankResponseCallback);
             mCurrentTime = progress;
             mSeeked = true;
         }
@@ -155,6 +157,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            if(getActivity() == null) return;
                             Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
                             ObjectAnimator slidingPanelTopLayoutColorFade = ObjectAnimator.ofObject(slidingPanelTopLayout, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), color);
                             slidingPanelTopLayoutColorFade.setDuration(500);
