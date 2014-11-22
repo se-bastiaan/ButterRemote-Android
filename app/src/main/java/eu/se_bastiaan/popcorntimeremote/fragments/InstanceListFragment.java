@@ -1,11 +1,14 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -13,12 +16,17 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
@@ -26,12 +34,44 @@ import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceProvider;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
-public class InstanceListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class InstanceListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Boolean mActionMode = false;
     private SimpleCursorAdapter mAdapter;
     private Integer mSelectedPosition;
     private ActionMode mMode;
+    private ListView listView;
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View  v = inflater.inflate(R.layout.fragment_listinstance, null);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            final int diameter = getResources().getDimensionPixelSize(R.dimen.diameter);
+            View addButton = v.findViewById(R.id.add_button);
+            ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+                    outline.setOval(0, 0, diameter, diameter);
+                }
+            };
+            addButton.setOutlineProvider(viewOutlineProvider);
+            addButton.setClipToOutline(true);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openEditorFragment(null);
+                }
+            });
+        }
+        listView = (ListView) v.findViewById(R.id.instancesList);
+        return v;
+    }
+
+    private ListView getListView() {
+        return listView;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -46,7 +86,7 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
         int verticalMargin = getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
         int actionBarHeight = getResources().getDimensionPixelSize(R.dimen.abc_action_bar_default_height_material);
         int statusBarHeight = 0;
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
             statusBarHeight = PixelUtils.getStatusBarHeight(getActivity());
         }
         getListView().setPadding(horizontalMargin, verticalMargin + actionBarHeight + statusBarHeight, horizontalMargin, verticalMargin);
@@ -58,39 +98,45 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
                 R.id.text1, R.id.text2}, 0);
 
         getLoaderManager().initLoader(0, null, this);
+        listView.setOnItemClickListener(mClickListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if(mMode != null) mMode.finish();
+        if (mMode != null) mMode.finish();
     }
 
-    @Override
-    public void onListItemClick(ListView parent, View view, int position, long id) {
-        if(!mActionMode) {
-            Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-            Intent intent = new Intent(getActivity(), ControllerActivity.class);
-            intent.putExtra(ControllerActivity.KEY_IP, cursor.getString(1));
-            intent.putExtra(ControllerActivity.KEY_PORT, cursor.getString(2));
-            intent.putExtra(ControllerActivity.KEY_NAME, cursor.getString(3));
-            intent.putExtra(ControllerActivity.KEY_USERNAME, cursor.getString(4));
-            intent.putExtra(ControllerActivity.KEY_PASSWORD, cursor.getString(5));
-            startActivity(intent);
-        } else {
-            getListView().getChildAt(mSelectedPosition).setBackgroundDrawable(null);
-            mSelectedPosition = position;
-            getListView().setItemChecked(mSelectedPosition, true);
-            view.setBackgroundResource(R.color.list_selected);
+
+    private ListView.OnItemClickListener mClickListener = new ListView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            if (!mActionMode) {
+                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), ControllerActivity.class);
+                intent.putExtra(ControllerActivity.KEY_IP, cursor.getString(1));
+                intent.putExtra(ControllerActivity.KEY_PORT, cursor.getString(2));
+                intent.putExtra(ControllerActivity.KEY_NAME, cursor.getString(3));
+                intent.putExtra(ControllerActivity.KEY_USERNAME, cursor.getString(4));
+                intent.putExtra(ControllerActivity.KEY_PASSWORD, cursor.getString(5));
+                startActivity(intent);
+            } else {
+                getListView().getChildAt(mSelectedPosition).setBackgroundDrawable(null);
+                mSelectedPosition = position;
+                getListView().setItemChecked(mSelectedPosition, true);
+                view.setBackgroundResource(R.color.list_selected);
+            }
         }
-    }
+    };
+
 
     private AdapterView.OnItemLongClickListener mOnLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            if(mSelectedPosition != null) {
+            if (mSelectedPosition != null) {
                 View v = getListView().getChildAt(mSelectedPosition);
-                if(v != null) v.setBackgroundDrawable(null);
+                if (v != null) v.setBackgroundDrawable(null);
             }
             mSelectedPosition = position;
             view.setBackgroundResource(R.color.list_selected);
@@ -108,12 +154,13 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if(getListAdapter() == null) {
-            setListAdapter(mAdapter);
+        if (getListView().getAdapter() == null) {
+            getListView().setAdapter(mAdapter);
         }
         mAdapter.swapCursor(cursor);
-        if(mAdapter.getCount() <= 0) {
-            setEmptyText(getActivity().getString(R.string.no_instances));
+        if (mAdapter.getCount() <= 0) {
+            TextView emptyText = (TextView) getActivity().findViewById(android.R.id.empty);
+            getListView().setEmptyView(emptyText);
         }
     }
 
@@ -171,6 +218,7 @@ public class InstanceListFragment extends ListFragment implements LoaderManager.
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
         }
+
     }
 
     private void openEditorFragment(String id) {

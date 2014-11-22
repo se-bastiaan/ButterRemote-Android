@@ -11,4 +11,8 @@
     <dimen name="action_margin">32dp</dimen>
     <dimen name="context_icon">28dp</dimen>
     <dimen name="divider_margin">72dp</dimen>
+    <dimen name="diameter">56dp</dimen>
+    <dimen name="elevation_low">2dp</dimen>
+    <dimen name="elevation_high">4dp</dimen>
+    <dimen name="add_button_margin">16dp</dimen>
 </resources>
