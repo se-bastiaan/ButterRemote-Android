@@ -25,9 +25,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
@@ -40,16 +42,18 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
     private SimpleCursorAdapter mAdapter;
     private Integer mSelectedPosition;
     private ActionMode mMode;
-    private ListView listView;
+
+    ListView listView;
+    Button addButton;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View  v = inflater.inflate(R.layout.fragment_listinstance, null);
+        ButterKnife.inject(this, v);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             final int diameter = getResources().getDimensionPixelSize(R.dimen.diameter);
-            View addButton = v.findViewById(R.id.add_button);
             ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
@@ -65,7 +69,6 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
                 }
             });
         }
-        listView = (ListView) v.findViewById(R.id.instancesList);
         return v;
     }
 
