@@ -98,7 +98,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onStopTrackingTouch(SeekBar seekBar) {
             int progress = seekBar.getProgress();
             PopcornTimeRpcClient client = getClient();
-            if(client == null) return;
+            if(client == null || mCurrentTime == null) return;
             client.seek(progress - mCurrentTime, mBlankResponseCallback);
             mCurrentTime = progress;
             mSeeked = true;
@@ -296,16 +296,20 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
     private void updateViews() {
         if(Version.compare(getClient().getVersion(), "0.0.0")) {
-            if (mPlaying) {
-                playPauseButton.setImageResource(R.drawable.ic_av_pause);
-            } else {
-                playPauseButton.setImageResource(R.drawable.ic_av_play);
+            if(playPauseButton != null) {
+                if (mPlaying) {
+                    playPauseButton.setImageResource(R.drawable.ic_av_pause);
+                } else {
+                    playPauseButton.setImageResource(R.drawable.ic_av_play);
+                }
             }
 
-            if (mFullscreen) {
-                fullscreenBlockImage.setImageResource(R.drawable.ic_av_small_screen);
-            } else {
-                fullscreenBlockImage.setImageResource(R.drawable.ic_av_full_screen);
+            if(fullscreenBlockImage != null) {
+                if (mFullscreen) {
+                    fullscreenBlockImage.setImageResource(R.drawable.ic_av_small_screen);
+                } else {
+                    fullscreenBlockImage.setImageResource(R.drawable.ic_av_full_screen);
+                }
             }
         }
     }

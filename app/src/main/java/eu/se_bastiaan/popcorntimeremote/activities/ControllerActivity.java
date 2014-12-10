@@ -2,7 +2,6 @@ package eu.se_bastiaan.popcorntimeremote.activities;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,14 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.squareup.okhttp.Call;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -33,9 +30,7 @@ import eu.se_bastiaan.popcorntimeremote.fragments.LoadingControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.MainControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.MovieControllerFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.PlayerControllerFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.PlayerSelectorDialogFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.SeriesControllerFragment;
-import eu.se_bastiaan.popcorntimeremote.fragments.SubtitleSelectorDialogFragment;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
@@ -137,7 +132,7 @@ public class ControllerActivity extends ActionBarActivity {
 
                 fragmentTransaction.setCustomAnimations(R.anim.slide_up, R.anim.still);
             } else {
-                fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                fragmentTransaction.setCustomAnimations(R.anim.fade_open, R.anim.fade_close);
             }
             fragmentTransaction.replace(R.id.frameLayout, fragment);
             fragmentTransaction.commit();

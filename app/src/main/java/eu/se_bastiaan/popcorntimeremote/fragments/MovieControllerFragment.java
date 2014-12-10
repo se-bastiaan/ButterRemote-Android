@@ -122,8 +122,10 @@ public class MovieControllerFragment extends BaseControlFragment {
                         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
                             if(e != null) {
                                 String videoId = mCurrentMap.get("trailer").toString().replace("http://youtube.com/watch?v=", "");
-                                Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
-                                startActivity(intent);
+                                if(videoId != null && getActivity() != null) {
+                                    Intent intent = YouTubeStandalonePlayer.createVideoIntent(getActivity(), Constants.YOUTUBE_KEY, videoId, 0, true, true);
+                                    startActivity(intent);
+                                }
                             }
                         }
                     });
