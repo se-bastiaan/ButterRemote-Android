@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ListView
@@ -8,13 +8,29 @@
         android:layout_height="wrap_content"
         android:id="@+id/instancesList" />
 
+    <ImageButton
+        android:id="@+id/add_button"
+        android:visibility="gone"
+        android:layout_width="@dimen/diameter"
+        android:layout_height="@dimen/diameter"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="@dimen/add_button_margin"
+        android:layout_marginRight="@dimen/add_button_margin"
+        android:tint="@android:color/white"
+        android:background="@drawable/circle_blue"
+        android:elevation="@dimen/elevation_low"
+        android:stateListAnimator="@anim/button_elevation"
+        android:src="@android:drawable/ic_input_add" />
 
     <TextView
         android:id="@android:id/empty"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:gravity="center_horizontal"
         android:text="@string/no_instances" />
 
-</LinearLayout>
+</FrameLayout>
