@@ -1,24 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Popcorn Time Remote</string>
     <string name="subtitles">Napisy</string>
     <string name="disable_subs">Wyłącz napisy</string>
-
     <string name="no_connection">Brak połączenia</string>
     <string name="no_connection_desc">Nie można się połączyć z wybraną instancją Popcorn Time. Upewnij się, że Popcorn Time (v0.3.3+) jest uruchomiony, sprawdź swoje ustawienia oraz połączenie z internetem.</string>
     <string name="retry">Ponów</string>
-
+    <string name="now_playing">Teraz odtwarzane</string>
+    <string name="loading">Popcorn Time wczytuje dane...</string>
+    <string name="minutes">min</string>
+    <string name="watch_trailer">Obejrzyj zwiastun</string>
     <string name="left">Lewo</string>
     <string name="right">Prawo</string>
     <string name="up">Góra</string>
     <string name="down">Dół</string>
     <string name="toggle_tabs">Przełącz karty</string>
-    <string name="add_favourite">Add to favourites</string>
+    <string name="add_favourite">Dodaj do ulubionych</string>
+    <string name="remove_favourite">Usuń z ulubionych</string>
     <string name="watched">Obejrzane</string>
     <string name="fullscreen">Pełny ekran</string>
     <string name="search">Szukaj</string>
     <string name="subs">Napisy</string>
+    <string name="player">Wybierz odtwarzacz</string>
     <string name="quality">Jakość</string>
     <string name="next_season">Następny sezon</string>
     <string name="prev_season">Poprzedni sezon</string>
@@ -26,13 +29,13 @@
     <string name="backward">Przewiń do tyłu</string>
     <string name="fastforward">Szybko przewiń do przodu</string>
     <string name="fastbackward">Szybko przewiń do tyłu</string>
-
     <string name="no_instances">Dodaj nową instancję aby rozpocząć korzystanie z Popcorn Time Remote</string>
     <string name="add_instance">Dodaj instancję</string>
     <string name="edit_instance">Edytuj instancję</string>
     <string name="delete_instance">Usuń instancję</string>
     <string name="save">Zapisz</string>
     <string name="cancel">Anuluj</string>
+    <string name="close">Zamknij</string>
     <string name="ip">Adres IP</string>
     <string name="name">Nazwa</string>
     <string name="port">Port</string>
@@ -41,5 +44,4 @@
     <string name="enter_manually">Wpisz dane samodzielnie</string>
     <string name="scan_qr">Skanuj kod QR</string>
     <string name="easy_pairing">Parowanie przez kod QR działa w Popcorn Time 0.3.4 lub nowszym. Otwórz ustawienia zaawansowane i wygeneruj kod QR w sekcji \'Zdalne sterowanie\' .</string>
-
 </resources>

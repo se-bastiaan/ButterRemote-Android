@@ -4,10 +4,10 @@
     <string name="subtitles">Subtiitrid</string>
     <string name="disable_subs">Subtiitrid välja</string>
     <string name="no_connection">Ühendus puudub</string>
-    <string name="no_connection_desc">Ei ole võimalik valitud PopcornTime\'ga ühendust luua. Palun kontrollige, et PopcornTime (v0.3.3+) on käivitatud, kontrollige oma seadeid ja interneti ühendust. </string>
+    <string name="no_connection_desc">Ei ole võimalik valitud Popcorn Time\'ga ühendust luua. Palun kontrollige, et Popcorn Time (v0.3.3+) on käivitatud, kontrollige oma seadeid ja interneti ühendust. </string>
     <string name="retry">Proovi uuesti</string>
     <string name="now_playing">Hetkel mängib</string>
-    <string name="loading">PopcornTime loeb andmeid…</string>
+    <string name="loading">Popcorn Time loeb andmeid...</string>
     <string name="minutes">min</string>
     <string name="watch_trailer">Vaata treilerit</string>
     <string name="left">Vasakule</string>
@@ -42,6 +42,6 @@
     <string name="username">Kasutajanimi</string>
     <string name="password">Parool</string>
     <string name="enter_manually">Sisesta seaded käsitsi</string>
-    <string name="scan_qr">Scanni QR kood</string>
-    <string name="easy_pairing">Easy pairing on saadaval alates versioonist PopcornTime v.0.3.4 ja uuemad. Ava seadete vaheleht, vali \'näita rohkem seadeid\' ja loo QR kood \'Kaugjuhtimine\' sektisoonist.</string>
+    <string name="scan_qr">Loe QR kood</string>
+    <string name="easy_pairing">Easy pairing on saadaval alates versioonist Popcorn Time v.0.3.4 ja uuemad. Ava seadete vaheleht, vali \'näita rohkem seadeid\' ja loo QR kood \'Kaugjuhtimine\' sektisoonist.</string>
 </resources>

@@ -6,10 +6,10 @@
     <string name="no_connection">Nije povezano</string>
     <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
     <string name="retry">Pokušaj ponovno</string>
-    <string name="now_playing">Trenutno ide</string>
-    <string name="loading">Popcorn Time učitava podatke…</string>
+    <string name="now_playing">Trenutna reprodukcija</string>
+    <string name="loading">Popcorn Time učitava podatke...</string>
     <string name="minutes">min</string>
-    <string name="watch_trailer">Pogledaj najavu</string>
+    <string name="watch_trailer">Pogledajte najavu</string>
     <string name="left">Lijevo</string>
     <string name="right">Desno</string>
     <string name="up">Gore</string>
@@ -21,7 +21,7 @@
     <string name="fullscreen">Uključi/Isključi cjelozaslonski prikaz</string>
     <string name="search">Pretraži</string>
     <string name="subs">Odaberi podnaslove</string>
-    <string name="player">Odaberi video izvođač</string>
+    <string name="player">Odaberi video reproduktor</string>
     <string name="quality">Uključi/Isključi kvalitetu</string>
     <string name="next_season">Sljedeća sezona</string>
     <string name="prev_season">Prijašnja sezona</string>
