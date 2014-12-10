@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -181,13 +182,18 @@ public class InstanceEditorDialogFragment extends DialogFragment {
             }
         });
 
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PairingScannerActivity.class);
-                startActivityForResult(intent, PairingScannerActivity.SCAN);
-            }
-        });
+        PackageManager pm = getActivity().getPackageManager();
+        if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            scanButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), PairingScannerActivity.class);
+                    startActivityForResult(intent, PairingScannerActivity.SCAN);
+                }
+            });
+        } else {
+            scanButton.setEnabled(false);
+        }
 
         return dialog;
     }
