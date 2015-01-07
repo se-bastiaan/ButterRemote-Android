@@ -1,17 +1,17 @@
 buildscript {
     repositories {
-        maven { url 'http://download.crashlytics.com/maven' }
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 apply plugin: 'com.android.application'
-apply plugin: 'crashlytics'
+apply plugin: 'io.fabric'
 
 repositories {
-    maven { url 'http://download.crashlytics.com/maven' }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 
@@ -25,19 +25,25 @@ android {
         }
     }
     compileSdkVersion 21
-    buildToolsVersion "21.0.0"
+    buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 2310
+        versionCode 2311
         versionName "0.2.3.1"
     }
     buildTypes {
+        debug {
+            buildConfigField "Boolean", "IS_DEBUG", "true"
+            buildConfigField "String", "GOOGLE_PLAY_PUBLIC_KEY", "null"
+        }
         release {
             signingConfig signingConfigs.mainConfig
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "Boolean", "IS_DEBUG", "false"
+            buildConfigField "String", "GOOGLE_PLAY_PUBLIC_KEY", "null"
         }
     }
     lintOptions {
@@ -47,16 +53,18 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'com.android.support:palette-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.+'
+    compile 'com.android.support:palette-v7:21.+'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'com.squareup.picasso:picasso:2.3.4'
+    compile 'com.squareup.picasso:picasso:2.+'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.jakewharton:butterknife:6.+'
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.5'
     compile 'com.sothree.slidinguppanel:library:2.0.2'
     compile 'com.github.nirhart:parallaxscroll:1.0'
-    compile 'com.crashlytics.android:crashlytics:1.+'
+    compile('com.crashlytics.sdk.android:crashlytics:2.2.0@aar') {
+        transitive = true;
+    }
 }

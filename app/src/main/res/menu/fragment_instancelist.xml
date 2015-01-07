@@ -5,5 +5,10 @@
         android:id="@+id/action_add"
         android:title="@string/add_instance"
         android:icon="@drawable/ic_action_add"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_donate"
+        android:title="@string/donation_action"
+        app:showAsAction="never" />
+
 </menu>

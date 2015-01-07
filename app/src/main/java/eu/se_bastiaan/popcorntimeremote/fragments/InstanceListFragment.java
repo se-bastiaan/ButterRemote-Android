@@ -37,6 +37,8 @@ import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceProvider;
+import eu.se_bastiaan.popcorntimeremote.iab.DialogHelper;
+import eu.se_bastiaan.popcorntimeremote.iab.DonationFragment;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
 public class InstanceListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -189,6 +191,9 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
         switch (item.getItemId()) {
             case R.id.action_add:
                 openEditorFragment(null);
+                return true;
+            case R.id.action_donate:
+                DialogHelper.showDonateDialog((ActionBarActivity) getActivity());
                 return true;
         }
         return super.onOptionsItemSelected(item);

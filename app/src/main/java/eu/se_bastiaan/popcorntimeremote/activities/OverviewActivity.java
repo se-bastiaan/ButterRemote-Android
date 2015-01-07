@@ -15,6 +15,7 @@ import com.crashlytics.android.Crashlytics;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fragments.InstanceListFragment;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
+import io.fabric.sdk.android.Fabric;
 
 public class OverviewActivity extends ActionBarActivity {
 
@@ -26,7 +27,8 @@ public class OverviewActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Crashlytics.start(this);
+        Fabric.with(this, new Crashlytics());
+
         /*if (Constants.LOG_ENABLED)
             Ion.getDefault(this).configure().setLogging("IonLogs", Log.DEBUG);*/
 

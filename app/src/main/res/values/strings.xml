@@ -50,4 +50,25 @@
     <string name="scan_qr">Scan easy pairing QR</string>
     <string name="easy_pairing">Easy pairing is available in Popcorn Time v0.3.4 and higher. Open the advanced settings and generate your QR code in the \'remote control\' section.</string>
 
+
+    <string name="donation_action">Donate</string>
+    <string name="donation_title">Donate to developer</string>
+    <string name="donation_info"><![CDATA[
+        Popcorn Time Remote is a free and <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">open-source</a> app.
+        You can show your appreciation and support development by donating:
+    ]]></string>
+
+    <string name="donation_item_label" translatable="false">﹩%1$s</string>
+    <string name="donation_item_bought">You\'ve donated for this item already.</string>
+
+    <string name="donation_1">An ice cream</string>
+    <string name="donation_4">Cup of coffee</string>
+    <string name="donation_10">Electricity bills</string>
+    <string name="donation_20">The right pillow</string>
+    <string name="donation_50">Solid-state drive</string>
+    <string name="donation_99">Sound system</string>
+
+    <string name="donation_error_iab_setup">Failed to setup in-app-billing service!</string>
+    <string name="donation_no_responsibility">Notice that Google is not responsible for that payments method.</string>
+
 </resources>
