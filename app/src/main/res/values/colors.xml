@@ -19,6 +19,6 @@
     <color name="overlay">#33000000</color>
 
     <color name="donation_normal">#FF1976D2</color>
-    <color name="donation_purchased">#441668B9</color>
+    <color name="donation_purchased">#ff174f9e</color>
 
 </resources>

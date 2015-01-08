@@ -7,6 +7,7 @@
 
     <string name="no_connection">No connection</string>
     <string name="no_connection_desc">We could not connect to the selected Popcorn Time instance, make sure Popcorn Time (v0.3.3+) is running and check your settings and internet connection.</string>
+    <string name="not_working_versions">Please note that Popcorn Time 0.3.6 does not have a working remote option.</string>
     <string name="retry">Retry</string>
     <string name="now_playing">Now playing</string>
     <string name="loading">Popcorn Time is loading data…</string>

@@ -23,10 +23,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -56,6 +60,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
  */
 public class DonationFragment extends DialogFragment {
 
+    public static final String TAG_FRAGMENT_DONATION = "dialog_donate";
     public static final int RC_REQUEST = 10001;
     private static final String TAG = "DonationFragment";
     private final HashSet<String> mInventorySet = new HashSet<>();
@@ -127,11 +132,10 @@ public class DonationFragment extends DialogFragment {
         Activity activity = getActivity();
         assert activity != null;
 
-        View view = new DialogHelper.Builder(activity)
-                .setTitle(R.string.donation_title)
-                .setView(R.layout.donation_dialog)
-                .createSkeletonView();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.donation_dialog, null, false);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+                .setTitle(R.string.donation_title)
                 .setView(view)
                 .setNegativeButton(android.R.string.cancel, null);
 
@@ -183,9 +187,8 @@ public class DonationFragment extends DialogFragment {
      */
     private void startPaymentIntentWithWarningAlertDialog(final Intent intent) {
         CharSequence messageText = getString(R.string.donation_no_responsibility);
-        new DialogHelper.Builder(getActivity())
+        new AlertDialog.Builder(getActivity())
                 .setMessage(messageText)
-                .wrap()
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -301,6 +304,18 @@ public class DonationFragment extends DialogFragment {
 
     private void complain(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void show(FragmentManager fm) {
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prev = fm.findFragmentByTag("");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        DonationFragment donationFragment = new DonationFragment();
+        donationFragment.show(ft, TAG_FRAGMENT_DONATION);
     }
 
 }
