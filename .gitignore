@@ -31,3 +31,4 @@ proguard/
 *.jks
 com_crashlytics_export_strings.xml
 crashlytics-build.properties
+build_release.sh
