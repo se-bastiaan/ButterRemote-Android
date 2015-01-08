@@ -9,14 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,19 +23,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Optional;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceProvider;
-import eu.se_bastiaan.popcorntimeremote.iab.DialogHelper;
 import eu.se_bastiaan.popcorntimeremote.iab.DonationFragment;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
@@ -193,7 +188,7 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
                 openEditorFragment(null);
                 return true;
             case R.id.action_donate:
-                DialogHelper.showDonateDialog((ActionBarActivity) getActivity());
+                DonationFragment.show(getFragmentManager());
                 return true;
         }
         return super.onOptionsItemSelected(item);
