@@ -17,6 +17,15 @@
         android:gravity="center_horizontal"
         android:text="@string/no_connection_desc" />
 
+
+    <TextView
+        android:layout_below="@id/contentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="@string/not_working_versions" />
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
