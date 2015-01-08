@@ -1,3 +1,5 @@
+import groovy.swing.SwingBuilder
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -14,14 +16,13 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
 android {
     signingConfigs {
         mainConfig {
-            keyAlias 'PT Remote'
-            keyPassword 'pt_remote'
-            storeFile file('../keystore.jks')
-            storePassword 'pt_remote'
+            storeFile file(System.getenv("POPCORNTIMEREMOTE_SIGN_STORE_FILE").toString())
+            keyAlias System.getenv("POPCORNTIMEREMOTE_KEY_ALIAS").toString()
+            keyPassword 'password' // Fictive password to pass Gradle check
+            storePassword 'password' // Fictive password to pass Gradle check
         }
     }
     compileSdkVersion 21
@@ -30,9 +31,16 @@ android {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 2311
-        versionName "0.2.3.1"
+        versionCode 2320
+        versionName "0.2.3.2"
     }
+
+    String playPublicKey = System.getenv("POPCORNTIMEREMOTE_GOOGLE_PLAY_PUBLIC_KEY").toString();
+
+    println "- - - - - - - - - - - -"
+    println "\u001B[36m\u001B[1mGOOGLE_PLAY_PUBLIC_KEY\u001B[0m: " + playPublicKey
+    println "- - - - - - - - - - - -"
+
     buildTypes {
         debug {
             buildConfigField "Boolean", "IS_DEBUG", "true"
@@ -42,8 +50,8 @@ android {
             signingConfig signingConfigs.mainConfig
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "Boolean", "IS_DEBUG", "false"
-            buildConfigField "String", "GOOGLE_PLAY_PUBLIC_KEY", "null"
+            buildConfigField "Boolean", "IS_DEBUG", "true"
+            buildConfigField "String", "GOOGLE_PLAY_PUBLIC_KEY", "\"" + playPublicKey + "\""
         }
     }
     lintOptions {
@@ -68,3 +76,56 @@ dependencies {
         transitive = true;
     }
 }
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if(taskGraph.hasTask(':app:assembleRelease')) {
+
+        def pass = System.getenv("POPCORNTIMEREMOTE_ALIAS_KEY") ? System.getenv("POPCORNTIMEREMOTE_ALIAS_KEY").toString() : ''
+        def store_pass = System.getenv("POPCORNTIMEREMOTE_STORE_KEY") ? System.getenv("POPCORNTIMEREMOTE_STORE_KEY").toString() : ''
+        if(pass == '' || store_pass == '') {
+            if (System.console() == null) {
+                new SwingBuilder().edt {
+                    dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
+                            title: 'Enter password', // Dialog title
+                            alwaysOnTop: true, // pretty much what the name says
+                            resizable: false, // Don't allow the user to resize the dialog
+                            locationRelativeTo: null, // Place dialog in center of the screen
+                            pack: true, // We need to pack the dialog (so it will take the size of it's children)
+                            show: true // Let's show it
+                    ) {
+                        vbox { // Put everything below each other
+                            label(text: "Please enter storage passphrase:")
+                            input = passwordField()
+                            button(defaultButton: true, text: 'OK', actionPerformed: {
+                                store_pass = input.password;
+                                // Set pass variable to value of input field
+                                dispose(); // Close dialog
+                            })
+                        } // vbox end
+                        vbox { // Put everything below each other
+                            label(text: "Please enter key passphrase:")
+                            input = passwordField()
+                            button(defaultButton: true, text: 'OK', actionPerformed: {
+                                pass = input.password; // Set pass variable to value of input field
+                                dispose(); // Close dialog
+                            })
+                        } // vbox end
+                    } // dialog end
+                } // edt end
+            } else {
+                store_pass = System.console().readPassword("\nPlease enter storage passphrase: ")
+                store_pass = new String(store_pass)
+                pass = System.console().readPassword("\nPlease enter key passphrase: ")
+                pass = new String(pass)
+            }
+
+            if (pass.size() <= 0) {
+                throw new InvalidUserDataException("You must enter a password to proceed.")
+            }
+        }
+
+        android.signingConfigs.mainConfig.keyPassword = pass
+        android.signingConfigs.mainConfig.storePassword = store_pass
+
+    } // end if has task
+} // end whenReady
