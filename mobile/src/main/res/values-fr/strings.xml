@@ -5,6 +5,7 @@
   <string name="disable_subs">Désactiver les sous-titres</string>
   <string name="no_connection">Pas de connexion</string>
   <string name="no_connection_desc">Nous n\'avons pas pu vous connecter à la session sélectionnée. Assurez-vous que Popcorn Time (0.3.3 +) est en cours d\'exécution, vérifiez les paramètres et votre connexion Internet.</string>
+  <string name="not_working_versions">Popcorn Time 0.3.6 ne propose pas de contrôle à distance.</string>
   <string name="retry">Réessayer</string>
   <string name="now_playing">En lecture</string>
   <string name="loading">Popcorn Time charge les données…</string>
@@ -21,7 +22,7 @@
   <string name="fullscreen">Plein écran</string>
   <string name="search">Rechercher</string>
   <string name="subs">Sélectionner sous-titres</string>
-  <string name="player">Choisissez le lecteur</string>
+  <string name="player">Sélectionner le lecteur</string>
   <string name="quality">Changer la qualité</string>
   <string name="next_season">Saison suivante</string>
   <string name="prev_season">Saison précédente</string>
@@ -43,5 +44,20 @@
   <string name="password">Mot de passe</string>
   <string name="enter_manually">Régler manuellement</string>
   <string name="scan_qr">Easy Pairing: code QR</string>
-  <string name="easy_pairing">Easy Pairing est disponible pour Popcorn Time 0.3.4 +. Ouvrez les paramètres avancés de Popcorn Time et générez votre code QR dans la section \\"contrôle à distance\\".</string>
+  <string name="easy_pairing">Easy Pairing est disponible pour Popcorn Time 0.3.4 +. Ouvrez les paramètres avancés de Popcorn Time et générez votre code QR dans la section \'contrôle à distance\'.</string>
+  <string name="donation_action">Faire un don</string>
+  <string name="donation_title">Faire un don au développeur</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time Remote est une application gratuite et <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">Open Source</a>.
+        Vous pouvez aider au développement en faisant un don : 
+    ]]></string>
+  <string name="donation_item_bought">Vous avez déjà fait une donation.</string>
+  <string name="donation_1">Une crème glacée</string>
+  <string name="donation_4">Une tasse de café</string>
+  <string name="donation_10">Une facture d\'électricité</string>
+  <string name="donation_20">Un coussin confortable</string>
+  <string name="donation_50">Un SSD</string>
+  <string name="donation_99">Un système hi-fi</string>
+  <string name="donation_error_iab_setup">Échec lors de la configuration de la facturation !</string>
+  <string name="donation_no_responsibility">Google n\'est pas responsable pour cette méthode de paiement.</string>
 </resources>

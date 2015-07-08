@@ -5,6 +5,7 @@
   <string name="disable_subs">Feliratok letiltása</string>
   <string name="no_connection">Nincs kapcsolat</string>
   <string name="no_connection_desc">Nem tudunk csatlakozni a kiválasztott Popcorn Time -hoz, győződjön meg róla, hogy fut a Popcorn Time (v0.3.3+) és ellenőrizze a beállításait és internetkapcsolatát.</string>
+  <string name="not_working_versions">Felhívjuk figyelmét, hogy Popcorn Time 0.3.6 nem rendelkezik működő távvezérlő lehetőséggel.</string>
   <string name="retry">Újra</string>
   <string name="now_playing">Most játszott</string>
   <string name="loading">Popcorn Time betöltése...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">Beállítások kézi megadása</string>
   <string name="scan_qr">Egyszerű párosítás QR -el</string>
   <string name="easy_pairing">Egyszerű párosítás elérhető a Popcorn Time 0.3.4 -es vagy újjabb verziójában. Nyissa meg a haladó beállításokat és generáljon QR kódot a \'távirányítás\' részen.</string>
+  <string name="donation_action">Adomány</string>
+  <string name="donation_title">Adomány a fejlesztőnek</string>
+  <string name="donation_info"><![CDATA[
+A Popcorn Time Remote ingyenes és <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">nyílt forráskódú</a> app.
+Kimutathatja elismerését és támogathatja a fejlesztést adományozással:
+]]></string>
+  <string name="donation_item_bought">Már adományozott ehhez a termékhez.</string>
+  <string name="donation_1">Egy fagylalt</string>
+  <string name="donation_4">Egy csésze kávé</string>
+  <string name="donation_10">Villanyszámla</string>
+  <string name="donation_20">A megfelelő párna</string>
+  <string name="donation_50">Szilárdtest-meghajtó</string>
+  <string name="donation_99">Hangrendszer</string>
+  <string name="donation_error_iab_setup">Nem sikerült beállítani az alkalmazáson belüli számlázási szolgáltatást!</string>
+  <string name="donation_no_responsibility">Vegye figyelembe, hogy a Google nem felelős ezért a fizetési módszerért.</string>
 </resources>

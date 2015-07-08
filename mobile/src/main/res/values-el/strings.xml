@@ -5,6 +5,7 @@
   <string name="disable_subs">Απενεργοποίηση υποτίτλων</string>
   <string name="no_connection">Καμία σύνδεση</string>
   <string name="no_connection_desc">Αδύνατη η σύνδεση στον επιλεγμένο Popcorn Time διακομιστή, ελέγξτε ότι το Popcorn Time (v0.3.3+) είναι σε λειτουργία, τις ρυθμίσεις σας και την σύνδεση σας στο internet.</string>
+  <string name="not_working_versions">Παρακαλούμε να σημειώσετε ότι η ωρα στο Popcorn 0.3.6 δεν διαθέτει την επιλογή εργασίας εξ αποστάσεως.</string>
   <string name="retry">Δοκιμάστε ξανά</string>
   <string name="now_playing">Παίζει τώρα</string>
   <string name="loading">Το Popcorn Time φορτώνει δεδομένα...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">Εισαγωγή ρυθμίσεων χειροκίνητα</string>
   <string name="scan_qr">Σκανάρισμα εύκολης αντιστοίχισης QR</string>
   <string name="easy_pairing">Η εύκολη αντιστοίχιση είναι διαθέσιμη από το Popcorn TIme v0.3.4 και πάνω. Πηγαίνετε στις προηγμένες ρυθμίσεις και δημιουργείστε τον QR κώδικα σας από το τμήμα \'remote control\'.</string>
+  <string name="donation_action">Δωρεά</string>
+  <string name="donation_title">Δωρεά στον προγραμματιστή</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time Remote is a free and <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">ανοικτού κώδικα</a> εφαρμογή.
+        Μπορείτε να δείξετε την εκτίμησή σας και την στηριξη της αναπτυξης δωρίζοντας:
+    ]]></string>
+  <string name="donation_item_bought">Έχετε ηδη δωρίσει για αυτό το στοιχείο </string>
+  <string name="donation_1">Ένα παγωτό</string>
+  <string name="donation_4">Φλιτζάνι του καφέ</string>
+  <string name="donation_10">Λογαριασμούς ηλεκτρικού ρεύματος</string>
+  <string name="donation_20">Το σωστό μαξιλάρι</string>
+  <string name="donation_50">Στερεάς καταστάσεως μονάδα δίσκου</string>
+  <string name="donation_99">Ηχοσύστημα</string>
+  <string name="donation_error_iab_setup">Αποτυχία να συσταθεί εντός εφαρμογής-χρέωση των υπηρεσιών!</string>
+  <string name="donation_no_responsibility">Σημειώστε ότι η Google δεν είναι υπεύθυνη για την εν λόγω μέθοδο πληρωμών.</string>
 </resources>

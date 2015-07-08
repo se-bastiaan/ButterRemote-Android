@@ -5,6 +5,7 @@
   <string name="disable_subs">Inaktivera undertexter</string>
   <string name="no_connection">Ingen anslutning</string>
   <string name="no_connection_desc">Vi kunde inte ansluta till den valda Popcorn Time-instansen, se till att Popcorn Time (v0.3.3 +) är igång och kontrollera dina inställningar och din internetuppkoppling.</string>
+  <string name="not_working_versions">Observera att Popcorn Time 0.3.6 inte har en fungerande fjärr alternativ.</string>
   <string name="retry">Försök igen</string>
   <string name="now_playing">Nu spelas</string>
   <string name="loading">Popcorn Time laddar data...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">Ange inställningarna manuellt</string>
   <string name="scan_qr">Skanna enkel ihopkopplings-QR</string>
   <string name="easy_pairing">Enkel ihopkoppling finns i Popcorn Time v0.3.4 och senare. Öppna avancerade inställningar och skapa din QR-kod under avsnittet \"fjärrkontroll\".</string>
+  <string name="donation_action">Donera</string>
+  <string name="donation_title">Donera till utvecklaren</string>
+  <string name="donation_info">&lt;! [CDATA [
+Popcorn Time Remote är en fri och &lt;a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android"&gt;open-source &lt;/a&gt; app.
+Du kan visa din uppskattning och stöd utvecklingen genom att donera: 
+]]&gt;</string>
+  <string name="donation_item_bought">Du har donerat för denna post redan.</string>
+  <string name="donation_1">En glass</string>
+  <string name="donation_4">Kopp kaffe</string>
+  <string name="donation_10">Elräkningar</string>
+  <string name="donation_20">Rätt kudde</string>
+  <string name="donation_50">Solid-state drive</string>
+  <string name="donation_99">Ljudanläggning</string>
+  <string name="donation_error_iab_setup">Det gick inte att ställa in i-app-billing service!</string>
+  <string name="donation_no_responsibility">Lägg märke till att Google inte ansvarar för att utbetalningarna metod.</string>
 </resources>

@@ -5,6 +5,7 @@
   <string name="disable_subs">Subtiitrid välja</string>
   <string name="no_connection">Ühendus puudub</string>
   <string name="no_connection_desc">Ei ole võimalik valitud Popcorn Time\'ga ühendust luua. Palun kontrollige, et Popcorn Time (v0.3.3+) on käivitatud, kontrollige oma seadeid ja interneti ühendust. </string>
+  <string name="not_working_versions">Palun võtke teadmiseks, et Popcorn Time 0.3.6 ei oma toimivat kaugjuhtimise versiooni.</string>
   <string name="retry">Proovi uuesti</string>
   <string name="now_playing">Hetkel mängib</string>
   <string name="loading">Popcorn Time loeb andmeid...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">Sisesta seaded käsitsi</string>
   <string name="scan_qr">Loe QR kood</string>
   <string name="easy_pairing">Easy pairing on saadaval alates versioonist Popcorn Time v.0.3.4 ja uuemad. Ava seadete vaheleht, vali \'näita rohkem seadeid\' ja loo QR kood \'Kaugjuhtimine\' sektisoonist.</string>
+  <string name="donation_action">Anneta</string>
+  <string name="donation_title">Anneta programmi arendajale</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time Remote tasuta ja <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">avatud lähtekoodiga</a> rakendus.
+        Sa võid avalada tänu ja toetada projekti arendamist annetades:
+    ]]></string>
+  <string name="donation_item_bought">Sa oled selle asja jaoks juba annetanud. </string>
+  <string name="donation_1">Jäätise</string>
+  <string name="donation_4">Tassi kohvi</string>
+  <string name="donation_10">Elektriarved</string>
+  <string name="donation_20">Õige padja</string>
+  <string name="donation_50">SSD kõvaketta</string>
+  <string name="donation_99">Helisüsteemi</string>
+  <string name="donation_error_iab_setup">Rakendusesisene maksmise meetodi käivitamine ei õnnestunud.</string>
+  <string name="donation_no_responsibility">Märkus, et Google ei ole vastutav selle maksemeetodi eest.</string>
 </resources>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="app_name">Popcorn Time Remote</string>
+  <string name="subtitles">Untertitel</string>
+  <string name="disable_subs">Untertitel deaktivieren</string>
+  <string name="no_connection">Keine Verbindung</string>
+  <string name="no_connection_desc">Wir konnten nicht die ausgewählte Popcorn Time-Instanz wiederherstellen, stellen Sie sicher, dass Popcorn Time (v0.3.3 +) ausgeführt wird, und überprüfen Sie die Einstellungen und den Internetzugang.</string>
+  <string name="not_working_versions">Bitte beachten Sie, dass Popcorn Time 0.3.6 wenn die Remote Option aktiviert ist, nicht funktioniert.</string>
+  <string name="retry">Wiederholen</string>
+  <string name="now_playing">Aktuelle Wiedergabe</string>
+  <string name="loading">Popcorn Time Daten werden gerade geladen…</string>
+  <string name="minutes">min</string>
+  <string name="watch_trailer">Trailer ansehen</string>
+  <string name="left">Links</string>
+  <string name="right">Rechts</string>
+  <string name="up">Nach oben</string>
+  <string name="down">Nach unten</string>
+  <string name="toggle_tabs">Toggle Tabs</string>
+  <string name="add_favourite">Zu Favoriten hinzufügen</string>
+  <string name="remove_favourite">Aus den Favoriten entfernen</string>
+  <string name="watched">Toggle beobachtet</string>
+  <string name="fullscreen">Toggle Vollbild</string>
+  <string name="search">Suchen</string>
+  <string name="subs">Untertitel auswählen</string>
+  <string name="player">Video Player auswählen</string>
+  <string name="quality">Toggle qualität</string>
+  <string name="next_season">Nächste Saison</string>
+  <string name="prev_season">Letzte Saison</string>
+  <string name="forward">Vorwärts spulen</string>
+  <string name="backward">Rückwärts spulen</string>
+  <string name="fastforward">Schnelldurchlauf Vorwärts</string>
+  <string name="fastbackward">Schnelldurchlauf Rückwärts</string>
+  <string name="no_instances">Eine neue Instanz hinzufügen um mit dieser Popcorn Time Remote zu starten</string>
+  <string name="add_instance">Instanz hinzufügen</string>
+  <string name="edit_instance">Instanz bearbeiten</string>
+  <string name="delete_instance">Instanz löschen</string>
+  <string name="save">Speichern</string>
+  <string name="cancel">Abbrechen</string>
+  <string name="close">Schließen</string>
+  <string name="ip">IP Addresse</string>
+  <string name="name">Name</string>
+  <string name="port">Port</string>
+  <string name="username">Benutzername</string>
+  <string name="password">Passwort</string>
+  <string name="enter_manually">Einstellungen manuell eingeben</string>
+  <string name="scan_qr">Scannen Sie einfach die QR Paarung</string>
+  <string name="easy_pairing">Die einfache Paarung ist in Popcorn Time v0.3.4 und höher verfügbar. Öffnen Sie die erweiterten Einstellungen und erzeugen Sie ihren QR-Code in dem Abschnitt \"Fernbedienung\".</string>
+  <string name="donation_action">Spenden</string>
+  <string name="donation_title">Spende an den Entwickler</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time Remote is a free and <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">open-source</a> app.
+        Sie können Ihre Wertschätzung und Unterstützung der Entwicklung zeigen, durch die Spende:
+    ]]></string>
+  <string name="donation_item_bought">Sie haben diesem Titel bereits gespendet.</string>
+  <string name="donation_1">Ein Eis</string>
+  <string name="donation_4">Eine Tasse Kaffee</string>
+  <string name="donation_10">Stromrechnungen</string>
+  <string name="donation_20">Das richtige Kissen</string>
+  <string name="donation_50">Festkörperlaufwerk</string>
+  <string name="donation_99">Soundsystem</string>
+  <string name="donation_error_iab_setup">Die Einstellung im in-app-Abrechnungsdienst ist fehlgeschlagen!</string>
+  <string name="donation_no_responsibility">Beachten Sie, dass Google nicht für diese Zahlungsverfahren verantwortlich ist.</string>
+</resources>
