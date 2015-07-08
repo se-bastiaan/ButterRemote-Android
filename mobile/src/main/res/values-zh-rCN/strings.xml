@@ -5,6 +5,7 @@
   <string name="disable_subs">关闭字幕</string>
   <string name="no_connection">无网络连接</string>
   <string name="no_connection_desc">我们无法连接到选中的 Popcorn Time 设备，请确认 Popcorn Time (v0.3.3以上) 已运行并检查您的设置及网络连接。</string>
+  <string name="not_working_versions">注意，Popcorn Time 0.3.6版本的远程控制选项无法正常工作。</string>
   <string name="retry">重试</string>
   <string name="now_playing">正在播放</string>
   <string name="loading">Popcorn Time 正在载入数据...</string>
@@ -43,5 +44,20 @@
   <string name="password">密码</string>
   <string name="enter_manually">手动输入设置</string>
   <string name="scan_qr">扫描匹配的二维码</string>
-  <string name="easy_pairing"> Popcorn Time v0.3.4及往后版本均支持创建二维码。打开高级设置，在“远程控制”栏目中创建属于您的二维码。</string>
+  <string name="easy_pairing"> Popcorn Time v0.3.4及往后版本均支持创建二维码。打开高级设置，在“远程控制”分栏中创建属于您的二维码。</string>
+  <string name="donation_action">捐助</string>
+  <string name="donation_title">捐助开发者</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time 远程控制 是一个免费的 <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">开源的</a> 软件。
+        您可以通过捐助的方式支持软件的开发：
+    ]]></string>
+  <string name="donation_item_bought">此项目您已经捐助过了。</string>
+  <string name="donation_1">一支雪糕</string>
+  <string name="donation_4">一杯咖啡</string>
+  <string name="donation_10">电费支出</string>
+  <string name="donation_20">舒适靠枕</string>
+  <string name="donation_50">固态硬盘</string>
+  <string name="donation_99">音响设备</string>
+  <string name="donation_error_iab_setup">打开内购服务失败！</string>
+  <string name="donation_no_responsibility">注意：此支付方法不由Google提供。</string>
 </resources>

@@ -5,6 +5,7 @@
   <string name="disable_subs">غیرفعال کردن زیرنویس‌ها</string>
   <string name="no_connection">اتصال برقرار نیست</string>
   <string name="no_connection_desc">ارتباط با Popcorn Time مورد نظر با خطا مواجه شد. مطمئن شوید که Popcorn Time (نسخه‌ی v0.3.3 یا بالاتر) در حال اجرا هست و تنظیمات و اتصال اینترنت خود را چک کنید.</string>
+  <string name="not_working_versions">توجه داشته باشید که Popcorn Time نسخه‌ی 0.3.6 قابلیت کنترل ندارد.</string>
   <string name="retry">دوباره سعی کن</string>
   <string name="now_playing">در حال پخش</string>
   <string name="loading">Popcorn Time در حال بارگزاری اطلاعات است...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">تنظیمات دستی</string>
   <string name="scan_qr">اسکن کد QR</string>
   <string name="easy_pairing">برقراری ارتباط ساده از طریق کد QR در Popcorn Time نسخه‌ی 0.3.4 یا بالاتر امکان پذیر است. بخش تنظیمات پیشرقته را باز کنید و در بخش \'کنترل از راه دور\' دکمه‌ی تولید کد QR را کلیک کنید.</string>
+  <string name="donation_action">حمایت مالی</string>
+  <string name="donation_title">حمایت مالی به تسعه دهنده</string>
+  <string name="donation_info"><![CDATA[
+Popcorn Time Remote یک برنامه‌ی <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">متن‌باز</a> است.
+با حمایت مالی می‌توانید به توسعه‌ی برنامه کمک کنید:
+]]></string>
+  <string name="donation_item_bought">شما پیش از این حمایت مالی ارسال کرده‌اید.</string>
+  <string name="donation_1">یک بستنی</string>
+  <string name="donation_4">یک فنجان قهوه</string>
+  <string name="donation_10">قبض برق</string>
+  <string name="donation_20">بالش درست و حسابی</string>
+  <string name="donation_50">یک SSD</string>
+  <string name="donation_99">سیستم صوتی</string>
+  <string name="donation_error_iab_setup">سرویس پرداخت در برنامه با مشکل مواجه شد!</string>
+  <string name="donation_no_responsibility">توجه داشته باشید که گوگل مسئولیتی برای این نوع برداخت قبول نمی‌کند.</string>
 </resources>

@@ -273,7 +273,14 @@ public class MovieControllerFragment extends BaseControlFragment {
                         year = (String) mCurrentMap.get("year");
                     }
                     final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
-                    final String rating = (String) mCurrentMap.get("rating");
+                    String tempRating;
+                    try {
+                        tempRating = (String) mCurrentMap.get("rating");
+                    } catch (ClassCastException ex) {
+                        tempRating = Double.toString( (Double) mCurrentMap.get("rating") );
+                    }
+                    final String rating = tempRating;
+
                     mIsFavourited = (Boolean) mCurrentMap.get("bookmarked");
 
                     mHandler.post(new Runnable() {

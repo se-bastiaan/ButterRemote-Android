@@ -5,6 +5,7 @@
   <string name="disable_subs">Onemogući podnaslove</string>
   <string name="no_connection">Nije povezano</string>
   <string name="no_connection_desc">Nemoguće povezivanje s odabranim Popcorn Time primjerkom, provjerite je li Popcorn Time (v0.3.3+) pokrenut, provjerite postavke i vaš Internet pristup. </string>
+  <string name="not_working_versions">Imajte u vidu da s Popcorn Time 0.3.6 mogućnost daljinskog upravljanja ne radi.</string>
   <string name="retry">Pokušaj ponovno</string>
   <string name="now_playing">Trenutna reprodukcija</string>
   <string name="loading">Popcorn Time učitava podatke...</string>
@@ -44,4 +45,19 @@
   <string name="enter_manually">Unesite postavke ručno</string>
   <string name="scan_qr">Skeniraj QR kôd za lakše uparivanje</string>
   <string name="easy_pairing">Lakše uparivanje je dostupno u Popcorn Time v0.3.4 i novijim izdanjima. Otvorite napredne postavke i generirajte QR kôd u \'Daljinsko upravljenje\' odjeljku.</string>
+  <string name="donation_action">Donirajte</string>
+  <string name="donation_title">Donirajte razvijatelja</string>
+  <string name="donation_info"><![CDATA[
+        Popcorn Time Remote je besplatna aplikacija <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">otvorenog kôda</a>.
+        Možete pokazati svoju zahvalnost i podršku razvoju doniranjem:
+    ]]></string>
+  <string name="donation_item_bought">Za ovu stavku ste već donirali.</string>
+  <string name="donation_1">Za sladoled</string>
+  <string name="donation_4">Za šalicu kave</string>
+  <string name="donation_10">Za račun struje</string>
+  <string name="donation_20">Za odgovorajući jastuk</string>
+  <string name="donation_50">Za solid-state disk</string>
+  <string name="donation_99">Za zvučni sustav</string>
+  <string name="donation_error_iab_setup">Neuspješno postavljanje aplikacije za uslugu naplate!</string>
+  <string name="donation_no_responsibility">Zapamtite da Google nije odgovoran za ovaj način plaćanja.</string>
 </resources>

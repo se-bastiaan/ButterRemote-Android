@@ -95,7 +95,7 @@
                         />
                 </LinearLayout>
 
-                <SeekBar
+                <eu.se_bastiaan.popcorntimeremote.widget.SeekBar
                     android:id="@+id/currentProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                         android:layout_height="56dp"
                         android:layout_marginRight="@dimen/playercontrol_icon_margin"
                         android:src="@drawable/ic_av_volume" />
-                    <SeekBar
+                    <eu.se_bastiaan.popcorntimeremote.widget.SeekBar
                         android:id="@+id/volumeControl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

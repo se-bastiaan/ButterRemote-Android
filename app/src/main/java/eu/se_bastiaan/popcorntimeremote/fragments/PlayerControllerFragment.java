@@ -1,6 +1,8 @@
 package eu.se_bastiaan.popcorntimeremote.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,9 +54,9 @@ public class PlayerControllerFragment extends BaseControlFragment {
     @InjectView(R.id.slidingPanelTopLayout)
     LinearLayout slidingPanelTopLayout;
     @InjectView(R.id.currentProgress)
-    SeekBar currentTime;
+    eu.se_bastiaan.popcorntimeremote.widget.SeekBar currentTime;
     @InjectView(R.id.volumeControl)
-    SeekBar volumeControl;
+    eu.se_bastiaan.popcorntimeremote.widget.SeekBar volumeControl;
     @InjectView(R.id.fullscreenBlock)
     LinearLayout fullscreenBlock;
     @InjectView(R.id.fullscreenBlockImage)
@@ -290,6 +292,9 @@ public class PlayerControllerFragment extends BaseControlFragment {
             slidingLayout.expandPanel();
             PrefUtils.save(getActivity(), "learned_panel", true);
         }
+
+        volumeControl.getThumbDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        currentTime.getThumbDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         return v;
     }
