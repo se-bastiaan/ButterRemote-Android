@@ -48,7 +48,7 @@
   <string name="donation_action">Doar</string>
   <string name="donation_title">Doazón ao desenvolvedor</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time e unha app de balde e de<a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\"> código aberto</a>.
+        Popcorn Time e unha app de balde e de<a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android"> código aberto</a>.
         Podes amosar o teu agradecemento e contribuír ao desenvolvemento doando:
     ]]></string>
   <string name="donation_item_bought">Xa fixeches unha doazón.</string>

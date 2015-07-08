@@ -48,7 +48,7 @@
   <string name="donation_action">Anneta</string>
   <string name="donation_title">Anneta programmi arendajale</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time Remote tasuta ja <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">avatud lähtekoodiga</a> rakendus.
+        Popcorn Time Remote tasuta ja <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">avatud lähtekoodiga</a> rakendus.
         Sa võid avalada tänu ja toetada projekti arendamist annetades:
     ]]></string>
   <string name="donation_item_bought">Sa oled selle asja jaoks juba annetanud. </string>

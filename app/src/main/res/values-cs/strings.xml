@@ -43,5 +43,5 @@
     <string name="password">Heslo</string>
     <string name="enter_manually">Zadat nastavení ručně</string>
     <string name="scan_qr">Skenovat párovací QR kód</string>
-    <string name="easy_pairing">Párování pomocí QR kódu je k dispozici v Popcorn Time v0.3.4 a vyšší. Otevřete dialogové okno Upřesnit nastavení a generování QR kódu v části \"dálkové ovládání\".</string>
+    <string name="easy_pairing">Párování pomocí QR kódu je k dispozici v Popcorn Time v0.3.4 a vyšší. Otevřete dialogové okno Upřesnit nastavení a generování QR kódu v části "dálkové ovládání".</string>
 </resources>

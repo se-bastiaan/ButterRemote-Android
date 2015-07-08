@@ -48,7 +48,7 @@
   <string name="donation_action">Faire un don</string>
   <string name="donation_title">Faire un don au développeur</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time Remote est une application gratuite et <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">Open Source</a>.
+        Popcorn Time Remote est une application gratuite et <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">Open Source</a>.
         Vous pouvez aider au développement en faisant un don : 
     ]]></string>
   <string name="donation_item_bought">Vous avez déjà fait une donation.</string>

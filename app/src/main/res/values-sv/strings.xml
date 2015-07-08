@@ -44,13 +44,13 @@
   <string name="password">Lösenord</string>
   <string name="enter_manually">Ange inställningarna manuellt</string>
   <string name="scan_qr">Skanna enkel ihopkopplings-QR</string>
-  <string name="easy_pairing">Enkel ihopkoppling finns i Popcorn Time v0.3.4 och senare. Öppna avancerade inställningar och skapa din QR-kod under avsnittet \"fjärrkontroll\".</string>
+  <string name="easy_pairing">Enkel ihopkoppling finns i Popcorn Time v0.3.4 och senare. Öppna avancerade inställningar och skapa din QR-kod under avsnittet "fjärrkontroll".</string>
   <string name="donation_action">Donera</string>
   <string name="donation_title">Donera till utvecklaren</string>
-  <string name="donation_info">&lt;! [CDATA [
-Popcorn Time Remote är en fri och &lt;a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android"&gt;open-source &lt;/a&gt; app.
+  <string name="donation_info"><![CDATA[
+Popcorn Time Remote är en fri och <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">open-source </a> app.
 Du kan visa din uppskattning och stöd utvecklingen genom att donera: 
-]]&gt;</string>
+]]></string>
   <string name="donation_item_bought">Du har donerat för denna post redan.</string>
   <string name="donation_1">En glass</string>
   <string name="donation_4">Kopp kaffe</string>

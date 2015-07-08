@@ -37,5 +37,5 @@
     <string name="password">Parola</string>
     <string name="enter_manually">Adaugă setari manuale</string>
     <string name="scan_qr">Scanează uşor pentru potrivirea QR</string>
-    <string name="easy_pairing">Potrivirea uşora este diponibilă în Popcorn Time v0.3.4 sau mai nouă. Deschide setările avansate şi generează codul tău QR în secţiunea \"remote control\"</string>
+    <string name="easy_pairing">Potrivirea uşora este diponibilă în Popcorn Time v0.3.4 sau mai nouă. Deschide setările avansate şi generează codul tău QR în secţiunea "remote control"</string>
 </resources>

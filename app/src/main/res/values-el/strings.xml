@@ -48,7 +48,7 @@
   <string name="donation_action">Δωρεά</string>
   <string name="donation_title">Δωρεά στον προγραμματιστή</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time Remote is a free and <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">ανοικτού κώδικα</a> εφαρμογή.
+        Popcorn Time Remote is a free and <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">ανοικτού κώδικα</a> εφαρμογή.
         Μπορείτε να δείξετε την εκτίμησή σας και την στηριξη της αναπτυξης δωρίζοντας:
     ]]></string>
   <string name="donation_item_bought">Έχετε ηδη δωρίσει για αυτό το στοιχείο </string>

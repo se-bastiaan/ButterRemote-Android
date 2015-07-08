@@ -44,12 +44,12 @@
   <string name="password">Salasana</string>
   <string name="enter_manually">Syötä asetukset käsin</string>
   <string name="scan_qr">Skannaa helposti parittava QR-koodi</string>
-  <string name="easy_pairing">Helppo paritus on saatavilla käyttäessä Popcorn Time v0.3.4 tai uudempaa. Avaa lisäasetukset ja luo QR-koodi kohdassa \"remote control\".</string>
+  <string name="easy_pairing">Helppo paritus on saatavilla käyttäessä Popcorn Time v0.3.4 tai uudempaa. Avaa lisäasetukset ja luo QR-koodi kohdassa "remote control".</string>
   <string name="donation_action">Lahjoita</string>
   <string name="donation_title">Lahjoita kehittäjälle</string>
   <string name="donation_info"><![CDATA[
 
-        Popcorn Time Remote on ilmainen ja <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">avoimen lähdekoodin</a> ohjelma.
+        Popcorn Time Remote on ilmainen ja <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">avoimen lähdekoodin</a> ohjelma.
 
         Voit näyttää kiitoksesi ja tukea kehitystä lahjoittamalla:
 

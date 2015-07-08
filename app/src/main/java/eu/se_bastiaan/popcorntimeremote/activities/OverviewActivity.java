@@ -1,5 +1,6 @@
 package eu.se_bastiaan.popcorntimeremote.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import com.crashlytics.android.Crashlytics;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fragments.InstanceListFragment;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
+import eu.se_bastiaan.popcorntimeremote.utils.PrefUtils;
 import io.fabric.sdk.android.Fabric;
 
 public class OverviewActivity extends ActionBarActivity {
@@ -31,6 +33,12 @@ public class OverviewActivity extends ActionBarActivity {
 
         /*if (Constants.LOG_ENABLED)
             Ion.getDefault(this).configure().setLogging("IonLogs", Log.DEBUG);*/
+
+        if(!PrefUtils.contains(this, "intro")) {
+            Intent intent = new Intent(this, IntroActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         setContentView(R.layout.activity_framelayout);
         ButterKnife.bind(this);

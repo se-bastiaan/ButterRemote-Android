@@ -72,4 +72,22 @@
     <string name="donation_error_iab_setup">Failed to setup in-app-billing service!</string>
     <string name="donation_no_responsibility">Notice that Google is not responsible for that payments method.</string>
 
+    <string name="slideone_title">Welcome to Popcorn Time Remote</string>
+    <string name="slideone_text">This app allows you to remote control Popcorn Time on your computer.</string>
+
+    <string name="slidetwo_title">Are you using the right version?</string>
+    <string name="slidetwo_text">First, please make sure your Popcorn Time version was downloaded from https://popcorntime.io/.</string>
+
+    <string name="slidethree_title">Enabling advanced settings</string>
+    <string name="slidethree_text">To add a new instance, open the settings in Popcorn Time and check \'show advanced settings\'.</string>
+
+    <string name="slidefour_title">Finding the remote section</string>
+    <string name="slidefour_text">Now that the advanced settings are enabled you need to find the \'remote control\' section.</string>
+
+    <string name="slidefive_title">Adding a new instance</string>
+    <string name="slidefive_text">Press the \'+\' button in the overview screen of this app to add a new instance using the information in the \'remote control\' section of the Popcorn Time settings.</string>
+
+    <string name="slidesix_title">Done!</string>
+    <string name="slidesix_text">You can now remotely control your Popcorn Time!\n\nProblems? Post on the Popcorn Time forum to get help:\nhttps://discuss.popcorntime.io</string>
+
 </resources>

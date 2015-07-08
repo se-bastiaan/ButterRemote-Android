@@ -44,11 +44,11 @@
   <string name="password">Passwort</string>
   <string name="enter_manually">Einstellungen manuell eingeben</string>
   <string name="scan_qr">Scannen Sie einfach die QR Paarung</string>
-  <string name="easy_pairing">Die einfache Paarung ist in Popcorn Time v0.3.4 und höher verfügbar. Öffnen Sie die erweiterten Einstellungen und erzeugen Sie ihren QR-Code in dem Abschnitt \"Fernbedienung\".</string>
+  <string name="easy_pairing">Die einfache Paarung ist in Popcorn Time v0.3.4 und höher verfügbar. Öffnen Sie die erweiterten Einstellungen und erzeugen Sie ihren QR-Code in dem Abschnitt "Fernbedienung".</string>
   <string name="donation_action">Spenden</string>
   <string name="donation_title">Spende an den Entwickler</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time Remote is a free and <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">open-source</a> app.
+        Popcorn Time Remote is a free and <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">open-source</a> app.
         Sie können Ihre Wertschätzung und Unterstützung der Entwicklung zeigen, durch die Spende:
     ]]></string>
   <string name="donation_item_bought">Sie haben diesem Titel bereits gespendet.</string>

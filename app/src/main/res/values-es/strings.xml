@@ -44,7 +44,7 @@
   <string name="password">Contraseña</string>
   <string name="enter_manually">Ingresé la configuración manualmente</string>
   <string name="scan_qr">Escanear QR de enparejamiento simple</string>
-  <string name="easy_pairing">El emparejamiento simple esta disponible en Popcorn Time v0.3.4 o superior. Abre las configuraciones avanzadas y genera tu codigo QR en la sección \"control remoto\"</string>
+  <string name="easy_pairing">El emparejamiento simple esta disponible en Popcorn Time v0.3.4 o superior. Abre las configuraciones avanzadas y genera tu codigo QR en la sección "control remoto"</string>
   <string name="donation_action">Donar</string>
   <string name="donation_title">Donar al desarrollador</string>
   <string name="donation_item_bought">Ya has donado por este elemento previamente</string>

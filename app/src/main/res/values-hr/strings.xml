@@ -48,7 +48,7 @@
   <string name="donation_action">Donirajte</string>
   <string name="donation_title">Donirajte razvijatelja</string>
   <string name="donation_info"><![CDATA[
-        Popcorn Time Remote je besplatna aplikacija <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">otvorenog kôda</a>.
+        Popcorn Time Remote je besplatna aplikacija <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">otvorenog kôda</a>.
         Možete pokazati svoju zahvalnost i podršku razvoju doniranjem:
     ]]></string>
   <string name="donation_item_bought">Za ovu stavku ste već donirali.</string>

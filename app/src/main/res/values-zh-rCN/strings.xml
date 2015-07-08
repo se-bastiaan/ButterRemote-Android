@@ -48,7 +48,7 @@
   <string name="donation_action">捐助</string>
   <string name="donation_title">捐助开发者</string>
   <string name="donation_info"><![CDATA[
-Popcorn Time 远程控制 是免费的 <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">开源的</a> 软件。
+Popcorn Time 远程控制 是免费的 <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">开源的</a> 软件。
 您可以通过捐助的方式支持软件的开发：
 ]]></string>
   <string name="donation_item_bought">此项目您已经捐助过了。</string>

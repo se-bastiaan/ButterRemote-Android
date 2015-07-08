@@ -48,7 +48,7 @@
   <string name="donation_action">Adomány</string>
   <string name="donation_title">Adomány a fejlesztőnek</string>
   <string name="donation_info"><![CDATA[
-A Popcorn Time Remote ingyenes és <a style=\"color:#1976D2\" href=\"https://github.com/se-bastiaan/PopcornTimeRemote-Android\">nyílt forráskódú</a> app.
+A Popcorn Time Remote ingyenes és <a style="color:#1976D2" href="https://github.com/se-bastiaan/PopcornTimeRemote-Android">nyílt forráskódú</a> app.
 Kimutathatja elismerését és támogathatja a fejlesztést adományozással:
 ]]></string>
   <string name="donation_item_bought">Már adományozott ehhez a termékhez.</string>
