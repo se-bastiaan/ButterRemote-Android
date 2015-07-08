@@ -29,7 +29,7 @@ import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
@@ -45,39 +45,39 @@ public class MovieControllerFragment extends BaseControlFragment {
     private Boolean mTransparentBar = true, mOpenBar = true, mIsFavourited = false;
 
     View toolbar;
-    @InjectView(R.id.scrollView)
+    @Bind(R.id.scrollView)
     ParallaxScrollView scrollView;
-    @InjectView(R.id.coverImage)
+    @Bind(R.id.coverImage)
     ImageView coverImage;
-    @InjectView(R.id.mainInfoBlock)
+    @Bind(R.id.mainInfoBlock)
     RelativeLayout mainInfoBlock;
-    @InjectView(R.id.playButton)
+    @Bind(R.id.playButton)
     ImageButton playButton;
-    @InjectView(R.id.titleText)
+    @Bind(R.id.titleText)
     TextView titleText;
-    @InjectView(R.id.yearText)
+    @Bind(R.id.yearText)
     TextView yearText;
-    @InjectView(R.id.runtimeText)
+    @Bind(R.id.runtimeText)
     TextView runtimeText;
-    @InjectView(R.id.ratingText)
+    @Bind(R.id.ratingText)
     TextView ratingText;
-    @InjectView(R.id.synopsisText)
+    @Bind(R.id.synopsisText)
     TextView synopsisText;
-    @InjectView(R.id.favouriteText)
+    @Bind(R.id.favouriteText)
     TextView favouriteText;
-    @InjectView(R.id.synopsisBlock)
+    @Bind(R.id.synopsisBlock)
     LinearLayout synopsisBlock;
-    @InjectView(R.id.qualityBlock)
+    @Bind(R.id.qualityBlock)
     LinearLayout qualityBlock;
-    @InjectView(R.id.favouriteBlock)
+    @Bind(R.id.favouriteBlock)
     LinearLayout favouriteBlock;
-    @InjectView(R.id.trailerBlock)
+    @Bind(R.id.trailerBlock)
     LinearLayout trailerBlock;
-    @InjectView(R.id.subtitlesBlock)
+    @Bind(R.id.subtitlesBlock)
     LinearLayout subtitlesBlock;
-    @InjectView(R.id.playerBlock)
+    @Bind(R.id.playerBlock)
     LinearLayout playerBlock;
-    @InjectView(R.id.topDivider)
+    @Bind(R.id.topDivider)
     View topDivider;
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -182,7 +182,7 @@ public class MovieControllerFragment extends BaseControlFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_moviecontroller, container, false);
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         Drawable playButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
         if(mPlayButtonDrawable == null) playButton.setImageDrawable(playButtonDrawable);

@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
@@ -43,16 +43,16 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
     private Integer mSelectedPosition;
     private ActionMode mMode;
 
-    @InjectView(R.id.instancesList)
+    @Bind(R.id.instancesList)
     ListView listView;
-    @InjectView(R.id.add_button)
+    @Bind(R.id.add_button)
     ImageButton addButton;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_listinstance, container, false);
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             addButton.setVisibility(View.VISIBLE);

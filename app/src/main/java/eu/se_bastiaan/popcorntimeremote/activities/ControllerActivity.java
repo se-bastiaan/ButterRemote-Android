@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ import com.squareup.okhttp.Call;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fragments.ConnectionLostFragment;
 import eu.se_bastiaan.popcorntimeremote.fragments.LoadingControllerFragment;
@@ -35,7 +36,7 @@ import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.ActionBarBackground;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
-public class ControllerActivity extends ActionBarActivity {
+public class ControllerActivity extends AppCompatActivity {
 
     public static final String KEY_IP = "ipAddress", KEY_PORT = "port", KEY_USERNAME = "username", KEY_PASSWORD = "password", KEY_NAME = "name", KEY_VERSION = "version";
 
@@ -45,9 +46,9 @@ public class ControllerActivity extends ActionBarActivity {
     private String mCurrentFragment, mTopView;
     private Call mViewstackFuture;
 
-    @InjectView(R.id.progressBar)
+    @Bind(R.id.progressBar)
     ProgressBar progressBar;
-    @InjectView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
@@ -55,7 +56,7 @@ public class ControllerActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_framelayout);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {

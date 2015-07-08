@@ -27,7 +27,7 @@ import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.PairingScannerActivity;
 import eu.se_bastiaan.popcorntimeremote.database.InstanceEntry;
@@ -40,27 +40,27 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     private Validator mValidator;
     private String mId;
 
-    @InjectView(R.id.nameInput)
+    @Bind(R.id.nameInput)
     @Required(order = 0)
     EditText nameInput;
-    @InjectView(R.id.ipInput)
+    @Bind(R.id.ipInput)
     @Required(order = 1)
     EditText ipInput;
-    @InjectView(R.id.portInput)
+    @Bind(R.id.portInput)
     @Required(order = 3)
     @NumberRule(order = 4, type = NumberRule.NumberType.INTEGER)
     EditText portInput;
-    @InjectView(R.id.usernameInput)
+    @Bind(R.id.usernameInput)
     @Required(order = 5)
     EditText usernameInput;
-    @InjectView(R.id.passwordInput)
+    @Bind(R.id.passwordInput)
     @Required(order = 6)
     EditText passwordInput;
-    @InjectView(R.id.manualButton)
+    @Bind(R.id.manualButton)
     Button manualButton;
-    @InjectView(R.id.scanButton)
+    @Bind(R.id.scanButton)
     Button scanButton;
-    @InjectView(R.id.pairingLayout)
+    @Bind(R.id.pairingLayout)
     LinearLayout pairingLayout;
 
     private Validator.ValidationListener mValidationListener = new Validator.ValidationListener() {
@@ -116,7 +116,7 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_instanceeditor, null, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
             .setView(view)

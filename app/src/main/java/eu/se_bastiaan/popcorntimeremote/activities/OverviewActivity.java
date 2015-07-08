@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import com.crashlytics.android.Crashlytics;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.fragments.InstanceListFragment;
@@ -19,9 +19,9 @@ import io.fabric.sdk.android.Fabric;
 
 public class OverviewActivity extends ActionBarActivity {
 
-    @InjectView(R.id.progressBar)
+    @Bind(R.id.progressBar)
     ProgressBar progressBar;
-    @InjectView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
@@ -33,7 +33,7 @@ public class OverviewActivity extends ActionBarActivity {
             Ion.getDefault(this).configure().setLogging("IonLogs", Log.DEBUG);*/
 
         setContentView(R.layout.activity_framelayout);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {

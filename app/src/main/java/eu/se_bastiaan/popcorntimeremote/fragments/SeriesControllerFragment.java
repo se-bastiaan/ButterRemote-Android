@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
@@ -17,13 +17,13 @@ import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
 public class SeriesControllerFragment extends BaseControlFragment {
 
-    @InjectView(R.id.joystick)
+    @Bind(R.id.joystick)
     JoystickView joystickView;
-    @InjectView(R.id.favouriteButton)
+    @Bind(R.id.favouriteButton)
     ImageButton favouriteButton;
-    @InjectView(R.id.watchedButton)
+    @Bind(R.id.watchedButton)
     ImageButton watchedButton;
-    @InjectView(R.id.qualityButton)
+    @Bind(R.id.qualityButton)
     ImageButton qualityButton;
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class SeriesControllerFragment extends BaseControlFragment {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
             v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + PixelUtils.getStatusBarHeight(getActivity()), v.getPaddingRight(), v.getPaddingBottom());
         }
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         favouriteButton.setOnClickListener(mButtonClickListener);
         watchedButton.setOnClickListener(mButtonClickListener);

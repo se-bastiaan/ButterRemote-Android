@@ -18,7 +18,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
@@ -31,9 +31,9 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
     private Bundle mExtras;
     private Handler mHandler;
 
-    @InjectView(R.id.listView)
+    @Bind(R.id.listView)
     ListView listView;
-    @InjectView(R.id.progressBar)
+    @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
     protected PopcornTimeRpcClient getClient() {
@@ -55,7 +55,7 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_subtitleselector, null, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         getClient().getPlayers(mResponseListener);
 

@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.activities.ControllerActivity;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 
 public class ConnectionLostFragment extends Fragment {
 
-    @InjectView(R.id.retryButton)
+    @Bind(R.id.retryButton)
     Button retryButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_noconnection, container, false);
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         retryButton.setOnClickListener(mOnClickListener);
 

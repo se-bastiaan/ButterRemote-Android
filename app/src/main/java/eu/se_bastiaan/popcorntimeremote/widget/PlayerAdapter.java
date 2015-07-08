@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 
@@ -27,9 +27,9 @@ public class PlayerAdapter extends BaseAdapter {
 
     class ViewHolder {
         public ViewHolder(View v) {
-            ButterKnife.inject(this, v);
+            ButterKnife.bind(this, v);
         }
-        @InjectView(android.R.id.text1)
+        @Bind(android.R.id.text1)
         TextView text1;
     }
 

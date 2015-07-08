@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.rpc.PopcornTimeRpcClient;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
@@ -41,27 +41,27 @@ public class PlayerControllerFragment extends BaseControlFragment {
     private Integer mCurrentTime, mMax, mVolume;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    @InjectView(R.id.slidingLayout)
+    @Bind(R.id.slidingLayout)
     SlidingUpPanelLayout slidingLayout;
-    @InjectView(R.id.coverImage)
+    @Bind(R.id.coverImage)
     ImageView coverImage;
-    @InjectView(R.id.backwardButton)
+    @Bind(R.id.backwardButton)
     ImageButton backwardButton;
-    @InjectView(R.id.playPauseButton)
+    @Bind(R.id.playPauseButton)
     ImageButton playPauseButton;
-    @InjectView(R.id.forwardButton)
+    @Bind(R.id.forwardButton)
     ImageButton forwardButton;
-    @InjectView(R.id.slidingPanelTopLayout)
+    @Bind(R.id.slidingPanelTopLayout)
     LinearLayout slidingPanelTopLayout;
-    @InjectView(R.id.currentProgress)
+    @Bind(R.id.currentProgress)
     eu.se_bastiaan.popcorntimeremote.widget.SeekBar currentTime;
-    @InjectView(R.id.volumeControl)
+    @Bind(R.id.volumeControl)
     eu.se_bastiaan.popcorntimeremote.widget.SeekBar volumeControl;
-    @InjectView(R.id.fullscreenBlock)
+    @Bind(R.id.fullscreenBlock)
     LinearLayout fullscreenBlock;
-    @InjectView(R.id.fullscreenBlockImage)
+    @Bind(R.id.fullscreenBlockImage)
     ImageView fullscreenBlockImage;
-    @InjectView(R.id.subtitlesBlock)
+    @Bind(R.id.subtitlesBlock)
     LinearLayout subtitlesBlock;
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -258,7 +258,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         LogUtils.d("JoyStickPlayerControllerFragment", "onCreateView");
 
         View v = inflater.inflate(R.layout.fragment_playercontroller, container, false);
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         fullscreenBlock.setOnClickListener(mOnClickListener);
         forwardButton.setOnClickListener(mOnClickListener);

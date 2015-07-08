@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
@@ -24,18 +24,18 @@ import eu.se_bastiaan.popcorntimeremote.widget.JoystickView;
 
 public class MainControllerFragment extends BaseControlFragment {
 
-    @InjectView(R.id.joystick)
+    @Bind(R.id.joystick)
     JoystickView joystickView;
 
-    @InjectView(R.id.searchButton)
+    @Bind(R.id.searchButton)
     ImageButton searchButton;
-    @InjectView(R.id.favouriteButton)
+    @Bind(R.id.favouriteButton)
     ImageButton favouriteButton;
-    @InjectView(R.id.tabsButton)
+    @Bind(R.id.tabsButton)
     ImageButton tabsButton;
-    @InjectView(R.id.searchInputBox)
+    @Bind(R.id.searchInputBox)
     LinearLayout searchInputBox;
-    @InjectView(R.id.searchInput)
+    @Bind(R.id.searchInput)
     ClearableEditText searchInput;
 
 
@@ -120,7 +120,7 @@ public class MainControllerFragment extends BaseControlFragment {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
             v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + PixelUtils.getStatusBarHeight(getActivity()), v.getPaddingRight(), v.getPaddingBottom());
         }
-        ButterKnife.inject(this, v);
+        ButterKnife.bind(this, v);
 
         searchButton.setOnClickListener(mButtonClickListener);
         favouriteButton.setOnClickListener(mButtonClickListener);

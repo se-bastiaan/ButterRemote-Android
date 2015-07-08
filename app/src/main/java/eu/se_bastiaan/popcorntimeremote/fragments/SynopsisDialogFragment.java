@@ -9,18 +9,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import eu.se_bastiaan.popcorntimeremote.R;
 
 public class SynopsisDialogFragment extends DialogFragment {
 
-    @InjectView(R.id.synopsisText)
+    @Bind(R.id.synopsisText)
     TextView synopsisText;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_synopsis, null, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
         .setView(view)

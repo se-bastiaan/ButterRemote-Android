@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.19.2'
     }
 }
 apply plugin: 'com.android.application'
@@ -25,14 +25,14 @@ android {
             storePassword 'password' // Fictive password to pass Gradle check
         }
     }
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
-        minSdkVersion 9
-        targetSdkVersion 21
-        versionCode 2320
-        versionName "0.2.3.2"
+        minSdkVersion 11
+        targetSdkVersion 22
+        versionCode 2400
+        versionName "0.2.4"
     }
 
     String playPublicKey = System.getenv("POPCORNTIMEREMOTE_GOOGLE_PLAY_PUBLIC_KEY").toString();
@@ -61,13 +61,14 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.+'
-    compile 'com.android.support:palette-v7:21.+'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'com.squareup.picasso:picasso:2.+'
-    compile 'com.google.code.gson:gson:2.3'
-    compile 'com.jakewharton:butterknife:6.+'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:palette-v7:21.0.3'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.paolorotolo:appintro:2.0.0'
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.5'
     compile 'com.sothree.slidinguppanel:library:2.0.2'

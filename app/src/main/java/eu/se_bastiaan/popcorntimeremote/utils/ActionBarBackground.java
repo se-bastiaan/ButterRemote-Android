@@ -9,7 +9,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import eu.se_bastiaan.popcorntimeremote.R;
@@ -17,27 +17,27 @@ import eu.se_bastiaan.popcorntimeremote.R;
 public class ActionBarBackground {
 
     private Drawable mOldBackground;
-    private ActionBarActivity mActivity;
+    private AppCompatActivity mActivity;
     private View mToolbar;
     private ActionBar mActionBar;
     private int mNewColor;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public ActionBarBackground(ActionBarActivity actionBarActivity) {
+    public ActionBarBackground(AppCompatActivity AppCompatActivity) {
         mNewColor = Color.parseColor("#FFFFFF");
-        init(actionBarActivity);
+        init(AppCompatActivity);
     }
 
-    public ActionBarBackground(ActionBarActivity actionBarActivity, int newColor) {
+    public ActionBarBackground(AppCompatActivity AppCompatActivity, int newColor) {
         mNewColor = newColor;
-        init(actionBarActivity);
+        init(AppCompatActivity);
     }
 
-    private void init(ActionBarActivity actionBarActivity) {
-        mActionBar = actionBarActivity.getSupportActionBar();
-        mActivity = actionBarActivity;
+    private void init(AppCompatActivity AppCompatActivity) {
+        mActionBar = AppCompatActivity.getSupportActionBar();
+        mActivity = AppCompatActivity;
 
-        getToolbar(actionBarActivity);
+        getToolbar(AppCompatActivity);
         if(mToolbar == null || mToolbar.getBackground() == null) {
             mOldBackground = getColoredBackground(R.color.primary);
         } else {
@@ -49,9 +49,9 @@ public class ActionBarBackground {
         return mActivity.getResources();
     }
 
-    private View getToolbar(ActionBarActivity actionBarActivity) {
-        final int toolBarId = getResources().getIdentifier("toolbar", "id", actionBarActivity.getPackageName());
-        mToolbar = actionBarActivity.findViewById(toolBarId);
+    private View getToolbar(AppCompatActivity AppCompatActivity) {
+        final int toolBarId = getResources().getIdentifier("toolbar", "id", AppCompatActivity.getPackageName());
+        mToolbar = AppCompatActivity.findViewById(toolBarId);
         return mToolbar;
     }
 
@@ -172,7 +172,7 @@ public class ActionBarBackground {
      * @param activity Activity where the ActionBar has to change
      * @return Instance of this class
      */
-    public static ActionBarBackground fadeOut(ActionBarActivity activity) {
+    public static ActionBarBackground fadeOut(AppCompatActivity activity) {
         ActionBarBackground abColor = new ActionBarBackground(activity);
         abColor.fadeOut();
         return abColor;
@@ -183,7 +183,7 @@ public class ActionBarBackground {
      * @param activity Activity where the ActionBar has to change
      * @return Instance of this class
      */
-    public static ActionBarBackground fadeIn(ActionBarActivity activity, Integer color) {
+    public static ActionBarBackground fadeIn(AppCompatActivity activity, Integer color) {
         ActionBarBackground abColor = new ActionBarBackground(activity);
         abColor.fadeIn(color);
         return abColor;
@@ -195,7 +195,7 @@ public class ActionBarBackground {
      * @param newColor New background color of the ActionBar
      * @return Instance of this class
      */
-    public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor) {
+    public static ActionBarBackground changeColor(AppCompatActivity activity, int newColor) {
         return changeColor(activity, newColor, true);
     }
 
@@ -205,7 +205,7 @@ public class ActionBarBackground {
      * @param newColor New background color of the ActionBar
      * @return Instance of this class
      */
-    public static ActionBarBackground changeColor(ActionBarActivity activity, int newColor, Boolean fade) {
+    public static ActionBarBackground changeColor(AppCompatActivity activity, int newColor, Boolean fade) {
         ActionBarBackground abColor = new ActionBarBackground(activity, newColor);
         abColor.changeColor(fade);
         return abColor;
@@ -217,7 +217,7 @@ public class ActionBarBackground {
      * @param newDrawable New background color of the ActionBar
      * @return Instance of this class
      */
-    public static ActionBarBackground fadeDrawable(ActionBarActivity activity, Drawable newDrawable) {
+    public static ActionBarBackground fadeDrawable(AppCompatActivity activity, Drawable newDrawable) {
         ActionBarBackground abColor = new ActionBarBackground(activity);
         abColor.fadeBackground(newDrawable);
         return abColor;
