@@ -36,6 +36,9 @@ public class SeriesControllerFragment extends BaseControlFragment {
                 case R.id.watchedButton:
                     getClient().toggleWatched(mBlankResponseCallback);
                     break;
+                case R.id.qualityButton:
+                    getClient().toggleQuality(mBlankResponseCallback);
+                    break;
             }
         }
     };
