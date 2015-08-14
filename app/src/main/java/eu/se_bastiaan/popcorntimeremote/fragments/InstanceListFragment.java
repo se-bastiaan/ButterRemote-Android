@@ -14,6 +14,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -146,7 +147,7 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
             }
             mSelectedPosition = position;
             view.setBackgroundResource(R.color.list_selected);
-            mMode = ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionBarCallBack());
+            mMode = ((AppCompatActivity) getActivity()).startSupportActionMode(new ActionBarCallBack());
             return true;
         }
     };

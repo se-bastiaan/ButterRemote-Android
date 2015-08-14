@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -19,7 +20,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 import eu.se_bastiaan.popcorntimeremote.utils.PrefUtils;
 import io.fabric.sdk.android.Fabric;
 
-public class OverviewActivity extends ActionBarActivity {
+public class OverviewActivity extends AppCompatActivity {
 
     @Bind(R.id.progressBar)
     ProgressBar progressBar;

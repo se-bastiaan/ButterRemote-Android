@@ -7,7 +7,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -164,12 +164,12 @@ public class MovieControllerFragment extends BaseControlFragment {
             if(mParallaxHeight - scrollView.getScrollY() < 0) {
                 if(mTransparentBar) {
                     mTransparentBar = false;
-                    ActionBarBackground.changeColor((ActionBarActivity) getActivity(), mPaletteColor, false);
+                    ActionBarBackground.changeColor((AppCompatActivity) getActivity(), mPaletteColor, false);
                 }
             } else {
                 if(!mTransparentBar) {
                     mTransparentBar = true;
-                    ActionBarBackground.fadeOut((ActionBarActivity) getActivity());
+                    ActionBarBackground.fadeOut((AppCompatActivity) getActivity());
                 }
             }
 
