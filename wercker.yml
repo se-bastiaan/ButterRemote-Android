@@ -1,4 +1,4 @@
-box: cattaka/android@1.0.8-r1
+box: jacekmarchwicki/android
 # Build definition
 build:
   # The steps that will be executed on build
