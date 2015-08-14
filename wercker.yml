@@ -4,4 +4,4 @@ build:
     steps:
         - script:
             name: run gradle
-            code: gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR assembleDebug lintDebug
+            code: ./gradle --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR assembleDebug lintDebug
