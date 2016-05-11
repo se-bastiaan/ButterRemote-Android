@@ -279,10 +279,12 @@ public class PopcornTimeRpcClient {
                 public void onCompleted(Exception e, RpcResponse result) {
                     try {
                         if (e == null && result != null && result.result != null) {
-                            ArrayList list = (ArrayList) result.result;
-                            LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
-                            map.put("viewstack", list.get(0));
-                            result.result = map;
+                            if (result.result instanceof ArrayList) {
+                                ArrayList list = (ArrayList) result.result;
+                                LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
+                                map.put("viewstack", list.get(0));
+                                result.result = map;
+                            }
                         }
                         callback.onCompleted(e, result);
                     } catch(Exception exception) {

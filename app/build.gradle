@@ -25,14 +25,14 @@ android {
             storePassword 'password' // Fictive password to pass Gradle check
         }
     }
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId "eu.se_bastiaan.popcorntimeremote"
         minSdkVersion 11
         targetSdkVersion 22
-        versionCode 2420
-        versionName "0.2.4.2"
+        versionCode 2430
+        versionName "0.2.4.3"
     }
 
     String playPublicKey = System.getenv("POPCORNTIMEREMOTE_GOOGLE_PLAY_PUBLIC_KEY").toString();
@@ -61,12 +61,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:palette-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:palette-v7:23.3.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.google.code.gson:gson:2.4'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.paolorotolo:appintro:2.0.0'
     compile 'com.mobsandgeeks:android-saripaar:1.0.2'
