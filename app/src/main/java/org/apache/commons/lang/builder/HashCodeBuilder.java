@@ -486,7 +486,7 @@ public class HashCodeBuilder {
             iTotal = iTotal * iConstant;
 
         } else {
-            if (object.getClass().isArray() == false) {
+            if (!object.getClass().isArray()) {
                 // the simple case, not an array, just the element
                 iTotal = iTotal * iConstant + object.hashCode();
 
