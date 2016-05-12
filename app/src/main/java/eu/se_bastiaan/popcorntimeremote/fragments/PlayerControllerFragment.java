@@ -87,6 +87,8 @@ public class PlayerControllerFragment extends BaseControlFragment {
                 case R.id.backwardButton:
                     getClient().seek(-60, mBlankResponseCallback);
                     break;
+                default:
+                    break;
             }
         }
     };

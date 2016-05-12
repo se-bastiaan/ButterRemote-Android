@@ -39,6 +39,8 @@ public class SeriesControllerFragment extends BaseControlFragment {
                 case R.id.qualityButton:
                     getClient().toggleQuality(mBlankResponseCallback);
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -63,6 +65,8 @@ public class SeriesControllerFragment extends BaseControlFragment {
                     break;
                 case LEFT:
                     getClient().prevSeason(mBlankResponseCallback);
+                    break;
+                default:
                     break;
             }
         }

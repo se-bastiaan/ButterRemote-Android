@@ -130,6 +130,8 @@ public class MovieControllerFragment extends BaseControlFragment {
                         }
                     });
                     break;
+                default:
+                    break;
             }
         }
     };
