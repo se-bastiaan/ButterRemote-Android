@@ -42,6 +42,15 @@ public class JoystickView extends View {
     private Context mContext;
     private DisplayMetrics mMetrics = new DisplayMetrics();
 
+    private Runnable mCallbackRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mCalledOnce = true;
+            mOnJoystickMoveListener.onValueChanged(getAngle(), getPower(), getDirection());
+            mHandler.postDelayed(this, 500);
+        }
+    };
+
     public JoystickView(Context context) {
         super(context);
         initJoystickView(context);
@@ -366,12 +375,4 @@ public class JoystickView extends View {
         public void onValueChanged(int angle, int power, Direction direction);
     }
 
-    private Runnable mCallbackRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mCalledOnce = true;
-            mOnJoystickMoveListener.onValueChanged(getAngle(), getPower(), getDirection());
-            mHandler.postDelayed(this, 500);
-        }
-    };
 }

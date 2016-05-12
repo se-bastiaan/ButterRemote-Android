@@ -23,11 +23,12 @@ public class SubtitleAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     class ViewHolder {
+        @Bind(android.R.id.text1)
+        TextView text1;
+
         public ViewHolder(View v) {
             ButterKnife.bind(this, v);
         }
-        @Bind(android.R.id.text1)
-        TextView text1;
     }
 
     public SubtitleAdapter(Context context, ArrayList<String> data) {

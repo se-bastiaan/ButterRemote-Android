@@ -36,6 +36,23 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
+    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
+        @Override
+        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+            if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_PLAYERS.ordinal()) {
+                playerData = (ArrayList<LinkedTreeMap<String, String>>) result.getMapResult().get("players");
+                final PlayerAdapter adapter = new PlayerAdapter(getActivity(), playerData);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        listView.setAdapter(adapter);
+                    }
+                });
+            }
+        }
+    };
+
     protected PopcornTimeRpcClient getClient() {
         if(mExtras == null) {
             mExtras = getArguments();
@@ -86,25 +103,6 @@ public class PlayerSelectorDialogFragment extends DialogFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
-
-    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_PLAYERS.ordinal()) {
-                playerData = (ArrayList<LinkedTreeMap<String, String>>) result.getMapResult().get("players");
-                final PlayerAdapter adapter = new PlayerAdapter(getActivity(), playerData);
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.GONE);
-                        listView.setAdapter(adapter);
-                    }
-                });
-            }
-        }
-    };
-
-
 
 }
 

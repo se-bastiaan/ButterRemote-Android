@@ -34,6 +34,24 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
+    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
+        @Override
+        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+            if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {
+                subsData = (ArrayList<String>) result.getMapResult().get("subtitles");
+                subsData.add(0, "no-subs");
+                final SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        listView.setAdapter(adapter);
+                    }
+                });
+            }
+        }
+    };
+
     protected PopcornTimeRpcClient getClient() {
         if(mExtras == null) {
             mExtras = getArguments();
@@ -84,25 +102,5 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
-
-    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {
-                subsData = (ArrayList<String>) result.getMapResult().get("subtitles");
-                subsData.add(0, "no-subs");
-                final SubtitleAdapter adapter = new SubtitleAdapter(getActivity(), subsData);
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.GONE);
-                        listView.setAdapter(adapter);
-                    }
-                });
-            }
-        }
-    };
-
-
 
 }

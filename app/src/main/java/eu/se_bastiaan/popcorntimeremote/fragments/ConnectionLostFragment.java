@@ -19,6 +19,13 @@ public class ConnectionLostFragment extends Fragment {
     @Bind(R.id.retryButton)
     Button retryButton;
 
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ((ControllerActivity) getActivity()).runViewstackRunnable();
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_noconnection, container, false);
@@ -28,12 +35,5 @@ public class ConnectionLostFragment extends Fragment {
 
         return v;
     }
-
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            ((ControllerActivity) getActivity()).runViewstackRunnable();
-        }
-    };
 
 }

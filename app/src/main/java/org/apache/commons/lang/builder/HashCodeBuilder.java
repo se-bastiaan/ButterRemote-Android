@@ -104,6 +104,60 @@ public class HashCodeBuilder {
     };
 
     /**
+     * Constant to use in building the hashCode.
+     */
+    private final int iConstant;
+
+    /**
+     * Running total of the hashCode.
+     */
+    private int iTotal = 0;
+
+    /**
+     * <p>
+     * Uses two hard coded choices for the constants needed to build a <code>hashCode</code>.
+     * </p>
+     */
+    public HashCodeBuilder() {
+        iConstant = 37;
+        iTotal = 17;
+    }
+
+    /**
+     * <p>
+     * Two randomly chosen, non-zero, odd numbers must be passed in. Ideally these should be different for each class,
+     * however this is not vital.
+     * </p>
+     *
+     * <p>
+     * Prime numbers are preferred, especially for the multiplier.
+     * </p>
+     *
+     * @param initialNonZeroOddNumber
+     *            a non-zero, odd number used as the initial value
+     * @param multiplierNonZeroOddNumber
+     *            a non-zero, odd number used as the multiplier
+     * @throws IllegalArgumentException
+     *             if the number is zero or even
+     */
+    public HashCodeBuilder(int initialNonZeroOddNumber, int multiplierNonZeroOddNumber) {
+        if (initialNonZeroOddNumber == 0) {
+            throw new IllegalArgumentException("HashCodeBuilder requires a non zero initial value");
+        }
+        if (initialNonZeroOddNumber % 2 == 0) {
+            throw new IllegalArgumentException("HashCodeBuilder requires an odd initial value");
+        }
+        if (multiplierNonZeroOddNumber == 0) {
+            throw new IllegalArgumentException("HashCodeBuilder requires a non zero multiplier");
+        }
+        if (multiplierNonZeroOddNumber % 2 == 0) {
+            throw new IllegalArgumentException("HashCodeBuilder requires an odd multiplier");
+        }
+        iConstant = multiplierNonZeroOddNumber;
+        iTotal = initialNonZeroOddNumber;
+    }
+
+    /**
      * <p>
      * Returns the registry of objects being traversed by the reflection methods in the current thread.
      * </p>
@@ -170,60 +224,6 @@ public class HashCodeBuilder {
      */
     static void unregister(Object value) {
         getRegistry().remove(toIdentityHashCodeInteger(value));
-    }
-
-    /**
-     * Constant to use in building the hashCode.
-     */
-    private final int iConstant;
-
-    /**
-     * Running total of the hashCode.
-     */
-    private int iTotal = 0;
-
-    /**
-     * <p>
-     * Uses two hard coded choices for the constants needed to build a <code>hashCode</code>.
-     * </p>
-     */
-    public HashCodeBuilder() {
-        iConstant = 37;
-        iTotal = 17;
-    }
-
-    /**
-     * <p>
-     * Two randomly chosen, non-zero, odd numbers must be passed in. Ideally these should be different for each class,
-     * however this is not vital.
-     * </p>
-     *
-     * <p>
-     * Prime numbers are preferred, especially for the multiplier.
-     * </p>
-     *
-     * @param initialNonZeroOddNumber
-     *            a non-zero, odd number used as the initial value
-     * @param multiplierNonZeroOddNumber
-     *            a non-zero, odd number used as the multiplier
-     * @throws IllegalArgumentException
-     *             if the number is zero or even
-     */
-    public HashCodeBuilder(int initialNonZeroOddNumber, int multiplierNonZeroOddNumber) {
-        if (initialNonZeroOddNumber == 0) {
-            throw new IllegalArgumentException("HashCodeBuilder requires a non zero initial value");
-        }
-        if (initialNonZeroOddNumber % 2 == 0) {
-            throw new IllegalArgumentException("HashCodeBuilder requires an odd initial value");
-        }
-        if (multiplierNonZeroOddNumber == 0) {
-            throw new IllegalArgumentException("HashCodeBuilder requires a non zero multiplier");
-        }
-        if (multiplierNonZeroOddNumber % 2 == 0) {
-            throw new IllegalArgumentException("HashCodeBuilder requires an odd multiplier");
-        }
-        iConstant = multiplierNonZeroOddNumber;
-        iTotal = initialNonZeroOddNumber;
     }
 
     /**

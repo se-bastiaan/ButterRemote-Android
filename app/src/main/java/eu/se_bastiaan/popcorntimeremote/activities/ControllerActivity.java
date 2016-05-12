@@ -51,6 +51,91 @@ public class ControllerActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
+    private Runnable mGetViewstackRunnable = new Runnable() {
+        @Override
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        public void run() {
+            mViewstackFuture = mRpc.getViewstack(new PopcornTimeRpcClient.Callback() {
+                @Override
+                public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+                    try {
+                        if (e == null && result != null && result.result != null) {
+                            LinkedTreeMap<String, Object> map = result.getMapResult();
+
+                            if (map.containsKey("viewstack")) {
+                                ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
+                                mTopView = resultList.get(resultList.size() - 1);
+                                Boolean translucentActionBar = false;
+                                String shownFragment = mCurrentFragment = mCurrentFragment != null ? mCurrentFragment : "";
+
+                                if (mTopView.equals("player") && !mCurrentFragment.equals("player")) {
+                                    setFragment(new PlayerControllerFragment());
+                                    mCurrentFragment = mTopView;
+                                    translucentActionBar = true;
+                                } else if (mTopView.equals("shows-container-contain") && !mCurrentFragment.equals("shows-container-contain")) {
+                                    setFragment(new SeriesControllerFragment());
+                                    mCurrentFragment = mTopView;
+                                } else if (mTopView.equals("movie-detail") && !mCurrentFragment.equals("movie-detail")) {
+                                    setFragment(new MovieControllerFragment());
+                                    mCurrentFragment = mTopView;
+                                    translucentActionBar = true;
+                                } else if (mTopView.equals("app-overlay") && !mCurrentFragment.equals("app-overlay")) {
+                                    setFragment(new LoadingControllerFragment());
+                                    mCurrentFragment = mTopView;
+                                } else if (!(mTopView.equals("player") || mTopView.equals("shows-container-contain") || mTopView.equals("movie-detail") || mTopView.equals("app-overlay")) && !mCurrentFragment.equals("main")) {
+                                    setFragment(new MainControllerFragment());
+                                    mCurrentFragment = "main";
+                                }
+
+                                Window window = getWindow();
+                                if(translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
+                                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                        window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
+                                    }
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            getSupportActionBar().setTitle("");
+                                            ActionBarBackground.fadeOut(ControllerActivity.this);
+                                        }
+                                    });
+                                } else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
+                                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                        window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
+                                    }
+
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            getSupportActionBar().setTitle(getString(R.string.app_name));
+                                            ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
+                                        }
+                                    });
+                                }
+
+                                if(mTopView.equals("player")) {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            getSupportActionBar().setTitle(R.string.now_playing);
+                                        }
+                                    });
+                                }
+                            }
+
+                            mHandler.postDelayed(mGetViewstackRunnable, 500);
+                        } else if (e != null) {
+                            e.printStackTrace();
+                            showNoConnection();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,91 +258,6 @@ public class ControllerActivity extends AppCompatActivity {
             }
         });
     }
-
-    private Runnable mGetViewstackRunnable = new Runnable() {
-        @Override
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        public void run() {
-        mViewstackFuture = mRpc.getViewstack(new PopcornTimeRpcClient.Callback() {
-            @Override
-            public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-                try {
-                    if (e == null && result != null && result.result != null) {
-                        LinkedTreeMap<String, Object> map = result.getMapResult();
-
-                        if (map.containsKey("viewstack")) {
-                            ArrayList<String> resultList = (ArrayList<String>) map.get("viewstack");
-                            mTopView = resultList.get(resultList.size() - 1);
-                            Boolean translucentActionBar = false;
-                            String shownFragment = mCurrentFragment = mCurrentFragment != null ? mCurrentFragment : "";
-
-                            if (mTopView.equals("player") && !mCurrentFragment.equals("player")) {
-                                setFragment(new PlayerControllerFragment());
-                                mCurrentFragment = mTopView;
-                                translucentActionBar = true;
-                            } else if (mTopView.equals("shows-container-contain") && !mCurrentFragment.equals("shows-container-contain")) {
-                                setFragment(new SeriesControllerFragment());
-                                mCurrentFragment = mTopView;
-                            } else if (mTopView.equals("movie-detail") && !mCurrentFragment.equals("movie-detail")) {
-                                setFragment(new MovieControllerFragment());
-                                mCurrentFragment = mTopView;
-                                translucentActionBar = true;
-                            } else if (mTopView.equals("app-overlay") && !mCurrentFragment.equals("app-overlay")) {
-                                setFragment(new LoadingControllerFragment());
-                                mCurrentFragment = mTopView;
-                            } else if (!(mTopView.equals("player") || mTopView.equals("shows-container-contain") || mTopView.equals("movie-detail") || mTopView.equals("app-overlay")) && !mCurrentFragment.equals("main")) {
-                                setFragment(new MainControllerFragment());
-                                mCurrentFragment = "main";
-                            }
-
-                            Window window = getWindow();
-                            if(translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
-                                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-                                    window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
-                                }
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                    getSupportActionBar().setTitle("");
-                                    ActionBarBackground.fadeOut(ControllerActivity.this);
-                                    }
-                                });
-                            } else if(!translucentActionBar && !shownFragment.equals(mCurrentFragment)) {
-                                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-                                    window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
-                                }
-
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                    getSupportActionBar().setTitle(getString(R.string.app_name));
-                                    ActionBarBackground.changeColor(ControllerActivity.this, getResources().getColor(R.color.primary));
-                                    }
-                                });
-                            }
-
-                            if(mTopView.equals("player")) {
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        getSupportActionBar().setTitle(R.string.now_playing);
-                                    }
-                                });
-                            }
-                        }
-
-                        mHandler.postDelayed(mGetViewstackRunnable, 500);
-                    } else if (e != null) {
-                        e.printStackTrace();
-                        showNoConnection();
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-        });
-        }
-    };
 
     public void runViewstackRunnable() {
         try {

@@ -39,18 +39,12 @@ public class ClearableEditText extends EditText implements OnTouchListener, OnFo
         void didClearText();
     }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
-
-    public void setIconAlwaysVisible(Boolean iconAlwaysVisible) {
-        this.iconAlwaysVisible = iconAlwaysVisible;
-        if(iconAlwaysVisible) setClearIconVisible(true);
-    }
-
     private Drawable xD;
     private Listener listener;
     private Boolean iconAlwaysVisible = false;
+
+    private OnTouchListener l;
+    private OnFocusChangeListener f;
 
     public ClearableEditText(Context context) {
         super(context);
@@ -67,6 +61,15 @@ public class ClearableEditText extends EditText implements OnTouchListener, OnFo
         init();
     }
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    public void setIconAlwaysVisible(Boolean iconAlwaysVisible) {
+        this.iconAlwaysVisible = iconAlwaysVisible;
+        if(iconAlwaysVisible) setClearIconVisible(true);
+    }
+
     @Override
     public void setOnTouchListener(OnTouchListener l) {
         this.l = l;
@@ -76,9 +79,6 @@ public class ClearableEditText extends EditText implements OnTouchListener, OnFo
     public void setOnFocusChangeListener(OnFocusChangeListener f) {
         this.f = f;
     }
-
-    private OnTouchListener l;
-    private OnFocusChangeListener f;
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
