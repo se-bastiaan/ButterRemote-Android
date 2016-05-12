@@ -181,6 +181,129 @@ public class MovieControllerFragment extends BaseControlFragment {
         }
     };
 
+    private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
+        @Override
+        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
+            try {
+                if (result != null && e == null) {
+                    mCurrentMap = result.getMapResult();
+
+                    // movie info
+                    final String title = (String) mCurrentMap.get("title");
+                    final String synopsis = (String) mCurrentMap.get("synopsis");
+                    final String year;
+                    if(mCurrentMap.get("year") instanceof Double) {
+                        year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
+                    } else {
+                        year = (String) mCurrentMap.get("year");
+                    }
+                    final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
+                    String tempRating;
+                    try {
+                        tempRating = (String) mCurrentMap.get("rating");
+                    } catch (ClassCastException ex) {
+                        tempRating = Double.toString( (Double) mCurrentMap.get("rating") );
+                    }
+                    final String rating = tempRating;
+
+                    mIsFavourited = (Boolean) mCurrentMap.get("bookmarked");
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            titleText.setText(title);
+                            synopsisText.setText(synopsis);
+                            yearText.setText(year);
+                            runtimeText.setText(runtime + " " + getString(R.string.minutes));
+                            ratingText.setText(rating + "/10");
+
+                            if(mIsFavourited) {
+                                favouriteText.setText(R.string.remove_favourite);
+                            } else {
+                                favouriteText.setText(R.string.add_favourite);
+                            }
+
+                            if(!mCurrentMap.containsKey("trailer")) {
+                                trailerBlock.setVisibility(View.GONE);
+                                topDivider.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+
+                    // poster/color
+                    final String posterUrl;
+                    if(mCurrentMap.containsKey("image")) {
+                        posterUrl = ((String) mCurrentMap.get("image")).replace("-300.jpg", ".jpg");
+                    } else {
+                        LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");
+                        posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
+                    }
+
+                    final String backdropUrl;
+                    if(mCurrentMap.containsKey("backdrop")) {
+                        backdropUrl = (String) mCurrentMap.get("backdrop");
+                    } else {
+                        LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");
+                        backdropUrl = images.get("fanart");
+                    }
+
+                    Bitmap poster = Picasso.with(getActivity()).load(posterUrl).get();
+                    Palette palette = Palette.generate(poster);
+
+                    try {
+                        int vibrantColor = palette.getVibrantColor(R.color.primary);
+                        if (vibrantColor == R.color.primary) {
+                            mPaletteColor = palette.getMutedColor(R.color.primary);
+                        } else {
+                            mPaletteColor = vibrantColor;
+                        }
+
+                        final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), mPaletteColor);
+                        mainInfoBlockColorFade.setDuration(500);
+                        Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
+                        mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, mPaletteColor);
+                        final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
+
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                playButton.setImageDrawable(td);
+                            }
+                        });
+
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        if(getActivity() == null) return;
+                                        Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+
+                                        mainInfoBlockColorFade.start();
+                                        td.startTransition(500);
+                                        coverImage.setVisibility(View.VISIBLE);
+                                        coverImage.startAnimation(fadeInAnim);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+
+                                    }
+                                });
+                            }
+                        });
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                }
+            } catch(Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_moviecontroller, container, false);
@@ -257,128 +380,5 @@ public class MovieControllerFragment extends BaseControlFragment {
             }
         }.execute();
     }
-
-    private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
-        @Override
-        public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
-            try {
-                if (result != null && e == null) {
-                    mCurrentMap = result.getMapResult();
-
-                    // movie info
-                    final String title = (String) mCurrentMap.get("title");
-                    final String synopsis = (String) mCurrentMap.get("synopsis");
-                    final String year;
-                    if(mCurrentMap.get("year") instanceof Double) {
-                        year = Integer.toString(((Double) mCurrentMap.get("year")).intValue());
-                    } else {
-                        year = (String) mCurrentMap.get("year");
-                    }
-                    final String runtime = Integer.toString(((Double) mCurrentMap.get("runtime")).intValue());
-                    String tempRating;
-                    try {
-                        tempRating = (String) mCurrentMap.get("rating");
-                    } catch (ClassCastException ex) {
-                        tempRating = Double.toString( (Double) mCurrentMap.get("rating") );
-                    }
-                    final String rating = tempRating;
-
-                    mIsFavourited = (Boolean) mCurrentMap.get("bookmarked");
-
-                    mHandler.post(new Runnable() {
-                          @Override
-                          public void run() {
-                              titleText.setText(title);
-                              synopsisText.setText(synopsis);
-                              yearText.setText(year);
-                              runtimeText.setText(runtime + " " + getString(R.string.minutes));
-                              ratingText.setText(rating + "/10");
-
-                              if(mIsFavourited) {
-                                  favouriteText.setText(R.string.remove_favourite);
-                              } else {
-                                  favouriteText.setText(R.string.add_favourite);
-                              }
-
-                              if(!mCurrentMap.containsKey("trailer")) {
-                                  trailerBlock.setVisibility(View.GONE);
-                                  topDivider.setVisibility(View.GONE);
-                              }
-                          }
-                    });
-
-                    // poster/color
-                    final String posterUrl;
-                    if(mCurrentMap.containsKey("image")) {
-                        posterUrl = ((String) mCurrentMap.get("image")).replace("-300.jpg", ".jpg");
-                    } else {
-                        LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");
-                        posterUrl = images.get("poster").replace("-300.jpg", ".jpg");
-                    }
-
-                    final String backdropUrl;
-                    if(mCurrentMap.containsKey("backdrop")) {
-                        backdropUrl = (String) mCurrentMap.get("backdrop");
-                    } else {
-                        LinkedTreeMap<String, String> images = (LinkedTreeMap<String, String>) mCurrentMap.get("images");
-                        backdropUrl = images.get("fanart");
-                    }
-
-                    Bitmap poster = Picasso.with(getActivity()).load(posterUrl).get();
-                    Palette palette = Palette.generate(poster);
-
-                    try {
-                        int vibrantColor = palette.getVibrantColor(R.color.primary);
-                        if (vibrantColor == R.color.primary) {
-                            mPaletteColor = palette.getMutedColor(R.color.primary);
-                        } else {
-                            mPaletteColor = vibrantColor;
-                        }
-
-                        final ObjectAnimator mainInfoBlockColorFade = ObjectAnimator.ofObject(mainInfoBlock, "backgroundColor", new ArgbEvaluator(), getResources().getColor(R.color.primary), mPaletteColor);
-                        mainInfoBlockColorFade.setDuration(500);
-                        Drawable oldDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, getResources().getColor(R.color.primary));
-                        mPlayButtonDrawable = PixelUtils.changeDrawableColor(getActivity(), R.drawable.ic_av_play_button, mPaletteColor);
-                        final TransitionDrawable td = new TransitionDrawable(new Drawable[]{oldDrawable, mPlayButtonDrawable});
-
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                playButton.setImageDrawable(td);
-                            }
-                        });
-
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Picasso.with(getActivity()).load(backdropUrl).into(coverImage, new com.squareup.picasso.Callback() {
-                                    @Override
-                                    public void onSuccess() {
-                                        if(getActivity() == null) return;
-                                        Animation fadeInAnim = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
-
-                                        mainInfoBlockColorFade.start();
-                                        td.startTransition(500);
-                                        coverImage.setVisibility(View.VISIBLE);
-                                        coverImage.startAnimation(fadeInAnim);
-                                    }
-
-                                    @Override
-                                    public void onError() {
-
-                                    }
-                                });
-                            }
-                        });
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                }
-            } catch(Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-    };
 
 }

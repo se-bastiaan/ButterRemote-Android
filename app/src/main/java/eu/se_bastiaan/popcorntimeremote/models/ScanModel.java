@@ -9,6 +9,19 @@ public class ScanModel implements Parcelable {
     public String user;
     public String pass;
 
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<ScanModel> CREATOR = new Parcelable.Creator<ScanModel>() {
+        @Override
+        public ScanModel createFromParcel(Parcel in) {
+            return new ScanModel(in);
+        }
+
+        @Override
+        public ScanModel[] newArray(int size) {
+            return new ScanModel[size];
+        }
+    };
+
     protected ScanModel(Parcel in) {
         ip = in.readString();
         port = in.readString();
@@ -29,16 +42,4 @@ public class ScanModel implements Parcelable {
         dest.writeString(pass);
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<ScanModel> CREATOR = new Parcelable.Creator<ScanModel>() {
-        @Override
-        public ScanModel createFromParcel(Parcel in) {
-            return new ScanModel(in);
-        }
-
-        @Override
-        public ScanModel[] newArray(int size) {
-            return new ScanModel[size];
-        }
-    };
 }

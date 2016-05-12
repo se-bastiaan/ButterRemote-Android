@@ -49,6 +49,42 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
     @Bind(R.id.add_button)
     ImageButton addButton;
 
+    private ListView.OnItemClickListener mClickListener = new ListView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            if (!mActionMode) {
+                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), ControllerActivity.class);
+                intent.putExtra(ControllerActivity.KEY_IP, cursor.getString(1));
+                intent.putExtra(ControllerActivity.KEY_PORT, cursor.getString(2));
+                intent.putExtra(ControllerActivity.KEY_NAME, cursor.getString(3));
+                intent.putExtra(ControllerActivity.KEY_USERNAME, cursor.getString(4));
+                intent.putExtra(ControllerActivity.KEY_PASSWORD, cursor.getString(5));
+                startActivity(intent);
+            } else {
+                getListView().getChildAt(mSelectedPosition).setBackgroundDrawable(null);
+                mSelectedPosition = position;
+                getListView().setItemChecked(mSelectedPosition, true);
+                view.setBackgroundResource(R.color.list_selected);
+            }
+        }
+    };
+
+    private AdapterView.OnItemLongClickListener mOnLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            if (mSelectedPosition != null) {
+                View v = getListView().getChildAt(mSelectedPosition);
+                if (v != null) v.setBackgroundDrawable(null);
+            }
+            mSelectedPosition = position;
+            view.setBackgroundResource(R.color.list_selected);
+            mMode = ((AppCompatActivity) getActivity()).startSupportActionMode(new ActionBarCallBack());
+            return true;
+        }
+    };
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -113,44 +149,6 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
         super.onPause();
         if (mMode != null) mMode.finish();
     }
-
-
-    private ListView.OnItemClickListener mClickListener = new ListView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            if (!mActionMode) {
-                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), ControllerActivity.class);
-                intent.putExtra(ControllerActivity.KEY_IP, cursor.getString(1));
-                intent.putExtra(ControllerActivity.KEY_PORT, cursor.getString(2));
-                intent.putExtra(ControllerActivity.KEY_NAME, cursor.getString(3));
-                intent.putExtra(ControllerActivity.KEY_USERNAME, cursor.getString(4));
-                intent.putExtra(ControllerActivity.KEY_PASSWORD, cursor.getString(5));
-                startActivity(intent);
-            } else {
-                getListView().getChildAt(mSelectedPosition).setBackgroundDrawable(null);
-                mSelectedPosition = position;
-                getListView().setItemChecked(mSelectedPosition, true);
-                view.setBackgroundResource(R.color.list_selected);
-            }
-        }
-    };
-
-
-    private AdapterView.OnItemLongClickListener mOnLongClickListener = new AdapterView.OnItemLongClickListener() {
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            if (mSelectedPosition != null) {
-                View v = getListView().getChildAt(mSelectedPosition);
-                if (v != null) v.setBackgroundDrawable(null);
-            }
-            mSelectedPosition = position;
-            view.setBackgroundResource(R.color.list_selected);
-            mMode = ((AppCompatActivity) getActivity()).startSupportActionMode(new ActionBarCallBack());
-            return true;
-        }
-    };
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

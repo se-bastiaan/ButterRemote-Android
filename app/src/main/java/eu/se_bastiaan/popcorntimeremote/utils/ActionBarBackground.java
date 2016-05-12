@@ -23,6 +23,23 @@ public class ActionBarBackground {
     private int mNewColor;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    private Drawable.Callback drawableCallback = new Drawable.Callback() {
+        @Override
+        public void invalidateDrawable(Drawable who) {
+            mActionBar.setBackgroundDrawable(who);
+        }
+
+        @Override
+        public void scheduleDrawable(Drawable who, Runnable what, long when) {
+            mHandler.postAtTime(what, when);
+        }
+
+        @Override
+        public void unscheduleDrawable(Drawable who, Runnable what) {
+            mHandler.removeCallbacks(what);
+        }
+    };
+
     public ActionBarBackground(AppCompatActivity AppCompatActivity) {
         mNewColor = Color.parseColor("#FFFFFF");
         init(AppCompatActivity);
@@ -140,23 +157,6 @@ public class ActionBarBackground {
 
         return this;
     }
-
-    private Drawable.Callback drawableCallback = new Drawable.Callback() {
-        @Override
-        public void invalidateDrawable(Drawable who) {
-            mActionBar.setBackgroundDrawable(who);
-        }
-
-        @Override
-        public void scheduleDrawable(Drawable who, Runnable what, long when) {
-            mHandler.postAtTime(what, when);
-        }
-
-        @Override
-        public void unscheduleDrawable(Drawable who, Runnable what) {
-            mHandler.removeCallbacks(what);
-        }
-    };
 
     /**
      * Get new drawable with provided color.
