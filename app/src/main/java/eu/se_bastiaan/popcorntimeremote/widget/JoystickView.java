@@ -294,6 +294,8 @@ public class JoystickView extends View {
             case RIGHT:
                 mRightImage = resource;
                 break;
+            default:
+                break;
         }
     }
 
@@ -319,6 +321,8 @@ public class JoystickView extends View {
                 case RIGHT:
                     mRightImage = bitmap;
                     break;
+                default:
+                    break;
             }
         } else {
             mCenterImage = null;
@@ -342,6 +346,8 @@ public class JoystickView extends View {
             case RIGHT:
                 mPositionY = mCenterY;
                 mPositionX = getWidth();
+                break;
+            default:
                 break;
         }
 

@@ -56,6 +56,8 @@ public class MainControllerFragment extends BaseControlFragment {
                 case R.id.tabsButton:
                     getClient().toggleTabs(mBlankResponseCallback);
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -80,6 +82,8 @@ public class MainControllerFragment extends BaseControlFragment {
                     break;
                 case LEFT:
                     getClient().left(mBlankResponseCallback);
+                    break;
+                default:
                     break;
             }
         }

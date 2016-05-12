@@ -191,6 +191,8 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
             case R.id.action_donate:
                 DonationFragment.show(getFragmentManager());
                 return true;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -208,6 +210,8 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
                 case R.id.action_edit:
                     openEditorFragment(cursor.getString(0));
                     mMode.finish();
+                    break;
+                default:
                     break;
             }
             return true;
