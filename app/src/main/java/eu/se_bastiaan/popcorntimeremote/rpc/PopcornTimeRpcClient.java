@@ -24,9 +24,9 @@ import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class PopcornTimeRpcClient {
 
+    private final OkHttpClient mClient = new OkHttpClient();
+    private final Gson mGson = new Gson();
     private String mIpAddress, mPort, mUrl, mUsername, mPassword, mVersion;
-    private OkHttpClient mClient = new OkHttpClient();
-    private Gson mGson = new Gson();
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json");
 
     public enum RequestId { PING, UP, DOWN, LEFT, RIGHT, ENTER, BACK, QUALITY, NEXT_SEASON, PREV_SEASON, TOGGLE_PLAY, PLAY_TRAILER, TOGGLE_TABS, TOGGLE_FULLSCREEN, TOGGLE_FAVOURITE, TOGGLE_WATCHED, TOGGLE_MUTE, SET_VOLUME, GET_VOLUME, GET_PLAYING, FILTER_GENRE, FILTER_SORTER, FILTER_TYPE, FILTER_SEARCH, CLEAR_SEARCH, SEEK, GET_VIEWSTACK, SET_SELECTION, GET_SELECTION, GET_FULLSCREEN, GET_SUBTITLES, GET_PLAYERS, SET_PLAYER, SET_SUBTITLE, LISTENNOTIFICATIONS }

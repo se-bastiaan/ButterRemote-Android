@@ -51,7 +51,7 @@ public class ControllerActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    private Runnable mGetViewstackRunnable = new Runnable() {
+    private final Runnable mGetViewstackRunnable = new Runnable() {
         @Override
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         public void run() {

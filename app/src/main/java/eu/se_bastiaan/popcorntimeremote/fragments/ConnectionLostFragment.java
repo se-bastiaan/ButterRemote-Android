@@ -19,7 +19,7 @@ public class ConnectionLostFragment extends Fragment {
     @Bind(R.id.retryButton)
     Button retryButton;
 
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             ((ControllerActivity) getActivity()).runViewstackRunnable();

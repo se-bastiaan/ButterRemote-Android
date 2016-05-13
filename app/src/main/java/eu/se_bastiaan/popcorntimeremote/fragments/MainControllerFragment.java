@@ -39,7 +39,7 @@ public class MainControllerFragment extends BaseControlFragment {
     ClearableEditText searchInput;
 
 
-    private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
@@ -62,7 +62,7 @@ public class MainControllerFragment extends BaseControlFragment {
         }
     };
 
-    private JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
+    private final JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
         @Override
         public void onValueChanged(int angle, int power, JoystickView.Direction direction) {
             LogUtils.d("mOnJoystickMoveListener", power);
@@ -89,7 +89,7 @@ public class MainControllerFragment extends BaseControlFragment {
         }
     };
 
-    private ClearableEditText.Listener mClearableEditTextListener = new ClearableEditText.Listener() {
+    private final ClearableEditText.Listener mClearableEditTextListener = new ClearableEditText.Listener() {
         @Override
         public void didClearText() {
             searchInputBox.setVisibility(View.GONE);
@@ -99,7 +99,7 @@ public class MainControllerFragment extends BaseControlFragment {
         }
     };
 
-    private TextWatcher mClearableEditTextWatcher = new TextWatcher() {
+    private final TextWatcher mClearableEditTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 

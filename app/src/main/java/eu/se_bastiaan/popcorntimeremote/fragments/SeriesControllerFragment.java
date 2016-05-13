@@ -26,7 +26,7 @@ public class SeriesControllerFragment extends BaseControlFragment {
     @Bind(R.id.qualityButton)
     ImageButton qualityButton;
 
-    private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
@@ -45,7 +45,7 @@ public class SeriesControllerFragment extends BaseControlFragment {
         }
     };
 
-    private JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
+    private final JoystickView.OnJoystickMoveListener mOnJoystickMoveListener = new JoystickView.OnJoystickMoveListener() {
         @Override
         public void onValueChanged(int angle, int power, JoystickView.Direction direction) {
             LogUtils.d("OnJoystickMoveListener", power);

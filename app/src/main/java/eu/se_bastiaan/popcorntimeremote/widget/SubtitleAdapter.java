@@ -19,8 +19,8 @@ import eu.se_bastiaan.popcorntimeremote.R;
  */
 public class SubtitleAdapter extends BaseAdapter {
 
-    private ArrayList<String> mData;
-    private LayoutInflater mInflater;
+    private final ArrayList<String> mData;
+    private final LayoutInflater mInflater;
 
     class ViewHolder {
         @Bind(android.R.id.text1)

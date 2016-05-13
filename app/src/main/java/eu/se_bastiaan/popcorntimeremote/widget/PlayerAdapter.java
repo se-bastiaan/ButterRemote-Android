@@ -22,8 +22,8 @@ import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
  */
 public class PlayerAdapter extends BaseAdapter {
 
-    private ArrayList<LinkedTreeMap<String, String>> mData;
-    private LayoutInflater mInflater;
+    private final ArrayList<LinkedTreeMap<String, String>> mData;
+    private final LayoutInflater mInflater;
 
     class ViewHolder {
         @Bind(android.R.id.text1)

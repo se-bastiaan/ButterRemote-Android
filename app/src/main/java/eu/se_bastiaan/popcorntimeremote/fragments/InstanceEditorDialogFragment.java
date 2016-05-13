@@ -63,7 +63,7 @@ public class InstanceEditorDialogFragment extends DialogFragment {
     @Bind(R.id.pairingLayout)
     LinearLayout pairingLayout;
 
-    private Validator.ValidationListener mValidationListener = new Validator.ValidationListener() {
+    private final Validator.ValidationListener mValidationListener = new Validator.ValidationListener() {
         @Override
         public void onValidationSucceeded() {
             try {

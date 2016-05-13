@@ -34,7 +34,7 @@ public class SubtitleSelectorDialogFragment extends DialogFragment {
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
-    private PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
+    private final PopcornTimeRpcClient.Callback mResponseListener = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             if(e == null && result != null && result.result != null && result.id == PopcornTimeRpcClient.RequestId.GET_SUBTITLES.ordinal()) {

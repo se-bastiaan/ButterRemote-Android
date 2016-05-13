@@ -16,14 +16,14 @@ import eu.se_bastiaan.popcorntimeremote.R;
 
 public class ActionBarBackground {
 
+    private final int mNewColor;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private Drawable mOldBackground;
     private AppCompatActivity mActivity;
     private View mToolbar;
     private ActionBar mActionBar;
-    private int mNewColor;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    private Drawable.Callback drawableCallback = new Drawable.Callback() {
+    private final Drawable.Callback drawableCallback = new Drawable.Callback() {
         @Override
         public void invalidateDrawable(Drawable who) {
             mActionBar.setBackgroundDrawable(who);
