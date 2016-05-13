@@ -18,6 +18,8 @@ import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
 public class JoystickView extends View {
     // Constants
+    private final Handler mHandler = new Handler();
+    private final DisplayMetrics mMetrics = new DisplayMetrics();
     private final double RAD = 57.2957795;
     public enum Direction { CENTER, RIGHT, UP, LEFT, DOWN };
     // Variables
@@ -38,11 +40,9 @@ public class JoystickView extends View {
     private boolean mUserIsTouching = false;
     private boolean mCalledOnce = false;
     private boolean mDrawn = false;
-    private Handler mHandler = new Handler();
     private Context mContext;
-    private DisplayMetrics mMetrics = new DisplayMetrics();
 
-    private Runnable mCallbackRunnable = new Runnable() {
+    private final Runnable mCallbackRunnable = new Runnable() {
         @Override
         public void run() {
             mCalledOnce = true;

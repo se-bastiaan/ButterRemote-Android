@@ -39,7 +39,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
 
     private Boolean mPlaying = false, mSeeked = false, mVolumeChanged = false, mFullscreen = false;
     private Integer mCurrentTime, mMax, mVolume;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Bind(R.id.slidingLayout)
     SlidingUpPanelLayout slidingLayout;
@@ -64,7 +64,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
     @Bind(R.id.subtitlesBlock)
     LinearLayout subtitlesBlock;
 
-    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
@@ -93,7 +93,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener mOnTimeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener mOnTimeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
         @Override
@@ -109,7 +109,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener mOnVolumeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener mOnVolumeControlChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if(fromUser) {
@@ -127,7 +127,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         public void onStopTrackingTouch(SeekBar seekBar) { }
     };
 
-    private PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
+    private final PopcornTimeRpcClient.Callback mSelectionCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -178,7 +178,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private PopcornTimeRpcClient.Callback mPlayingCallback = new PopcornTimeRpcClient.Callback() {
+    private final PopcornTimeRpcClient.Callback mPlayingCallback = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -220,7 +220,7 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private PopcornTimeRpcClient.Callback mFullscreenCallback  = new PopcornTimeRpcClient.Callback() {
+    private final PopcornTimeRpcClient.Callback mFullscreenCallback  = new PopcornTimeRpcClient.Callback() {
         @Override
         public void onCompleted(Exception e, PopcornTimeRpcClient.RpcResponse result) {
             try {
@@ -241,14 +241,14 @@ public class PlayerControllerFragment extends BaseControlFragment {
         }
     };
 
-    private Runnable mPlayingRunnable = new Runnable() {
+    private final Runnable mPlayingRunnable = new Runnable() {
         @Override
         public void run() {
             getClient().getPlaying(mPlayingCallback);
         }
     };
 
-    private Runnable mFullscreenRunnable = new Runnable() {
+    private final Runnable mFullscreenRunnable = new Runnable() {
         @Override
         public void run() {
             getClient().getFullscreen(mFullscreenCallback);

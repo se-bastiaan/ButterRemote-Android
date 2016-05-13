@@ -39,7 +39,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.PixelUtils;
 
 public class InstanceListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private Boolean mActionMode = false;
+    private final Boolean mActionMode = false;
     private SimpleCursorAdapter mAdapter;
     private Integer mSelectedPosition;
     private ActionMode mMode;
@@ -49,7 +49,7 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
     @Bind(R.id.add_button)
     ImageButton addButton;
 
-    private ListView.OnItemClickListener mClickListener = new ListView.OnItemClickListener() {
+    private final ListView.OnItemClickListener mClickListener = new ListView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -71,7 +71,7 @@ public class InstanceListFragment extends Fragment implements LoaderManager.Load
         }
     };
 
-    private AdapterView.OnItemLongClickListener mOnLongClickListener = new AdapterView.OnItemLongClickListener() {
+    private final AdapterView.OnItemLongClickListener mOnLongClickListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             if (mSelectedPosition != null) {

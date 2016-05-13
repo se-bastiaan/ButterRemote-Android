@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class Version implements Comparable<Version> {
 
-    private String version;
+    private final String version;
 
     public Version(String version) {
         if(version == null)
