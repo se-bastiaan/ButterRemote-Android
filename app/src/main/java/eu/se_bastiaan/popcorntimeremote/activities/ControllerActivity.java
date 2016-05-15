@@ -40,6 +40,10 @@ public class ControllerActivity extends AppCompatActivity {
 
     public static final String KEY_IP = "ipAddress", KEY_PORT = "port", KEY_USERNAME = "username", KEY_PASSWORD = "password", KEY_NAME = "name", KEY_VERSION = "version";
 
+    private static final String PLAYER = "player";
+    private static final String SHOWS_CONTAINER_CONTAIN = "shows-container-contain";
+    private static final String MOVIE_DETAIL = "movie-detail";
+    private static final String APP_OVERLAY = "app-overlay";
     private Bundle mExtras;
     private PopcornTimeRpcClient mRpc;
     private Handler mHandler;
@@ -68,21 +72,21 @@ public class ControllerActivity extends AppCompatActivity {
                                 Boolean translucentActionBar = false;
                                 String shownFragment = mCurrentFragment = mCurrentFragment != null ? mCurrentFragment : "";
 
-                                if (mTopView.equals("player") && !mCurrentFragment.equals("player")) {
+                                if (mTopView.equals(PLAYER) && !mCurrentFragment.equals(PLAYER)) {
                                     setFragment(new PlayerControllerFragment());
                                     mCurrentFragment = mTopView;
                                     translucentActionBar = true;
-                                } else if (mTopView.equals("shows-container-contain") && !mCurrentFragment.equals("shows-container-contain")) {
+                                } else if (mTopView.equals(SHOWS_CONTAINER_CONTAIN) && !mCurrentFragment.equals(SHOWS_CONTAINER_CONTAIN)) {
                                     setFragment(new SeriesControllerFragment());
                                     mCurrentFragment = mTopView;
-                                } else if (mTopView.equals("movie-detail") && !mCurrentFragment.equals("movie-detail")) {
+                                } else if (mTopView.equals(MOVIE_DETAIL) && !mCurrentFragment.equals(MOVIE_DETAIL)) {
                                     setFragment(new MovieControllerFragment());
                                     mCurrentFragment = mTopView;
                                     translucentActionBar = true;
-                                } else if (mTopView.equals("app-overlay") && !mCurrentFragment.equals("app-overlay")) {
+                                } else if (mTopView.equals(APP_OVERLAY) && !mCurrentFragment.equals(APP_OVERLAY)) {
                                     setFragment(new LoadingControllerFragment());
                                     mCurrentFragment = mTopView;
-                                } else if (!(mTopView.equals("player") || mTopView.equals("shows-container-contain") || mTopView.equals("movie-detail") || mTopView.equals("app-overlay")) && !mCurrentFragment.equals("main")) {
+                                } else if (!(mTopView.equals(PLAYER) || mTopView.equals(SHOWS_CONTAINER_CONTAIN) || mTopView.equals(MOVIE_DETAIL) || mTopView.equals(APP_OVERLAY)) && !mCurrentFragment.equals("main")) {
                                     setFragment(new MainControllerFragment());
                                     mCurrentFragment = "main";
                                 }
@@ -113,7 +117,7 @@ public class ControllerActivity extends AppCompatActivity {
                                     });
                                 }
 
-                                if(mTopView.equals("player")) {
+                                if(mTopView.equals(PLAYER)) {
                                     mHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
@@ -199,7 +203,7 @@ public class ControllerActivity extends AppCompatActivity {
 
             fragment.setArguments(mExtras);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if (mCurrentFragment.equals("player")) {
+            if (mCurrentFragment.equals(PLAYER)) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -208,7 +212,7 @@ public class ControllerActivity extends AppCompatActivity {
                 });
 
                 fragmentTransaction.setCustomAnimations(R.anim.still, R.anim.slide_down);
-            } else if(mTopView.equals("player")) {
+            } else if(mTopView.equals(PLAYER)) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {

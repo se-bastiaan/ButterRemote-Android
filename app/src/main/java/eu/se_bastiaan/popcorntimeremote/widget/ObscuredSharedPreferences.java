@@ -28,6 +28,8 @@ import javax.crypto.spec.PBEParameterSpec;
  * publicity.
  */
 public class ObscuredSharedPreferences implements SharedPreferences {
+
+    private static final String PBE_WITH_MD5_AND_DES = "PBEWithMD5AndDES";
     protected static final String UTF8 = "utf-8";
     private static final char[] SEKRIT = new char[] { 0x7B, 0xCC, 0x01, 0xEC, 0xCF, 0x74 }; // INSERT A RANDOM PASSWORD HERE.
     // Don't use anything you wouldn't want to
@@ -178,9 +180,9 @@ public class ObscuredSharedPreferences implements SharedPreferences {
 
         try {
             final byte[] bytes = value!=null ? value.getBytes(UTF8) : new byte[0];
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(PBE_WITH_MD5_AND_DES);
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(SEKRIT));
-            Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+            Cipher pbeCipher = Cipher.getInstance(PBE_WITH_MD5_AND_DES);
             pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(), Settings.System.ANDROID_ID).getBytes(UTF8), 20));
             return new String(Base64.encode(pbeCipher.doFinal(bytes), Base64.NO_WRAP),UTF8);
 
@@ -193,9 +195,9 @@ public class ObscuredSharedPreferences implements SharedPreferences {
     protected String decrypt(String value){
         try {
             final byte[] bytes = value!=null ? Base64.decode(value, Base64.DEFAULT) : new byte[0];
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(PBE_WITH_MD5_AND_DES);
             SecretKey key = keyFactory.generateSecret(new PBEKeySpec(SEKRIT));
-            Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+            Cipher pbeCipher = Cipher.getInstance(PBE_WITH_MD5_AND_DES);
             pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(Settings.Secure.getString(context.getContentResolver(),Settings.System.ANDROID_ID).getBytes(UTF8), 20));
             return new String(pbeCipher.doFinal(bytes),UTF8);
 

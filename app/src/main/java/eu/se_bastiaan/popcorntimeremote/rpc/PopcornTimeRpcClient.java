@@ -24,6 +24,9 @@ import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class PopcornTimeRpcClient {
 
+    private static final String VOLUME = "volume";
+    private static final String OLD_API_METHOD_NOT_IMPLEMENTED = "Old API, method not implemented";
+    private static final String ZERO_VERSION = "0.0.0";
     private final OkHttpClient mClient = new OkHttpClient();
     private final Gson mGson = new Gson();
     private String mIpAddress, mPort, mUrl, mUsername, mPassword, mVersion;
@@ -37,7 +40,7 @@ public class PopcornTimeRpcClient {
     }
 
     public PopcornTimeRpcClient(String ipAddress, String port, String username, String password) {
-        mVersion = "0.0.0";
+        mVersion = ZERO_VERSION;
         init(ipAddress, port, username, password);
     }
 
@@ -57,7 +60,7 @@ public class PopcornTimeRpcClient {
     }
 
     public String getVersion() {
-        return mVersion != null ? mVersion : "0.0.0";
+        return mVersion != null ? mVersion : ZERO_VERSION;
     }
 
     public Call ping(Callback callback) {
@@ -97,7 +100,7 @@ public class PopcornTimeRpcClient {
 
     public Call toggleQuality(Callback callback) {
         RpcRequest request;
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             request = new RpcRequest("togglequality", RequestId.QUALITY);
         } else {
             request = new RpcRequest("quality", RequestId.QUALITY);
@@ -127,7 +130,7 @@ public class PopcornTimeRpcClient {
 
     public Call toggleTabs(Callback callback) {
         RpcRequest request;
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             request = new RpcRequest("toggletab", RequestId.TOGGLE_TABS);
         } else {
             request = new RpcRequest("togglemoviesshows", RequestId.TOGGLE_TABS);
@@ -168,8 +171,8 @@ public class PopcornTimeRpcClient {
      */
     public Call setVolume(Double volume, Callback callback) {
         RpcRequest request;
-        if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("volume", Arrays.asList(volume), RequestId.SET_VOLUME);
+        if(Version.compare(mVersion, ZERO_VERSION)) {
+            request = new RpcRequest(VOLUME, Arrays.asList(volume), RequestId.SET_VOLUME);
         } else {
             request = new RpcRequest("setvolume", Arrays.asList(volume), RequestId.SET_VOLUME);
         }
@@ -183,12 +186,12 @@ public class PopcornTimeRpcClient {
      */
     public Call getVolume(Callback callback) {
         RpcRequest request;
-        if(Version.compare(mVersion, "0.0.0")) {
-            request = new RpcRequest("volume", RequestId.GET_VOLUME);
+        if(Version.compare(mVersion, ZERO_VERSION)) {
+            request = new RpcRequest(VOLUME, RequestId.GET_VOLUME);
         } else {
             RpcResponse response = new RpcResponse();
             LinkedTreeMap<String, Object> map = new LinkedTreeMap<String, Object>();
-            map.put("volume", 1);
+            map.put(VOLUME, 1);
             response.result = map;
             callback.onCompleted(null, response);
             return null;
@@ -271,7 +274,7 @@ public class PopcornTimeRpcClient {
      */
     public Call getViewstack(final Callback callback) {
         RpcRequest request  = new RpcRequest("getviewstack", RequestId.GET_VIEWSTACK);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
             return request(request, new Callback() {
@@ -302,7 +305,7 @@ public class PopcornTimeRpcClient {
      */
     public Call getSubtitles(final Callback callback) {
         RpcRequest request  = new RpcRequest("getsubtitles", RequestId.GET_SUBTITLES);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
             return request(request, new Callback() {
@@ -327,10 +330,10 @@ public class PopcornTimeRpcClient {
      */
     public Call getSelection(final Callback callback) {
         RpcRequest request  = new RpcRequest("getselection", RequestId.GET_SELECTION);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
-            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            callback.onCompleted(new UnsupportedOperationException(OLD_API_METHOD_NOT_IMPLEMENTED), null);
             return null;
         }
     }
@@ -346,7 +349,7 @@ public class PopcornTimeRpcClient {
         if(Version.compare(mVersion, "0.3.4")) {
             return request(request, callback);
         } else {
-            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            callback.onCompleted(new UnsupportedOperationException(OLD_API_METHOD_NOT_IMPLEMENTED), null);
             return null;
         }
     }
@@ -358,10 +361,10 @@ public class PopcornTimeRpcClient {
      */
     public Call getPlaying(final Callback callback) {
         RpcRequest request  = new RpcRequest("getplaying", RequestId.GET_PLAYING);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
-            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            callback.onCompleted(new UnsupportedOperationException(OLD_API_METHOD_NOT_IMPLEMENTED), null);
             return null;
         }
     }
@@ -373,10 +376,10 @@ public class PopcornTimeRpcClient {
      */
     public Call getFullscreen(final Callback callback) {
         RpcRequest request  = new RpcRequest("getfullscreen", RequestId.GET_FULLSCREEN);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
-            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            callback.onCompleted(new UnsupportedOperationException(OLD_API_METHOD_NOT_IMPLEMENTED), null);
             return null;
         }
     }
@@ -388,10 +391,10 @@ public class PopcornTimeRpcClient {
      */
     public Call getPlayers(final Callback callback) {
         RpcRequest request  = new RpcRequest("getplayers", RequestId.GET_PLAYERS);
-        if(Version.compare(mVersion, "0.0.0")) {
+        if(Version.compare(mVersion, ZERO_VERSION)) {
             return request(request, callback);
         } else {
-            callback.onCompleted(new UnsupportedOperationException("Old API, method not implemented"), null);
+            callback.onCompleted(new UnsupportedOperationException(OLD_API_METHOD_NOT_IMPLEMENTED), null);
             return null;
         }
     }
@@ -463,7 +466,7 @@ public class PopcornTimeRpcClient {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     e = ex;
-                    mVersion = "0.0.0";
+                    mVersion = ZERO_VERSION;
                     if(rpc.id == RequestId.GET_SELECTION.ordinal()) {
                         mVersion = "0.3.4";
                     }
