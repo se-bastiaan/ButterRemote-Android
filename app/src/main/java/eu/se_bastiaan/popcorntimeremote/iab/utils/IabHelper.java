@@ -111,6 +111,8 @@ public class IabHelper {
     // some fields on the getSkuDetails response bundle
     public static final String GET_SKU_DETAILS_ITEM_LIST = "ITEM_ID_LIST";
     public static final String GET_SKU_DETAILS_ITEM_TYPE_LIST = "ITEM_TYPE_LIST";
+
+    private static final String CONSUME = "consume";
     // Is debug logging enabled?
     boolean mDebugLog = false;
     String mDebugTag = "IabHelper";
@@ -630,7 +632,7 @@ public class IabHelper {
      */
     void consume(Purchase itemInfo) throws IabException {
         checkNotDisposed();
-        checkSetupDone("consume");
+        checkSetupDone(CONSUME);
 
         if (!itemInfo.mItemType.equals(ITEM_TYPE_INAPP)) {
             throw new IabException(IABHELPER_INVALID_CONSUMPTION,
@@ -669,7 +671,7 @@ public class IabHelper {
      */
     public void consumeAsync(Purchase purchase, OnConsumeFinishedListener listener) {
         checkNotDisposed();
-        checkSetupDone("consume");
+        checkSetupDone(CONSUME);
         List<Purchase> purchases = new ArrayList<>();
         purchases.add(purchase);
         consumeAsyncInternal(purchases, listener, null);
@@ -683,7 +685,7 @@ public class IabHelper {
      */
     public void consumeAsync(List<Purchase> purchases, OnConsumeMultiFinishedListener listener) {
         checkNotDisposed();
-        checkSetupDone("consume");
+        checkSetupDone(CONSUME);
         consumeAsyncInternal(purchases, null, listener);
     }
 
@@ -850,7 +852,7 @@ public class IabHelper {
                               final OnConsumeFinishedListener singleListener,
                               final OnConsumeMultiFinishedListener multiListener) {
         final Handler handler = new Handler();
-        flagStartAsync("consume");
+        flagStartAsync(CONSUME);
         (new Thread(new Runnable() {
             public void run() {
                 final List<IabResult> results = new ArrayList<>();

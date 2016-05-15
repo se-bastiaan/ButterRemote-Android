@@ -7,8 +7,10 @@ import eu.se_bastiaan.popcorntimeremote.Constants;
 
 public class LogUtils {
 
+    private static final String LOG_UTILS = "LogUtils";
+
     public static void d(Object message) {
-        d("LogUtils", message);
+        d(LOG_UTILS, message);
     }
 
     public static void d(Object tag, Object message) {
@@ -18,7 +20,7 @@ public class LogUtils {
     }
 
     public static void v(Object message) {
-        v("LogUtils", message);
+        v(LOG_UTILS, message);
     }
 
     public static void v(Object tag, Object message) {
@@ -28,7 +30,7 @@ public class LogUtils {
     }
 
     public static void e(Object message) {
-        e("LogUtils", message);
+        e(LOG_UTILS, message);
     }
 
     public static void e(Object tag, Object message) {
@@ -44,7 +46,7 @@ public class LogUtils {
     }
 
     public static void w(Object message) {
-        w("LogUtils", message);
+        w(LOG_UTILS, message);
     }
 
     public static void w(Object tag, Object message) {

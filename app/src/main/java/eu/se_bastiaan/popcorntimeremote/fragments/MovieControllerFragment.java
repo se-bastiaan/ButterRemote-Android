@@ -39,6 +39,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.Version;
 
 public class MovieControllerFragment extends BaseControlFragment {
 
+    private static final String OVERLAY_FRAGMENT = "overlay_fragment";
     private Drawable mPlayButtonDrawable;
     private LinkedTreeMap<String, Object> mCurrentMap;
     private Integer mLastScrollLocation = 0, mPaletteColor = R.color.primary, mOpenBarPos, mHeaderHeight, mToolbarHeight, mParallaxHeight;
@@ -95,17 +96,17 @@ public class MovieControllerFragment extends BaseControlFragment {
                     Bundle b = new Bundle();
                     b.putString("text", (String) mCurrentMap.get("synopsis"));
                     synopsisDialogFragment.setArguments(b);
-                    synopsisDialogFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
+                    synopsisDialogFragment.show(getActivity().getSupportFragmentManager(), OVERLAY_FRAGMENT);
                     break;
                 case R.id.subtitlesBlock:
                     SubtitleSelectorDialogFragment subtitleFragment = new SubtitleSelectorDialogFragment();
                     subtitleFragment.setArguments(getArguments());
-                    subtitleFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
+                    subtitleFragment.show(getActivity().getSupportFragmentManager(), OVERLAY_FRAGMENT);
                     break;
                 case R.id.playerBlock:
                     PlayerSelectorDialogFragment playerFragment = new PlayerSelectorDialogFragment();
                     playerFragment.setArguments(getArguments());
-                    playerFragment.show(getActivity().getSupportFragmentManager(), "overlay_fragment");
+                    playerFragment.show(getActivity().getSupportFragmentManager(), OVERLAY_FRAGMENT);
                     break;
                 case R.id.favouriteBlock:
                     getClient().toggleFavourite(mBlankResponseCallback);
