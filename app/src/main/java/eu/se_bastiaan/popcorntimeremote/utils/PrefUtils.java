@@ -5,7 +5,11 @@ import android.content.Context;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 import eu.se_bastiaan.popcorntimeremote.widget.ObscuredSharedPreferences;
 
-public class PrefUtils {
+public final class PrefUtils {
+
+    private PrefUtils() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     // Main functions below
 

@@ -28,7 +28,11 @@ import eu.se_bastiaan.popcorntimeremote.R;
  *
  * @author Artem Chepurnoy
  */
-public class DonationItems {
+public final class DonationItems {
+
+    private DonationItems() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     public static Donation[] get(Resources res) {
         int[] data = new int[]{
