@@ -5,9 +5,13 @@ import android.util.Log;
 import eu.se_bastiaan.popcorntimeremote.Constants;
 
 
-public class LogUtils {
+public final class LogUtils {
 
     private static final String LOG_UTILS = "LogUtils";
+
+    private LogUtils() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     public static void d(Object message) {
         d(LOG_UTILS, message);

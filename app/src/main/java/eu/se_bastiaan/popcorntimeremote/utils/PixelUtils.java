@@ -11,7 +11,11 @@ import android.util.TypedValue;
 /**
  * Created by Sebastiaan on 11-06-14.
  */
-public class PixelUtils {
+public final class PixelUtils {
+
+    private PixelUtils() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     public static int getPixelsFromDp(Context context, Integer dp) {
         Resources r = context.getResources();

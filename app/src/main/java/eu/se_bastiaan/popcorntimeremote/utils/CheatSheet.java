@@ -31,12 +31,16 @@ import android.widget.Toast;
  * <p>Based on the original action bar implementation in <a href="https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/java/com/android/internal/view/menu/ActionMenuItemView.java">
  * ActionMenuItemView.java</a>.
  */
-public class CheatSheet {
+public final class CheatSheet {
     /**
      * The estimated height of a toast, in dips (density-independent pixels). This is used to
      * determine whether or not the toast should appear above or below the UI element.
      */
     private static final int ESTIMATED_TOAST_HEIGHT_DIPS = 48;
+
+    private CheatSheet() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     /**
      * Sets up a cheat sheet (tooltip) for the given view by setting its {@link

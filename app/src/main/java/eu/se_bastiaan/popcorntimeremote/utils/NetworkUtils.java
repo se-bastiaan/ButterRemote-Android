@@ -8,7 +8,11 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
-public class NetworkUtils {
+public final class NetworkUtils {
+
+    private NetworkUtils() throws InstantiationException {
+        throw new InstantiationException("This class is not created for instantiation");
+    }
 
     /**
      * Returns MAC address of the given interface name.
