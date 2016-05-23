@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.google.gson.internal.LinkedTreeMap;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -22,7 +22,7 @@ import eu.se_bastiaan.popcorntimeremote.utils.LogUtils;
  */
 public class PlayerAdapter extends BaseAdapter {
 
-    private final ArrayList<LinkedTreeMap<String, String>> mData;
+    private final List<LinkedTreeMap<String, String>> mData;
     private final LayoutInflater mInflater;
 
     class ViewHolder {
@@ -34,7 +34,7 @@ public class PlayerAdapter extends BaseAdapter {
         }
     }
 
-    public PlayerAdapter(Context context, ArrayList<LinkedTreeMap<String, String>> data) {
+    public PlayerAdapter(Context context, List<LinkedTreeMap<String, String>> data) {
         mData = data;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

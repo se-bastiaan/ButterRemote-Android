@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -19,7 +19,7 @@ import eu.se_bastiaan.popcorntimeremote.R;
  */
 public class SubtitleAdapter extends BaseAdapter {
 
-    private final ArrayList<String> mData;
+    private final List<String> mData;
     private final LayoutInflater mInflater;
 
     class ViewHolder {
@@ -31,7 +31,7 @@ public class SubtitleAdapter extends BaseAdapter {
         }
     }
 
-    public SubtitleAdapter(Context context, ArrayList<String> data) {
+    public SubtitleAdapter(Context context, List<String> data) {
         mData = data;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

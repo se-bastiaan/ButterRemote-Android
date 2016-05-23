@@ -15,9 +15,7 @@ public class LoadingControllerFragment extends BaseControlFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LogUtils.d("JoyStickMainControllerFragment", "onCreateView");
 
-        View v = inflater.inflate(R.layout.fragment_loadingcontroller, container, false);
-
-        return v;
+        return inflater.inflate(R.layout.fragment_loadingcontroller, container, false);
     }
 
 }
