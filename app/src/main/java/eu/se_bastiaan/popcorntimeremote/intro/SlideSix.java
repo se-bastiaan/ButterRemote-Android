@@ -11,7 +11,6 @@ import eu.se_bastiaan.popcorntimeremote.R;
 public class SlideSix extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_introslide_six, container, false);
-        return v;
+        return inflater.inflate(R.layout.fragment_introslide_six, container, false);
     }
 }

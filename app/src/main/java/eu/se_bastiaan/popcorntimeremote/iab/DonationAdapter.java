@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import eu.se_bastiaan.popcorntimeremote.R;
 
@@ -39,14 +39,14 @@ import eu.se_bastiaan.popcorntimeremote.R;
  */
 public class DonationAdapter extends ArrayAdapter<Donation> {
 
-    private final HashSet<String> mInventorySet;
+    private final Set<String> mInventorySet;
     private final LayoutInflater mInflater;
     private final String mDonationAmountLabel;
 
     private final int mColorNormal;
     private final int mColorPurchased;
 
-    public DonationAdapter(Context context, Donation[] items, HashSet<String> inventory) {
+    public DonationAdapter(Context context, Donation[] items, Set<String> inventory) {
         super(context, 0, items);
 
         mInventorySet = inventory;
