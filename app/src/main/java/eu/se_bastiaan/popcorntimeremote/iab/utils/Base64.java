@@ -31,6 +31,8 @@ package eu.se_bastiaan.popcorntimeremote.iab.utils;
  * @version 1.3
  */
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * Base64 converter class. This code is not a complete MIME encoder;
  * it simply converts binary data to base64 data and back.
@@ -427,7 +429,7 @@ public class Base64 {
      * @since 1.4
      */
     public static byte[] decode(String s) throws Base64DecoderException {
-        byte[] bytes = s.getBytes();
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         return decode(bytes, 0, bytes.length);
     }
 
@@ -439,7 +441,7 @@ public class Base64 {
      * @return the decoded data
      */
     public static byte[] decodeWebSafe(String s) throws Base64DecoderException {
-        byte[] bytes = s.getBytes();
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         return decodeWebSafe(bytes, 0, bytes.length);
     }
 
