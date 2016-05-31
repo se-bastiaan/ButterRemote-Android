@@ -22,6 +22,7 @@ package eu.se_bastiaan.popcorntimeremote.iab.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -108,7 +109,7 @@ public final class Security {
         try {
             sig = Signature.getInstance(SIGNATURE_ALGORITHM);
             sig.initVerify(publicKey);
-            sig.update(signedData.getBytes());
+            sig.update(signedData.getBytes(StandardCharsets.UTF_8));
             if (!sig.verify(Base64.decode(signature))) {
                 Log.e(TAG, "Signature verification failed.");
                 return false;
