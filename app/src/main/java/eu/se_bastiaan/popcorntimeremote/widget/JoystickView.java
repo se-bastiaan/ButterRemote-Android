@@ -24,10 +24,10 @@ public class JoystickView extends View {
     public enum Direction { CENTER, RIGHT, UP, LEFT, DOWN };
     // Variables
     private OnJoystickMoveListener mOnJoystickMoveListener;
-    private int mPositionX = 0;
-    private int mPositionY = 0;
-    private int mCenterX = 0;
-    private int mCenterY = 0;
+    private int mPositionX;
+    private int mPositionY;
+    private int mCenterX;
+    private int mCenterY;
     private Paint mCirclePaint;
     private Paint mButtonPaint;
     private Paint mButtonImagePaint;
@@ -35,11 +35,11 @@ public class JoystickView extends View {
     private float mJoystickRadius;
     private float mButtonRadius;
     private float mOuterCircleRadius;
-    private int mLastAngle = 0;
-    private int mLastPower = 0;
-    private boolean mUserIsTouching = false;
-    private boolean mCalledOnce = false;
-    private boolean mDrawn = false;
+    private int mLastAngle;
+    private int mLastPower;
+    private boolean mUserIsTouching;
+    private boolean mCalledOnce;
+    private boolean mDrawn;
     private Context mContext;
 
     private final Runnable mCallbackRunnable = new Runnable() {

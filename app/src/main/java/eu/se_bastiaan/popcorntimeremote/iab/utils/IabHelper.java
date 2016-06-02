@@ -114,18 +114,18 @@ public class IabHelper {
 
     private static final String CONSUME = "consume";
     // Is debug logging enabled?
-    private boolean mDebugLog = false;
+    private boolean mDebugLog;
     private String mDebugTag = "IabHelper";
     // Is setup done?
-    private boolean mSetupDone = false;
+    private boolean mSetupDone;
     // Has this object been disposed of? (If so, we should ignore callbacks, etc)
-    private boolean mDisposed = false;
-    private boolean mIsBound = false;
+    private boolean mDisposed;
+    private boolean mIsBound;
     // Are subscriptions supported?
-    private boolean mSubscriptionsSupported = false;
+    private boolean mSubscriptionsSupported;
     // Is an asynchronous operation in progress?
     // (only one at a time can be in progress)
-    private boolean mAsyncInProgress = false;
+    private boolean mAsyncInProgress;
     // (for logging/debugging)
     // if mAsyncInProgress == true, what asynchronous operation is in progress?
     private String mAsyncOperation = "";
@@ -139,7 +139,7 @@ public class IabHelper {
     // The item type of the current purchase flow
     private String mPurchasingItemType;
     // Public key for verifying signature, in base64 encoding
-    private String mSignatureBase64 = null;
+    private String mSignatureBase64;
     // The listener registered on launchPurchaseFlow, which we have to call back when
     // the purchase finishes
     private OnIabPurchaseFinishedListener mPurchaseListener;
