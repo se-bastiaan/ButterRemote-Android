@@ -92,7 +92,7 @@ public class DonationAdapter extends ArrayAdapter<Donation> {
     }
 
     private static class Holder {
-        TextView title;
-        TextView summary;
+        private TextView title;
+        private TextView summary;
     }
 }
