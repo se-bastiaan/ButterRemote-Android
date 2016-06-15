@@ -20,7 +20,7 @@ public class PairingScannerActivity extends AppCompatActivity implements ZXingSc
 
     public static Integer SCAN = 1440, SUCCESS = 1441;
 
-    ZXingScannerView scannerView;
+    private ZXingScannerView scannerView;
 
     @Override
     public void onCreate(Bundle state) {

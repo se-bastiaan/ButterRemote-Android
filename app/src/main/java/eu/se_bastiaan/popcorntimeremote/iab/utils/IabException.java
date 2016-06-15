@@ -26,7 +26,7 @@ package eu.se_bastiaan.popcorntimeremote.iab.utils;
  * call {@link #getResult()}.
  */
 public class IabException extends Exception {
-    IabResult mResult;
+    private IabResult mResult;
 
     public IabException(IabResult r) {
         this(r, null);

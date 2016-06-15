@@ -114,35 +114,35 @@ public class IabHelper {
 
     private static final String CONSUME = "consume";
     // Is debug logging enabled?
-    boolean mDebugLog = false;
-    String mDebugTag = "IabHelper";
+    private boolean mDebugLog = false;
+    private String mDebugTag = "IabHelper";
     // Is setup done?
-    boolean mSetupDone = false;
+    private boolean mSetupDone = false;
     // Has this object been disposed of? (If so, we should ignore callbacks, etc)
-    boolean mDisposed = false;
-    boolean mIsBound = false;
+    private boolean mDisposed = false;
+    private boolean mIsBound = false;
     // Are subscriptions supported?
-    boolean mSubscriptionsSupported = false;
+    private boolean mSubscriptionsSupported = false;
     // Is an asynchronous operation in progress?
     // (only one at a time can be in progress)
-    boolean mAsyncInProgress = false;
+    private boolean mAsyncInProgress = false;
     // (for logging/debugging)
     // if mAsyncInProgress == true, what asynchronous operation is in progress?
-    String mAsyncOperation = "";
+    private String mAsyncOperation = "";
     // Context we were passed during initialization
-    Context mContext;
+    private Context mContext;
     // Connection to the service
-    IInAppBillingService mService;
-    ServiceConnection mServiceConn;
+    private IInAppBillingService mService;
+    private ServiceConnection mServiceConn;
     // The request code used to launch purchase flow
-    int mRequestCode;
+    private int mRequestCode;
     // The item type of the current purchase flow
-    String mPurchasingItemType;
+    private String mPurchasingItemType;
     // Public key for verifying signature, in base64 encoding
-    String mSignatureBase64 = null;
+    private String mSignatureBase64 = null;
     // The listener registered on launchPurchaseFlow, which we have to call back when
     // the purchase finishes
-    OnIabPurchaseFinishedListener mPurchaseListener;
+    private OnIabPurchaseFinishedListener mPurchaseListener;
 
     /**
      * Creates an instance. After creation, it will not yet be ready to use. You must perform
